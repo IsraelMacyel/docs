@@ -1,0 +1,174 @@
+---
+title: "Managing Snapshots"
+description: "In this section, you will learn how to create, retrieve, and restore snapshots for your applications and databases using the Python SDK."
+---
+
+# Managing Snapshots
+
+> In this section, you will learn how to create, retrieve, and restore snapshots for your applications and databases using the Python SDK.
+
+[Client]: client
+
+[Application]: client#application
+
+Snapshots are backups of your application or database at a specific point in time. They allow you to restore your application or database to a previous state if needed. Virtus Cloud provides unlimited snapshots with automatic daily backups.
+
+## Creating an application snapshot
+
+`client.snapshot` returns a `Snapshot` object.
+
+<Tabs>
+  <Tab title="Using Client">
+    ```python theme={null}
+    import virtuscloud as square
+
+    client = square.Client(api_key='API_KEY')
+
+    async def example():
+        snapshot = await client.snapshot(app_id='application_id')
+        
+        print(snapshot.url)  # Download URL for the snapshot
+        print(snapshot.key)  # Snapshot key identifier
+    ```
+  </Tab>
+
+  <Tab title="Using Application">
+    ```python theme={null}
+    import virtuscloud as square
+
+    client = square.Client(api_key='API_KEY')
+
+    async def example():
+        app = await client.app('application_id')
+        snapshot = await app.snapshot()
+        
+        print(snapshot.url)  # Download URL for the snapshot
+        print(snapshot.key)  # Snapshot key identifier
+    ```
+  </Tab>
+</Tabs>
+
+## Downloading a snapshot
+
+The `Snapshot` object provides a method to download the snapshot as a zip file.
+
+```python theme={null}
+import virtuscloud as square
+
+client = square.Client(api_key='API_KEY')
+
+async def example():
+    snapshot = await client.snapshot(app_id='application_id')
+    
+    # Download snapshot to current directory
+    zip_file = await snapshot.download()
+    
+    # Download snapshot to specific directory
+    zip_file = await snapshot.download(path='./backups')
+```
+
+## Listing application snapshots
+
+`client.all_app_snapshots` returns a list of `SnapshotInfo` objects.
+
+<Tabs>
+  <Tab title="Using Client">
+    ```python theme={null}
+    import virtuscloud as square
+
+    client = square.Client(api_key='API_KEY')
+
+    async def example():
+        snapshots = await client.all_app_snapshots(app_id='application_id')
+        
+        for snapshot in snapshots:
+            print(f"Snapshot ID: {snapshot.id}")
+            print(f"  Size: {snapshot.size}")
+            print(f"  Created at: {snapshot.created_at}")
+    ```
+  </Tab>
+
+  <Tab title="Using Application">
+    ```python theme={null}
+    import virtuscloud as square
+
+    client = square.Client(api_key='API_KEY')
+
+    async def example():
+        app = await client.app('application_id')
+        snapshots = await app.all_snapshots()
+        
+        for snapshot in snapshots:
+            print(f"Snapshot ID: {snapshot.id}")
+            print(f"  Size: {snapshot.size}")
+            print(f"  Created at: {snapshot.created_at}")
+    ```
+  </Tab>
+</Tabs>
+
+## Restoring a snapshot
+
+`client.restore_snapshot` returns a `Response` object. You can restore snapshots for both applications and databases.
+
+```python theme={null}
+import virtuscloud as square
+
+client = square.Client(api_key='API_KEY')
+
+async def example():
+    # Restore an application snapshot
+    response = await client.restore_snapshot(
+        application_type='app',
+        app_id='application_id',
+        snapshot_id='snapshot_id',
+        version_id='version_id'
+    )
+    
+    print(f"Snapshot restored: {response.status}")
+    
+    # Restore a database snapshot
+    response = await client.restore_snapshot(
+        application_type='database',
+        app_id='database_id',
+        snapshot_id='snapshot_id',
+        version_id='version_id'
+    )
+    
+    print(f"Database snapshot restored: {response.status}")
+```
+
+## Snapshot data structures
+
+### Snapshot
+
+The `Snapshot` object represents a created snapshot:
+
+| Property | Type  | Description                        |
+| -------- | ----- | ---------------------------------- |
+| `url`    | `str` | Download URL for the snapshot      |
+| `key`    | `str` | Unique identifier for the snapshot |
+
+### SnapshotInfo
+
+The `SnapshotInfo` object represents snapshot metadata:
+
+| Property     | Type  | Description                            |
+| ------------ | ----- | -------------------------------------- |
+| `id`         | `str` | Snapshot unique identifier             |
+| `size`       | `str` | Size of the snapshot                   |
+| `created_at` | `str` | Snapshot creation timestamp (ISO 8601) |
+
+## Best practices
+
+* **Automatic backups**: Virtus Cloud automatically creates daily snapshots for your applications and databases.
+* **Unlimited snapshots**: Create as many manual snapshots as needed without additional costs.
+* **Retention period**: Snapshots are retained for 30 days.
+* **Restoration time**: The restoration process takes approximately 60 seconds to ensure all data is stable.
+* **Testing**: Before restoring a snapshot, consider creating a new application or database to test the restore process first.
+
+## Snapshot limits
+
+* **Daily snapshots per plan**: Each plan can generate `(RAM / 256) * 2` snapshots per day
+  * Example: Hobby plan with 2048MB = 16 daily snapshots (480 per month)
+* **Retention**: All snapshots are retained for the last 30 days
+* **Cost**: No additional cost for snapshots

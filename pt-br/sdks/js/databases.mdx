@@ -1,0 +1,166 @@
+---
+title: "Databases"
+description: "Provision, monitor and manage Virtus Cloud databases, including credential rotation and snapshots."
+---
+
+# Databases
+
+> Provision, monitor and manage Virtus Cloud databases, including credential rotation and snapshots.
+
+<Info>
+  Databases are exposed by the `api.databases` module — a v4 addition. They are available on **Standard, Pro and Enterprise** plans.
+</Info>
+
+## Creating a database
+
+`api.databases.create(options)` provisions a new database. The `password` and `certificate` are returned **only at creation time** — store them now.
+
+```typescript theme={null}
+const created = await api.databases.create({
+    name: "my-mongo",
+    memory: 512,
+    type: "mongo",
+    version: "7.0",
+});
+
+console.log(created.id);
+console.log(created.connection_url);
+console.log(created.password);     // shown once — store securely
+console.log(created.certificate);  // shown once — store securely
+```
+
+| Field     | Type     | Description                                     |
+| --------- | -------- | ----------------------------------------------- |
+| `name`    | `string` | Display name                                    |
+| `memory`  | `number` | Allocated memory in MB                          |
+| `type`    | `string` | Engine slug (e.g. `mongo`, `postgres`, `mysql`) |
+| `version` | `string` | Engine version (e.g. `"7.0"`)                   |
+
+## Listing your databases
+
+`api.user.get()` populates `user.databases` with a `Collection` of every database you own:
+
+```typescript theme={null}
+const user = await api.user.get();
+
+for (const [id, db] of user.databases) {
+    console.log(`${db.name} (${id}) — ${db.type} ${db.ram}MB`);
+}
+```
+
+## Fetching a single database
+
+```typescript theme={null}
+const db = await api.databases.fetch(created.id);
+
+console.log(db.id);
+console.log(db.name);
+console.log(db.owner);
+console.log(db.type);
+console.log(db.ram);
+console.log(db.cluster);
+console.log(db.port);
+console.log(db.createdAt);
+```
+
+## Lifecycle
+
+```typescript theme={null}
+await db.start();
+await db.stop();
+```
+
+## Status and metrics
+
+```typescript theme={null}
+const status = await db.getStatus();
+console.log(`${status.status} • CPU ${status.usage.cpu} • RAM ${status.usage.ram}`);
+
+const metrics = await db.getMetrics();
+console.log(`${metrics.length} metric points (up to 288 over 24h)`);
+```
+
+### Summary status for every database
+
+```typescript theme={null}
+const all = await api.databases.statusAll();
+
+for (const summary of all) {
+    console.log(`${summary.databaseId} → ${summary.running ? "running" : "stopped"}`);
+
+    // Promote to the full status with .fetch()
+    if (summary.running) {
+        const full = await summary.fetch();
+        console.log(full.usage);
+    }
+}
+```
+
+## Updating
+
+`db.update(options)` changes the display name and/or memory allocation. At least one field must be provided.
+
+```typescript theme={null}
+await db.update({ name: "primary-db", ram: 1024 });
+```
+
+## Credentials
+
+`db.credentials.certificate()` returns the TLS certificate (base64-encoded PEM):
+
+```typescript theme={null}
+const cert = await db.credentials.certificate();
+console.log(`Certificate length: ${cert.length}`);
+```
+
+`db.credentials.reset(type)` rotates either the password or the certificate.
+
+```typescript theme={null}
+// Rotate the password — the new value is shown only once
+const { password } = await db.credentials.reset("password");
+console.log(`New password: ${password}`);
+
+// Rotate the certificate — fetch the new one via .certificate()
+await db.credentials.reset("certificate");
+const newCert = await db.credentials.certificate();
+```
+
+<Warning>
+  `db.credentials.certificate()` and `db.credentials.reset()` require the database to be **running**.
+</Warning>
+
+## Snapshots
+
+`db.snapshots` mirrors the application snapshots API.
+
+```typescript theme={null}
+import { writeFile } from "node:fs/promises";
+
+const snapshots = await db.snapshots.list();
+console.log(`${snapshots.length} snapshots stored`);
+
+const fresh = await db.snapshots.create();
+console.log(`Download URL: ${fresh.url}`);
+
+const buffer = await db.snapshots.download();
+await writeFile("./db-backup.tar.gz", buffer);
+
+await db.snapshots.restore(
+    "00000000-0000-4000-8000-000000000000_mongo",
+    "v1",
+);
+```
+
+<Note>
+  Unlike `app.snapshots.restore({ snapshotId, versionId })`, `db.snapshots.restore(snapshotId, versionId)` takes positional arguments.
+</Note>
+
+## Deleting a database
+
+<Warning>
+  Deleting a database is irreversible. Make sure you have a recent snapshot if you might need to recover the data.
+</Warning>
+
+```typescript theme={null}
+await db.delete();
+```

@@ -1,0 +1,91 @@
+---
+title: "How to create and manage Workspaces"
+description: "Learn how to create and manage Workspaces in Virtus Cloud."
+---
+
+# How to create and manage Workspaces
+
+> Learn how to create and manage Workspaces in Virtus Cloud.
+
+## Introduction
+
+A Workspace in Virtus Cloud is a collaborative environment where multiple users can work together on projects hosted by the Workspace owner.
+
+## Prerequisites
+
+* **Virtus Cloud Account**: Sign up through the [signup page](https://virtuscloud.app/en/signup) using your email.
+* **Active Paid Plan**: You need an active Standard plan or higher to create and manage Workspaces. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the one that best suits your needs.
+
+## Workspace management
+
+To start managing Workspaces, navigate to the [Virtus Cloud Dashboard](https://virtuscloud.app/en/dashboard). In the main page, you will find the "Workspaces" with your name, you just need to click on it and select or create a workspace.
+
+### Creating a workspace
+
+When you create a Workspace, you become its owner. As the owner, you have the ability to invite other users to join the Workspace and collaborate on projects.
+
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/articles/workspace/create-workspace.gif" alt="Creating a workspace on Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+### Inviting users
+
+<Steps>
+  <Step title="Getting the invite code">
+    The user who you want to invite needs to provide you with their unique invite code.
+    They can find this code in their Virtus Cloud account settings under the "Authentication" section, [here](https://virtuscloud.app/en/account/security).\
+    <Note>The user doesn't need to have a paid plan to join a Workspace.</Note>
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/workspace/invite-code.gif" alt="Getting workspace invite code from account settings" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+
+  <Step title="Inviting the user">
+    Once you have the invite code, go back to the Workspace configuration page.\
+    There, in "Settings" you will find an option to invite users by entering their invite code and selecting their permission.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/workspace/inviting.gif" alt="Inviting a member to the workspace" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+
+    <Note>
+      **Permissions**
+
+      <AccordionGroup>
+        <Accordion title="Viewer" icon="eye">
+          Can view system dashboards, metrics, logs, and alerts to monitor overall health and performance.
+        </Accordion>
+
+        <Accordion title="Manager" icon="user-group">
+          In addition to viewing permissions, you can control the lifecycle of applications by starting, stopping and restarting services.
+        </Accordion>
+
+        <Accordion title="Maintain" icon="user-cog">
+          In addition to manager permissions, you can upload, download and edit files and application settings.
+        </Accordion>
+
+        <Accordion title="Admin" icon="user-shield">
+          Have full access, including viewing metrics, managing applications, editing files, accessing confidential data, and performing snapshots and system restorations.
+        </Accordion>
+      </AccordionGroup>
+    </Note>
+  </Step>
+</Steps>
+
+### Allocating projects to a workspace
+
+To allocate a project to a Workspace is very simple. You need to be the owner of the Workspace and the application hosted on your account.
+In the workspace page, click on the "Allocate Application" and select the application you want to allocate to the workspace.
+
+<Note>
+  Only the owner of the Workspace can allocate applications to it.
+</Note>
+
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/articles/workspace/allocating-project.gif" alt="Allocating an application to the workspace" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+## Contact us
+
+If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.

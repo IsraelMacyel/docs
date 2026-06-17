@@ -1,0 +1,51 @@
+---
+title: "Installation"
+icon: "download"
+description: "Learn what it takes to install the VirtusCloud CLI."
+---
+
+The VirtusCloud CLI is a command-line tool that allows you to interact with VirtusCloud services. You can use the CLI to deploy applications, manage services, and much more.
+
+## Installation 
+To use the CLI, you need to install it on your local machine.
+ 
+You can install the CLI using the following commands:
+
+<br/>
+
+<CodeGroup>
+```bash macOS, Linux, and WSL 
+curl -fsSL https://cli.virtuscloud.app/install | bash
+```
+
+```bash Windows with npm
+npm install -g @virtuscloud/cli
+```
+
+```bash Windows with yarn
+yarn global add @virtuscloud/cli
+```
+</CodeGroup>
+
+## Update the CLI
+To update the CLI, you can run the following command:
+<CodeGroup>
+```bash Windows
+npm update -g @virtuscloud/cli
+```
+```bash Linux, macOS, and WSL
+curl -fsSL https://cli.virtuscloud.app/install | bash
+```
+</CodeGroup>
+
+And that's it! You have successfully updated the VirtusCloud CLI. 🎉
+
+## Next steps
+After installing the CLI, you need to authenticate to the VirtusCloud API.
+
+<Card
+  title="Authentication"
+  href="/cli-reference/authentication"
+>
+    Learn what it takes to authenticate to the VirtusCloud CLI.
+</Card> 

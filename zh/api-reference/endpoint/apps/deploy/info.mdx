@@ -1,0 +1,45 @@
+---
+title: "Get Current"
+description: "Get the current deployment information for an application."
+api: "GET https:/api.virtuscloud.app/v2/apps/{app_id}/deployments/current"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Response
+
+<Status />
+
+<ResponseField name="response" type="object">
+
+The contents of the response.
+
+<Expandable title="Toggle object">
+
+<ResponseField name="webhook" type="string">
+  The webhook URL for the application.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+
+<ResponseExample>
+```json
+{
+    "status": "success",
+    "response": {
+        "webhook": "https://api.virtuscloud.app/v2/git/webhook/69ce71f11974f2cc21d47cd0a8bcbafdaacbc3c9924b23ca40e0e2032705f6391eb89b40983338e0f2415e9331d602ccc"
+    }
+}
+```
+</ResponseExample>

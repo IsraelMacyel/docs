@@ -1,0 +1,86 @@
+---
+title: "Real-time stream"
+description: "Subscribe to live application events through a Server-Sent Events (SSE) stream."
+---
+
+# Real-time stream
+
+> Subscribe to live application events through a Server-Sent Events (SSE) stream.
+
+`app.realtime()` opens a [Server-Sent Events](https://developer.mozilla.org/docs/Web/API/Server-sent_events) stream and returns the raw `Response`. The SDK does **not** parse SSE frames for you — it hands you the stream so you can wire it into your own event loop.
+
+## Connection limits
+
+* Each connection lasts up to **10 minutes**, then the server closes it
+* A single account can keep at most **10 concurrent connections** open
+
+## Event shape
+
+The stream emits two kinds of frames:
+
+* `event: system` — connection lifecycle messages such as `REALTIME_CONNECTING`, `REALTIME_TIMEOUT`, etc.
+* `event: message` — the JSON application payload
+
+## Consuming the stream
+
+```typescript theme={null}
+import { SquareCloudAPI } from "@virtuscloud/api";
+
+const api = new SquareCloudAPI(process.env.SQUARE_API_KEY!);
+const app = await api.applications.fetch("abc123def456abc123def456");
+
+const response = await app.realtime();
+
+if (!response.body) {
+    throw new Error("No stream body");
+}
+
+const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+let buffer = "";
+
+while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    buffer += value;
+
+    // SSE frames are separated by \n\n
+    let separator = buffer.indexOf("\n\n");
+    while (separator !== -1) {
+        const rawFrame = buffer.slice(0, separator);
+        buffer = buffer.slice(separator + 2);
+        separator = buffer.indexOf("\n\n");
+
+        const event = parseSSE(rawFrame);
+        if (!event) continue;
+
+        if (event.name === "system") {
+            console.log(`[system] ${event.data}`);
+            continue;
+        }
+
+        try {
+            const payload = JSON.parse(event.data);
+            console.log("[message]", payload);
+        } catch {
+            console.log("[message]", event.data);
+        }
+    }
+}
+
+function parseSSE(frame: string): { name: string; data: string } | null {
+    let name = "message";
+    let data = "";
+
+    for (const line of frame.split("\n")) {
+        if (line.startsWith("event:")) name = line.slice(6).trim();
+        else if (line.startsWith("data:")) data += line.slice(5).trim();
+    }
+
+    return data ? { name, data } : null;
+}
+```
+
+<Tip>
+  Each invocation of `app.realtime()` returns a fresh `Response`. To stay connected past the 10-minute server timeout, reconnect when the stream ends.
+</Tip>

@@ -1,0 +1,94 @@
+---
+title: "Database Hosting"
+description: "Host databases for your applications with the largest platform in Latin America. Enterprise performance and security for your data"
+---
+
+# Database Hosting
+
+> Host databases for your applications with the largest platform in Latin America. Enterprise performance and security for your data
+
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/services/en/database.png" alt="Virtus Cloud Databases service overview" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+## Why choose Virtus Cloud?
+
+<CardGroup cols={2}>
+  <Card title="Enterprise-Level Storage" icon="bolt">
+    Cutting-edge hardware with **enterprise Samsung NVMe SSDs** ensuring **maximum performance** and **ultra-low latency** for your data.
+  </Card>
+
+  <Card title="Zero network fees" icon="wifi">
+    You can **transfer data** to and from your database **without worrying about network fees**, allowing you to focus on building your application without unexpected costs.
+  </Card>
+
+  <Card title="Smart Snapshots" icon="server">
+    **Exclusive** technology for **1-click** restore points, included **at no additional cost**, ensuring **complete security** for your data.
+  </Card>
+
+  <Card title="Advanced Security" icon="shield-halved">
+    **Secure connections with certificates** managed by Virtus Cloud, ensuring that your data is protected with enterprise-grade security measures.
+  </Card>
+</CardGroup>
+
+## Supported databases
+
+We offer some databases already configured to connect and start using.
+
+<CardGroup cols={2}>
+  <Card title="PostgreSQL" icon="elephant" href="https://virtuscloud.app/en/databases/postgresql" />
+
+  <Card title="MongoDB" icon="leaf" href="https://virtuscloud.app/en/databases/mongodb" />
+
+  <Card title="MySQL" icon="database" href="https://virtuscloud.app/en/databases/mysql" />
+
+  <Card title="Redis" icon="r" href="https://virtuscloud.app/en/databases/redis" />
+</CardGroup>
+
+### Versions
+
+|    SGBD    | Version |
+| :--------: | :-----: |
+| PostgreSQL |  17.x.x |
+|    MySQL   |  9.x.x  |
+|   MongoDB  |  8.x.x  |
+|    Redis   |  7.4.x  |
+
+## How do I host my database?
+
+Hosting your database with Virtus Cloud is simple and straightforward, you need an **active Standard plan or higher** and follow these steps:
+
+<Steps>
+  <Step title="Create a new database instance">
+    Go to the [Databases](https://virtuscloud.app/en/dashboard/databases) page and click on the "Create Database" button.
+  </Step>
+
+  <Step title="Setting up your database instance">
+    Select the database type you want to host and fill in the required information, such as the database name and RAM.
+  </Step>
+
+  <Step title="Finish your instance creation">
+    Click on the "Create" button and wait for the database to be created. Once it's ready, you can find the connection details in the database dashboard.
+  </Step>
+</Steps>
+
+## How do I connect to my database?
+
+Our databases are configured to only allow secure connections with certificate. To connect to your brand new database, you need to follow these steps:
+
+<Steps>
+  <Step title="Get the credentials and certificates">
+    Get the credentials to connect to your database. You will need the host, port, username and password, which you can find in the URL  and you will need the certificates.
+  </Step>
+
+  <Step title="Connect to your database with ssl/tls">
+    Use the credentials and certificates to connect to your database using your preferred database client or library.\
+    Make sure to use SSL/TLS for secure connections and use the certificates as CA, root certificate or client certificate and key certificate.\
+    <Note> Normally you will need only the `.pem` but some clients may require the `.key` and `.cert` files separately or `.p12` file.</Note>
+  </Step>
+
+  <Step title="Start using your database">
+    Once connected, you can start using your database instance, storing and managing your data.\
+    You can also monitor the performance and usage of your database through the Virtus Cloud dashboard.
+  </Step>
+</Steps>

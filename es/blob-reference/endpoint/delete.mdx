@@ -1,0 +1,80 @@
+---
+title: "Blob Delete Objects"
+sidebarTitle: "Objects Delete"
+description: "This documentation provides a comprehensive overview of the DELETE /v1/objects endpoint of the VirtusCloud Blob API."
+api: "DELETE https://blob.virtuscloud.app/v1/objects"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+
+<Authorization />
+
+<ParamField body="object" type="string" placeholder="Object name" required>
+    The name of the object to delete. The object name must adhere to the following pattern: `a to z, A to Z, 0 to 9, and _`.
+    ```json
+    { "object": "ID/prefix/name1_ltq7b2sw-de6241.jpeg" }
+    ```
+</ParamField>
+
+### Response
+
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful. "success" if successful, "error" if not.
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+  "status": "success",
+}
+```
+</ResponseExample>
+
+### Troubleshooting
+<Tabs>
+    <Tab title="400 Status Code">
+        ### Object-Related
+        <CodeGroup>
+        ```json INVALID_OBJECT
+        // The provided object name is invalid.
+        {
+            "status": "error",
+            "code": "INVALID_OBJECT"
+        }
+        ```
+        ```json FAILED_DELETE
+        // The request to delete the objects failed. Please try again.
+        {
+            "status": "error",
+            "code": "FAILED_DELETE"
+        }
+        ```
+        </CodeGroup>
+    </Tab>
+    <Tab title="401 Status Code">
+        ### Unauthorized
+        <CodeGroup>
+        ```json ACCESS_DENIED
+        // Just set the correct API key in the Authorization header.
+        {
+            "status": "error",
+            "code": "ACCESS_DENIED"
+        }
+        ```
+        </CodeGroup>
+    </Tab>
+    <Tab title="404 Status Code">
+        ### Unauthorized
+        <CodeGroup>
+        ```json OBJECT_NOT_FOUND
+        // The object you are trying to delete does not exist.
+        {
+            "status": "error",
+            "code": "OBJECT_NOT_FOUND"
+        }
+        ```
+        </CodeGroup>
+    </Tab>
+</Tabs>
+

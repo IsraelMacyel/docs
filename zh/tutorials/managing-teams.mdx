@@ -1,0 +1,81 @@
+---
+title: "在 VirtusCloud 上管理团队"
+sidebarTitle: "管理团队"
+description: "了解团队系统的工作原理以及如何管理您的团队"
+---
+
+## 简介
+
+- 在开始之前，您需要在 VirtusCloud 创建账户，可通过 [注册页面](https://virtuscloud.app/signup) 完成。您可以使用电子邮件创建账户。
+- 最后，您需要在账户中拥有有效的付费计划。您可以在 [这里](https://virtuscloud.app/pricing) 查看我们的计划并购买。
+
+## 创建您的团队
+
+要创建团队，请进入 [仪表板](https://virtuscloud.app/dashboard)，点击您的个人资料并选择"创建团队"选项。选择团队名称并确认。团队将被创建，您可以再次选择个人资料并选择所需团队来访问它。
+<Frame>
+    <img src="/images/articles/teams/create-team.png" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+## 添加团队成员
+要向团队添加新成员，请按照以下步骤操作：
+
+<Steps>
+  <Step title="第一步" icon="check">
+    请要添加的用户访问 [配置](https://virtuscloud.app/account/security) 页面并点击"申请团队码"按钮。他们应将生成的账户码发送给您。请注意，此码只能使用一次，有效期为 **5 分钟**。
+  </Step>
+  <Step title="第二步" icon="star">
+    访问 [仪表板](https://virtuscloud.app/dashboard)，导航到您的个人资料，选择要添加用户的团队。然后转到"成员"标签，点击"邀请成员"按钮，输入您要邀请的用户的账户码。
+<Frame>
+    <img src="/images/articles/teams/add-member.gif" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+  </Step>
+</Steps>
+
+<Warning>只与可信赖的人分享您的账户码。</Warning>
+
+### 角色
+团队中每个成员都有一个角色，该角色提供对应用程序执行特定操作的权限。以下是权限列表：
+
+<AccordionGroup>
+  <Accordion title="查看" icon="eye">
+  可以查看面板、指标、日志和系统警报，以监控整体完整性和性能。
+  </Accordion>
+
+  <Accordion title="管理员" icon="user-tie">
+    除查看权限外，还可以通过启动、停止和重启服务来控制应用程序的生命周期。
+  </Accordion>
+
+  <Accordion title="维护" icon="wrench">
+    除管理员权限外，还可以上传、下载和编辑文件及应用程序设置。
+  </Accordion>
+
+  <Accordion title="超级管理员" icon="user-shield">
+    拥有完全访问权限，包括查看指标、管理应用程序、编辑文件、访问机密数据以及执行系统快照和恢复。
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+ 只有超级管理员角色才能查看 `.env`、`.env.production` 和配置文件（`virtuscloud.app/.config`）等文件
+</Note>
+
+## 将应用程序添加到团队
+要将应用程序添加到团队，请按照以下步骤操作：
+
+<Steps>
+  <Step title="第一步" icon="check">
+    访问您要添加新应用程序的团队。
+    <Frame>
+      <img src="/images/articles/teams/team.gif" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+  <Step title="第二步" icon="star">
+    点击"添加新项"并选择要添加到所选团队的应用程序。
+    <Frame>
+      <img src="/images/articles/teams/add-app.gif" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+<Warning>只有团队所有者可以添加应用程序。</Warning>
+
+如果您遇到任何问题，请随时 [联系我们的支持团队](/company/support)。

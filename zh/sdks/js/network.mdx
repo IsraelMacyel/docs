@@ -1,0 +1,147 @@
+---
+title: "Network & edge"
+description: "Manage custom domains, DNS, edge analytics, error tracking, request logs, latency percentiles and cache invalidation for website applications."
+---
+
+# Network & edge
+
+> Manage custom domains, DNS, edge analytics, error tracking, request logs, latency percentiles and cache invalidation for website applications.
+
+The `network` module is only available on **website applications**. Narrow the type with `app.isWebsite()` first:
+
+```typescript theme={null}
+const app = await api.applications.fetch("abc123def456abc123def456");
+
+if (!app.isWebsite()) {
+    throw new Error("This application is not a website");
+}
+
+app.network; // NetworkModule
+```
+
+## Custom domain
+
+`app.network.setCustomDomain(domain)` sets or removes the custom domain bound to the website.
+
+```typescript theme={null}
+await app.network.setCustomDomain("yoursite.com");
+
+// Pass "@" to remove the configured custom domain
+await app.network.setCustomDomain("@");
+```
+
+<Note>
+  Custom domains require a [Senior plan](https://virtuscloud.app/plans) or higher.
+</Note>
+
+## DNS records
+
+After attaching a custom domain you need to configure DNS at your registrar. `app.network.dns()` returns the ownership record and SSL status.
+
+```typescript theme={null}
+const dns = await app.network.dns();
+
+console.log(`${dns.ownership.type} ${dns.ownership.name} → ${dns.ownership.value}`);
+console.log(`SSL: ${dns.ssl.status}`); // "pending" | "pending_validation" | "active"
+```
+
+<Warning>
+  The shape changed in v4. `app.network.dns()` previously returned an array of records — it now returns a single object: `{ ownership, ssl }`.
+</Warning>
+
+## Analytics
+
+`app.network.analytics({ start, end })` returns aggregated edge analytics. `start` and `end` accept either ISO 8601 strings or `Date` objects. Maximum retention window is **7 days**.
+
+```typescript theme={null}
+const since = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+const analytics = await app.network.analytics({
+    start: since,
+    end: new Date(),
+});
+
+if ("visits" in analytics) {
+    console.log(analytics.visits.length, "time buckets");
+    console.log("Top countries:", analytics.countries.slice(0, 5));
+    console.log("Top paths:",     analytics.paths.slice(0, 5));
+}
+```
+
+<Warning>
+  For empty windows (e.g. before the app was created) the API returns `{}`. Guard with `"visits" in analytics` before reading.
+</Warning>
+
+<Warning>
+  v3 called this endpoint with no arguments. **v4 requires `{ start, end }`.**
+</Warning>
+
+## Error tracking
+
+`app.network.errors({ start, end, include4xx? })` returns the edge error breakdown. By default only 5xx errors are included.
+
+```typescript theme={null}
+const errors = await app.network.errors({
+    start: since,
+    end: new Date(),
+    include4xx: true, // include 4xx alongside 5xx
+});
+
+if ("summary" in errors) {
+    console.log(`Total: ${errors.summary.total}`);
+    console.log("By class:",          errors.summary.by_class);
+    console.log("Top failing paths:", errors.top_paths.slice(0, 3));
+}
+```
+
+## Per-request logs
+
+`app.network.logs({ start, end })` returns the per-request edge logs.
+
+```typescript theme={null}
+const logs = await app.network.logs({ start: since, end: new Date() });
+
+for (const log of logs.slice(0, 5)) {
+    console.log(
+        log.timestamp,
+        log.request.method, log.request.path,
+        "→",
+        log.response.status,
+        `(${log.client.country ?? "??"})`,
+    );
+}
+```
+
+<Note>
+  Per-request logs require a [Pro plan](https://virtuscloud.app/plans) or higher.
+</Note>
+
+## Latency percentiles
+
+`app.network.performance({ start, end })` returns p50 / p95 / p99 latencies for the edge and origin layers.
+
+```typescript theme={null}
+const perf = await app.network.performance({ start: since, end: new Date() });
+
+if ("summary" in perf) {
+    const { p50, p95, p99 } = perf.summary.edge;
+    console.log(`Edge p50/p95/p99: ${p50}/${p95}/${p99}ms`);
+    console.log("Slowest paths:", perf.slowest_paths.slice(0, 3));
+}
+```
+
+<Note>
+  Performance metrics require a [Pro plan](https://virtuscloud.app/plans) or higher.
+</Note>
+
+## Purging the edge cache
+
+`app.network.purgeCache()` invalidates the entire edge cache for the application's domains.
+
+```typescript theme={null}
+await app.network.purgeCache();
+```
+
+<Warning>
+  In v3 (and the short-lived v4.0.0) `purgeCache(paths?)` accepted a list of paths to purge selectively. **Starting with v4.0.1 the argument was removed** — calling `purgeCache()` always purges the entire cache.
+</Warning>

@@ -1,0 +1,128 @@
+---
+title: "How to validate data with pydantic"
+description: "Learn how to validate data with pydantic."
+---
+
+# How to validate data with pydantic
+
+> Learn how to validate data with pydantic.
+
+## Introduction
+
+* This article guides you through data validation with pydantic. Pydantic is a Python library built in Rust.
+* Before we get start, make sure you have Python and Pydantic library installed on your environment. Check the pydantic instalation command below.
+
+```bash theme={null}
+pip install pydantic
+```
+
+## Creating a model
+
+* First, we will need to import and make our class inherit from `pydantic.BaseModel` to start validating. In our example we will create a class named
+  `Person` and it will have name, age and an e-mail.
+
+```python theme={null}
+from pydantic import BaseModel
+
+class Person(BaseModel):
+    name: str
+    age: int
+    email: str
+```
+
+* With this class, when we instatiate it, pydantic will validate if the parameters `name` and `email` are strings and `age` is integer.
+
+### Using the model
+
+* Now we have it created, we will instantiate the class. We will create a dict containing the data and unpack it to our class.
+
+```python theme={null}
+data = {
+    "name": "John",
+    "age": 19,
+    "email": "john@gmail.com"
+}
+person = Person(**data)
+```
+
+* The above example will not raise any error since all **parameters** are on correct type. Now we will make a wrong data to confirm if our validation
+  work.
+
+```python theme={null}
+data = {
+    "name": "John",
+    "age": "19",
+    "email": "john@gmail.com"
+}
+person = Person(**data)
+```
+
+* In the above example it will raise the error `ValidationError` because `age` needs to be an **integer** and cannot be provided as a **string**.
+
+## Creating dataclass
+
+* You can also create **dataclasses** with pydantic which will be similar to standard Python **dataclasses** but will have validations like BaseModel.
+
+```python theme={null}
+from pydantic import dataclass
+
+@dataclass
+class Person:
+    name: str
+    age: int
+    email: str
+```
+
+* If we send a `string` to `age`, it will convert to `int`.
+
+<Info>
+  Pydantic supports recursive validation, meaning that when validating nested models, it also validates the internal
+  models.
+
+  If some class has a list of `Person`, `people: list[Person]`, it will check each item on the list and converts it into a `Person`.
+</Info>
+
+## Extras
+
+* Pydantic has some extras like **e-mail** validations and a fallback **timezone** package. To install them, you need to run the following commands:
+
+```bash theme={null}
+pip install pydantic[email]
+```
+
+```bash theme={null}
+pip install pydantic[timezone]
+```
+
+* You can install both together by running the following command.
+
+```bash theme={null}
+pip install pydantic[email,timezone]
+```
+
+* Pydantic\[email] brings a class to handle emails, normalizing it and validanting the format `user@domain.tld`. For this, pydantic brings the class `EmailStr` to do this validation.
+
+```python theme={null}
+from pydantic import dataclass, EmailStr
+
+@dataclass
+class Person:
+    name: str
+    age: int
+    email: EmailStr
+```
+
+## Did you like this article?
+
+* We created this content with great care to offer the best help possible.
+  If this article helped you in any way, support our work! Leave your review! it helps us understand what matters most to you.
+
+<CardGroup cols={2}>
+  <Card title="Google Reviews" icon="google" href="https://g.page/r/CYZenpQcDgTzEAI/review">
+    Leave your review in Google Reviews.
+  </Card>
+
+  <Card title="Trustpilot" icon="star" href="https://www.trustpilot.com/review/virtuscloud.app">
+    Leave your review in Trustpilot.
+  </Card>
+</CardGroup>

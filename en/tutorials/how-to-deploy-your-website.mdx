@@ -1,0 +1,79 @@
+---
+title: "Hosting Your Website/API on VirtusCloud"
+sidebarTitle: "Websites and APIs"
+description: "Learn how to host your website or API on VirtusCloud using the virtuscloud.app configuration file."
+---
+
+## Introduction
+
+- Create an account on VirtusCloud, which can be done through the [sign up page](https://virtuscloud.app/signup). You can use your email to create an account.
+- Have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/pricing).
+
+## Creating the virtuscloud config file
+
+<Card
+  title="Learn about: how to make the configuration file for VirtusCloud."
+  icon="link"
+  href="https://docs.virtuscloud.app/getting-started/config-file"
+>
+  The virtuscloud.app file is a configuration file that will be used to
+  configure your application; it will be used to define the name, description,
+  version, main file, among other things.
+</Card>
+
+### Important website parameters
+The **website port** needs to be **80**, if you are using a static website, you don't need to set the `START` parameter.
+
+In virtuscloud.app configuration file:
+- `SUBDOMAIN`: If you are hosting a website, set this parameter to your desired subdomain.
+- `START`: A custom startup command (if needed).
+
+
+<Note>Website url will be: `my-subdomain-parameter`.virtusapp.cloud</Note>
+```systemd This example host a website without custom startup command
+MAIN=index.html
+MEMORY=512
+VERSION=recommended
+DISPLAY_NAME=My simple static website!
+SUBDOMAIN=mysite-simple-website
+```
+
+```systemd This example use all parameters and custom startup command in a website
+MAIN=index.js
+MEMORY=512
+VERSION=recommended
+DISPLAY_NAME=My simple nextjs website!
+SUBDOMAIN=mysite-nextjs-website
+START=npm run build && npm run start
+```
+
+# Support for multiple technologies
+
+<CardGroup cols={2}>
+  <Card title="React" icon="react" href="https://docs.virtuscloud.app/tutorials/how-to-deploy-your-react-website">
+    Learn how to host your React website on VirtusCloud.
+  </Card>
+  <Card title="Next.js" icon="node-js" href="https://docs.virtuscloud.app/tutorials/how-to-deploy-your-next-website">
+    Learn how to host your Next.js website on VirtusCloud.
+  </Card>
+  <Card title="NestJs" icon="js" href="https://docs.virtuscloud.app/tutorials/how-to-deploy-your-nestjs-application">
+    Learn how to host your NestJs application on VirtusCloud.
+  </Card>
+  <Card title="Vite" icon="rocket" href="https://docs.virtuscloud.app/tutorials/how-to-deploy-your-vite-website">
+    Learn how to host your Vite website on VirtusCloud.
+  </Card>
+    <Card title="Vue" icon="vuejs" href="https://docs.virtuscloud.app/tutorials/how-to-deploy-your-vue-website">
+    Learn how to host your Vue website on VirtusCloud.
+  </Card>
+  <Card title="Flask" icon="flask" href="https://docs.virtuscloud.app/tutorials/how-to-deploy-your-flask-application">
+    Learn how to host your Flask application on VirtusCloud.
+  </Card>
+  <Card title="Django" icon="python" href="https://docs.virtuscloud.app/tutorials/how-to-deploy-your-django-application">
+    Learn how to host your Django application on VirtusCloud.
+  </Card>
+  <Card title="Lavalink" icon="java" href="https://docs.virtuscloud.app/tutorials/how-to-create-your-lavalink-server">
+    Learn how to host your Lavalink server and stream high-quality music to your Discord bot.
+  </Card>
+</CardGroup>
+
+By following these steps, you'll have your website or API up and running smoothly on VirtusCloud. If you encounter any issues or need further assistance, don't hesitate to reach out to our [support team](../company/support).

@@ -1,0 +1,39 @@
+---
+title: "身份验证"
+icon: "lock"
+description: "了解向 VirtusCloud CLI 进行身份验证所需的内容。"
+---
+
+<Steps>
+    <Step title="获取 API 密钥">
+        首先，您需要从[开发者控制台](https://virtuscloud.app/account/security)获取 API 密钥。您可以使用此 API 密钥向 VirtusCloud CLI 进行身份验证。
+    </Step>
+    <Step title="进行身份验证">
+        使用以下命令向 VirtusCloud CLI 进行身份验证：
+        ```bash
+        virtuscloud auth login
+        ```
+
+        系统将提示您输入 API 密钥。
+        ```bash
+        Your API Token:
+        > 输入您的 VirtusCloud API 令牌
+        ```
+
+        输入 API 密钥后，您将通过 VirtusCloud CLI 的身份验证。
+
+        您可以使用 `--token` 标志传递 API 密钥来跳过提示：
+        ```bash
+        virtuscloud auth login --token=<API 密钥>
+        ```
+    </Step>
+</Steps>
+
+## 下一步
+
+<Card title="部署您的应用程序" href="/cli-reference/commands">
+    了解如何使用 VirtusCloud CLI 部署您的应用程序。
+</Card>
+<Card title="命令参考" href="/cli-reference/commands">
+    了解 VirtusCloud CLI 中可用的命令。
+</Card>

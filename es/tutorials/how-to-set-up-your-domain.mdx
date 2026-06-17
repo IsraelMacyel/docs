@@ -1,0 +1,56 @@
+---
+title: "Cómo configurar tu dominio personalizado"
+sidebarTitle: "Dominios personalizados"
+description: "Aprende cómo configurar tu dominio en VirtusCloud"
+---
+
+## Introducción
+
+Para configurar tu dominio, necesitas tener el plan Standard o superior. Puedes adquirir tu dominio en varias plataformas de registro de dominios como:
+
+- [Registro.br](https://registro.br/)
+- [Square Space](https://squarespace.com/) *anteriormente: Google Domains
+- [GoDaddy](https://www.godaddy.com/)
+- [Namecheap](https://www.namecheap.com/)
+
+Elige una plataforma que se adapte a tus necesidades y adquiere tu dominio.
+
+## Configurando DNS en Cloudflare
+
+- Accede al sitio web donde compraste tu dominio, como [Hostinger](https://www.hostinger.com.br/) o [Registro.br](https://registro.br/).
+- A continuación, ve a [Cloudflare](https://cloudflare.com/), navega a "Websites" y haz clic en "Add a site".
+<Frame>
+  <img src="/images/articles/cloudflare/add-site.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+Después de ingresar tu dominio, copia los servidores de nombres proporcionados y pégalos en el sitio donde compraste el dominio, en la sección DNS/Servidores de nombres.
+
+## Configurando tu dominio en VirtusCloud
+
+- Elige el sitio para el que deseas configurar el dominio en el [dashboard](https://virtuscloud.app/dashboard), ve a la opción **Configuración** e ingresa tu dominio en lugar de "ejemplo.com".
+<Frame>
+  <img src="/images/articles/cloudflare/domain-setup.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+- Ahora que el dominio está configurado en VirtusCloud, regresa a Cloudflare, selecciona tu dominio y elige la opción DNS.
+- Finalmente, apunta tu dominio a "cname.virtusapp.cloud" con el tipo "CNAME", reemplazando "name" con tu dominio, y agrega otro registro de tipo TXT con el valor que aparecerá en "Configuración DNS" después de hacer clic en "guardar".
+<Frame>
+  <img src="/images/articles/cloudflare/record-dns.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+## Bueno saber
+### Redirección www a tu dominio
+- Para redirigir www a tu dominio, crea un nuevo registro con el nombre "www" y el tipo "A", apuntando a 192.0.2.1 (IP interna de Cloudflare).
+- Ve a la opción "Page Rules" en Cloudflare y crea una nueva regla con la siguiente configuración:
+
+<Frame>
+  <img src="/images/articles/cloudflare/page-rule-www.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+### Solución de problemas
+
+- Si recibes el error Unauthorized DNS, intenta borrar el caché de tu navegador y accede al sitio de nuevo en 5 minutos. Si el problema persiste, [contacta a nuestro equipo](/company/support).
+<Frame>
+  <img src="/images/articles/cloudflare/unauthorized-dns.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+- Si recibes el error Cloudflare 1015, significa que tu dominio no está configurado correctamente. Verifica la configuración de tu dominio y asegúrate de que apunta correctamente a VirtusCloud. Si el problema persiste, [contacta a nuestro equipo](/company/support).

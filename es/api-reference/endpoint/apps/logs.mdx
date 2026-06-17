@@ -1,0 +1,43 @@
+---
+title: "Get Application Logs"
+description: "Collect the latest logs from your application. It has a rate limit of 1 request every 5 seconds."
+api: "GET https://api.virtuscloud.app/v2/apps/{app_id}/logs"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Response
+
+<Status />
+
+<ResponseField name="response" type="object">
+
+The contents of the response.
+
+<Expandable title="Toggle object">
+
+<ResponseField name="logs" type="string">
+  The latest logs from the application.
+</ResponseField>
+
+</Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "status": "success",
+    "response": {
+        "logs": "Working!"
+    }
+}
+```
+</ResponseExample>

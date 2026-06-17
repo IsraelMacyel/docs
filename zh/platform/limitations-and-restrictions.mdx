@@ -1,0 +1,42 @@
+---
+title: "限制与约束"
+description: "了解 VirtusCloud 平台的约束和限制。"
+icon: "shield-dog"
+---
+
+## 最低资源要求
+VirtusCloud 平台上托管的每个项目都有特定的最低资源要求，以确保最佳性能：
+
+- **机器人：** 至少需要 256MB RAM。
+- **网站：** 至少需要 512MB RAM。
+- **缓存数据库：** 至少需要 512MB RAM。
+- **通用数据库：** 至少需要 1GB RAM。
+
+## 为什么有最低 RAM 要求？
+VirtusCloud 强制执行最低 RAM 要求，以确保应用程序的稳定性和最佳性能。RAM 不足可能导致应用程序崩溃和降低用户体验。
+
+请注意，虽然 VirtusCloud 提供最高 **1TB RAM** 的计划，但任何**应用程序的最大 RAM 分配为 32GB**。<ins>如果您需要超过 32GB，请联系我们的支持团队寻求帮助。</ins>
+
+## 网络限制
+每增加 **256 MB** RAM，**网络速度增加 50 Mbps**。
+
+- **256 MB RAM：** 50 Mbps
+- **512 MB RAM：** 100 Mbps
+- **1024 MB RAM：** 200 Mbps
+- **2048 MB RAM：** 400 Mbps
+- **4096 MB RAM：** 800 Mbps
+- **8192 MB RAM：** 1600 Mbps
+- **10240 MB RAM：** 2000 Mbps
+
+## 存储限制
+- **所有项目：** 每个项目分配 10GB 存储空间。
+
+## 服务限制
+
+### LACK_OF_RAM
+如果应用程序超出配置文件中指定的 RAM 限制，它将因违反 LACK_OF_RAM 而被标记并关闭。
+
+### LACK_OF_CPU
+如果应用程序超出其分配的处理限制，它将因违反 LACK_OF_CPU 而被标记并关闭。VirtusCloud 不允许托管挖矿加密货币的应用程序。
+
+VirtusCloud 致力于为所有用户提供安全、平衡的环境。

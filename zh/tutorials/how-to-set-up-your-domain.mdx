@@ -1,0 +1,56 @@
+---
+title: "如何设置您的自定义域名"
+sidebarTitle: "自定义域名"
+description: "了解如何在 VirtusCloud 上配置您的域名"
+---
+
+## 简介
+
+要配置您的域名，您需要拥有 Standard 计划或更高级别的计划。您可以在各种域名注册平台上购买域名，例如：
+
+- [Registro.br](https://registro.br/)
+- [Square Space](https://squarespace.com/) *前身：Google Domains
+- [GoDaddy](https://www.godaddy.com/)
+- [Namecheap](https://www.namecheap.com/)
+
+选择适合您需求的平台并购买您的域名。
+
+## 在 Cloudflare 上配置 DNS
+
+- 访问您购买域名的网站，例如 [Hostinger](https://www.hostinger.com.br/) 或 [Registro.br](https://registro.br/)。
+- 接下来，进入 [Cloudflare](https://cloudflare.com/)，导航到"Websites"并点击"Add a site"。
+<Frame>
+  <img src="/images/articles/cloudflare/add-site.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+输入您的域名后，复制提供的名称服务器，并将其粘贴到购买域名的网站的 DNS/名称服务器部分。
+
+## 在 VirtusCloud 上配置您的域名
+
+- 在 [仪表板](https://virtuscloud.app/dashboard) 中选择要配置域名的站点，进入**设置**选项，将域名输入到"example.com"的位置。
+<Frame>
+  <img src="/images/articles/cloudflare/domain-setup.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+- 在 VirtusCloud 上配置好域名后，返回 Cloudflare，选择您的域名并选择 DNS 选项。
+- 最后，将您的域名指向"cname.virtusapp.cloud"，类型为"CNAME"，将"name"替换为您的域名，并添加另一个类型为 TXT 的记录，其值将在点击"保存"后出现在"DNS 配置"中。
+<Frame>
+  <img src="/images/articles/cloudflare/record-dns.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+## 须知
+### www 重定向到您的域名
+- 要将 www 重定向到您的域名，创建一个名为"www"、类型为"A"的新记录，指向 192.0.2.1（Cloudflare 内部 IP）。
+- 进入 Cloudflare 的"Page Rules"选项，使用以下设置创建新规则：
+
+<Frame>
+  <img src="/images/articles/cloudflare/page-rule-www.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+### 故障排除
+
+- 如果您收到 Unauthorized DNS 错误，请尝试清除浏览器缓存，并在 5 分钟后重新访问该站点。如果问题仍然存在，请 [联系我们的团队](/company/support)。
+<Frame>
+  <img src="/images/articles/cloudflare/unauthorized-dns.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+- 如果您收到 Cloudflare 1015 错误，这意味着您的域名配置不正确。检查您的域名配置，确保它正确指向 VirtusCloud。如果问题仍然存在，请 [联系我们的团队](/company/support)。

@@ -1,0 +1,153 @@
+---
+title: "😁 Bem-vindo à VirtusCloud"
+sidebarTitle: "Visão Geral"
+icon: "book"
+description: "A VirtusCloud é uma plataforma que oferece serviços de hospedagem empresarial sem complicações e fáceis de usar. Comece em minutos. ✨"
+---
+
+<CardGroup>
+  <Card
+    title="Guia de Início Rápido"
+    icon="book"
+    href="/getting-started/quick-start"
+  >
+    Tenha uma visão rápida dos seus primeiros passos com a VirtusCloud.
+  </Card>
+  <Card title="API Oficial" icon="code" href="/api-reference">
+    Nossa documentação de API para desenvolvedores (e você está aqui!).
+  </Card>
+</CardGroup>
+
+<Snippet file="before-begin.mdx" />
+
+Após se cadastrar, você pode começar a fazer o deploy das suas aplicações na VirtusCloud depois de selecionar o plano que melhor atende às suas necessidades.
+
+## Facilite sua jornada com a CLI 💻
+Esta visão geral utiliza a [CLI da VirtusCloud](/cli) para fazer deploy das suas aplicações. A CLI é uma ferramenta de linha de comando que permite interagir com os serviços da VirtusCloud. Você pode usá-la para fazer deploy de aplicações, gerenciar serviços e visualizar logs.
+
+Para usar a CLI, você precisa instalá-la na sua máquina local. Use os seguintes comandos para instalar:
+
+<br/>
+
+<CodeGroup>
+```bash macOS, Linux e WSL
+curl -fsSL https://cli.virtuscloud.app/install | bash
+```
+
+```bash Windows com npm
+npm install -g @virtuscloud/cli
+```
+
+```bash Windows com yarn
+yarn global add @virtuscloud/cli
+```
+</CodeGroup>
+
+<Steps>
+  <Step title="Leia as instruções sobre sua linguagem">
+    <Snippet file="languages.mdx" />
+    <Info>Para este exemplo, usaremos a linguagem JavaScript (Node.js).</Info>
+  </Step>
+  <Step title="Crie seu arquivo de configuração VirtusCloud">
+    Após instalar a CLI, você precisa criar um arquivo de configuração. Você pode criar um [arquivo de configuração](/getting-started/config-file) lendo o artigo [aqui](/getting-started/config-file).
+
+    Meu arquivo de configuração ficou assim:
+    ```systemd
+    MAIN=index.js
+    MEMORY=512
+    VERSION=recommended
+    DISPLAY_NAME=Robin bot
+    DESCRIPTION=Este sistema de bot foi criado para ajudá-lo nas suas tarefas diárias.
+    ```
+  </Step>
+  <Step title="Faça upload do seu projeto">
+    Após esta etapa, você precisa fazer upload do seu projeto para a VirtusCloud. Execute o seguinte comando:
+    ```bash
+    virtuscloud upload
+    ```
+  </Step>
+</Steps>
+
+
+## Facilite sua jornada com a interface web 😉
+Se você não gosta de linhas de comando ou prefere usar a interface web, pode fazer upload do seu projeto diretamente no site da VirtusCloud. Para isso, siga estas etapas:
+
+<Steps>
+  <Step title="Acesse o site da VirtusCloud">
+    Acesse o [painel da VirtusCloud](https://virtuscloud.app/dashboard) usando sua conta.
+  </Step>
+  <Step title="Crie seu arquivo de configuração VirtusCloud">
+    Após acessar o painel, você precisa criar um arquivo de configuração. Você pode criar um [arquivo de configuração](/getting-started/config-file) lendo o artigo [aqui](/getting-started/config-file).
+  </Step>
+  <Step title="Compacte seu projeto em ZIP">
+    Após criar o arquivo de configuração, você precisa compactar seu projeto.
+    ```bash Usando a CLI
+    virtuscloud zip
+    ```
+
+    Ou você pode compactar seu projeto manualmente:
+    <CodeGroup>
+      ```bash Windows
+      1. Localize o arquivo ou pasta que deseja compactar.
+      2. Pressione e segure (ou clique com o botão direito) no arquivo ou pasta, selecione Enviar para e depois Pasta compactada (zipada).
+      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local. Para renomeá-la, clique com o botão direito na pasta, selecione Renomear e digite o novo nome.
+      ```
+      ```bash Linux
+      1. Localize o arquivo ou pasta que deseja compactar.
+      2. Clique com o botão direito no arquivo ou pasta e escolha Compactar no menu de atalho.
+      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+      ```
+      ```bash macOS
+      1. Localize o arquivo ou pasta que deseja compactar.
+      2. Clique com Ctrl no arquivo ou pasta e escolha Compactar no menu de atalho.
+      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+      ```
+    </CodeGroup>
+
+    Ou use a linha de comando para compactar a pasta do projeto:
+    <CodeGroup>
+    ```bash macOS, Linux e WSL
+    zip -r meu-projeto.zip .
+    ```
+
+    ```bash Windows (powershell)
+    Compress-Archive -Path . -DestinationPath meu-projeto.zip
+    ```
+    </CodeGroup>
+   </Step>
+  <Step title="Faça o deploy do seu projeto">
+    Após fazer upload do seu projeto, clique no botão "Adicionar novo" para fazer o deploy.
+  </Step>
+</Steps>
+
+## O que vem a seguir?
+Agora que você aprendeu como fazer o deploy do seu projeto, pode explorar mais a plataforma VirtusCloud. Aqui estão alguns recursos para ajudá-lo a começar:
+
+<CardGroup>
+  <Card
+    title="Referência da API"
+    icon="server"
+    href="/api-reference"
+  >
+    Saiba mais sobre a API da VirtusCloud.
+  </Card>
+  <Card
+    title="Referência da CLI"
+    icon="code"
+    href="/cli-reference"
+  >
+    Saiba mais sobre a CLI da VirtusCloud.
+  </Card>
+</CardGroup>
+
+Junte-se à nossa comunidade no [Discord](https://discord.gg/virtuscloud) para obter ajuda de outros desenvolvedores e compartilhar suas experiências.
+<Card
+  title="Comunidade VirtusCloud"
+  icon="discord"
+  href="https://discord.gg/virtuscloud"
+  color="#7289DA"
+>
+  Junte-se à nossa comunidade no Discord. Estamos aqui para ajudá-lo!
+</Card>
+
+Se tiver alguma dúvida ou precisar de ajuda, entre em contato com nossa [equipe de suporte](https://virtuscloud.app/dashboard/support). Estamos aqui para ajudar! 🚀

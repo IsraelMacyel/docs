@@ -1,0 +1,27 @@
+---
+title: "Stop Application"
+description: "Initiate your application."
+api: "POST https://api.virtuscloud.app/v2/apps/{app_id}/stop"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Response
+
+<Status />
+
+<ResponseExample>
+```json
+{
+    "status": "success"
+}
+```
+</ResponseExample>

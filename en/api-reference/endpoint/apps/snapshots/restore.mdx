@@ -1,0 +1,48 @@
+---
+title: "Restore Snapshot"
+description: "Restores an application based on a snapshot of it."
+---
+
+# Restore Snapshot
+
+> Restores an application based on a snapshot of it.
+
+<Warning>This route has a rate limit of 1 request every 60 seconds.</Warning>
+
+## Request
+
+### Headers
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+### Path
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Body
+
+<ParamField body="snapshotId" type="string" placeholder="Snapshot ID" required>
+  The ID of the snapshot to restore for this application (app\_id).
+</ParamField>
+
+<ParamField body="versionId" type="string" placeholder="Snapshot Version Key" required>
+  The version key of the snapshot.
+</ParamField>
+
+## Response
+
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
+<ResponseExample>
+  ```json theme={null}
+  {
+    "status":"success"
+  }
+  ```
+</ResponseExample>

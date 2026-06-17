@@ -1,0 +1,44 @@
+---
+title: "Create Snapshot"
+description: "Perform a snapshot of your application. It has a rate limit of 1 request every 5 seconds."
+api: "POST https://api.virtuscloud.app/v2/apps/{app_id}/snapshots"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Warning>Each account can perform up to (RAM / 256) * 2 snapshots every 24 hours.</Warning>
+
+<Authorization />
+'
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Response
+
+<Status />
+<ResponseField name="response" type="object">
+
+The contents of the response.
+<Expandable title="Toggle object">
+<ResponseField name="url" type="string">
+  The URL to download the snapshot of your application.
+</ResponseField>
+<ResponseField name="key" type="string">
+  The key to download the snapshot of your application.
+</ResponseField>
+</Expandable>
+</ResponseField>
+<ResponseExample>
+```json
+{
+    "status": "success",
+    "response": {
+        "url": "https://snapshots.virtuscloud.app/applications/23457145698959364/a23d130fcc9ddaf2d288ae9599a4292c32.zip?AWSAccessKeyId=i06Xdad2dRD74Pm8Xly&Expires=1753081182&Signature=riWPedawcsouRAPGU5n3kGHnWoOuw%3D",
+        "key": "AWSAccessKeyId=i06Xdad2dRD74Pm8Xly&Expires=1753081182&Signature=riWPedawcsouRAPGU5n3kGHnWoOuw%3D"
+    }
+}
+```
+</ResponseExample>

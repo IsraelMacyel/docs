@@ -1,0 +1,78 @@
+---
+title: "Get Database Info"
+description: "Retrieve detailed information about a specific database."
+---
+
+# Get Database Info
+
+> Retrieve detailed information about a specific database.
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+<ParamField path="database_id" type="string" placeholder="Database ID" required>
+  The ID of the database. You can find this in the Virtus Cloud dashboard.
+</ParamField>
+
+### Response
+
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
+<ResponseField name="response" type="object">
+  The contents of the response.
+
+  <Expandable title="Toggle object">
+    <ResponseField name="name" type="string">
+      The database's name.
+    </ResponseField>
+
+    <ResponseField name="id" type="string">
+      The database's ID.
+    </ResponseField>
+
+    <ResponseField name="owner" type="string">
+      The ID of the database owner.
+    </ResponseField>
+
+    <ResponseField name="cluster" type="string">
+      The database's cluster.
+    </ResponseField>
+
+    <ResponseField name="ram" type="number">
+      The database's RAM usage in MB.
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      The database's type (e.g., mongodb, postgresql).
+    </ResponseField>
+
+    <ResponseField name="port" type="number">
+      The database's port.
+    </ResponseField>
+
+    <ResponseField name="created_at" type="date">
+      The database's creation date.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+  ```json Response theme={null}
+  {
+    "status": "success",
+    "response": {
+      "name": "my-database",
+      "id": "db1234567890",
+      "owner": "313397145698959364",
+      "cluster": "suki-cluster",
+      "ram": 1024,
+      "type": "mongodb",
+      "port": 27017,
+      "created_at": "2023-01-15T10:00:00Z"
+    }
+  }
+  ```
+</ResponseExample>

@@ -1,0 +1,32 @@
+---
+title: "解决网站或 API 访问问题"
+sidebarTitle: "网站访问问题"
+description: "了解如何解决访问网站或 API 时的问题。"
+---
+
+## 未授权 (Unauthorized)
+
+- 尝试访问网站/API 时出现此消息有 2 种情况：
+
+1. 您尝试访问的网站 URL 未托管在 VirtusCloud 上。如果您在部署应用程序后添加了 "SUBDOMAIN" 字段，该字段将不会被读取。您需要删除应用程序并使用正确配置的该字段重新部署。
+
+2. 如果您最近托管了网站，请等待 1 分钟。VirtusCloud 正在完成网站配置。
+
+<Frame>
+  <img src="/images/articles/cloudflare/unauthorized-dns.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+## 超时 (Timeout)
+
+- 尝试访问网站/API 时出现此消息有 4 种情况：
+
+1. 您的网站或 API 可能存在阻止其正常响应的错误。
+2. 如果网站或 API 处于离线状态，您也会收到此消息。
+3. VirtusCloud 中网站和 API 的默认端口是 HTTP 流量的端口 `80`。如果您的应用程序使用不同的端口，可能会遇到此错误。
+4. 如果托管网站时未将 host 正确配置为 `0.0.0.0`，可能会导致访问错误。
+
+<Frame>
+  <img src="/images/articles/cloudflare/timeout.png" style={{ borderRadius: '0.2rem' }} />
+</Frame>
+
+如果您继续遇到任何问题，请随时[联系我们的支持团队](/company/support)。

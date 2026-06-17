@@ -1,0 +1,117 @@
+---
+title: "Workspaces"
+description: "Create workspaces, invite members, manage roles and share applications across a team."
+---
+
+# Workspaces
+
+> Create workspaces, invite members, manage roles and share applications across a team.
+
+<Info>
+  Workspaces are exposed by the `api.workspaces` module — a v4 addition. They are available on **Standard, Pro and Enterprise** plans.
+</Info>
+
+## Creating a workspace
+
+```typescript theme={null}
+const { id: workspaceId } = await api.workspaces.create({ name: "Acme" });
+```
+
+The `name` must be 1–32 characters long.
+
+## Listing workspaces
+
+`api.workspaces.list()` returns every workspace where the authenticated user is owner or member.
+
+```typescript theme={null}
+const workspaces = await api.workspaces.list();
+
+for (const ws of workspaces) {
+    console.log(
+        `${ws.name} (${ws.memberList.length} members, ${ws.applicationList.length} apps)`,
+    );
+}
+```
+
+<Warning>
+  In v3 `ws.members` and `ws.applications` held raw data arrays. In v4 those are now **modules** (`ws.members.add(...)`, `ws.applications.add(...)`). The raw arrays moved to `ws.memberList` and `ws.applicationList`.
+</Warning>
+
+## Fetching a single workspace
+
+```typescript theme={null}
+const workspace = await api.workspaces.fetch(workspaceId);
+
+console.log(workspace.id);
+console.log(workspace.name);
+console.log(workspace.owner);
+console.log(workspace.createdAt);
+console.log(workspace.memberList);
+console.log(workspace.applicationList);
+```
+
+## Inviting members
+
+Inviting a member is a two-step handshake — the invitee proves consent by generating a short-lived (5-minute) code from **their** client, and the owner consumes it.
+
+```typescript theme={null}
+// 1. From the invitee's own SDK client
+const otherApi = new SquareCloudAPI(process.env.OTHER_USER_API_KEY!);
+const code = await otherApi.workspaces.generateInviteCode();
+
+// 2. From the workspace owner's client
+await workspace.members.add(code, "maintain");
+```
+
+Valid roles for the `group` argument:
+
+| Role       | Description                                    |
+| ---------- | ---------------------------------------------- |
+| `view`     | Read-only access                               |
+| `manager`  | Manage applications                            |
+| `maintain` | Manage applications + members below their tier |
+| `admin`    | Full admin                                     |
+
+<Note>
+  The `owner` role cannot be assigned through the API — ownership transfer is not exposed.
+</Note>
+
+## Changing a member's role
+
+```typescript theme={null}
+await workspace.members.update("1234567890abcdef1234567890abcdef", "admin");
+```
+
+## Removing a member
+
+```typescript theme={null}
+await workspace.members.remove("1234567890abcdef1234567890abcdef");
+```
+
+<Note>
+  Only the workspace owner can remove members.
+</Note>
+
+## Sharing applications
+
+```typescript theme={null}
+await workspace.applications.add("abc123def456abc123def456");
+await workspace.applications.remove("abc123def456abc123def456");
+```
+
+## Leaving or deleting a workspace
+
+```typescript theme={null}
+// As a member
+await workspace.leave();
+
+// As the owner (irreversible)
+await workspace.delete();
+```
+
+You can also delete or leave by ID directly from the module:
+
+```typescript theme={null}
+await api.workspaces.delete(workspaceId);
+await api.workspaces.leave(workspaceId);
+```

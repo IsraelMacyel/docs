@@ -1,0 +1,72 @@
+---
+title: "Alojamiento de Sitios Web"
+description: "Descubre las innovaciones y la robustez de VirtusCloud explorando las funciones de alojamiento de sitios web."
+icon: "globe"
+---
+
+<img src="/images/services/sites.png" />
+
+**VirtusCloud** destaca por ofrecer soporte integral para diversos frameworks. Este artículo explora las características de alojamiento web de **VirtusCloud**.
+
+## Características y Soporte
+
+<CardGroup cols={1}>
+  <Card title="Configuración de Dominio" icon="globe" href="https://docs.virtuscloud.app/tutorials/how-to-set-up-your-domain">
+    Configura tu dominio personalizado en VirtusCloud. Instrucciones detalladas disponibles [aquí](https://docs.virtuscloud.app/tutorials/how-to-set-up-your-domain).
+  </Card>
+  <Card title="DNS Rápido" icon="bolt">
+    Utiliza tu propio dominio para una presencia online más profesional y personalizada.
+  </Card>
+  <Card title="Integración con Cloudflare Premium" icon="link">
+    Integra Cloudflare Premium con VirtusCloud para seguridad avanzada, mejor rendimiento y entrega global de contenido.
+  </Card>
+  <Card title="Configuración WAF" icon="shield-check">
+    Nuestro sistema de firewall de última generación garantiza la máxima seguridad para tu sitio web.
+  </Card>
+</CardGroup>
+
+## Lenguajes Soportados
+
+<CardGroup cols={3}>
+  <Card title="Node.js" icon="node-js" href="https://docs.virtuscloud.app/articles/getting-started-with-nodejs">Ideal para desarrollo web dinámico.</Card>
+  <Card title="Python" icon="python" href="https://docs.virtuscloud.app/articles/getting-started-with-python">Ampliamente usado en IA y automatización.</Card>
+  <Card title="Java" icon="java" href="https://docs.virtuscloud.app/articles/getting-started-with-java">Portátil para aplicaciones empresariales.</Card>
+  <Card title="Elixir" icon="droplet" href="https://docs.virtuscloud.app/articles/getting-started-with-elixir">Excelente en sistemas distribuidos.</Card>
+  <Card title="Rust" icon="rust" href="https://docs.virtuscloud.app/articles/getting-started-with-rust">Seguridad y alto rendimiento.</Card>
+  <Card title="PHP" icon="php" href="https://docs.virtuscloud.app/articles/getting-started-with-php">Popular para scripting del servidor.</Card>
+  <Card title="Go" icon="golang" href="https://docs.virtuscloud.app/articles/getting-started-with-go">Eficiente en producción.</Card>
+  <Card title="HTML/CSS" icon="html5">Perfecto para sitios estáticos.</Card>
+  <Card title="C#" icon="c" href="https://docs.virtuscloud.app/articles/getting-started-with-csharp">Versátil para Windows y videojuegos.</Card>
+</CardGroup>
+
+## ¿Cómo Alojar Mi Sitio en VirtusCloud?
+
+<Steps>
+  <Step title="Archivo de Configuración" icon="file">
+    Crea un archivo de configuración detallado, incluyendo:
+    - **SUBDOMAIN**: El subdominio de tu sitio. Ejemplo: `SUBDOMAIN: test`
+    - **MEMORY**: La cantidad de RAM (**mínimo 512MB**).
+    Detalles [aquí](https://docs.virtuscloud.app/getting-started/config-file).
+  </Step>
+  <Step title="Creación del Archivo ZIP" icon="file-zip">
+    Coloca los archivos y la configuración en un .zip. No incluyas `node_modules` ni `package-lock.json`.
+  </Step>
+  <Step title="Archivo de Dependencias" icon="box">
+    Incluye las dependencias en el .zip (`package.json` para Node.js, `requirements.txt` para Python).
+  </Step>
+  <Step title="Subida del Sitio" icon="arrow-up">
+    <Tip>Si puedes definir un `puerto` en tu código o en el parámetro `START`, siempre usa el `puerto 80`.</Tip>
+    Sube tu .zip [aquí](https://virtuscloud.app/dashboard/upload).
+  </Step>
+  <Step title="Errores Comunes" icon="x">
+    <Warning>Si encuentras un error no listado, [contáctanos](https://virtuscloud.app/dashboard/support).</Warning>
+    <AccordionGroup>
+      <Accordion title="INVALID_DEPENDENCY" icon="box">Archivo de dependencias ausente en el .zip.</Accordion>
+      <Accordion title="FEW_MEMORY" icon="memory">RAM mal configurada (mínimo 512MB para sitios web).</Accordion>
+      <Accordion title="INVALID_MAIN" icon="file-code">El archivo "main" no existe o la ruta es incorrecta.</Accordion>
+      <Accordion title="MISSING_CONFIG" icon="file-signature">El archivo de configuración no está en el .zip o no está en la raíz.</Accordion>
+      <Accordion title="INVALID_START" icon="terminal">Campo START ausente o incorrecto.</Accordion>
+      <Accordion title="FAILED_UPLOAD" icon="x">Problema con el .zip. Verifica que esté bien creado y sin contraseña.</Accordion>
+    </AccordionGroup>
+  </Step>
+</Steps>

@@ -1,0 +1,155 @@
+---
+title: "Alojando un Bot de Discord en VirtusCloud"
+sidebarTitle: "Bot de Discord"
+description: "Este artículo te guía en la creación y alojamiento de un bot de Discord en VirtusCloud."
+---
+
+## Introducción
+
+- Antes de comenzar a programar, debes configurar tu bot correctamente en Discord. Primero, necesitas tener una cuenta de Discord. Si aún no tienes una, créala visitando el [sitio oficial de Discord](https://discord.com/).
+- A continuación, necesitarás crear una cuenta en VirtusCloud, lo que puedes hacer en la [página de registro](https://virtuscloud.app/signup). Puedes usar tu correo electrónico para crear una cuenta.
+- Finalmente, necesitas tener un plan de pago activo en tu cuenta. Puedes ver nuestros planes y adquirir uno según tus necesidades [aquí](https://virtuscloud.app/pricing).
+
+<AccordionGroup>
+  <Accordion title="Primeros Pasos" icon="rocket" iconType="solid">
+    Primero, ve al [Portal de Desarrolladores](https://discord.com/developers/applications) y haz clic en "New Application". Luego elige un nombre para tu bot y haz clic en "Create" para crearlo.
+    <Frame>
+      <img src="/images/articles/discord/getting-started.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="Obteniendo el Token" icon="key" iconType="solid">
+    Después de crear tu bot, es hora de obtener el token. Para ello, ve a la pestaña "Bot" y haz clic en "Reset Token" para generar tu token. Cópialo para usarlo en tu código más adelante.
+    <Frame>
+      <img src="/images/articles/discord/getting-the-token.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Accordion>
+  <Accordion title="Activando Privileged Intents" icon="message" iconType="solid">
+   Ahora que tienes el token de tu bot, debes activar los intents necesarios. Todavía en la pestaña "Bot", desplázate hacia abajo y busca "Privileged Gateway Intents". Activa los intents necesarios:
+    <Frame>
+      <img src="/images/articles/discord/intent.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Accordion>
+</AccordionGroup>
+<Warning>Recuerda mantener el token de tu bot en secreto, ya que puede usarse para controlarlo.</Warning>
+
+# Usando librerías para la creación del bot
+<Tabs>
+  <Tab title="Discord.js">
+    1. Asegúrate de tener Node.js instalado. Si no lo tienes, descárgalo desde el [sitio oficial de Node.js](https://nodejs.org/).
+2. Inicializa un nuevo proyecto Node.js con `npm init`:
+
+```bash
+npm init -y
+```
+
+3. Instala la librería discord.js con npm:
+
+```bash
+npm install discord.js
+```
+
+4. Crea un nuevo archivo JavaScript (ej.: `index.js`) con el siguiente código:
+
+```javascript index.js
+const { Client, GatewayIntentBits } = require("discord.js");
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
+
+client.on("ready", () => {
+  console.log(`${client.user.tag}!`);
+});
+
+client.on("messageCreate", (message) => {
+  if (message.content === "!hello") {
+    message.reply("¡Hola!");
+  }
+});
+
+client.login("tu token aquí");
+```
+  </Tab>
+    <Tab title="Discord.py">
+    1. Asegúrate de tener Python instalado. Si no lo tienes, descárgalo desde el [sitio oficial de Python](https://www.python.org/).
+    2. Instala la librería discord.py con pip:
+
+```bash
+pip install discord.py
+```
+
+3. Crea un nuevo archivo Python (ej.: `main.py`) con el siguiente código:
+
+```python main.py
+import discord
+from discord.ext import commands
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = commands.Bot(command_prefix='!', intents=intents)
+
+@client.event
+async def on_ready():
+    print(f'{client.user}')
+
+@client.command()
+async def hello(ctx):
+    await ctx.reply('¡Hola!')
+
+client.run('tu token aquí')
+```
+
+4. Crea un archivo `requirements.txt` con las librerías externas necesarias:
+
+```txt requirements.txt
+discord.py
+```
+  </Tab>
+</Tabs>
+
+## Creando el archivo de configuración de VirtusCloud
+
+<Card title="Aprende: cómo crear el archivo de configuración para VirtusCloud." icon="link" href="https://docs.virtuscloud.app/getting-started/config-file">
+El archivo virtuscloud.app es un archivo de configuración que se usará para configurar tu aplicación; define el nombre, descripción, versión, archivo principal, entre otras cosas.
+</Card>
+
+## Configurando el campo START
+<Warning>Usa este campo solo si estás seguro de lo que estás haciendo.</Warning>
+
+En el archivo de configuración de VirtusCloud, el campo **START** es opcional y solo se necesita si usas un script personalizado para iniciar el bot.
+
+## Subiendo tu proyecto a VirtusCloud
+
+Después de seguir todos los pasos, comprime los archivos de tu aplicación en un zip con el archivo de configuración y sube el bot en [Upload](https://virtuscloud.app/dashboard/upload). Incluye el archivo `requirements.txt` o `package.json`, pero no incluyas carpetas como `__pycache__` o `node_modules`.
+
+## Probando el Bot
+
+Si todo está bien, invita tu bot para probarlo:
+
+1. Accede al [Portal de Desarrolladores](https://discord.com/developers/applications).
+2. Selecciona tu bot.
+3. Ve a la pestaña "OAuth2".
+4. Ve a "OAuth2 URL Generator".
+5. Marca la opción "bot".
+6. Elige los permisos que tendrá tu bot.
+7. Se generará un enlace de invitación similar a:
+```txt
+https://discord.com/oauth2/authorize?client_id=00000000000000&permissions=8&scope=bot
+```
+
+Para probar, ejecuta el siguiente comando en tu servidor: `!hello`.
+    <Frame>
+      <img src="/images/articles/discord/testing-bot.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+
+## Recursos Adicionales
+
+Para más información sobre la creación de bots con discord.py y discord.js, visita la [documentación oficial de discord.py](https://discordpy.readthedocs.io/en/latest/) y la [guía oficial de discord.js](https://discordjs.guide/).
+
+Si tienes problemas, no dudes en [contactar a nuestro equipo de soporte](/company/support).

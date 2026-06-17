@@ -1,0 +1,80 @@
+---
+title: "命令参考"
+sidebarTitle: "命令"
+icon: "code"
+description: "了解 VirtusCloud CLI 中可用的命令。"
+---
+
+## 主要命令
+
+<Tabs>
+    <Tab title="virtuscloud help">
+        获取任何命令的帮助信息。
+        ```bash
+        virtuscloud help
+        ```
+    </Tab>
+    <Tab title="virtuscloud auth login">
+        使用 API 密钥向 VirtusCloud CLI 进行身份验证。
+        ```bash
+        virtuscloud auth login
+        ```
+        系统将提示您输入 API 密钥。
+        ```bash
+        Your API Token:
+        > 输入您的 VirtusCloud API 令牌
+        ```
+    </Tab>
+    <Tab title="virtuscloud auth whoami">
+        显示与当前令牌关联的用户信息。
+        ```bash
+        virtuscloud auth whoami
+        ```
+        ```bash 输出
+        Currently logged as <username>
+        ```
+    </Tab>
+    <Tab title="virtuscloud commit">
+        将您的应用程序提交到 VirtusCloud。
+        ```bash
+        virtuscloud commit
+        ```
+    </Tab>
+    <Tab title="virtuscloud zip">
+        将当前文件夹压缩为 ZIP。
+        ```bash
+        virtuscloud zip
+        ```
+    </Tab>
+</Tabs>
+
+## 应用程序命令
+
+<Tabs>
+    <Tab title="virtuscloud app list">
+        列出您所有的 VirtusCloud 应用程序。
+        ```bash
+        virtuscloud app list
+        ```
+    </Tab>
+    <Tab title="virtuscloud app">
+        对您的应用程序执行操作。
+        ```bash
+        virtuscloud app
+        ```
+    </Tab>
+</Tabs>
+
+## 部署命令
+
+<Tabs>
+    <Tab title="virtuscloud upload">
+        将您的应用程序上传到 VirtusCloud。
+        ```bash
+        virtuscloud upload
+        ```
+        ```bash 输出
+         ✓ Your application has been uploaded
+        ```
+    </Tab>
+</Tabs>

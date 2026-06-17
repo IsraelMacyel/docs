@@ -1,0 +1,81 @@
+---
+title: "Administrando Equipos en VirtusCloud"
+sidebarTitle: "Administrar Equipos"
+description: "Aprende cómo funciona el sistema de equipos y cómo administrar tus equipos"
+---
+
+## Introducción
+
+- Antes de comenzar, necesitarás crear una cuenta en VirtusCloud, lo que puedes hacer en la [página de registro](https://virtuscloud.app/signup). Puedes usar tu correo electrónico para crear una cuenta.
+- Finalmente, necesitas tener un plan de pago activo en tu cuenta. Puedes ver nuestros planes y adquirir uno [aquí](https://virtuscloud.app/pricing).
+
+## Creando tu Equipo
+
+Para crear tu equipo, ve al [dashboard](https://virtuscloud.app/dashboard), haz clic en tu perfil y elige la opción "Crear un Equipo". Elige el nombre del equipo y confirma. El equipo se creará y podrás acceder a él seleccionando tu perfil de nuevo y eligiendo el equipo deseado.
+<Frame>
+    <img src="/images/articles/teams/create-team.png" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+## Agregando Miembros al Equipo
+Para agregar un nuevo miembro al equipo, sigue estos pasos:
+
+<Steps>
+  <Step title="Primer Paso" icon="check">
+    Pide al usuario que deseas agregar que acceda a la página de [configuración](https://virtuscloud.app/account/security) y active el botón `solicitar código de equipo`. Deberán enviarte el código generado. Recuerda que este código solo puede usarse una vez y expira después de **5 minutos**.
+  </Step>
+  <Step title="Segundo Paso" icon="star">
+    Accede al [dashboard](https://virtuscloud.app/dashboard), navega a tu perfil y selecciona el equipo donde quieres agregar al usuario. Luego ve a la pestaña "Miembros", haz clic en "Invitar a un miembro" e ingresa el código de cuenta del usuario que deseas invitar.
+<Frame>
+    <img src="/images/articles/teams/add-member.gif" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+  </Step>
+</Steps>
+
+<Warning>Comparte tu código de cuenta solo con personas de confianza.</Warning>
+
+### Roles
+Cada miembro del equipo tiene un rol que le otorga permisos específicos para gestionar las aplicaciones. A continuación encontrarás la lista de permisos:
+
+<AccordionGroup>
+  <Accordion title="Ver" icon="eye">
+  Puede ver paneles, métricas, registros y alertas del sistema para monitorear la integridad y el rendimiento general.
+  </Accordion>
+
+  <Accordion title="Gerente" icon="user-tie">
+    Además de los permisos de visualización, puede controlar el ciclo de vida de las aplicaciones iniciando, deteniendo y reiniciando servicios.
+  </Accordion>
+
+  <Accordion title="Mantenimiento" icon="wrench">
+    Más allá de los permisos de gerente, puede cargar, descargar y editar archivos y configuraciones de aplicaciones.
+  </Accordion>
+
+  <Accordion title="Admin" icon="user-shield">
+    Tiene acceso completo, incluyendo ver métricas, administrar aplicaciones, editar archivos, acceder a datos confidenciales y realizar snapshots y restauraciones del sistema.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+ Solo el rol Admin puede ver archivos como `.env`, `.env.production` y el archivo de configuración (`virtuscloud.app/.config`)
+</Note>
+
+## Agregando Aplicaciones al Equipo
+Para agregar aplicaciones a tu equipo, sigue estos pasos:
+
+<Steps>
+  <Step title="Primer Paso" icon="check">
+    Accede al equipo al que deseas agregar una nueva aplicación.
+    <Frame>
+      <img src="/images/articles/teams/team.gif" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+  <Step title="Segundo Paso" icon="star">
+    Haz clic en "Agregar nuevo" y selecciona la aplicación que deseas agregar al equipo elegido.
+    <Frame>
+      <img src="/images/articles/teams/add-app.gif" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+<Warning>Solo el propietario del equipo puede agregar aplicaciones.</Warning>
+
+Si tienes problemas, no dudes en [contactar a nuestro equipo de soporte](/company/support).

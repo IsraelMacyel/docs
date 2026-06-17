@@ -1,0 +1,126 @@
+---
+title: "Network Logs"
+description: "Get per-request edge logs for the application's domains."
+---
+
+# Network Logs
+
+> Get per-request edge logs for the application's domains.
+
+Returns per-request edge logs (HTTP, country, status, bytes) for the application's primary domain and any configured custom domain. Maximum retention window is 7 days; the start is clamped to the application's creation date.
+
+<Info>
+  Available only on **Pro** and **Enterprise** plans. Cache miss rate limit: 10 requests per 60 seconds per owner.
+</Info>
+
+## Request
+
+### Headers
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+### Path
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Query
+
+<ParamField query="start" type="string" placeholder="ISO 8601 timestamp" required>
+  ISO 8601 start timestamp. Cannot be earlier than the application's creation date or older than 7 days.
+</ParamField>
+
+<ParamField query="end" type="string" placeholder="ISO 8601 timestamp" required>
+  ISO 8601 end timestamp. Must be after `start`.
+</ParamField>
+
+## Response
+
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
+<ResponseField name="response" type="array">
+  The contents of the response.
+
+  <Expandable title="Toggle object">
+    <ResponseField name="timestamp" type="string">
+      Timestamp of the request in ISO format.
+    </ResponseField>
+
+    <ResponseField name="client" type="object">
+      Information about the client that made the request.
+
+      <Expandable title="Toggle client object">
+        <ResponseField name="ip" type="string | null">The client's IP address.</ResponseField>
+        <ResponseField name="country" type="string | null">The client's country code.</ResponseField>
+        <ResponseField name="location" type="string | null">The client's approximate location.</ResponseField>
+        <ResponseField name="asn" type="string">The client's ASN.</ResponseField>
+        <ResponseField name="agent" type="string | null">The client's user agent.</ResponseField>
+        <ResponseField name="category" type="string | null">The client category (e.g. bot, human).</ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="request" type="object">
+      Information about the incoming request.
+
+      <Expandable title="Toggle request object">
+        <ResponseField name="mitigated" type="boolean">Whether the request was mitigated by edge protections.</ResponseField>
+        <ResponseField name="method" type="string">HTTP method used.</ResponseField>
+        <ResponseField name="host" type="string">Host header value.</ResponseField>
+        <ResponseField name="path" type="string">Request path.</ResponseField>
+        <ResponseField name="query" type="string | null">Query string.</ResponseField>
+        <ResponseField name="protocol" type="string">Protocol used (e.g. HTTP/2).</ResponseField>
+        <ResponseField name="referer" type="string | null">Referer header value.</ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="response" type="object">
+      Information about the response served at the edge.
+
+      <Expandable title="Toggle response object">
+        <ResponseField name="status" type="integer">HTTP status code returned.</ResponseField>
+        <ResponseField name="contentType" type="string | null">Response content type.</ResponseField>
+        <ResponseField name="cache" type="string | null">Cache status (e.g. HIT, MISS).</ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+  ```json theme={null}
+  {
+    "status": "success",
+    "response": [
+      {
+        "timestamp": "2025-12-01T12:00:00.000Z",
+        "client": {
+          "ip": "203.0.113.45",
+          "country": "BR",
+          "location": "São Paulo",
+          "asn": "12345 - Example ISP",
+          "agent": "Mozilla/5.0",
+          "category": null
+        },
+        "request": {
+          "mitigated": false,
+          "method": "GET",
+          "host": "my-app.squareweb.app",
+          "path": "/api/users",
+          "query": "?limit=10",
+          "protocol": "HTTP/2",
+          "referer": null
+        },
+        "response": {
+          "status": 200,
+          "contentType": "application/json",
+          "cache": "MISS"
+        }
+      }
+    ]
+  }
+  ```
+</ResponseExample>

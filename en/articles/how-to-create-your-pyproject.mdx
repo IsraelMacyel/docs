@@ -1,0 +1,127 @@
+---
+title: "How to create your pyproject.toml file"
+description: "Complete guide to the pyproject.toml file in Python: learn how to create, list dependencies, pin versions, and prepare your project for production."
+---
+
+# How to create your pyproject.toml file
+
+> Complete guide to the pyproject.toml file in Python: learn how to create, list dependencies, pin versions, and prepare your project for production.
+
+## pyproject.toml file for Python
+
+The `pyproject.toml` file is a modern way to specify all your project's build system requirements and dependencies in a single file. This guide shows how to create, configure and use `pyproject.toml` to ensure consistency between development and production environments.
+
+## What is a pyproject.toml file?
+
+A `pyproject.toml` lists dependencies, build system and other metadata for your Python project. This allows:
+
+* You and your team to maintain identical environments
+* New collaborators to reproduce the environment exactly
+* Set up development and production dependencies separately
+
+***
+
+<Steps>
+  <Step title="Create the pyproject.toml file">
+    First, create a file named `pyproject.toml` in the root of your project.
+  </Step>
+
+  <Step title="Define your project details">
+    In the `pyproject.toml` file, start by defining your project metadata. We will define the project name, version, description, and other relevant information.\
+    The project name must consist of ASCII letters, digits, underscores “\_”, hyphens “-” and periods “.”. It must not start or end with an underscore, hyphen or period. For example:
+
+    ```toml pyproject.toml theme={null}
+    [project]
+    name = "my-python-project"
+    description = "A sample Python project using pyproject.toml"
+    version = "1.0.0"
+    ```
+  </Step>
+
+  <Step title="List project dependencies">
+    Next, we will list the dependencies required for our project. We can specify both development and production dependencies. The production dependencies are listed under the `dependencies` section, while development dependencies can be listed under `optional-dependencies` with a specific group name (e.g., `dev`).\
+    You can specify versions for your dependencies using comparison operators like `==`, `>=`, `<`... In the example below, we do not specify versions. This means that the latest will be installed.
+    It is recommended to specify exact versions to ensure reproducibility and prevent breakage from incompatible updates in production.
+
+    ```toml pyproject.toml theme={null}
+    [project]
+    name = "my-python-project"
+    description = "A sample Python project using pyproject.toml"
+    version = "1.0.0"
+    dependencies = [
+        "discord-py",
+        "aiohttp"
+    ]
+
+    [project.optional-dependencies]
+    dev = [
+        "pytest",
+        "black"
+    ]
+    ```
+  </Step>
+
+  <Step title="Set up the build system">
+    Finally, we need to specify the build system requirements. This is necessary for tools like pip to know how to build and install your project. We will use `setuptools` as our build backend, which is a common choice for Python projects, but you can choose others like `poetry`.
+
+    ```toml pyproject.toml theme={null}
+    [project]
+    name = "my-python-project"
+    description = "A sample Python project using pyproject.toml"
+    version = "1.0.0"
+    dependencies = [
+        "discord.py",
+        "aiohttp"
+    ]
+
+    [project.optional-dependencies]
+    dev = [
+        "pytest",
+        "black"
+    ]
+
+    [build-system]
+    requires = ["setuptools"]
+    build-backend = "setuptools.build_meta"
+    ```
+  </Step>
+</Steps>
+
+***
+
+## Install dependencies with pip
+
+To install the dependencies listed in your `pyproject.toml` file, you can use pip or other tools that support `pyproject.toml`. This allows you to work on your project while having the dependencies installed.
+
+```bash theme={null}
+pip install .
+```
+
+This command will read the `pyproject.toml` file, install the dependencies listed under `dependencies`, and set up your project for development. If you want to install the development dependencies as well, you can use:
+
+```bash theme={null}
+pip install .[dev]
+```
+
+This will install both the production and development dependencies, allowing you to work on your project with all the necessary tools.
+
+## Best practices and tips:
+
+* **Keep updated**: Review and update `pyproject.toml` regularly as you add new dependencies
+* **Use exact versions**: Always use `==` instead of `>`, `>=` or no version to avoid surprises in production
+* **Versioning**: Commit `pyproject.toml` to git to track dependency changes and version updates
+* **Isolated environment**: Maintain one virtual environment per project to avoid global conflicts
+* **Test locally**: Before deploying, test the file with `pip install .` in a new environment
+
+***
+
+## Next steps
+
+With your `pyproject.toml` file configured:
+
+1. Commit to your Git repository.
+2. Host your project on **Virtus Cloud**.
+3. Configure automatic deploy via GitHub.
+4. Welcome to professional Python application hosting!
+
+A well-structured `pyproject.toml` file is the foundation for any successful Python application, ensuring your application works perfectly on Virtus Cloud.

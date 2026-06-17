@@ -1,0 +1,121 @@
+---
+title: "Managing Workspaces"
+description: "In this section, you will learn how to manage workspaces using the Python SDK. Workspaces allow you to organize and collaborate on multiple applications with team members."
+---
+
+# Managing Workspaces
+
+> In this section, you will learn how to manage workspaces using the Python SDK. Workspaces allow you to organize and collaborate on multiple applications with team members.
+
+[Client]: client
+
+Workspaces are a way to organize your applications and collaborate with team members. You can create, retrieve, list, and delete workspaces using the Client class.
+
+## Creating a workspace
+
+`client.create_workspace` returns a `Workspace` object.
+
+```python theme={null}
+import virtuscloud as square
+
+client = square.Client(api_key='API_KEY')
+
+async def example():
+    workspace = await client.create_workspace(name='My Workspace')
+    
+    print(workspace.id)              # Workspace identifier
+    print(workspace.name)             # 'My Workspace'
+    print(workspace.owner)            # Owner member information
+    print(workspace.members)          # List of workspace members
+    print(workspace.applications)     # List of applications in the workspace
+    print(workspace.createdAt)        # Workspace creation timestamp
+```
+
+## Retrieving a workspace
+
+`client.get_workspace` returns a `Workspace` object.
+
+```python theme={null}
+import virtuscloud as square
+
+client = square.Client(api_key='API_KEY')
+
+async def example():
+    workspace = await client.get_workspace(workspace_id='WORKSPACE_ID')
+    
+    print(workspace.id)          # Workspace identifier
+    print(workspace.name)         # Workspace name
+    print(workspace.owner)        # Owner member information
+    print(workspace.members)      # List of workspace members
+    print(workspace.applications) # List of applications in the workspace
+```
+
+## Listing all workspaces
+
+`client.all_workspaces` returns a list of `Workspace` objects.
+
+```python theme={null}
+import virtuscloud as square
+
+client = square.Client(api_key='API_KEY')
+
+async def example():
+    workspaces = await client.all_workspaces()
+    
+    for workspace in workspaces:
+        print(f"Workspace: {workspace.name} (ID: {workspace.id})")
+        print(f"  Owner: {workspace.owner.name}")
+        print(f"  Members: {len(workspace.members)}")
+        print(f"  Applications: {len(workspace.applications)}")
+```
+
+## Deleting a workspace
+
+`client.delete_workspace` returns a `Response` object.
+
+```python theme={null}
+import virtuscloud as square
+
+client = square.Client(api_key='API_KEY')
+
+async def example():
+    response = await client.delete_workspace(workspace_id='WORKSPACE_ID')
+    print(f"Workspace deleted successfully: {response.status}")
+```
+
+## Leaving a workspace
+
+If you are a member of a workspace but not the owner, you can leave the workspace using `client.leave_workspace`, which returns a `Response` object.
+
+```python theme={null}
+import virtuscloud as square
+
+client = square.Client(api_key='API_KEY')
+
+async def example():
+    response = await client.leave_workspace(workspace_id='WORKSPACE_ID')
+    print(f"Left workspace successfully: {response.status}")
+```
+
+## Workspace data structure
+
+The `Workspace` object contains the following information:
+
+| Property       | Type                | Description                                |
+| -------------- | ------------------- | ------------------------------------------ |
+| `id`           | `str`               | Workspace unique identifier                |
+| `name`         | `str`               | Workspace name                             |
+| `owner`        | `Member`            | Workspace owner information                |
+| `members`      | `list[Member]`      | List of workspace members                  |
+| `applications` | `list[Application]` | Applications associated with the workspace |
+| `createdAt`    | `str`               | Workspace creation timestamp (ISO 8601)    |
+
+## Member data structure
+
+Each member in a workspace has the following structure:
+
+| Property | Type  | Description                           |
+| -------- | ----- | ------------------------------------- |
+| `id`     | `str` | Member unique identifier              |
+| `name`   | `str` | Member display name                   |
+| `group`  | `str` | Member role or group in the workspace |

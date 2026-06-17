@@ -1,0 +1,47 @@
+---
+title: "Como depurar sua Aplicação"
+description: "Aprenda como depurar sua aplicação usando discord.py e discord.js."
+---
+
+## Depurando em [**discord.js**](https://old.discordjs.dev/#/docs/discord.js/14.14.1/class/Client?scrollTo=e-debug)
+Com discord.js, você pode utilizar os eventos "debug" e "error" para depuração. Veja um exemplo:
+
+```js
+// O cliente escuta o evento 'debug'
+client.on('debug', (info) => {
+    // Registra as informações de debug no console
+    console.log(`Info de Debug: ${info}`);
+});
+
+// O cliente escuta o evento 'error'
+client.on('error', (error) => {
+    // Registra a mensagem de erro no console
+    console.error(`Erro encontrado: ${error.message}`);
+});
+```
+
+Neste código, usamos o evento 'debug'; ele é disparado para fornecer informações gerais de depuração, e as mensagens de debug são registradas no console. Da mesma forma, quando o evento 'error' é disparado, a mensagem de erro é registrada no console.
+
+## Depurando em [**discord.py**](https://discordpy.readthedocs.io/en/stable/logging.html?highlight=debug)
+Com discord.py, você pode usar o módulo de logging para depuração. Veja um exemplo:
+
+```py
+import logging
+import logging.handlers
+
+# Configura o logger para o discord
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+logging.getLogger('discord.http').setLevel(logging.INFO)
+
+# Configura o handler para o logger
+handler = logging.StreamHandler()
+dt_fmt = '%Y-%m-%d %H:%M:%S'
+formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+# Executa o bot
+client.run("seu token aqui", log_handler=None)
+```
+Neste código, todas as informações de depuração e erros são registrados no console.

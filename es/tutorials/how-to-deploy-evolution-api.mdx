@@ -1,0 +1,275 @@
+---
+title: "How to deploy Evolution API on Virtus Cloud"
+description: "This tutorial will guide you to create and deploy your Evolution API application on Virtus Cloud."
+---
+
+# How to deploy Evolution API on Virtus Cloud
+
+> This tutorial will guide you to create and deploy your Evolution API application on Virtus Cloud.
+
+  if (lang == 'pt-br') {
+    return <Note>
+            <b>Qual porta devo usar para o meu servidor?</b><br />
+            Você deve usar a porta <b>80</b> para o seu servidor. A porta 80 é a porta padrão para tráfego HTTP; a Virtus Cloud a encaminha para 443 (HTTPS) para estabelecer uma conexão segura.<br />
+            Certifique-se de configurá-la antes de compactar e enviar seu projeto.
+        </Note>;
+  }
+  return <Note>
+            <b>What port should I use for my server?</b><br />
+            You should use port <b>80</b> for your server. Port 80 is the default port for HTTP traffic, which is handled by Virtus Cloud to route it to 443, HTTPS, for a secure connection.<br />
+            Make sure to configure it before compressing and uploading your project.
+        </Note>;
+};
+
+  const url = `https://virtuscloud.app/${lang}/pay?plan=${plan.toLowerCase()}&tier=${tier}`;
+  if (lang == 'en') {
+    return <Note>
+        <b>Wondering how much RAM and CPU your plan needs to host {appType}?</b><br />
+        Don't worry, we're here to help.
+        Our <a href={url}>{plan}</a> plan offers <b>{tier}GB</b> of RAM and <b>{cpu}vCPU</b>, which should be sufficient for most {appType}. 
+        However, if you are working on a larger project and seeking extra stability, we recommend considering our <b>Pro</b> plan. With additional resources, you can maintain stability even during demand spikes. 
+        To purchase, simply click <a href="https://virtuscloud.app/en/pay?plan=pro">here</a>.
+      </Note>;
+  } else {
+    return <Note>
+          <b>Está se perguntando quanta RAM e CPU seu plano precisa para hospedar {appType}?</b><br />
+          Não se preocupe, estamos aqui para ajudar.
+          Nosso plano <a href={url}>{plan}</a> oferece <b>{tier}GB</b> de RAM e <b>{cpu}vCPU</b>, o que deve ser suficiente para a maioria dos {appType}.
+          No entanto, se você estiver trabalhando em um projeto maior e precisar de mais estabilidade, recomendamos considerar nosso plano <b>Pro</b>.
+          Com recursos adicionais, você pode manter a estabilidade mesmo durante picos de demanda.
+          Para comprar, basta clicar <a href={`https://virtuscloud.app/${lang}/pay?plan=pro`}>aqui</a>.
+        </Note>;
+  }
+};
+
+
+## Introduction
+
+To develop and host {appType_0} on Virtus Cloud, it's essential to follow a structured sequence of configurations and prerequisites. This technical guide will cover the entire process, from initial setup to production deployment.
+
+### Prerequisites
+
+* **Virtus Cloud Account**: Register through the [signup page](https://virtuscloud.app/en/signup) using your email.
+* **Active Paid Plan**: Ensures dedicated resources and optimized performance for your application. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the most suitable for your needs.
+
+<RecommendedPlan appType="Evolution API" plan="Standard" tier="4" cpu="4" lang="en" />
+
+## Why use Evolution API?
+
+Evolution API creates an easier way to use many tools in one place, integrating n8n, chatwoot and other tools.
+This project allows you to fastly create and connect with an instance through it or through it API, managing multiple bot instances in one place.
+
+## Setting up the project
+
+First, you need to get the project from some source. You can get it from the [official repository](https://github.com/EvolutionAPI/evolution-api) or from [our repository](https://github.com/virtuscloud-education/evolutionapi-web) which already have the files needed to deploy on the releases.
+
+### Database configuration
+
+To start setting up, we need a database for it. You can host one in Virtus Cloud if you have Standard plan or higher.
+After creating, we need to set in our `.env` the URL as `DATABASE_CONNECTION_URI` and create the client certificate for the PostgreSQL connection. Here's an example of the configuration needed:
+
+```systemd .env theme={null}
+DATABASE_PROVIDER=postgresql
+DATABASE_CONNECTION_URI='postgresql://virtuscloud:password@host:port/database?sslmode=require&sslidentity=path/to/client-identity.p12&sslpassword=p12password'
+DATABASE_CONNECTION_CLIENT_NAME='evolution_exchange'
+DATABASE_SAVE_DATA_INSTANCE=true
+DATABASE_SAVE_DATA_NEW_MESSAGE=true
+DATABASE_SAVE_MESSAGE_UPDATE=true
+DATABASE_SAVE_DATA_CONTACTS=true
+DATABASE_SAVE_DATA_CHATS=true
+DATABASE_SAVE_DATA_LABELS=true
+DATABASE_SAVE_DATA_HISTORIC=true
+DATABASE_SAVE_IS_ON_WHATSAPP=true
+DATABASE_SAVE_IS_ON_WHATSAPP_DAYS=7
+DATABASE_DELETE_MESSAGE=true
+```
+
+With the environment variable and certificate set, you need to apply the migrations on your database. To do so, you need to have the `runWithProvider.js` file within the project folder and run the following command:
+
+<Tabs>
+  <Tab title="Windows">
+    ```bash theme={null}
+    npm run db:deploy:win
+    ```
+  </Tab>
+
+  <Tab title="Linux">
+    ```bash theme={null}
+    npm run db:deploy
+    ```
+  </Tab>
+</Tabs>
+
+### Server configuration
+
+As shown in the repository `.env.example` file, you need to set some environment variables, server\_type, server\_port, server\_url and the language.
+
+```systemd .env theme={null}
+SERVER_NAME=evolution
+SERVER_TYPE=http
+SERVER_PORT=80
+# Change the SERVER_URL to your actual server URL.
+# you change it to your app url, selected when creating the app
+# or when set a domain
+SERVER_URL="https://my-evolution-api.squareweb.app"
+LANGUAGE=en
+# Other variables below...
+```
+
+It is important to configure a secure global API key to avoid non-authorized access.
+
+```systemd .env theme={null}
+# Other variables...
+AUTHENTICATION_API_KEY=MySuperSecureAPIKEY
+```
+
+## Deploying
+
+To deploy it in Virtus Cloud, you only will need to set the startup command and publish on web. To install and build, we recommend to use 3096MB of RAM.
+
+```bash startup command theme={null}
+npx prisma generate --schema prisma/postgresql-schema.prisma && npm run build && npm run start:prod
+```
+
+<PortNote lang="en" />
+
+### Via dashboard
+
+<Steps>
+  <Step title="Access the Upload Page">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configure Your Environment">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Deploy Your Project">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
+</Card>
+
+<Steps>
+  <Step title="Install the CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
+
+    ```
+    npm install -g @virtuscloud/cli
+    ```
+
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
+
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        virtuscloud update
+        ```
+      </Tab>
+
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Authenticate">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
+
+    ```bash theme={null}
+    virtuscloud auth login
+    ```
+  </Step>
+
+  <Step title="Upload Your Project">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
+
+    ```bash theme={null}
+    virtuscloud upload 
+    ```
+
+    Or if you created the zip manually, you can use:
+
+    ```bash theme={null}
+    virtuscloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
+
+## Additional info
+
+After the first run, you can reduce the RAM to 1536MB or 2048MB and set the startup command to only:
+
+```bash theme={null}
+npm run start:prod
+```
+
+### Cache system
+
+You can configure a cache system in Evolution API. To do so, you will need a Redis Database that you can also host in Virtus Cloud.\
+To configure it, you will also need to download the certificate and set the URL to connect.
+
+```systemd .env theme={null}
+CACHE_REDIS_ENABLED=true
+CACHE_REDIS_URI="redis://default:MySecurePassword@square-cloud-db-ID.squareweb.app:7170"
+CACHE_REDIS_TTL=604800
+# Prefix serves to differentiate data from one installation to another that are using the same redis
+CACHE_REDIS_PREFIX_KEY=evolution
+# Enabling this variable will save the connection information in Redis and not in the database.
+CACHE_REDIS_SAVE_INSTANCES=false
+```
+
+## Troubleshooting
+
+<CardGroup cols={1}>
+  ### Custom Domain
+
+  <Card horizontal>
+    To use a custom domain (e.g., `mysite.com`) instead of the default URL `mysite.squareweb.app`, you need the **Standard plan or higher**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
+  </Card>
+
+  ### Minimum RAM Requirements
+
+  <Card horizontal>
+    **Minimum: 512MB RAM** for simple websites/APIs. For sites with frameworks (Next.JS, React, Vue, Angular, etc.), we always recommend **at least 1GB RAM**. For larger applications, allocate more RAM to prevent the application from running out of memory and crashing.
+  </Card>
+
+  ### Could not find this site.
+
+  <Card horizontal>
+    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Virtus to enable **first access**.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/unauthorized.webp" alt="Cloudflare site not found error" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Card>
+
+  ### Site took too long to respond...
+
+  <Card horizontal>
+    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Virtus's forced environment variables: **PORT** and **HOST** from the `.env` file.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/timeout.webp" alt="Cloudflare request timeout error" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Card>
+</CardGroup>
+
+## Contact us
+
+If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.

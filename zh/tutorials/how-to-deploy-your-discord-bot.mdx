@@ -1,0 +1,155 @@
+---
+title: "在 VirtusCloud 上托管 Discord 机器人"
+sidebarTitle: "Discord 机器人"
+description: "本文将引导您在 VirtusCloud 上创建和托管 Discord 机器人。"
+---
+
+## 简介
+
+- 在开始编程之前，您需要在 Discord 上正确设置您的机器人。首先，您需要拥有一个 Discord 账户。如果还没有，请访问 [Discord 官方网站](https://discord.com/) 创建一个。
+- 接下来，您需要在 VirtusCloud 创建账户，可通过 [注册页面](https://virtuscloud.app/signup) 完成。您可以使用电子邮件创建账户。
+- 最后，您需要在账户中拥有有效的付费计划。您可以在 [这里](https://virtuscloud.app/pricing) 查看我们的计划并购买。
+
+<AccordionGroup>
+  <Accordion title="开始使用" icon="rocket" iconType="solid">
+    首先，进入 [开发者门户](https://discord.com/developers/applications) 并点击"New Application"。然后为您的机器人选择名称，点击"Create"创建它。
+    <Frame>
+      <img src="/images/articles/discord/getting-started.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Accordion>
+
+  <Accordion title="获取令牌" icon="key" iconType="solid">
+    创建机器人后，是时候获取令牌了。转到"Bot"标签，点击"Reset Token"生成您的令牌，然后复制它以备后用。
+    <Frame>
+      <img src="/images/articles/discord/getting-the-token.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Accordion>
+  <Accordion title="启用特权意图" icon="message" iconType="solid">
+   获取令牌后，您需要启用必要的意图。仍在"Bot"标签中，向下滚动找到"Privileged Gateway Intents"，启用所需意图：
+    <Frame>
+      <img src="/images/articles/discord/intent.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Accordion>
+</AccordionGroup>
+<Warning>请记住保护您的机器人令牌安全，因为它可以用来控制您的机器人。</Warning>
+
+# 使用框架创建机器人
+<Tabs>
+  <Tab title="Discord.js">
+    1. 确保您的系统已安装 Node.js。如果没有，可从 [Node.js 官网](https://nodejs.org/) 下载。
+2. 使用 `npm init` 初始化新的 Node.js 项目：
+
+```bash
+npm init -y
+```
+
+3. 使用 npm 安装 discord.js 库：
+
+```bash
+npm install discord.js
+```
+
+4. 创建新的 JavaScript 文件（例如 `index.js`），添加以下代码：
+
+```javascript index.js
+const { Client, GatewayIntentBits } = require("discord.js");
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
+
+client.on("ready", () => {
+  console.log(`${client.user.tag}!`);
+});
+
+client.on("messageCreate", (message) => {
+  if (message.content === "!hello") {
+    message.reply("你好！");
+  }
+});
+
+client.login("您的令牌");
+```
+  </Tab>
+    <Tab title="Discord.py">
+    1. 确保您的系统已安装 Python。如果没有，可从 [Python 官网](https://www.python.org/) 下载。
+    2. 使用 pip 安装 discord.py 库：
+
+```bash
+pip install discord.py
+```
+
+3. 创建新的 Python 文件（例如 `main.py`），添加以下代码：
+
+```python main.py
+import discord
+from discord.ext import commands
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = commands.Bot(command_prefix='!', intents=intents)
+
+@client.event
+async def on_ready():
+    print(f'{client.user}')
+
+@client.command()
+async def hello(ctx):
+    await ctx.reply('你好！')
+
+client.run('您的令牌')
+```
+
+4. 创建 `requirements.txt` 文件列出所需的外部库：
+
+```txt requirements.txt
+discord.py
+```
+  </Tab>
+</Tabs>
+
+## 创建 VirtusCloud 配置文件
+
+<Card title="了解：如何为 VirtusCloud 创建配置文件。" icon="link" href="https://docs.virtuscloud.app/getting-started/config-file">
+virtuscloud.app 文件是用于配置应用程序的配置文件，定义名称、描述、版本、主文件等信息。
+</Card>
+
+## 配置 START 字段
+<Warning>只有在确定自己在做什么的情况下才使用此字段。</Warning>
+
+在 VirtusCloud 配置文件中，**START** 字段是可选的，只有在使用自定义脚本启动机器人时才需要。
+
+## 上传项目到 VirtusCloud
+
+完成所有步骤后，将应用程序文件压缩成 zip 文件并在 [上传](https://virtuscloud.app/dashboard/upload) 页面上传。记得包含 `requirements.txt` 或 `package.json` 文件，但不要包含 `__pycache__` 或 `node_modules` 等文件夹。
+
+## 测试机器人
+
+一切就绪后，邀请您的机器人进行测试：
+
+1. 访问 [开发者门户](https://discord.com/developers/applications)。
+2. 选择您的机器人。
+3. 导航到"OAuth2"标签。
+4. 进入"OAuth2 URL Generator"。
+5. 勾选"bot"选项。
+6. 选择机器人的权限。
+7. 将生成一个邀请链接，类似于：
+```txt
+https://discord.com/oauth2/authorize?client_id=00000000000000&permissions=8&scope=bot
+```
+
+要测试，在服务器上执行命令：`!hello`。
+    <Frame>
+      <img src="/images/articles/discord/testing-bot.png" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+
+## 其他资源
+
+有关使用 discord.py 和 discord.js 创建机器人的更多信息，请访问 [discord.py 官方文档](https://discordpy.readthedocs.io/en/latest/) 和 [discord.js 官方指南](https://discordjs.guide/)。
+
+如果您遇到任何问题，请随时 [联系我们的支持团队](/company/support)。

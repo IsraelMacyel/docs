@@ -1,0 +1,89 @@
+---
+title: "快速开始"
+sidebarTitle: "快速开始"
+icon: "square-terminal"
+description: "使用 VirtusCloud 在几分钟内从零到英雄。本指南将帮助您开始使用 VirtusCloud 并了解我们平台的强大功能。"
+---
+
+## VirtusCloud 服务 🚀
+VirtusCloud 从头开始设计，旨在成为一个对开发者友好的平台。该平台由多种服务组成，可用于快速、安全地部署应用程序。
+
+<Card
+    title="机器人托管。"
+    href="/services/bots"
+>
+    将您的机器人部署到 VirtusCloud，获得最佳的机器人托管解决方案。
+    VirtusCloud 为最知名的平台提供战略性位置，确保低延迟和高可用性。
+</Card>
+
+<Card
+    title="网站托管。"
+    href="/services/web"
+>
+    将您的 Web 应用程序部署到 VirtusCloud，获得最佳的网站托管解决方案。
+    我们提供高级 Cloudflare 集成、快速 DNS 和 Web 应用防火墙 (WAF)，以确保最佳性能和安全性。
+</Card>
+
+<Card
+    title="无服务器存储、Blob 存储。"
+    href="/services/blob"
+>
+    使用 VirtusCloud 存储您的数据，享受无服务器存储的优势。
+    我们的存储服务设计为简单、可扩展且经济高效。
+</Card>
+
+<Snippet file="before-begin.mdx" />
+
+## 上传您的项目 😁
+您可以按照以下简单步骤将项目上传到 VirtusCloud：
+
+<Steps>
+  <Step title="首先，阅读您所用编程语言的说明：">
+    <Snippet file="languages.mdx" />
+    <Info>在本示例中，我们将使用 JavaScript (Node.js) 语言。</Info>
+  </Step>
+  <Step title="然后，创建您的 VirtusCloud 配置文件。">
+    访问控制台后，您需要创建一个配置文件。您可以通过阅读[此文章](/getting-started/config-file)来创建[配置文件](/getting-started/config-file)。
+
+    ```systemd 机器人配置文件示例
+    MAIN=index.js
+    MEMORY=512
+    VERSION=recommended
+    DISPLAY_NAME=Batman bot
+    DESCRIPTION=这个机器人是夜晚的黑暗骑士。
+    ```
+
+    ```systemd Web 应用配置文件示例（URL 配置为 "batman.virtusapp.cloud"）
+    MAIN=index.js
+    MEMORY=512
+    VERSION=recommended
+    SUBDOMAIN=batman
+    START=npm run build && npm run start
+    DISPLAY_NAME=Batman website
+    DESCRIPTION=这个网站是夜晚的黑暗骑士。
+    ```
+  </Step>
+  <Step title="接着，将项目压缩为 ZIP。">
+    创建配置文件后，您需要压缩您的项目。
+    <CodeGroup>
+      ```bash Windows
+      1. 找到要压缩的文件或文件夹。
+      2. 右键单击，选择"发送到"→"压缩（zipped）文件夹"。
+      3. 将在同一位置创建同名的新压缩文件夹。
+      ```
+      ```bash Linux
+      1. 找到要压缩的文件或文件夹。
+      2. 右键单击并从快捷菜单中选择"压缩"。
+      3. 将在同一位置创建同名的新压缩文件夹。
+      ```
+      ```bash macOS
+      1. 找到要压缩的文件或文件夹。
+      2. 按住 Ctrl 单击并从快捷菜单中选择"压缩"。
+      3. 将在同一位置创建同名的新压缩文件夹。
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="最后，上传您的项目。😉">
+    上传项目后，单击"添加新项目"按钮来部署您的项目。
+  </Step>
+</Steps>

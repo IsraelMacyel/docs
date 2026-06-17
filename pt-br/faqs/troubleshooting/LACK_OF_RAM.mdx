@@ -1,0 +1,28 @@
+---
+title: "Resolvendo LACK_OF_RAM"
+sidebarTitle: "Resolvendo LACK_OF_RAM"
+description: "Aprenda como resolver o problema LACK_OF_RAM na sua aplicação."
+---
+
+## Quando ocorre?
+
+Este problema ocorre quando sua aplicação está utilizando mais RAM do que o disponível.
+
+```bash
+[VIRTUS-SHIELD] LACK_OF_RAM
+```
+
+## Por que ocorre?
+
+Este problema ocorre quando sua aplicação está consumindo mais RAM do que o disponível no seu plano atual.
+
+## Como resolver
+
+Acesse o gerenciador de arquivos e localize o arquivo `virtuscloud.app` ou `virtuscloud.config`.
+1. Abra o arquivo e localize o campo `MEMORY`.
+2. Aumente o valor do campo `MEMORY`. O valor é em megabytes (MB).
+3. Recomendamos aumentar o valor em 50% do valor atual. Por exemplo, se o valor atual é `512`, aumente para `768`.
+
+Se já estiver usando o máximo de RAM disponível no seu plano atual, considere fazer upgrade para um plano superior visitando a [página de planos](https://virtuscloud.app/pricing).
+
+Se continuar enfrentando problemas, não hesite em [contatar nossa equipe de suporte](/company/support).

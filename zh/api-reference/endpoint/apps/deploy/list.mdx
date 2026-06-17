@@ -1,0 +1,68 @@
+---
+title: "List Deployments"
+description: "Get the last 10 deployments of an application from the last 24 hours."
+api: "GET https:/api.virtuscloud.app/v2/apps/{app_id}/deployments"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Response
+
+<Status />
+
+<ResponseField name="response" type="array">
+
+The contents of the response.
+
+<Expandable title="Toggle object">
+
+<ResponseField name="id" type="string">
+  The ID of the deploy.
+</ResponseField>
+
+<ResponseField name="state" type="string">
+  The state of the deploy. Can be `pending`, `clone`, `success`, or `error`.
+</ResponseField>
+
+<ResponseField name="date" type="string">
+  The date the deploy was created.
+</ResponseField>
+
+</Expandable>
+</ResponseField>
+
+
+<ResponseExample>
+```json
+{
+    "status": "success",
+    "response": [
+        [
+		    {
+			    "id": "git-393caedd68f5e5b771f6a027",
+			    "state": "pending",
+			    "date": "2023-10-16T20:27:20.513Z"
+		    },
+		    {
+			    "id": "git-393caedd68f5e5b771f6a027",
+			    "state": "clone",
+			    "date": "2023-10-16T20:27:20.536Z"
+		    },
+		    {
+			    "id": "git-393caedd68f5e5b771f6a027",
+			    "state": "success",
+			    "date": "2023-10-16T20:27:21.422Z"
+		    }
+	    ]
+    ],
+}
+```
+</ResponseExample>

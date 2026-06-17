@@ -1,0 +1,153 @@
+---
+title: "😁 欢迎使用 VirtusCloud"
+sidebarTitle: "概述"
+icon: "book"
+description: "VirtusCloud 是一个提供便捷、用户友好的企业级托管服务的平台。几分钟内即可开始使用。✨"
+---
+
+<CardGroup>
+  <Card
+    title="快速入门指南"
+    icon="book"
+    href="/getting-started/quick-start"
+  >
+    快速了解 VirtusCloud 的入门步骤。
+  </Card>
+  <Card title="官方 API" icon="code" href="/api-reference">
+    面向开发者的 API 文档（您现在就在这里！）。
+  </Card>
+</CardGroup>
+
+<Snippet file="before-begin.mdx" />
+
+注册后，您可以在选择适合您需求的计划后，立即开始在 VirtusCloud 上部署您的应用程序。
+
+## 使用 CLI 简化您的旅程 💻
+本概述使用 [VirtusCloud CLI](/cli) 来部署您的应用程序。CLI 是一个命令行工具，允许您与 VirtusCloud 服务进行交互。您可以使用 CLI 来部署应用程序、管理服务和查看日志。
+
+要使用 CLI，您需要在本地机器上安装它。使用以下命令安装：
+
+<br/>
+
+<CodeGroup>
+```bash macOS、Linux 和 WSL
+curl -fsSL https://cli.virtuscloud.app/install | bash
+```
+
+```bash Windows（npm）
+npm install -g @virtuscloud/cli
+```
+
+```bash Windows（yarn）
+yarn global add @virtuscloud/cli
+```
+</CodeGroup>
+
+<Steps>
+  <Step title="阅读您所用编程语言的说明">
+    <Snippet file="languages.mdx" />
+    <Info>在本示例中，我们将使用 JavaScript (Node.js) 语言。</Info>
+  </Step>
+  <Step title="创建您的 VirtusCloud 配置文件">
+    安装 CLI 后，您需要创建一个配置文件。您可以通过阅读[此文章](/getting-started/config-file)来创建[配置文件](/getting-started/config-file)。
+
+    我的配置文件如下：
+    ```systemd
+    MAIN=index.js
+    MEMORY=512
+    VERSION=recommended
+    DISPLAY_NAME=Robin bot
+    DESCRIPTION=该机器人系统旨在帮助您完成日常任务。
+    ```
+  </Step>
+  <Step title="上传您的项目">
+    完成上述步骤后，您需要将项目上传到 VirtusCloud。运行以下命令：
+    ```bash
+    virtuscloud upload
+    ```
+  </Step>
+</Steps>
+
+
+## 使用 Web 界面简化您的旅程 😉
+如果您不喜欢命令行或更喜欢使用 Web 界面，可以直接在 VirtusCloud 网站上传您的项目。请按照以下步骤操作：
+
+<Steps>
+  <Step title="访问 VirtusCloud 网站">
+    使用您的账户访问 [VirtusCloud 控制台](https://virtuscloud.app/dashboard)。
+  </Step>
+  <Step title="创建您的 VirtusCloud 配置文件">
+    访问控制台后，您需要创建一个配置文件。您可以通过阅读[此文章](/getting-started/config-file)来创建[配置文件](/getting-started/config-file)。
+  </Step>
+  <Step title="将项目压缩为 ZIP">
+    创建配置文件后，您需要压缩您的项目。
+    ```bash 使用 CLI
+    virtuscloud zip
+    ```
+
+    或者手动压缩您的项目：
+    <CodeGroup>
+      ```bash Windows
+      1. 找到要压缩的文件或文件夹。
+      2. 按住（或右键单击）该文件或文件夹，选择"发送到"，然后选择"压缩（zipped）文件夹"。
+      3. 将在同一位置创建同名的新压缩文件夹。
+      ```
+      ```bash Linux
+      1. 找到要压缩的文件或文件夹。
+      2. 右键单击该文件或文件夹，然后从快捷菜单中选择"压缩"。
+      3. 将在同一位置创建同名的新压缩文件夹。
+      ```
+      ```bash macOS
+      1. 找到要压缩的文件或文件夹。
+      2. 按住 Ctrl 单击该文件或文件夹，然后从快捷菜单中选择"压缩"。
+      3. 将在同一位置创建同名的新压缩文件夹。
+      ```
+    </CodeGroup>
+
+    或者使用命令行压缩项目文件夹：
+    <CodeGroup>
+    ```bash macOS、Linux 和 WSL
+    zip -r my-project.zip .
+    ```
+
+    ```bash Windows (powershell)
+    Compress-Archive -Path . -DestinationPath my-project.zip
+    ```
+    </CodeGroup>
+   </Step>
+  <Step title="部署您的项目">
+    上传项目后，单击"添加新项目"按钮来部署您的项目。
+  </Step>
+</Steps>
+
+## 下一步是什么？
+现在您已经学会了如何部署项目，可以进一步探索 VirtusCloud 平台。以下是一些帮助您入门的资源：
+
+<CardGroup>
+  <Card
+    title="API 参考"
+    icon="server"
+    href="/api-reference"
+  >
+    了解更多关于 VirtusCloud API 的信息。
+  </Card>
+  <Card
+    title="CLI 参考"
+    icon="code"
+    href="/cli-reference"
+  >
+    了解更多关于 VirtusCloud CLI 的信息。
+  </Card>
+</CardGroup>
+
+加入我们的 [Discord](https://discord.gg/virtuscloud) 社区，与其他开发者互动并分享您的经验。
+<Card
+  title="VirtusCloud 社区"
+  icon="discord"
+  href="https://discord.gg/virtuscloud"
+  color="#7289DA"
+>
+  加入我们的 Discord 社区。我们在这里帮助您！
+</Card>
+
+如果您有任何问题或需要帮助，请联系我们的[支持团队](https://virtuscloud.app/dashboard/support)。我们在这里为您提供帮助！🚀

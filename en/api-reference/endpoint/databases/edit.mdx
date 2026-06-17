@@ -1,0 +1,42 @@
+---
+title: "Edit Database"
+description: "Edits a database hosted on VirtusCloud, changing name and/or memory"
+api: "PATCH https://api.virtuscloud.app/v2/databases/{databaseId}"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+## Request
+
+### Headers
+
+<Authorization />
+
+### Path
+
+<ParamField path="databaseId" type="string" placeholder="Database ID" required>
+  The ID of the database.
+</ParamField>
+
+### Body
+
+<ParamField body="name" type="string" placeholder="database name">
+  The name of the Database. Must be [a-z] [A-Z] [0-9].
+</ParamField>
+<ParamField body="ram" type="int" placeholder="RAM(in MB)">
+  The RAM allocated to it. Redis minimum is 512 and Mongo, 1024.
+</ParamField>
+
+## Response
+
+<Status />
+
+<ResponseExample>
+```json
+{
+  "status":"success"
+}
+```
+</ResponseExample>

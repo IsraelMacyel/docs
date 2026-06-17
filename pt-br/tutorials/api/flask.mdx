@@ -1,0 +1,256 @@
+---
+title: "How to Host Flask Applications"
+description: "Learn how to create and host Flask applications on Virtus Cloud."
+---
+
+# How to Host Flask Applications
+
+> Learn how to create and host Flask applications on Virtus Cloud.
+
+  if (lang == 'pt-br') {
+    return <Note>
+            <b>Qual porta devo usar para o meu servidor?</b><br />
+            Você deve usar a porta <b>80</b> para o seu servidor. A porta 80 é a porta padrão para tráfego HTTP; a Virtus Cloud a encaminha para 443 (HTTPS) para estabelecer uma conexão segura.<br />
+            Certifique-se de configurá-la antes de compactar e enviar seu projeto.
+        </Note>;
+  }
+  return <Note>
+            <b>What port should I use for my server?</b><br />
+            You should use port <b>80</b> for your server. Port 80 is the default port for HTTP traffic, which is handled by Virtus Cloud to route it to 443, HTTPS, for a secure connection.<br />
+            Make sure to configure it before compressing and uploading your project.
+        </Note>;
+};
+
+  const desc = {
+    "pt-br": {
+      requirements: "Arquivo padrão usado em projetos Python para listar todas as bibliotecas externas e dependências necessárias para o seu projeto. Cada linha neste arquivo especifica um pacote a ser instalado usando o pip, o gerenciador de pacotes do Python",
+      pyproject: "Um arquivo de configuração moderno para projetos Python que permite especificar requisitos do sistema de compilação e metadados do projeto. É utilizado por ferramentas como o Poetry para gerenciar dependências e empacotamento."
+    },
+    en: {
+      requirements: "Standard file used in Python projects to list all the external libraries and dependencies that your project needs. Each line in this file specifies a package to be installed using pip, the Python package manager.",
+      pyproject: "A modern configuration file for Python projects that can specify build system requirements and project metadata. It is used by tools like Poetry to manage dependencies and packaging."
+    }
+  };
+  return <CardGroup cols={2}>
+            <Card title="requirements.txt" icon="file-lines" href="../../articles/how-to-create-your-requirements">
+            {desc[lang].requirements}
+            </Card>
+            <Card title="pyproject.toml" icon="file" href="../../articles/how-to-create-your-pyproject">
+            {desc[lang].pyproject}
+            </Card>
+        </CardGroup>;
+};
+
+  const url = `https://virtuscloud.app/${lang}/pay?plan=${plan.toLowerCase()}&tier=${tier}`;
+  if (lang == 'en') {
+    return <Note>
+        <b>Wondering how much RAM and CPU your plan needs to host {appType}?</b><br />
+        Don't worry, we're here to help.
+        Our <a href={url}>{plan}</a> plan offers <b>{tier}GB</b> of RAM and <b>{cpu}vCPU</b>, which should be sufficient for most {appType}. 
+        However, if you are working on a larger project and seeking extra stability, we recommend considering our <b>Pro</b> plan. With additional resources, you can maintain stability even during demand spikes. 
+        To purchase, simply click <a href="https://virtuscloud.app/en/pay?plan=pro">here</a>.
+      </Note>;
+  } else {
+    return <Note>
+          <b>Está se perguntando quanta RAM e CPU seu plano precisa para hospedar {appType}?</b><br />
+          Não se preocupe, estamos aqui para ajudar.
+          Nosso plano <a href={url}>{plan}</a> oferece <b>{tier}GB</b> de RAM e <b>{cpu}vCPU</b>, o que deve ser suficiente para a maioria dos {appType}.
+          No entanto, se você estiver trabalhando em um projeto maior e precisar de mais estabilidade, recomendamos considerar nosso plano <b>Pro</b>.
+          Com recursos adicionais, você pode manter a estabilidade mesmo durante picos de demanda.
+          Para comprar, basta clicar <a href={`https://virtuscloud.app/${lang}/pay?plan=pro`}>aqui</a>.
+        </Note>;
+  }
+};
+
+
+## Introduction
+
+To develop and host {appType_0} on Virtus Cloud, it's essential to follow a structured sequence of configurations and prerequisites. This technical guide will cover the entire process, from initial setup to production deployment.
+
+### Prerequisites
+
+* **Virtus Cloud Account**: Register through the [signup page](https://virtuscloud.app/en/signup) using your email.
+* **Active Paid Plan**: Ensures dedicated resources and optimized performance for your application. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the most suitable for your needs.
+
+<RecommendedPlan appType="Flask applications" plan="Standard" tier="4" cpu="4" lang="en" />
+
+## Creating project
+
+To create a Flask application, you need to have Python and pip installed on your system before following the steps.
+
+### Installing library
+
+With Python and pip installed, create your Flask project. First, install the required dependencies:
+
+```bash Terminal theme={null}
+pip install flask
+```
+
+### Developing project
+
+Create a Python file (for example, `app.py`) and add the following code to implement a basic Flask application:
+
+```python app.py theme={null}
+# Import the Flask class from the flask module
+from flask import Flask
+
+# Create an instance of the Flask class
+app = Flask(__name__)
+
+# Define a route for the root URL (/) that returns 'Hello, World!'
+@app.route('/')
+def hello_world():
+  return 'Hello, World!'
+
+# Check if this script is being run directly (not imported as a module)
+if __name__ == '__main__':
+  # Run the Flask application on host 0.0.0.0 (all available network interfaces) and port 80
+  app.run(host='0.0.0.0', port=80)
+```
+
+In the code above, we implement a simple route that returns "Hello, World!" when accessed. The application is configured to run on port 80, which is the default HTTP port.
+
+Next, we need to create our dependencies file. In Python we have requirements.txt or a pyproject.toml
+
+<PyDepFiles lang="en" />
+
+## Choosing a production server
+
+Flask built-in development server is not suitable for production use. Instead, we recommend using a production-ready WSGI server like Gunicorn.
+
+<CardGroup cols={1}>
+  <Card title="Gunicorn" icon="unicorn" href="/en/tutorials/python/how-to-use-gunicorn">
+    Gunicorn is a Python WSGI HTTP server for UNIX. It's a pre-fork worker model, which means that it forks multiple worker processes to handle requests.
+    This makes it a great choice for running python web applications in production.
+  </Card>
+</CardGroup>
+
+## Deploying
+
+After preparing your project files, you can now upload them to Virtus Cloud and host your project.
+To do so, create a ZIP file containing all your project files.
+
+<PortNote lang="en" />
+
+### Via dashboard
+
+<Steps>
+  <Step title="Access the Upload Page">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configure Your Environment">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Deploy Your Project">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
+</Card>
+
+<Steps>
+  <Step title="Install the CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
+
+    ```
+    npm install -g @virtuscloud/cli
+    ```
+
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
+
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        virtuscloud update
+        ```
+      </Tab>
+
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Authenticate">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
+
+    ```bash theme={null}
+    virtuscloud auth login
+    ```
+  </Step>
+
+  <Step title="Upload Your Project">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
+
+    ```bash theme={null}
+    virtuscloud upload 
+    ```
+
+    Or if you created the zip manually, you can use:
+
+    ```bash theme={null}
+    virtuscloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
+
+## Additional resources
+
+For more detailed information about Flask and its advanced tools, visit the [official Flask documentation](https://flask.palletsprojects.com/en/3.0.x/).
+There you will find in-depth technical guides, specialized tutorials, and full API documentation to make the most of Flask's features.
+
+## Troubleshooting
+
+<CardGroup cols={1}>
+  ### Custom Domain
+
+  <Card horizontal>
+    To use a custom domain (e.g., `mysite.com`) instead of the default URL `mysite.squareweb.app`, you need the **Standard plan or higher**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
+  </Card>
+
+  ### Minimum RAM Requirements
+
+  <Card horizontal>
+    **Minimum: 512MB RAM** for simple websites/APIs. For sites with frameworks (Next.JS, React, Vue, Angular, etc.), we always recommend **at least 1GB RAM**. For larger applications, allocate more RAM to prevent the application from running out of memory and crashing.
+  </Card>
+
+  ### Could not find this site.
+
+  <Card horizontal>
+    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Virtus to enable **first access**.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/unauthorized.webp" alt="Cloudflare site not found error" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Card>
+
+  ### Site took too long to respond...
+
+  <Card horizontal>
+    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Virtus's forced environment variables: **PORT** and **HOST** from the `.env` file.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/timeout.webp" alt="Cloudflare request timeout error" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Card>
+</CardGroup>
+
+## Contact us
+
+If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.

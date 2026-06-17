@@ -1,0 +1,96 @@
+---
+title: "How to Use Gunicorn"
+description: "Learn how to use Gunicorn, a Python HTTP server."
+---
+
+# How to Use Gunicorn
+
+> Learn how to use Gunicorn, a Python HTTP server.
+
+## Introduction
+
+* This article guides you through the process of using Gunicorn, a Python WSGI HTTP server.
+* Before we get started, make sure you have Python and Gunicorn installed in your environment. You can install Gunicorn using the following command:
+
+```bash theme={null}
+pip install gunicorn
+```
+
+## Basic usage
+
+To run a Python web application using Gunicorn, you need to have a application WSGI like flask, django or some other framework.\
+Once you have your application ready, you need to know the module name and the variable name that contains the WSGI application object.\
+For example, if you have a Flask application in a file named `app.py` and the Flask instance is named `app`, you can run it with Gunicorn using the following command:
+
+```bash theme={null}
+python -m gunicorn --bind 0.0.0.0:80 app:app 
+```
+
+In this command:
+
+* `python -m gunicorn` runs Gunicorn as a python module.
+* `--bind 0.0.0.0:80` tells Gunicorn to listen on all network interfaces on port 80.
+* `app:app` specifies the module name (`app`) and the variable name (`app`) that contains the WSGI application object.
+
+## Additional options
+
+Gunicorn provides several options to customize its behavior. Here we will show some options.
+
+### Workers
+
+* `--workers <number>`
+
+This options sets the number of worker processes for handling requests. Generally use 2-4 workers per CPU core.\
+You can calculate the number of workers using the formula: `(2 x $num_cores) + 1`.
+
+### Name
+
+* `--name <name>`
+* `-n <name>`
+
+This option sets the process name for Gunicorn.
+
+### Worker-class
+
+* `--worker-class <class>`
+* `-k <class>`
+
+This option sets the type of worker to use. The default is `sync`, but you can also use `gevent`, `eventlet`, `tornado` or other worker type.
+
+### Paste
+
+* `--paste <configfile>`
+
+This option allows you to load a PasteDeploy configuration file.
+This is useful for frameworks like Pyramid and Turbogear who use PasteDeploy files.
+
+## Extras
+
+Gunicorn has many more options and features that you can explore in the [official documentation](https://docs.gunicorn.org/en/stable/settings.html).
+
+### Config file
+
+* You can also create a configuration file to set Gunicorn options.
+  This file can be in Python format and named `gunicorn.config.py`.
+
+```python gunicorn.config.py theme={null}
+import multiprocessing
+
+bind = "0.0.0.0:80"
+workers = multiprocessing.cpu_count() * 2 + 1
+```
+
+## Did you like this article?
+
+* We created this content with great care to offer the best help possible.
+  If this article helped you in any way, support our work! Leave your review! it helps us understand what matters most to you.
+
+<CardGroup cols={2}>
+  <Card title="Google Reviews" icon="google" href="https://g.page/r/CYZenpQcDgTzEAI/review">
+    Leave your review in Google Reviews.
+  </Card>
+
+  <Card title="Trustpilot" icon="star" href="https://www.trustpilot.com/review/virtuscloud.app">
+    Leave your review in Trustpilot.
+  </Card>
+</CardGroup>

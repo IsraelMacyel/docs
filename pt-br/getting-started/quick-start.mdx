@@ -1,0 +1,89 @@
+---
+title: "Início Rápido"
+sidebarTitle: "Início Rápido"
+icon: "square-terminal"
+description: "Do zero ao herói em minutos com a VirtusCloud. Este guia vai te ajudar a começar com a VirtusCloud e entender o poder da nossa plataforma."
+---
+
+## Serviços da VirtusCloud 🚀
+A VirtusCloud foi projetada do zero para ser uma plataforma amigável para desenvolvedores. A plataforma é composta por vários serviços que podem ser usados para fazer deploy de aplicações de forma rápida e segura.
+
+<Card
+    title="Hospedagem de Bots."
+    href="/services/bots"
+>
+    Faça o deploy dos seus bots na VirtusCloud e receba as melhores soluções para hospedagem de bots.
+    A VirtusCloud oferece uma localização estratégica para as plataformas mais famosas, garantindo baixa latência e alta disponibilidade.
+</Card>
+
+<Card
+    title="Hospedagem Web."
+    href="/services/web"
+>
+    Faça o deploy das suas aplicações web na VirtusCloud e receba as melhores soluções para hospedagem web.
+    Oferecemos integração premium com Cloudflare, DNS rápido e Web Application Firewall (WAF) para garantir o melhor desempenho e segurança.
+</Card>
+
+<Card
+    title="Armazenamento Serverless, Blob Storage."
+    href="/services/blob"
+>
+    Armazene seus dados com a VirtusCloud e aproveite os benefícios do armazenamento serverless.
+    Nosso serviço de armazenamento é projetado para ser simples, escalável e econômico.
+</Card>
+
+<Snippet file="before-begin.mdx" />
+
+## Faça upload do seu projeto 😁
+Você pode fazer upload do seu projeto para a VirtusCloud em alguns passos simples, conforme mostrado abaixo:
+
+<Steps>
+  <Step title="Primeiro, leia as instruções sobre sua linguagem:">
+    <Snippet file="languages.mdx" />
+    <Info>Para este exemplo, usaremos a linguagem JavaScript (Node.js).</Info>
+  </Step>
+  <Step title="Em seguida, crie seu arquivo de configuração VirtusCloud.">
+    Após acessar o painel, você precisa criar um arquivo de configuração. Você pode criar um [arquivo de configuração](/getting-started/config-file) lendo o artigo [aqui](/getting-started/config-file).
+
+    ```systemd Exemplo de arquivo de configuração para um bot
+    MAIN=index.js
+    MEMORY=512
+    VERSION=recommended
+    DISPLAY_NAME=Batman bot
+    DESCRIPTION=Este bot é o cavaleiro das trevas da noite.
+    ```
+
+    ```systemd Exemplo de arquivo de configuração para uma aplicação web. (URL configurada como "batman.virtusapp.cloud")
+    MAIN=index.js
+    MEMORY=512
+    VERSION=recommended
+    SUBDOMAIN=batman
+    START=npm run build && npm run start
+    DISPLAY_NAME=Batman website
+    DESCRIPTION=Este site é o cavaleiro das trevas da noite.
+    ```
+  </Step>
+  <Step title="E então, compacte seu projeto em ZIP.">
+    Após criar o arquivo de configuração, você precisa compactar seu projeto.
+    <CodeGroup>
+      ```bash Windows
+      1. Localize o arquivo ou pasta que deseja compactar.
+      2. Pressione e segure (ou clique com o botão direito) no arquivo ou pasta, selecione Enviar para e depois Pasta compactada (zipada).
+      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+      ```
+      ```bash Linux
+      1. Localize o arquivo ou pasta que deseja compactar.
+      2. Clique com o botão direito no arquivo ou pasta e escolha Compactar no menu de atalho.
+      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+      ```
+      ```bash macOS
+      1. Localize o arquivo ou pasta que deseja compactar.
+      2. Clique com Ctrl no arquivo ou pasta e escolha Compactar no menu de atalho.
+      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Por fim, faça upload do seu projeto. 😉">
+    Após fazer upload do seu projeto, clique no botão "Adicionar novo" para fazer o deploy.
+  </Step>
+</Steps>

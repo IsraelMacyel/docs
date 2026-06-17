@@ -1,0 +1,27 @@
+---
+title: "Leave Workspace"
+description: "Leave from workspace."
+api: "DELETE https://api.virtuscloud.app/v2/workspaces/leave"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField body="workspaceId" type="string" placeholder="Workspace Id">
+  The ID of the workspace.
+</ParamField>
+
+### Response
+
+<Status />
+
+<ResponseExample>
+```json
+{
+  "status": "success"
+}
+```
+</ResponseExample>

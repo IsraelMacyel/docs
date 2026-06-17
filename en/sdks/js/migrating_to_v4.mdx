@@ -1,0 +1,177 @@
+---
+title: "Migrating to v4"
+description: "What changed between @virtuscloud/api v3 and v4 — breaking changes, renames and the smallest patches needed to upgrade."
+---
+
+# Migrating to v4
+
+> What changed between @virtuscloud/api v3 and v4 — breaking changes, renames and the smallest patches needed to upgrade.
+
+<Info>
+  Latest patch covered here: **v4.0.1** (released 2026-05-30).
+</Info>
+
+## Requirements
+
+* **Node.js 20.0.0** or newer (v3 supported Node 18)
+
+## Breaking changes summary
+
+| v3.x                                                   | v4.x                                                                                           |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `client.users.*`                                       | `client.user.*`                                                                                |
+| `app.backup` / `app.backups`                           | `app.snapshots`                                                                                |
+| `Backup` export                                        | `Snapshot` export                                                                              |
+| `app.deploys.list()` returns flat `Deployment[]`       | Returns `Deployment[][]` (call `.flat()` for old shape)                                        |
+| `Deployment.id` formatted as `` `git-${string}` ``     | Plain commit SHA-1 (40 hex chars)                                                              |
+| `app.network.dns()` returns an array                   | Returns `{ ownership, ssl }`                                                                   |
+| `app.network.analytics()` takes no arguments           | Requires `{ start, end }` (ISO string or `Date`)                                               |
+| `app.network.purgeCache(paths?)`                       | `purgeCache()` — argument removed in **v4.0.1**, always purges the whole cache                 |
+| `app.custom === undefined`                             | `app.custom === null`                                                                          |
+| `workspace.members` / `.applications` held data arrays | Renamed to `workspace.memberList` / `.applicationList`; the original names are now **modules** |
+| `app.commit(file, name, restart)`                      | `app.commit(file, name)` — third argument removed                                              |
+| `app.files.create(content, fullPath)`                  | `app.files.create(content, fileName, path)`                                                    |
+
+## Renames
+
+### `client.users` → `client.user`
+
+```typescript theme={null}
+// v3
+await api.users.get();
+
+// v4
+await api.user.get();
+```
+
+`api.users` is still exported as a deprecated getter that proxies to `api.user`, but it prints a warning at runtime.
+
+### Backups → Snapshots
+
+```typescript theme={null}
+// v3
+await app.backups.create();
+await app.backup.list();
+
+// v4
+await app.snapshots.create();
+await app.snapshots.list();
+```
+
+The `Backup` export is now a deprecated alias of `Snapshot`.
+
+## Application
+
+### `Application.custom`
+
+`app.custom` is now `null` (was `undefined` in v3) when no custom domain is bound.
+
+### `app.commit(file, fileName, restart)`
+
+The third `restart` argument has been removed. Restart manually after committing:
+
+```typescript theme={null}
+// v3
+await app.commit(buffer, "index.js", true);
+
+// v4
+await app.commit(buffer, "index.js");
+await app.restart();
+```
+
+### `app.files.create(content, path)`
+
+The signature is now `create(content, fileName, path = "/")`. Migrating:
+
+```typescript theme={null}
+// v3 — single combined path
+await app.files.create(content, "./folder/test_file.txt");
+
+// v4 — separate file name and directory
+await app.files.create(content, "test_file.txt", "/folder");
+```
+
+## Deploys
+
+### `app.deploys.list()` shape
+
+```typescript theme={null}
+// v3
+const events: Deployment[] = await app.deploys.list();
+
+// v4
+const timelines: Deployment[][] = await app.deploys.list();
+const events = timelines.flat(); // same shape as v3
+```
+
+### `Deployment.id`
+
+Now a plain commit SHA-1 (40 hex chars) instead of a `` `git-…` `` formatted string.
+
+## Network
+
+### `app.network.dns()`
+
+```typescript theme={null}
+// v3
+const records: DnsRecord[] = await app.network.dns();
+
+// v4
+const { ownership, ssl } = await app.network.dns();
+```
+
+### `app.network.analytics()`
+
+```typescript theme={null}
+// v3
+const data = await app.network.analytics();
+
+// v4 — { start, end } is now required (ISO string or Date)
+const data = await app.network.analytics({
+    start: new Date(Date.now() - 24 * 60 * 60 * 1000),
+    end:   new Date(),
+});
+```
+
+### `app.network.purgeCache()`
+
+```typescript theme={null}
+// v3 and v4.0.0
+await app.network.purgeCache(["/static/old.js"]);
+
+// v4.0.1 and later — selective purge removed
+await app.network.purgeCache();
+```
+
+## Workspaces
+
+```typescript theme={null}
+// v3
+workspace.members;      // raw member data
+workspace.applications; // raw application data
+
+// v4
+workspace.memberList;        // raw member data
+workspace.applicationList;   // raw application data
+workspace.members.add(...);  // members module
+workspace.applications.add(...); // applications module
+```
+
+## What's new in v4
+
+Beyond the renames and signature changes above, v4 adds a substantial feature set:
+
+* **Databases** — full lifecycle, credentials, snapshots and metrics ([Databases](/en/sdks/js/databases))
+* **Workspaces** — team collaboration with invite codes and roles ([Workspaces](/en/sdks/js/workspaces))
+* **Environment variables** — list / set / replace / delete ([Environment variables](/en/sdks/js/environment_variables))
+* **Application metrics** — 24h CPU/RAM/network samples ([Managing applications](/en/sdks/js/managing_application))
+* **Real-time SSE stream** — `app.realtime()` ([Realtime](/en/sdks/js/realtime))
+* **Edge analytics** — analytics, errors, logs and latency percentiles ([Network](/en/sdks/js/network))
+* **GitHub App integration** — `app.deploys.linkGithubApp({ ... })` ([Deploys](/en/sdks/js/deploys))
+* **Snapshot restore** — `app.snapshots.restore({ snapshotId, versionId })` and `db.snapshots.restore(snapshotId, versionId)`
+* **Status-all endpoints** — `api.applications.statusAll()`, `api.databases.statusAll()`
+* **Service status** — `api.service.status()`
+* **User scoped snapshots** — `api.user.snapshots(scope)`
+* **New User fields** — `User.locale`, `User.createdAt`, `User.databases`
+* **New BaseApplication fields** — `domain`, `custom`, `createdAt`
+* **`SquareCloudAPIError.code`** — public for `switch`-based error handling

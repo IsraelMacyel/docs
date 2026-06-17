@@ -1,0 +1,100 @@
+---
+title: "How to Set Up Git Integration in Your Application"
+description: "Complete guide for configuring Git integration on Virtus Cloud with automated deployment and professional repository management."
+---
+
+# How to Set Up Git Integration in Your Application
+
+> Complete guide for configuring Git integration on Virtus Cloud with automated deployment and professional repository management.
+
+GitHub integration allows you to connect your repository to Virtus Cloud for automated deployment. Follow this step-by-step guide to configure the complete integration.
+
+<Steps>
+  <Step title="Generate GitHub Access Token">
+    First, you need to create a personal access token on GitHub to authenticate the connection.
+
+    * Visit the [Personal access tokens](https://github.com/settings/tokens) page
+    * Click **"Generate new token"** and choose the **"classic"** option
+    * **Select only** the **"repos"** option in permissions
+    * **Do not set an expiration time** to avoid interruptions
+    * Give your token an identifying name
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/github/new-personal-access-token.png" alt="Creating a new GitHub personal access token" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+
+    * Click **"Generate token"** and **copy the generated token** (you won't be able to see it again)
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/github/copy-access-token.png" alt="Copying the GitHub personal access token" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+  </Step>
+
+  <Step title="Configure Token in Virtus Cloud">
+    Now configure the token on the Virtus Cloud platform to establish the connection.
+
+    * Access the [dashboard](https://virtuscloud.app/en/dashboard)
+    * Select your application
+    * Navigate to the **Deploy** section
+    * **Paste your token** in the corresponding field
+    * Click **"Save"**
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/github/deploy-webhook-git.gif" alt="Configuring deploy webhook on Virtus Cloud" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+
+    After saving, a **webhook URL** will be displayed. **Copy this URL** - you'll need it in the next step.
+  </Step>
+
+  <Step title="Configure Webhook on GitHub">
+    Configure the webhook in your GitHub repository so it can communicate with Virtus Cloud.
+
+    * Access your application's repository on GitHub
+    * Go to **"Settings"** → **"Webhooks"**
+    * Click **"Add Webhook"**
+    * Paste the webhook URL in the **Payload URL** field
+    * Set the **Content Type** to **application/json**
+    * Click **"Add Webhook"**
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/github/add-webhook.gif" alt="Adding webhook to GitHub repository" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+  </Step>
+
+  <Step title="Configure Specific Branch (Optional)">
+    If you want the webhook to monitor only a specific branch, configure an additional parameter.
+
+    * In the webhook's **Payload URL** field on GitHub
+    * Add to the end of the URL: `?branch=branch_name`
+
+    <Note>
+      Example: To monitor only the `main` branch, add `?branch=main` to the end of the URL
+    </Note>
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/github/setting_branch.gif" alt="Setting the deployment branch on GitHub" style={{ borderRadius: '0.2rem' }} />
+    </Frame>
+  </Step>
+
+  <Step title="Test Automated Deployment">
+    Now test if the integration is working correctly.
+
+    * Make any changes to your code
+    * Commit and push to the GitHub repository
+    * Your application on Virtus Cloud will be updated automatically
+    * Check the deployment logs in the control panel to confirm success
+  </Step>
+</Steps>
+
+## Next Steps
+
+With the integration configured, you can:
+
+* Automatically deploy with every push
+* Monitor deployment status in the dashboard
+* Configure different branches for different environments
+* Leverage Virtus Cloud's continuous integration system
+
+## Contact us
+
+If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.

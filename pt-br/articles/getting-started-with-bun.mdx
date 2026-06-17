@@ -1,0 +1,196 @@
+---
+title: "Getting Started on Virtus Cloud with Bun"
+description: "Learn how to get started on Virtus Cloud with Bun JS"
+---
+
+# Getting Started on Virtus Cloud with Bun
+
+> Learn how to get started on Virtus Cloud with Bun JS
+
+## 🚀 Introduction
+
+* Before getting started, you can choose to use the Bun runtime in your project. If you don't have Bun installed locally yet, you have two main options:
+
+* Install via npm (recommended for compatibility with `npx` during deploy):
+
+```bash theme={null}
+npm install bun
+```
+
+* Or install Bun via the official installer (check Bun documentation for native installation instructions).
+
+* By adding `bun` as a dependency, you can use `npx bun` in the `START` field of `virtuscloud.app` to start your application with Bun. See below in the "Starting the Application" section for `START` examples.
+
+* Next, you will need to create an account on Virtus Cloud, which can be done through the [login page](https://virtuscloud.app/en/signup). You can use your email, GitHub, or both to create the account.
+
+* Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/en/pricing).
+
+## ⚙️ virtuscloud.app file configuration
+
+<Note>
+  If you are uploading your application via the Virtus Cloud website, you can ignore this section. The site automatically creates the `virtuscloud.app` configuration file for you.
+</Note>
+
+<Card title="Learn more: how to create the configuration file for Virtus Cloud." icon="link" href="https://docs.virtuscloud.app/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to
+  configure your application; it will serve to define the name, description,
+  version, main file, among other things.
+</Card>
+
+## ▶️ How to start your application
+
+* To use the Bun runtime in the Virtus Cloud Node.js environment, first add the `bun` package to your project (e.g. `npm install bun`) so that the `npx bun` command is available in the runtime environment.
+* Then, set the `START` field in your `virtuscloud.app` with the command that starts your application using Bun. Example:
+
+```virtuscloud.app OR .config theme={null}
+START=npx bun main.js
+```
+
+Alternatively, if you need to run package.json scripts with bun, use:
+
+```
+START=npx bun run start
+```
+
+* Remember: if the `START` field is defined, the value in it will be executed directly. For more information about configuration file parameters, visit [configuration parameters](https://docs.virtuscloud.app/en/getting-started/config-file#configuration-parameters).
+
+* If the `node_modules` folder does not exist, Virtus Cloud will run `npm install --no-package-lock --no-audit --no-fund` to install dependencies and clean the `.npm` folder.
+
+If you intend to use Bun as a runtime, we recommend adding `bun` as a dependency (`npm install bun`) to ensure `npx bun` is available in the runtime environment during deploy. In projects where you prefer to use the native Bun installer, check compatibility and your build requirements before opting for this approach.
+
+## 🖥️ Preparing the project
+
+### 📁 Essential configuration files
+
+When preparing your BUN project for deploy on Virtus Cloud, ensure you include the configuration file (`virtuscloud.app/.config`) and your application's essential files inside a zip file.
+
+<Warning>The configuration file (`virtuscloud.app/.config`) must be located at the root of the zip file. Otherwise, Virtus Cloud will not be able to find it during deploy.</Warning>
+
+#### 🗑️ Files to exclude before uploading
+
+* `node_modules`: This folder does not need to be uploaded as it will be recreated during installation in production.
+* `package-lock.json`: This file is not needed as the production environment will install dependencies based on `package.json`.
+
+### 🤔 Why exclude these files?
+
+There are several reasons to exclude `node_modules` and `package-lock.json` before uploading your project:
+
+1. **Installation Consistency:** Not uploading `node_modules` ensures dependencies are installed by the production environment, resulting in a consistent build free of local system discrepancies.
+
+2. **Updated Installations:** The production environment will install the latest compatible versions of dependencies listed in `package.json`, providing a clean start for your application.
+
+3. **Upload Size Reduction:** Not including these folders reduces the uploaded file size, speeding up the upload process and making the deploy more efficient.
+
+By doing this, you ensure your BUN application is optimally prepared for hosting on Virtus Cloud.
+
+### 📄 Required Files
+
+Three files are necessary to host your BUN project:
+
+* [virtuscloud.app/.config](https://docs.virtuscloud.app/en/getting-started/config-file)
+* mainFile.js/.ts (Example of main file)
+* [package.json](./how-to-create-your-package-json) (Dependencies file)
+
+## 💡 Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The main file is invalid or corrupted" icon="file" iconType="solid">
+    This error occurs when the file defined as "main" for your application in the
+    configuration file does not exist, is spelled incorrectly, or the path
+    is wrong. If your main file is inside a folder, for
+    example, you must inform `folder/file.js`.
+  </Accordion>
+
+  <Accordion title="Insufficient memory" icon="memory" iconType="solid">
+    The minimum amount of RAM required to host a bot is 256MB and for
+    a site/API it is 512MB. However, depending on the size and complexity of
+    your application, it may be advisable to allocate a larger amount of RAM to
+    avoid your application running out of memory and crashing.
+  </Accordion>
+</AccordionGroup>
+
+## 📤 How to host your project
+
+Now that you have prepared all the files for your Bun project, the next step is to upload them to Virtus Cloud and put your application online. There are several ways to upload, but we will cover two: via Dashboard or via CLI.
+
+### Via dashboard
+
+<Steps>
+  <Step title="Access the Upload Page">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configure Your Environment">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Deploy Your Project">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
+</Card>
+
+<Steps>
+  <Step title="Install the CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
+
+    ```
+    npm install -g @virtuscloud/cli
+    ```
+
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
+
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        virtuscloud update
+        ```
+      </Tab>
+
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Authenticate">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
+
+    ```bash theme={null}
+    virtuscloud auth login
+    ```
+  </Step>
+
+  <Step title="Upload Your Project">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
+
+    ```bash theme={null}
+    virtuscloud upload 
+    ```
+
+    Or if you created the zip manually, you can use:
+
+    ```bash theme={null}
+    virtuscloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
+
+## Contact us
+
+If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.

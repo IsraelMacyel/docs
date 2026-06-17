@@ -1,0 +1,44 @@
+---
+title: "如何调试您的应用程序"
+description: "了解如何使用 discord.py 和 discord.js 调试您的应用程序。"
+---
+
+## 在 [**discord.js**](https://old.discordjs.dev/#/docs/discord.js/14.14.1/class/Client?scrollTo=e-debug) 中调试
+使用 discord.js，您可以利用 "debug" 和 "error" 事件进行调试。以下是一个示例：
+
+```js
+// 客户端监听 'debug' 事件
+client.on('debug', (info) => {
+    // 将调试信息记录到控制台
+    console.log(`调试信息：${info}`);
+});
+
+// 客户端监听 'error' 事件
+client.on('error', (error) => {
+    // 将错误消息记录到控制台
+    console.error(`遇到错误：${error.message}`);
+});
+```
+
+## 在 [**discord.py**](https://discordpy.readthedocs.io/en/stable/logging.html?highlight=debug) 中调试
+使用 discord.py，您可以使用 logging 模块进行调试。以下是一个示例：
+
+```py
+import logging
+import logging.handlers
+
+# 为 discord 设置日志记录器
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+logging.getLogger('discord.http').setLevel(logging.INFO)
+
+# 为日志记录器设置处理程序
+handler = logging.StreamHandler()
+dt_fmt = '%Y-%m-%d %H:%M:%S'
+formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+# 运行机器人
+client.run("您的令牌", log_handler=None)
+```

@@ -1,0 +1,49 @@
+---
+title: "Create Snapshot"
+description: "Do a snapshot of the database"
+api: "POST https://api.virtuscloud.app/v2/databases/{databaseId}/snapshots"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+## Request
+
+### Headers
+
+<Authorization />
+
+### Path
+
+<ParamField path="databaseId" type="string" placeholder="Database ID" required>
+  The ID of the database.
+</ParamField>
+
+## Response
+
+<Status />
+<ResponseField name="response" type="object">
+
+The contents of the response.
+<Expandable title="Toggle object">
+<ResponseField name="url" type="string">
+  The URL to download the snapshot of your application.
+</ResponseField>
+<ResponseField name="key" type="string">
+  The key to download the snapshot of your application.
+</ResponseField>
+</Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+  "status":"success",
+  "response":{
+    "url":"https://snapshots.virtuscloud.app/databases/384443501775028242/a14b8d5e1cb7405a851eb4c075506121.zip?AWSAccessKeyId=accesskey&Expires=1757683751&Signature=JR3danhvtVywQmcaIanWsoJFqhQ%3D",
+    "key":"AWSAccessKeyId=accesskey&Expires=1757683751&Signature=JR3danhvtVywQmcaIanWsoJFqhQ%3D"
+  }
+}
+```
+</ResponseExample>

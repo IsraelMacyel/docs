@@ -1,0 +1,42 @@
+---
+title: "Restore Snapshot"
+description: "Restores a database based on a snapshot of it."
+api: "POST https://api.virtuscloud.app/v2/databases/{databaseId}/snapshots/restore"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+## Request
+
+### Headers
+
+<Authorization />
+
+### Path
+
+<ParamField path="databaseId" type="string" placeholder="Database ID" required>
+  The ID of the database.
+</ParamField>
+
+### Body
+
+<ParamField body="snapshotId" type="string" placeholder="Database ID" required>
+  The database id you wanna restore.
+</ParamField>
+<ParamField body="versionId" type="string" placeholder="Database Snapshot ID" required>
+  The snapshot of the database you wanna restore.
+</ParamField>
+
+## Response
+
+<Status />
+
+<ResponseExample>
+```json
+{
+  "status":"success"
+}
+```
+</ResponseExample>

@@ -1,0 +1,44 @@
+---
+title: "Resolviendo MODULE_NOT_FOUND"
+sidebarTitle: "Resolviendo MODULE_NOT_FOUND"
+description: "Aprende cómo resolver el problema MODULE_NOT_FOUND en tu aplicación."
+---
+
+## ¿Cuándo ocurre?
+Este error ocurre cuando tu aplicación intenta usar una biblioteca que no está instalada en el entorno.
+
+```bash javascript
+Error: Cannot find module 'discord.js'
+```
+
+```bash python
+ModuleNotFoundError: No module named 'discord.py'
+```
+
+## ¿Por qué ocurre?
+
+Esto puede suceder cuando intentas usar una biblioteca que no está instalada por defecto en el entorno.
+
+## Cómo resolverlo
+
+Para solucionar esto, necesitas agregar la biblioteca faltante a los archivos de dependencias de tu proyecto. En Python, este archivo se llama `requirements.txt`, y para JavaScript se llama `package.json`.
+
+```json package.json
+{
+  "name": "mi-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "discord.js": "14.14.1"
+  }
+}
+```
+
+```txt requirements.txt
+discord.py
+```
+
+### Reinicia tu aplicación
+
+Después de agregar las bibliotecas necesarias, debes reiniciar tu aplicación para que el entorno las instale.
+
+Si continúas experimentando problemas, no dudes en [contactar a nuestro equipo de soporte](/company/support).

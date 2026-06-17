@@ -1,0 +1,169 @@
+---
+title: "Network Performance"
+description: "Get edge and origin latency percentiles with country, colo and path breakdowns for the application."
+---
+
+# Network Performance
+
+> Get edge and origin latency percentiles with country, colo and path breakdowns for the application.
+
+Returns edge and origin response-time percentiles (`p50`, `p95`, `p99`) for the application over a time window, plus per-country, per-colo and slowest-path breakdowns. Useful for diagnosing latency regressions and identifying which routes or regions are slowest.
+
+<Info>
+  Available only on **Pro** and **Enterprise** plans. Cache miss rate limit: 10 requests per 60 seconds per owner.
+</Info>
+
+## Request
+
+### Headers
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+### Path
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Query
+
+<ParamField query="start" type="string" placeholder="ISO 8601 timestamp" required>
+  ISO 8601 start timestamp for the analysis window.
+</ParamField>
+
+<ParamField query="end" type="string" placeholder="ISO 8601 timestamp" required>
+  ISO 8601 end timestamp. Must be after `start`.
+</ParamField>
+
+## Response
+
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
+<ResponseField name="response" type="object">
+  Latency percentiles and breakdowns for the window.
+
+  <Expandable title="Toggle response object">
+    <ResponseField name="summary" type="object">
+      Aggregate latency percentiles across the whole window.
+
+      <Expandable title="Toggle summary object">
+        <ResponseField name="edge" type="object">
+          Edge-side latency percentiles in milliseconds.
+
+          <Expandable title="Toggle edge object">
+            <ResponseField name="p50" type="integer">50th percentile (median) edge latency.</ResponseField>
+            <ResponseField name="p95" type="integer">95th percentile edge latency.</ResponseField>
+            <ResponseField name="p99" type="integer">99th percentile edge latency.</ResponseField>
+          </Expandable>
+        </ResponseField>
+
+        <ResponseField name="origin" type="object">
+          Origin-side latency percentiles in milliseconds.
+
+          <Expandable title="Toggle origin object">
+            <ResponseField name="p50" type="integer">50th percentile (median) origin latency.</ResponseField>
+            <ResponseField name="p95" type="integer">95th percentile origin latency.</ResponseField>
+            <ResponseField name="p99" type="integer">99th percentile origin latency.</ResponseField>
+          </Expandable>
+        </ResponseField>
+
+        <ResponseField name="requests" type="integer">Total number of requests analysed in the window.</ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="timeseries" type="array">
+      Latency percentiles bucketed across the analysis window.
+
+      <Expandable title="Toggle timeseries item">
+        <ResponseField name="date" type="string">Bucket start timestamp in ISO 8601 format.</ResponseField>
+        <ResponseField name="requests" type="integer">Requests observed in the bucket.</ResponseField>
+        <ResponseField name="edge" type="object">Edge `p50`/`p95`/`p99` for this bucket.</ResponseField>
+        <ResponseField name="origin" type="object">Origin `p50`/`p95`/`p99` for this bucket.</ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="countries" type="array">
+      Latency breakdown by client country.
+
+      <Expandable title="Toggle countries item">
+        <ResponseField name="type" type="string">ISO country code (e.g. `BR`, `US`).</ResponseField>
+        <ResponseField name="p50" type="integer">Median latency for this country in milliseconds.</ResponseField>
+        <ResponseField name="p95" type="integer">95th percentile latency for this country in milliseconds.</ResponseField>
+        <ResponseField name="requests" type="integer">Requests served to this country.</ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="colos" type="array">
+      Latency breakdown by edge colo (data center).
+
+      <Expandable title="Toggle colos item">
+        <ResponseField name="type" type="string">Colo identifier (e.g. `GRU`, `IAD`).</ResponseField>
+        <ResponseField name="city" type="string">City where the colo is located.</ResponseField>
+        <ResponseField name="country" type="string">Country where the colo is located.</ResponseField>
+        <ResponseField name="p50" type="integer">Median latency at this colo in milliseconds.</ResponseField>
+        <ResponseField name="p95" type="integer">95th percentile latency at this colo in milliseconds.</ResponseField>
+        <ResponseField name="requests" type="integer">Requests served through this colo.</ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="slowest_paths" type="array">
+      Paths with the highest latency in the window.
+
+      <Expandable title="Toggle slowest_paths item">
+        <ResponseField name="path" type="string">Request path.</ResponseField>
+        <ResponseField name="p95" type="integer">95th percentile latency for this path in milliseconds.</ResponseField>
+        <ResponseField name="p99" type="integer">99th percentile latency for this path in milliseconds.</ResponseField>
+        <ResponseField name="requests" type="integer">Requests observed for this path.</ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+  ```json theme={null}
+  {
+    "status": "success",
+    "response": {
+      "summary": {
+        "edge": { "p50": 42, "p95": 180, "p99": 320 },
+        "origin": { "p50": 28, "p95": 150, "p99": 280 },
+        "requests": 12450
+      },
+      "timeseries": [
+        {
+          "date": "2025-12-01T12:00:00.000Z",
+          "requests": 540,
+          "edge": { "p50": 41, "p95": 175, "p99": 310 },
+          "origin": { "p50": 27, "p95": 148, "p99": 270 }
+        }
+      ],
+      "countries": [
+        { "type": "BR", "p50": 35, "p95": 160, "requests": 8200 },
+        { "type": "US", "p50": 55, "p95": 210, "requests": 3100 }
+      ],
+      "colos": [
+        {
+          "type": "GRU",
+          "city": "São Paulo",
+          "country": "BR",
+          "p50": 34,
+          "p95": 158,
+          "requests": 8100
+        }
+      ],
+      "slowest_paths": [
+        {
+          "path": "/api/reports/generate",
+          "p95": 820,
+          "p99": 1500,
+          "requests": 230
+        }
+      ]
+    }
+  }
+  ```
+</ResponseExample>

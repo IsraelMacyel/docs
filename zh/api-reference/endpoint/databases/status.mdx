@@ -1,0 +1,78 @@
+---
+title: "Get Database Status"
+description: "Get all status info related with a single database"
+api: "GET https://api.virtuscloud.app/v2/databases/{databaseId}/status"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+## Request
+
+### Headers
+
+<Authorization />
+
+### Path
+
+<ParamField path="databaseId" type="string" placeholder="Database ID" required>
+  The ID of the database.
+</ParamField>
+
+## Response
+
+<Status />
+
+<ResponseField name="response" type="object">
+
+The contents of the response.
+<Expandable title="Toggle object">
+<ResponseField name="cpu" type="string">
+  The current CPU usage percentage.
+</ResponseField>
+<ResponseField name="ram" type="string">
+  The current RAM usage
+</ResponseField>
+<ResponseField name="running" type="boolean">
+  The boolean value if is running.
+</ResponseField>
+<ResponseField name="storage" type="string">
+  The current storage it is using.
+</ResponseField>
+<ResponseField name="network" type="object">
+  The network usage and total used.
+<Expandable title="Toggle object">
+<ResponseField name="total" type="string">
+  The total used.
+</ResponseField>
+<ResponseField name="now" type="string">
+  The current use.
+</ResponseField>
+</Expandable>
+</ResponseField>
+<ResponseField name="uptime" type="int">
+  The timestamp representing the uptime.
+</ResponseField>
+</Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "status": "success",
+    "response": {
+        "cpu": "0.54%",
+        "ram": "111.32MB",
+        "status": "running",
+        "running": true,
+        "storage": "210.1MB",
+        "network": {
+            "total": "16.83KB ↑ 126B ↓",
+            "now": "0B ↑ 0B ↓"
+        },
+        "uptime": 1755028584438
+    }
+}
+```
+</ResponseExample>

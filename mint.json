@@ -1,0 +1,647 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "VirtusCloud",
+  "favicon": "/favicon.png",
+  "font": {
+    "headings": {
+      "family": "Inter"
+    },
+    "body": {
+      "family": "Inter"
+    }
+  },
+  "colors": {
+    "primary": "#2563eb",
+    "light": "#2563eb",
+    "dark": "#2563eb",
+    "background": {
+      "light": "#f0f0f0",
+      "dark": "#0B0E13"
+    }
+  },
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": true
+  },
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://virtuscloud.app/dashboard"
+  },
+  "anchors": [
+    {
+      "name": "Join our Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/virtuscloud"
+    },
+    {
+      "name": "Follow us on Twitter",
+      "icon": "x-twitter",
+      "url": "https://twitter.com/virtuscloud"
+    },
+    {
+      "name": "Follow us on Instagram",
+      "icon": "instagram",
+      "url": "https://instagram.com/virtuscloud"
+    },
+    {
+      "name": "Contribute on GitHub",
+      "icon": "github",
+      "url": "https://github.com/virtuscloudofc"
+    }
+  ],
+  "tabs": [
+    {
+      "name": "Tutorials",
+      "url": "en/tutorials"
+    },
+    {
+      "name": "API Reference",
+      "url": "en/api-reference"
+    },
+    {
+      "name": "CLI Reference",
+      "url": "en/cli-reference"
+    },
+    {
+      "name": "Blob Reference",
+      "url": "en/blob-reference"
+    },
+    {
+      "name": "SDKs",
+      "url": "en/sdks"
+    },
+    {
+      "name": "FAQs",
+      "url": "en/faqs"
+    },
+    {
+      "name": "Changelog",
+      "url": "en/changelog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "en/getting-started/overview",
+        "en/getting-started/quick-start",
+        "en/getting-started/config-file"
+      ]
+    },
+    {
+      "group": "Services",
+      "pages": [
+        "en/services/bots",
+        "en/services/sites",
+        "en/services/blob",
+        "en/services/databases"
+      ]
+    },
+    {
+      "group": "Languages",
+      "pages": [
+        {
+          "group": "JavaScript",
+          "icon": "node-js",
+          "pages": [
+            "en/articles/getting-started-with-nodejs",
+            "en/articles/how-to-create-your-package-json"
+          ]
+        },
+        {
+          "group": "Python",
+          "icon": "python",
+          "pages": [
+            "en/articles/getting-started-with-python",
+            "en/articles/how-to-create-your-requirements",
+            "en/articles/how-to-create-your-pyproject"
+          ]
+        },
+        "en/articles/getting-started-with-java",
+        "en/articles/getting-started-with-rust",
+        "en/articles/getting-started-with-elixir",
+        "en/articles/getting-started-with-php",
+        "en/articles/getting-started-with-go",
+        "en/articles/getting-started-with-csharp",
+        "en/articles/getting-started-with-bun",
+        "en/articles/getting-started-with-deno",
+        "en/articles/getting-started-with-ruby",
+        "en/articles/getting-started-with-html"
+      ]
+    },
+    {
+      "group": "Introduction",
+      "pages": [
+        "en/tutorials/introduction"
+      ]
+    },
+    {
+      "group": "Tutorials",
+      "pages": [
+        "en/tutorials/managing-teams",
+        "en/tutorials/how-to-set-up-your-domain",
+        "en/tutorials/how-to-create-your-lavalink-server",
+        "en/tutorials/how-to-deploy-your-website",
+        "en/tutorials/how-to-set-up-git-integration",
+        "en/tutorials/timezone-change-guide",
+        "en/tutorials/topgg-webhook-config",
+        "en/tutorials/how-to-deploy-your-selenium-application",
+        "en/tutorials/how-to-deploy-evolution-api",
+        "en/tutorials/how-to-deploy-n8n",
+        "en/tutorials/how-to-deploy-pgadmin",
+        "en/tutorials/how-to-deploy-uptime-kuma"
+      ]
+    },
+    {
+      "group": "APIs",
+      "pages": [
+        "en/tutorials/how-to-deploy-your-flask-application",
+        "en/tutorials/how-to-deploy-your-django-application",
+        "en/tutorials/how-to-deploy-your-nestjs-application",
+        "en/tutorials/how-to-deploy-your-express-application",
+        "en/tutorials/how-to-deploy-your-fastify-application",
+        {
+          "group": "More Frameworks",
+          "pages": [
+            "en/tutorials/api/django",
+            "en/tutorials/api/express",
+            "en/tutorials/api/fastify",
+            "en/tutorials/api/flask",
+            "en/tutorials/api/laravel",
+            "en/tutorials/api/nestjs",
+            "en/tutorials/api/spring-boot"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Website",
+      "pages": [
+        "en/tutorials/how-to-deploy-your-vue-website",
+        "en/tutorials/how-to-deploy-your-vite-website",
+        "en/tutorials/how-to-deploy-your-react-website",
+        "en/tutorials/how-to-deploy-your-next-website",
+        {
+          "group": "More Frameworks",
+          "pages": [
+            "en/tutorials/website/angular",
+            "en/tutorials/website/astrojs",
+            "en/tutorials/website/gatsby",
+            "en/tutorials/website/nextjs",
+            "en/tutorials/website/nuxt",
+            "en/tutorials/website/phoenix",
+            "en/tutorials/website/preact",
+            "en/tutorials/website/qwik",
+            "en/tutorials/website/react",
+            "en/tutorials/website/remix",
+            "en/tutorials/website/ruby-on-rails",
+            "en/tutorials/website/solidjs",
+            "en/tutorials/website/vite",
+            "en/tutorials/website/vue"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Bots",
+      "pages": [
+        "en/tutorials/how-to-deploy-your-discord-bot",
+        "en/tutorials/how-to-deploy-your-whatsapp-bot",
+        "en/tutorials/how-to-deploy-your-telegram-bot",
+        {
+          "group": "More Platforms",
+          "pages": [
+            "en/tutorials/bots/discord",
+            "en/tutorials/bots/slack",
+            "en/tutorials/bots/telegram",
+            "en/tutorials/bots/whatsapp",
+            "en/tutorials/bots/x"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Platform",
+      "pages": [
+        "en/tutorials/platform/custom-domain",
+        "en/tutorials/platform/github-integration",
+        "en/tutorials/platform/workspaces"
+      ]
+    },
+    {
+      "group": "Python",
+      "pages": [
+        "en/tutorials/python/how-to-change-ptb-connection",
+        "en/tutorials/python/how-to-use-gunicorn",
+        "en/tutorials/python/how-to-validate-data-with-pydantic"
+      ]
+    },
+    {
+      "group": "Platform",
+      "pages": [
+        "en/platform/overview",
+        "en/platform/limitations-and-restrictions"
+      ]
+    },
+    {
+      "group": "Company",
+      "pages": [
+        "en/company/brand",
+        "en/company/legal",
+        "en/company/support"
+      ]
+    },
+    {
+      "group": "Introduction",
+      "pages": [
+        "en/api-reference/authentication",
+        "en/api-reference/limitations-and-restrictions",
+        "en/api-reference/openapi"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "en/api-reference/endpoint/users/me",
+        "en/api-reference/endpoint/users/snapshots",
+        "en/api-reference/endpoint/apps/upload",
+        "en/api-reference/endpoint/apps/status-all",
+        "en/api-reference/endpoint/service/status",
+        {
+          "group": "Database",
+          "pages": [
+            "en/api-reference/endpoint/databases/create",
+            "en/api-reference/endpoint/databases/info",
+            "en/api-reference/endpoint/databases/start",
+            "en/api-reference/endpoint/databases/stop",
+            "en/api-reference/endpoint/databases/status-all",
+            "en/api-reference/endpoint/databases/status",
+            "en/api-reference/endpoint/databases/metrics",
+            "en/api-reference/endpoint/databases/edit",
+            "en/api-reference/endpoint/databases/delete"
+          ]
+        },
+        {
+          "group": "Database - Credentials",
+          "pages": [
+            "en/api-reference/endpoint/databases/credentials/get_certificate",
+            "en/api-reference/endpoint/databases/credentials/reset"
+          ]
+        },
+        {
+          "group": "Database - Snapshots",
+          "pages": [
+            "en/api-reference/endpoint/databases/snapshots/get",
+            "en/api-reference/endpoint/databases/snapshots/do_snapshot",
+            "en/api-reference/endpoint/databases/snapshots/restore",
+            "en/api-reference/endpoint/databases/snapshots/create",
+            "en/api-reference/endpoint/databases/snapshots/list"
+          ]
+        },
+        {
+          "group": "Application",
+          "pages": [
+            "en/api-reference/endpoint/apps/info",
+            "en/api-reference/endpoint/apps/status",
+            "en/api-reference/endpoint/apps/logs",
+            "en/api-reference/endpoint/apps/metrics",
+            "en/api-reference/endpoint/apps/realtime",
+            "en/api-reference/endpoint/apps/start",
+            "en/api-reference/endpoint/apps/restart",
+            "en/api-reference/endpoint/apps/stop",
+            "en/api-reference/endpoint/apps/commit",
+            "en/api-reference/endpoint/apps/delete"
+          ]
+        },
+        {
+          "group": "Application - Snapshots",
+          "pages": [
+            "en/api-reference/endpoint/apps/snapshots/get",
+            "en/api-reference/endpoint/apps/snapshots/post",
+            "en/api-reference/endpoint/apps/snapshots/create",
+            "en/api-reference/endpoint/apps/snapshots/list",
+            "en/api-reference/endpoint/apps/snapshots/restore"
+          ]
+        },
+        {
+          "group": "Application - Environment",
+          "pages": [
+            "en/api-reference/endpoint/apps/envs/get",
+            "en/api-reference/endpoint/apps/envs/add_n_edit",
+            "en/api-reference/endpoint/apps/envs/overwrite",
+            "en/api-reference/endpoint/apps/envs/remove"
+          ]
+        },
+        {
+          "group": "Application - File Manager",
+          "pages": [
+            "en/api-reference/endpoint/apps/filemanager/content",
+            "en/api-reference/endpoint/apps/filemanager/list",
+            "en/api-reference/endpoint/apps/filemanager/put",
+            "en/api-reference/endpoint/apps/filemanager/patch",
+            "en/api-reference/endpoint/apps/filemanager/delete"
+          ]
+        },
+        {
+          "group": "Application - Deploy",
+          "pages": [
+            "en/api-reference/endpoint/apps/deploy/list",
+            "en/api-reference/endpoint/apps/deploy/info",
+            "en/api-reference/endpoint/apps/deploy/webhooks"
+          ]
+        },
+        {
+          "group": "Application - Network",
+          "pages": [
+            "en/api-reference/endpoint/apps/network/dns",
+            "en/api-reference/endpoint/apps/network/analytics",
+            "en/api-reference/endpoint/apps/network/custom",
+            "en/api-reference/endpoint/apps/network/purge_cache",
+            "en/api-reference/endpoint/apps/network/logs",
+            "en/api-reference/endpoint/apps/network/performance",
+            "en/api-reference/endpoint/apps/network/errors"
+          ]
+        },
+        {
+          "group": "Workspace",
+          "pages": [
+            "en/api-reference/endpoint/workspace/create",
+            "en/api-reference/endpoint/workspace/delete",
+            "en/api-reference/endpoint/workspace/get",
+            "en/api-reference/endpoint/workspace/leave",
+            "en/api-reference/endpoint/workspace/list"
+          ]
+        },
+        {
+          "group": "Workspace - Members",
+          "pages": [
+            "en/api-reference/endpoint/workspace/members/code",
+            "en/api-reference/endpoint/workspace/members/invite",
+            "en/api-reference/endpoint/workspace/members/kick",
+            "en/api-reference/endpoint/workspace/members/perms"
+          ]
+        },
+        {
+          "group": "Workspace - Application",
+          "pages": [
+            "en/api-reference/endpoint/workspace/apps/add",
+            "en/api-reference/endpoint/workspace/apps/remove"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "CLI Reference",
+      "pages": [
+        "en/cli-reference/installation",
+        "en/cli-reference/authentication",
+        "en/cli-reference/commands",
+        {
+          "group": "App Commands",
+          "pages": [
+            "en/cli-reference/commands/app/upload",
+            "en/cli-reference/commands/app/start",
+            "en/cli-reference/commands/app/stop",
+            "en/cli-reference/commands/app/restart",
+            "en/cli-reference/commands/app/logs",
+            "en/cli-reference/commands/app/status",
+            "en/cli-reference/commands/app/commit",
+            "en/cli-reference/commands/app/list",
+            "en/cli-reference/commands/app/snapshot",
+            "en/cli-reference/commands/app/delete"
+          ]
+        },
+        {
+          "group": "Auth Commands",
+          "pages": [
+            "en/cli-reference/commands/auth/login",
+            "en/cli-reference/commands/auth/logout",
+            "en/cli-reference/commands/auth/whoami"
+          ]
+        },
+        {
+          "group": "Database Commands",
+          "pages": [
+            "en/cli-reference/commands/database/snapshot"
+          ]
+        },
+        "en/cli-reference/commands/zip",
+        "en/cli-reference/commands/help"
+      ]
+    },
+    {
+      "group": "Blob Reference",
+      "pages": [
+        "en/blob-reference/authentication"
+      ]
+    },
+    {
+      "group": "Blob Endpoints",
+      "pages": [
+        "en/blob-reference/endpoint/stats",
+        "en/blob-reference/endpoint/list",
+        "en/blob-reference/endpoint/post",
+        "en/blob-reference/endpoint/delete"
+      ]
+    },
+    {
+      "group": "SDKs",
+      "pages": [
+        "en/sdks/introduction"
+      ]
+    },
+    {
+      "group": "JavaScript SDK",
+      "pages": [
+        "en/sdks/js/client",
+        "en/sdks/js/commit_and_upload",
+        "en/sdks/js/managing_application",
+        "en/sdks/js/managing_files",
+        "en/sdks/js/databases",
+        "en/sdks/js/deploys",
+        "en/sdks/js/environment_variables",
+        "en/sdks/js/network",
+        "en/sdks/js/realtime",
+        "en/sdks/js/snapshots",
+        "en/sdks/js/workspaces",
+        "en/sdks/js/migrating_to_v4"
+      ]
+    },
+    {
+      "group": "Python SDK",
+      "pages": [
+        "en/sdks/py/installation",
+        "en/sdks/py/client",
+        "en/sdks/py/commit_and_upload",
+        "en/sdks/py/managing_application",
+        "en/sdks/py/managing_files",
+        "en/sdks/py/deployments",
+        "en/sdks/py/databases",
+        "en/sdks/py/snapshots",
+        "en/sdks/py/workspaces",
+        {
+          "group": "Advanced Guide",
+          "pages": [
+            "en/sdks/py/advanced/app_cache",
+            "en/sdks/py/advanced/listeners",
+            "en/sdks/py/advanced/using_pydantic"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "FAQs",
+      "pages": [
+        "en/faqs/using-autorestart-in-your-virtuscloud-application",
+        "en/faqs/debugging-an-application",
+        "en/faqs/automatic-deletion-files-when-deploying-an-application-to-virtuscloud"
+      ]
+    },
+    {
+      "group": "Troubleshooting",
+      "pages": [
+        "en/faqs/troubleshooting/access-website",
+        "en/faqs/troubleshooting/lavalink-closed-abnormally",
+        "en/faqs/troubleshooting/whitelist-mongodb",
+        "en/faqs/troubleshooting/LACK_OF_CPU",
+        "en/faqs/troubleshooting/LACK_OF_RAM",
+        "en/faqs/troubleshooting/TOKEN_INVALID",
+        "en/faqs/troubleshooting/ABUSE_REQUESTS",
+        "en/faqs/troubleshooting/MODULE_NOT_FOUND",
+        "en/faqs/troubleshooting/INVALID_DEPENDENCY",
+        "en/faqs/troubleshooting/BETTER_SQLITE3_ERROR"
+      ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "en/changelog"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://virtuscloud.app",
+    "discord": "https://discord.gg/virtuscloud",
+    "instagram": "https://instagram.com/virtuscloudofc",
+    "x-twitter": "https://twitter.com/virtuscloudofc",
+    "linkedin": "https://linkedin.com/company/virtuscloud",
+    "github": "https://github.com/virtuscloudofc"
+  },
+  "backgroundImage": "/background.png",
+  "api": {
+    "auth": {
+      "method": "key",
+      "name": "Authorization"
+    }
+  },
+  "seo": {
+    "indexHiddenPages": true
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "raiseIssue": true,
+    "suggestEdit": true
+  },
+  "localization": {
+    "locales": ["en", "pt-br", "es", "zh"],
+    "defaultLocale": "en"
+  },
+  "redirects": [
+    {
+      "source": "/pt/:slug*",
+      "destination": "/pt-br/:slug*"
+    },
+    {
+      "source": "/introduction",
+      "destination": "/en/getting-started/overview"
+    },
+    {
+      "source": "/articles/how-to-create-your-virtuscloud-configuration-file",
+      "destination": "/en/getting-started/config-file"
+    },
+    {
+      "source": "/articles/como-criar-seu-arquivo-de-configuracao-virtuscloud",
+      "destination": "/en/getting-started/config-file"
+    },
+    {
+      "source": "/articles/how-to-set-up-git-integration",
+      "destination": "/en/tutorials/how-to-set-up-git-integration"
+    },
+    {
+      "source": "/articles/how-to-set-up-your-domain",
+      "destination": "/en/tutorials/how-to-set-up-your-domain"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-react-website",
+      "destination": "/en/tutorials/how-to-deploy-your-react-website"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-vite-website",
+      "destination": "/en/tutorials/how-to-deploy-your-vite-website"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-vue-website",
+      "destination": "/en/tutorials/how-to-deploy-your-vue-website"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-flask-application",
+      "destination": "/en/tutorials/how-to-deploy-your-flask-application"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-django-application",
+      "destination": "/en/tutorials/how-to-deploy-your-django-application"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-discord-bot",
+      "destination": "/en/tutorials/how-to-deploy-your-discord-bot"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-express-application",
+      "destination": "/en/tutorials/how-to-deploy-your-express-application"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-fastify-application",
+      "destination": "/en/tutorials/how-to-deploy-your-fastify-application"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-nestjs-application",
+      "destination": "/en/tutorials/how-to-deploy-your-nestjs-application"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-next-website",
+      "destination": "/en/tutorials/how-to-deploy-your-next-website"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-selenium-application",
+      "destination": "/en/tutorials/how-to-deploy-your-selenium-application"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-telegram-bot",
+      "destination": "/en/tutorials/how-to-deploy-your-telegram-bot"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-website",
+      "destination": "/en/tutorials/how-to-deploy-your-website"
+    },
+    {
+      "source": "/articles/how-to-deploy-your-whatsapp-bot",
+      "destination": "/en/tutorials/how-to-deploy-your-whatsapp-bot"
+    },
+    {
+      "source": "/articles/managing-teams",
+      "destination": "/en/tutorials/managing-teams"
+    },
+    {
+      "source": "/faqs/timezone-change-guide",
+      "destination": "/en/tutorials/timezone-change-guide"
+    },
+    {
+      "source": "/faqs/topgg-webhook-config",
+      "destination": "/en/tutorials/topgg-webhook-config"
+    },
+    {
+      "source": "/articles/how-to-create-your-lavalink-server",
+      "destination": "/en/tutorials/how-to-create-your-lavalink-server"
+    }
+  ]
+}

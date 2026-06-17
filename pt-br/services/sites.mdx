@@ -1,0 +1,74 @@
+---
+title: "Hospedagem de Sites"
+description: "Descubra as inovações e a robustez da VirtusCloud explorando os recursos de hospedagem de sites da plataforma."
+icon: "globe"
+---
+
+<img src="/images/services/sites.png" />
+
+A **VirtusCloud**, uma plataforma tecnológica avançada, destaca-se por oferecer suporte abrangente a diversos frameworks. Este artigo explora os recursos e o suporte a sites oferecidos pela **VirtusCloud**.
+
+## Recursos e Suporte
+
+<CardGroup cols={1}>
+  <Card title="Configuração de Domínio" icon="globe" href="https://docs.virtuscloud.app/tutorials/how-to-set-up-your-domain">
+    Configure seu domínio personalizado na VirtusCloud. Instruções detalhadas disponíveis [aqui](https://docs.virtuscloud.app/tutorials/how-to-set-up-your-domain).
+  </Card>
+  <Card title="DNS Rápido" icon="bolt">
+    Utilize seu próprio domínio, aprimorando sua presença online com um toque mais profissional e personalizado.
+  </Card>
+  <Card title="Integração com Cloudflare Premium" icon="link">
+    Integre o Cloudflare Premium com a VirtusCloud para obter segurança avançada, performance melhorada e entrega global de conteúdo.
+  </Card>
+  <Card title="Configuração WAF" icon="shield-check">
+    Nosso sistema de firewall de ponta garante a máxima segurança para o seu site, defendendo contra ataques maliciosos e tentativas de acesso não autorizado.
+  </Card>
+</CardGroup>
+
+Em resumo, a VirtusCloud oferece um conjunto abrangente de recursos para garantir que seu site seja hospedado com eficiência e protegido contra os desafios do ambiente digital.
+
+## Linguagens Suportadas
+
+<CardGroup cols={3}>
+  <Card title="Node.js" icon="node-js" href="https://docs.virtuscloud.app/articles/getting-started-with-nodejs">Ideal para desenvolvimento web dinâmico.</Card>
+  <Card title="Python" icon="python" href="https://docs.virtuscloud.app/articles/getting-started-with-python">Amplamente usado em IA, automação e desenvolvimento web.</Card>
+  <Card title="Java" icon="java" href="https://docs.virtuscloud.app/articles/getting-started-with-java">Portável e eficiente para aplicações empresariais.</Card>
+  <Card title="Elixir" icon="droplet" href="https://docs.virtuscloud.app/articles/getting-started-with-elixir">Excelente em sistemas distribuídos.</Card>
+  <Card title="Rust" icon="rust" href="https://docs.virtuscloud.app/articles/getting-started-with-rust">Focado em segurança e performance.</Card>
+  <Card title="PHP" icon="php" href="https://docs.virtuscloud.app/articles/getting-started-with-php">Escolha popular para scripts server-side.</Card>
+  <Card title="Go" icon="golang" href="https://docs.virtuscloud.app/articles/getting-started-with-go">Reconhecido pela eficiência em produção.</Card>
+  <Card title="HTML/CSS" icon="html5">Perfeito para sites estáticos.</Card>
+  <Card title="C#" icon="c" href="https://docs.virtuscloud.app/articles/getting-started-with-csharp">Versátil e poderoso.</Card>
+</CardGroup>
+
+## Como Hospedar Meu Site na VirtusCloud?
+
+<Steps>
+  <Step title="Arquivo de Configuração" icon="file">
+    Crie um arquivo de configuração detalhado. Lembre-se de incluir:
+    - **SUBDOMAIN**: O subdomínio do seu site. Exemplo: `SUBDOMAIN: teste` (teste.virtusapp.cloud)
+    - **MEMORY**: A quantidade de RAM, com **mínimo de 512MB**.
+    Detalhes [aqui](https://docs.virtuscloud.app/getting-started/config-file).
+  </Step>
+  <Step title="Criação do Arquivo ZIP" icon="file-zip">
+    Coloque os arquivos da aplicação e o arquivo de configuração dentro de um .zip. Arquivos como `node_modules`, `package-lock.json`, `__pycache__` não precisam ser incluídos.
+  </Step>
+  <Step title="Arquivo de Dependências" icon="box">
+    Inclua o arquivo de dependências no .zip (`package.json` para Node.js, `requirements.txt` para Python).
+  </Step>
+  <Step title="Upload do Site" icon="arrow-up">
+    <Tip>Se puder definir uma `porta` no seu código ou no parâmetro `START`, sempre use a `porta 80`.</Tip>
+    Acesse a página de upload na **VirtusCloud** e envie seu .zip [aqui](https://virtuscloud.app/dashboard/upload).
+  </Step>
+  <Step title="Erros Comuns" icon="x">
+    <Warning>Se encontrar um erro não listado, [entre em contato](https://virtuscloud.app/dashboard/support).</Warning>
+    <AccordionGroup>
+      <Accordion title="INVALID_DEPENDENCY" icon="box">Arquivo de dependências ausente no .zip.</Accordion>
+      <Accordion title="FEW_MEMORY" icon="memory">RAM configurada incorretamente (mínimo 512MB para sites).</Accordion>
+      <Accordion title="INVALID_MAIN" icon="file-code">Arquivo "main" inexistente ou com caminho incorreto.</Accordion>
+      <Accordion title="MISSING_CONFIG" icon="file-signature">Arquivo de configuração ausente no .zip ou fora da raiz.</Accordion>
+      <Accordion title="INVALID_START" icon="terminal">Campo START ausente ou incorreto no arquivo de configuração.</Accordion>
+      <Accordion title="FAILED_UPLOAD" icon="x">Problema com o arquivo .zip. Verifique se foi criado corretamente.</Accordion>
+    </AccordionGroup>
+  </Step>
+</Steps>

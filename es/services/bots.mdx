@@ -1,0 +1,81 @@
+---
+title: "Alojamiento de Bots"
+description: "Descubre las innovaciones y la robustez de VirtusCloud explorando las funciones de alojamiento de bots de la plataforma."
+icon: "robot"
+---
+
+<img src="/images/services/bots.png" />
+
+**VirtusCloud**, una plataforma tecnológica avanzada, destaca por ofrecer soporte integral para diversos tipos de bots. Este artículo profundiza en las características y el soporte de bots ofrecido por **VirtusCloud**.
+
+## Características y Soporte
+
+<CardGroup cols={1}>
+  <Card title="Soporte para Cualquier Plataforma" icon="robot">
+    **VirtusCloud** se distingue por ofrecer soporte para una amplia gama de plataformas populares como **Discord**, **Telegram**, **WhatsApp**, **Guilded**, **Slack**, **Messenger**, **Facebook** y **Twitch**.
+  </Card>
+  <Card title="Soporte Musical Avanzado" icon="music">
+    **VirtusCloud** mejora la experiencia musical de los bots al soportar **ffmpeg** y **Lavalink**. El **ffmpeg** ya viene incluido por defecto en **VirtusCloud**.
+  </Card>
+  <Card title="Base de Datos Local Eficiente" icon="database">
+    El sistema de archivos de **VirtusCloud** está diseñado para ser rápido y confiable, permitiendo el uso eficiente de bases de datos locales.
+  </Card>
+  <Card title="Alojamiento Dinámico" icon="rocket">
+    **VirtusCloud** ofrece un servicio dinámico e inteligente de alojamiento de bots con una amplia gama de direcciones IP públicas.
+  </Card>
+  <Card title="Latencia Optimizada" icon="bolt">
+    La ubicación estratégica de **VirtusCloud** en Tampa, Florida, proporciona una conectividad excepcional con un ping promedio de solo 20ms.
+  </Card>
+  <Card title="Almacenamiento Eficiente de Imágenes" icon="cloud">
+    **VirtusCloud** ofrece **Blob**, su propio CDN, para almacenar imágenes, videos y otros tipos de archivos fácilmente.
+  </Card>
+  <Card title="Seguridad Avanzada" icon="shield">
+    **VirtusShield** proporciona una capa adicional de seguridad, con sistemas preventivos para no exceder los límites de solicitudes API.
+  </Card>
+  <Card title="Despliegue Automático via Git" icon="code">
+    **VirtusCloud** ofrece despliegues automáticos con soporte para integración con GitHub y GitLab via Webhooks. Más detalles [aquí](https://docs.virtuscloud.app/tutorials/how-to-set-up-git-integration).
+  </Card>
+  <Card title="Rutas Premium" icon="star">
+    **VirtusCloud** ofrece una red con rutas premium a los principales centros de comunicación como **WhatsApp**, **Telegram** y **Discord**.
+  </Card>
+</CardGroup>
+
+## Lenguajes Soportados
+
+<CardGroup cols={3}>
+  <Card title="Node.js" icon="node-js" href="https://docs.virtuscloud.app/articles/getting-started-with-nodejs">Ideal para desarrollo web dinámico.</Card>
+  <Card title="Python" icon="python" href="https://docs.virtuscloud.app/articles/getting-started-with-python">Ampliamente usado en IA, automatización y desarrollo web.</Card>
+  <Card title="Java" icon="java" href="https://docs.virtuscloud.app/articles/getting-started-with-java">Portátil y eficiente para aplicaciones empresariales.</Card>
+  <Card title="Elixir" icon="droplet" href="https://docs.virtuscloud.app/articles/getting-started-with-elixir">Excelente en sistemas distribuidos y aplicaciones concurrentes.</Card>
+  <Card title="Rust" icon="rust" href="https://docs.virtuscloud.app/articles/getting-started-with-rust">Enfocado en seguridad y rendimiento.</Card>
+  <Card title="PHP" icon="php" href="https://docs.virtuscloud.app/articles/getting-started-with-php">Opción popular para scripting del lado del servidor.</Card>
+  <Card title="Go" icon="golang" href="https://docs.virtuscloud.app/articles/getting-started-with-go">Reconocido por su eficiencia en entornos de producción.</Card>
+  <Card title="C#" icon="c" href="https://docs.virtuscloud.app/articles/getting-started-with-csharp">Versátil y poderoso para aplicaciones Windows y videojuegos.</Card>
+</CardGroup>
+
+## ¿Cómo Alojar Mi Bot en VirtusCloud?
+
+<Steps>
+  <Step title="Archivo de Configuración" icon="file">
+    El primer paso es crear un archivo de configuración detallado. Detalles disponibles [aquí](https://docs.virtuscloud.app/getting-started/config-file).
+  </Step>
+  <Step title="Creación del Archivo ZIP" icon="file-zip">
+    Coloca los archivos de la aplicación y el archivo de configuración dentro de un .zip. No es necesario incluir `node_modules` ni `package-lock.json`.
+  </Step>
+  <Step title="Archivo de Dependencias" icon="box">
+    Incluye el archivo de dependencias en el .zip (`package.json` para Node.js, `requirements.txt` para Python).
+  </Step>
+  <Step title="Subida del Bot" icon="arrow-up">
+    Accede a la página de subida en **VirtusCloud** y envía tu archivo .zip [aquí](https://virtuscloud.app/dashboard/upload).
+  </Step>
+  <Step title="Errores Comunes" icon="x">
+    <Warning>Si encuentras un error no listado, [contáctanos](https://virtuscloud.app/dashboard/support).</Warning>
+    <AccordionGroup>
+      <Accordion title="INVALID_DEPENDENCY" icon="box">El archivo de dependencias está ausente en tu .zip.</Accordion>
+      <Accordion title="FEW_MEMORY" icon="memory">RAM configurada incorrectamente (mínimo 256MB para bots).</Accordion>
+      <Accordion title="INVALID_MAIN" icon="file-code">El archivo "main" no existe o está mal escrito.</Accordion>
+      <Accordion title="MISSING_CONFIG" icon="file-signature">El archivo de configuración no está en el .zip o no está en la raíz.</Accordion>
+      <Accordion title="FAILED_UPLOAD" icon="x">Problema con el archivo .zip. Verifica que esté creado correctamente y sin contraseña.</Accordion>
+    </AccordionGroup>
+  </Step>
+</Steps>

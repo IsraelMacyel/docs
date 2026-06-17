@@ -1,0 +1,31 @@
+---
+title: "Purge Cache"
+description: "Purge Cache of the certain paths in the network. It has a rate limit of 1 request every 60 seconds."
+api: "POST https://api.virtuscloud.app/v2/apps/{app_id}/network/purge_cache"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+<ParamField body="paths" type="array" placeholder={["https://yoursubdomain.virtusapp.cloud/", "https://yoursubdomain.virtusapp.cloud/style.css"]} required>
+  The paths you want to purge the cache.
+</ParamField>
+
+### Response
+
+<Status />
+
+<ResponseExample>
+```json
+{
+    "status": "success"
+}
+```
+</ResponseExample>

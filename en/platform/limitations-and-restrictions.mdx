@@ -1,0 +1,65 @@
+---
+title: "Limits and Restrictions"
+description: "Discover the constraints and boundaries of the VirtusCloud Platform."
+icon: "shield-dog"
+---
+
+## Minimum Resource Requirements
+Every project hosted on the VirtusCloud Platform has specific minimum resource requirements to ensure optimal performance:
+
+- **Bots:** Minimum 256MB RAM required.
+- **Websites:** Minimum 512MB RAM required.
+- **Cache Databases:** Minimum 512MB RAM required.
+- **General Databases:** Minimum 1GB RAM required.
+
+## Why Minimum RAM Requirements?
+VirtusCloud enforces minimum RAM requirements to ensure application stability and optimal performance. These requirements are based on the typical resource consumption patterns of different application types. Insufficient RAM can lead to application crashes, poor performance, and degraded user experience. By setting these minimums, we guarantee that your applications have adequate memory to handle their core operations, background processes, and unexpected traffic spikes without compromising functionality.
+
+Please note that while VirtusCloud offers plans with up to **1TB of RAM**, the **maximum RAM allocation** for any **application is 32GB**. <ins>If you require more than 32GB, please reach out to our support team for assistance.</ins>
+
+## CPU Optimization & Limitation
+The CPU limitation logic aims to optimize performance by dynamically adapting to the application's needs. The code divides the default CPU allocation by two, promoting an efficient resource utilization approach. However, specific conditions alter this behavior:
+
+If the **application's default CPU allocation** is <ins>1vCPU</ins>, the **CPU is set to 1**. (full release)
+
+**Otherwise**, the CPU **allocation varies based** on the **application's RAM size**:
+- If **RAM is less than or equal to 1024**, the CPU is set to the **maximum of half** of CPU or 1.
+- If **RAM is 2048** or <ins>**more**</ins>, the **CPU remains unchanged**. (full release)
+- For **RAM sizes between 1024 and 2048**, the CPU is set to **half of CPU**.
+
+This strategy aims to balance CPU efficiency with variable system demands, ensuring adequate performance across different scenarios.
+
+This approach is crucial to promote a high-quality experience, ensuring fair and efficient CPU resource allocation, optimizing application responsiveness, and reducing unnecessary resource consumption.
+
+## Network Limitations
+Network limitations are essential to ensure fair resource distribution and a high-quality experience for all users.  
+The **network speed increases by 50 Mbps** for every **additional 256 MB** of RAM allocated.
+
+Here are the network limitations based on RAM allocation:
+
+- **256 MB RAM:** 50 Mbps network speed  
+- **512 MB RAM:** 100 Mbps network speed  
+- **1024 MB RAM:** 200 Mbps network speed  
+- **2048 MB RAM:** 400 Mbps network speed  
+- **4096 MB RAM:** 800 Mbps network speed  
+- **8192 MB RAM:** 1600 Mbps network speed  
+- **10240 MB RAM:** 2000 Mbps network speed  
+
+For applications requiring network speeds exceeding 2000 Mbps, please contact our support team to discuss your specific needs.
+
+VirtusCloud is committed to providing a balance between resource availability and performance, ensuring a seamless experience for all users.
+
+## Storage Limitations
+Storage limitations are crucial to ensure equitable resource distribution and to provide a high-quality experience for all users.
+- **All projects:** Each project is allocated 10GB of storage.
+
+## Service Limits
+VirtusCloud implements service limits to ensure fair and efficient resource utilization for all users. These limits are categorized as:
+
+### LACK_OF_RAM
+If an application exceeds the allocated RAM limit as specified in its [virtuscloud.app config file](../getting-started/config-file), it will be flagged for violating LACK_OF_RAM and shut down to preserve its own and everyone else's safety.
+
+### LACK_OF_CPU
+If an application exceeds and stresses its allocated processing limit, it will be flagged for violating LACK_OF_CPU and shut down to preserve its own and everyone else's safety. It is important to remember that VirtusCloud does not allow the hosting of applications that mine cryptocurrencies, for example.
+
+VirtusCloud is dedicated to providing a secure and balanced environment for all users while ensuring compliance with its policies.

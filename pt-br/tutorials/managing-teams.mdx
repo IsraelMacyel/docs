@@ -1,0 +1,81 @@
+---
+title: "Gerenciando Equipes na VirtusCloud"
+sidebarTitle: "Gerenciar Equipes"
+description: "Aprenda como o sistema de equipes funciona e como gerenciar suas equipes"
+---
+
+## Introdução
+
+- Antes de começar, você precisará criar uma conta na VirtusCloud, o que pode ser feito pela [página de cadastro](https://virtuscloud.app/signup). Você pode usar seu e-mail para criar uma conta.
+- Por fim, você precisa ter um plano pago ativo na sua conta. Veja nossos planos e adquira um [aqui](https://virtuscloud.app/pricing).
+
+## Criando sua Equipe
+
+Para criar sua equipe, acesse o [dashboard](https://virtuscloud.app/dashboard), clique no seu perfil e escolha a opção "Criar uma Equipe". Em seguida, escolha o nome da equipe e confirme. A equipe será criada e você poderá acessá-la selecionando seu perfil novamente e escolhendo a equipe desejada.
+<Frame>
+    <img src="/images/articles/teams/create-team.png" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+## Adicionando Membros à Equipe
+Para adicionar um novo membro à equipe, siga estes passos:
+
+<Steps>
+  <Step title="Primeiro Passo" icon="check">
+    Peça ao usuário que deseja adicionar para acessar a página de [configurações](https://virtuscloud.app/account/security) e acionar o botão `solicitar código de equipe`. O usuário deverá enviar o código gerado para você. Lembre-se de que esse código só pode ser usado uma vez e expira após **5 minutos**.
+  </Step>
+  <Step title="Segundo Passo" icon="star">
+    Acesse o [dashboard](https://virtuscloud.app/dashboard), navegue até seu perfil e selecione a equipe onde deseja adicionar o usuário. Em seguida, vá até a aba "Membros", clique em "Convidar um membro" e insira o código de conta do usuário que deseja convidar.
+<Frame>
+    <img src="/images/articles/teams/add-member.gif" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+  </Step>
+</Steps>
+
+<Warning>Compartilhe seu código de conta somente com pessoas de confiança.</Warning>
+
+### Funções
+Cada membro da equipe possui uma função que concede permissões específicas para gerenciar as aplicações. Veja a lista de permissões abaixo:
+
+<AccordionGroup>
+  <Accordion title="Visualizador" icon="eye">
+  Pode visualizar painéis, métricas, logs e alertas do sistema para monitorar a integridade e o desempenho geral.
+  </Accordion>
+
+  <Accordion title="Gerente" icon="user-tie">
+    Além das permissões de visualização, pode controlar o ciclo de vida das aplicações iniciando, parando e reiniciando serviços.
+  </Accordion>
+
+  <Accordion title="Mantenedor" icon="wrench">
+    Além das permissões de gerente, pode fazer upload, download e editar arquivos e configurações das aplicações.
+  </Accordion>
+
+  <Accordion title="Admin" icon="user-shield">
+    Tem acesso total, incluindo visualização de métricas, gerenciamento de aplicações, edição de arquivos, acesso a dados confidenciais e execução de snapshots e restaurações do sistema.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+ Somente a função Admin pode visualizar arquivos como `.env`, `.env.production` e o arquivo de configuração (`virtuscloud.app/.config`)
+</Note>
+
+## Adicionando Aplicações à Equipe
+Para adicionar aplicações à sua equipe, siga estes passos:
+
+<Steps>
+  <Step title="Primeiro Passo" icon="check">
+    Acesse a equipe à qual deseja adicionar uma nova aplicação.
+    <Frame>
+      <img src="/images/articles/teams/team.gif" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+  <Step title="Segundo Passo" icon="star">
+    Clique em "Adicionar novo" e selecione a aplicação que deseja adicionar à equipe escolhida.
+    <Frame>
+      <img src="/images/articles/teams/add-app.gif" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+<Warning>Somente o proprietário da equipe pode adicionar aplicações.</Warning>
+
+Se continuar com problemas, não hesite em [entrar em contato com nosso suporte](/company/support).

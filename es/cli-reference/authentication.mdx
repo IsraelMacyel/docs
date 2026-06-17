@@ -1,0 +1,39 @@
+---
+title: "Autenticación"
+icon: "lock"
+description: "Aprende lo que se necesita para autenticarte en la CLI de VirtusCloud."
+---
+
+<Steps>
+    <Step title="Obtén tu clave de API">
+        Primero necesitas obtener una clave de API desde el [Panel de Desarrollador](https://virtuscloud.app/account/security). Puedes usar esta clave para autenticarte en la CLI de VirtusCloud.
+    </Step>
+    <Step title="Autentícate">
+        Autentícate en la CLI de VirtusCloud usando el siguiente comando:
+        ```bash
+        virtuscloud auth login
+        ```
+
+        Se te pedirá que ingreses tu clave de API.
+        ```bash
+        Your API Token:
+        > Inserta tu token de API de VirtusCloud
+        ```
+
+        Después de ingresar tu clave de API, estarás autenticado en la CLI de VirtusCloud.
+
+        Puedes omitir el prompt pasando tu clave de API con el flag `--token`:
+        ```bash
+        virtuscloud auth login --token=<clave de API>
+        ```
+    </Step>
+</Steps>
+
+## Próximos pasos
+
+<Card title="Desplegar tu aplicación" href="/cli-reference/commands">
+    Aprende cómo desplegar tu aplicación usando la CLI de VirtusCloud.
+</Card>
+<Card title="Referencia de Comandos" href="/cli-reference/commands">
+    Conoce los comandos disponibles en la CLI de VirtusCloud.
+</Card>

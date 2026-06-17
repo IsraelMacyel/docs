@@ -1,0 +1,62 @@
+---
+title: "Environment variables"
+description: "List, add, replace and delete environment variables for an application."
+---
+
+# Environment variables
+
+> List, add, replace and delete environment variables for an application.
+
+`app.envs` exposes the [`EnvsModule`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/modules/envs.ts), which lets you manage the `KEY=value` pairs your application sees at runtime.
+
+```typescript theme={null}
+const app = await api.applications.fetch("abc123def456abc123def456");
+app.envs; // EnvsModule
+```
+
+Every method resolves to the full env set after the operation completes — so you always get an up-to-date `{ key: value }` map back.
+
+## Listing environment variables
+
+```typescript theme={null}
+const envs = await app.envs.list();
+
+console.log(envs);
+// { DATABASE_URL: "postgres://...", FEATURE_FLAG: "true" }
+```
+
+## Adding or updating variables
+
+`app.envs.set(envs)` merges new variables into the existing set. Existing keys not present in the call are preserved.
+
+```typescript theme={null}
+await app.envs.set({
+    DATABASE_URL: "postgres://...",
+    FEATURE_FLAG: "true",
+});
+```
+
+## Replacing the entire env set
+
+`app.envs.replace(envs)` overwrites every variable. Anything not listed is **removed**.
+
+```typescript theme={null}
+await app.envs.replace({
+    DATABASE_URL: "postgres://new-host...",
+});
+// FEATURE_FLAG is now gone
+```
+
+Pass an empty object to wipe all variables:
+
+```typescript theme={null}
+await app.envs.replace({});
+```
+
+## Deleting variables
+
+`app.envs.delete(keys)` removes the listed keys. Unknown keys are silently ignored.
+
+```typescript theme={null}
+await app.envs.delete(["FEATURE_FLAG"]);
+```

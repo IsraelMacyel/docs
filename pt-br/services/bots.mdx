@@ -1,0 +1,85 @@
+---
+title: "Hospedagem de Bots"
+description: "Descubra as inovações e a robustez da VirtusCloud explorando os recursos de hospedagem de bots oferecidos pela plataforma."
+icon: "robot"
+---
+
+<img src="/images/services/bots.png" />
+
+A **VirtusCloud**, uma plataforma tecnológica avançada, destaca-se por oferecer suporte abrangente a diversos tipos de bots. Este artigo explora os recursos e o suporte a bots oferecidos pela **VirtusCloud**, destacando como esta plataforma se sobressai no cenário tecnológico atual.
+
+## Recursos e Suporte
+
+<CardGroup cols={1}>
+  <Card title="Suporte a Qualquer Plataforma" icon="robot">
+    A **VirtusCloud** diferencia-se ao oferecer suporte a uma ampla gama de plataformas populares como **Discord**, **Telegram**, **WhatsApp**, **Guilded**, **Slack**, **Messenger**, **Facebook** e **Twitch**. Essa diversidade de plataformas permite que os desenvolvedores escolham a que melhor atende ao público-alvo, maximizando o alcance e a efetividade de cada bot.
+  </Card>
+  <Card title="Suporte Avançado a Música" icon="music">
+    A **VirtusCloud** aprimora a experiência musical dos bots ao suportar **ffmpeg** e **Lavalink**. Essa combinação permite criar bots de música capazes de reproduzir músicas diretamente no servidor. O **ffmpeg** já é fornecido por padrão na **VirtusCloud**, facilitando a implementação de recursos musicais.
+
+    O **VirtusShield** garante a disponibilidade contínua do seu bot, proporcionando acesso ininterrupto à música desejada.
+  </Card>
+  <Card title="Banco de Dados Local Eficiente" icon="database">
+    O sistema de arquivos da **VirtusCloud** foi projetado para ser rápido e confiável, permitindo o uso eficiente de bancos de dados locais. Com este recurso, é possível armazenar grandes volumes de dados diretamente no bot, eliminando a necessidade de serviços externos de banco de dados.
+  </Card>
+  <Card title="Hospedagem Dinâmica" icon="rocket">
+    A **VirtusCloud** oferece um serviço dinâmico e inteligente de hospedagem de bots com uma ampla gama de endereços IP públicos. Essa abordagem garante rápida adaptação às mudanças nas condições de rede, mantendo o bot online e disponível em todos os momentos.
+  </Card>
+  <Card title="Latência Otimizada" icon="bolt">
+    A localização estratégica da **VirtusCloud** em Tampa, Flórida, proporciona conectividade excepcional para bots. Com um ping médio de apenas 20ms, a **VirtusCloud** garante comunicação rápida e eficiente, proporcionando uma experiência de usuário suave e sem atrasos.
+  </Card>
+  <Card title="Armazenamento Eficiente de Imagens" icon="cloud">
+    Para bots que precisam armazenar muitas imagens, a **VirtusCloud** oferece a solução ideal com o **Blob**, seu próprio CDN. Esta plataforma permite armazenar facilmente imagens, vídeos e outros tipos de arquivos, com recursos de organização por tags e tempo de expiração.
+  </Card>
+  <Card title="Segurança Avançada" icon="shield">
+    O **VirtusShield** oferece uma camada adicional de segurança, criando um ambiente seguro para os usuários dos bots. Sistemas preventivos garantem que os bots hospedados na **VirtusCloud** não excedam os limites de requisições da API.
+  </Card>
+  <Card title="Deploy Automático via Git" icon="code">
+    A **VirtusCloud** oferece a capacidade de gerenciar deploys automáticos da sua aplicação, com suporte à integração com GitHub e GitLab via Webhooks. Detalhes sobre a configuração estão disponíveis [aqui](https://docs.virtuscloud.app/tutorials/how-to-set-up-git-integration).
+  </Card>
+  <Card title="Rotas Premium" icon="star">
+    A **VirtusCloud** destaca-se no mercado ao oferecer uma rede com rotas premium para os principais hubs de comunicação, como **WhatsApp**, **Telegram** e **Discord**. Isso garante comunicação eficiente e de alta qualidade para sua aplicação, independentemente da plataforma preferida dos seus usuários.
+  </Card>
+</CardGroup>
+
+## Linguagens Suportadas
+
+A VirtusCloud atende a uma ampla gama de linguagens de programação, capacitando os desenvolvedores a escolherem a tecnologia mais adequada para seus projetos.
+
+<CardGroup cols={3}>
+  <Card title="Node.js" icon="node-js" href="https://docs.virtuscloud.app/articles/getting-started-with-nodejs">Ideal para desenvolvimento web dinâmico.</Card>
+  <Card title="Python" icon="python" href="https://docs.virtuscloud.app/articles/getting-started-with-python">Amplamente usado em IA, automação e desenvolvimento web.</Card>
+  <Card title="Java" icon="java" href="https://docs.virtuscloud.app/articles/getting-started-with-java">Portável e eficiente para aplicações empresariais.</Card>
+  <Card title="Elixir" icon="droplet" href="https://docs.virtuscloud.app/articles/getting-started-with-elixir">Excelente em sistemas distribuídos e aplicações concorrentes.</Card>
+  <Card title="Rust" icon="rust" href="https://docs.virtuscloud.app/articles/getting-started-with-rust">Focado em segurança e performance, ideal para sistemas de baixo nível.</Card>
+  <Card title="PHP" icon="php" href="https://docs.virtuscloud.app/articles/getting-started-with-php">Escolha popular para scripts server-side e desenvolvimento web.</Card>
+  <Card title="Go" icon="golang" href="https://docs.virtuscloud.app/articles/getting-started-with-go">Reconhecido pela eficiência em ambientes de produção.</Card>
+  <Card title="C#" icon="c" href="https://docs.virtuscloud.app/articles/getting-started-with-csharp">Versátil e poderoso, ideal para aplicações Windows e desenvolvimento de jogos.</Card>
+</CardGroup>
+
+## Como Hospedar Meu Bot na VirtusCloud?
+
+<Steps>
+  <Step title="Arquivo de Configuração" icon="file">
+    O primeiro passo para hospedar seu bot na **VirtusCloud** é criar um arquivo de configuração detalhado. Detalhes sobre como criar este arquivo estão disponíveis [aqui](https://docs.virtuscloud.app/getting-started/config-file).
+  </Step>
+  <Step title="Criação do Arquivo ZIP" icon="file-zip">
+    Com o arquivo de configuração pronto, o próximo passo é preparar sua aplicação para upload, colocando os arquivos da aplicação e o arquivo de configuração dentro de um arquivo .zip. Arquivos como `node_modules`, `package-lock.json` não precisam ser incluídos.
+  </Step>
+  <Step title="Arquivo de Dependências" icon="box">
+    Inclua o arquivo de dependências no .zip. Para Node.js é o `package.json` e para Python é o `requirements.txt`.
+  </Step>
+  <Step title="Upload do Bot" icon="arrow-up">
+    Após seguir todos os passos, acesse a página de upload na **VirtusCloud** e envie seu arquivo .zip [aqui](https://virtuscloud.app/dashboard/upload).
+  </Step>
+  <Step title="Erros Comuns Durante o Deploy" icon="x">
+    <Warning>Mesmo com uma preparação cuidadosa, alguns erros podem ocorrer. Abaixo estão os erros mais comuns e como resolvê-los. Se encontrar um erro não listado, [entre em contato](https://virtuscloud.app/dashboard/support).</Warning>
+    <AccordionGroup>
+      <Accordion title="INVALID_DEPENDENCY" icon="box">Ocorre quando o arquivo de dependências está ausente no seu .zip.</Accordion>
+      <Accordion title="FEW_MEMORY" icon="memory">Ocorre quando a RAM está configurada incorretamente no arquivo de configuração (mínimo 256MB para bots).</Accordion>
+      <Accordion title="INVALID_MAIN" icon="file-code">Ocorre quando o arquivo definido como "main" não existe ou está incorreto.</Accordion>
+      <Accordion title="MISSING_CONFIG" icon="file-signature">Ocorre quando o arquivo de configuração não está presente no .zip ou não está na raiz.</Accordion>
+      <Accordion title="FAILED_UPLOAD" icon="x">Geralmente causado por um problema com o arquivo .zip. Verifique se foi criado corretamente e não está protegido por senha.</Accordion>
+    </AccordionGroup>
+  </Step>
+</Steps>

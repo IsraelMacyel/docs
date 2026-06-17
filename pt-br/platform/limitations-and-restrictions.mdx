@@ -1,0 +1,61 @@
+---
+title: "Limites e Restrições"
+description: "Descubra as restrições e limites da Plataforma VirtusCloud."
+icon: "shield-dog"
+---
+
+## Requisitos Mínimos de Recursos
+Cada projeto hospedado na Plataforma VirtusCloud possui requisitos mínimos específicos de recursos para garantir desempenho ideal:
+
+- **Bots:** Mínimo de 256MB de RAM necessário.
+- **Sites:** Mínimo de 512MB de RAM necessário.
+- **Bancos de Dados Cache:** Mínimo de 512MB de RAM necessário.
+- **Bancos de Dados Gerais:** Mínimo de 1GB de RAM necessário.
+
+## Por que requisitos mínimos de RAM?
+A VirtusCloud impõe requisitos mínimos de RAM para garantir estabilidade e desempenho ideal das aplicações. Esses requisitos são baseados nos padrões típicos de consumo de recursos de diferentes tipos de aplicações. RAM insuficiente pode levar a falhas nas aplicações, mau desempenho e experiência degradada para o usuário. Ao definir esses mínimos, garantimos que suas aplicações tenham memória adequada para lidar com suas operações principais, processos em segundo plano e picos inesperados de tráfego sem comprometer a funcionalidade.
+
+Observe que, embora a VirtusCloud ofereça planos com até **1TB de RAM**, a **alocação máxima de RAM** para qualquer **aplicação é de 32GB**. <ins>Se precisar de mais de 32GB, entre em contato com nossa equipe de suporte.</ins>
+
+## Otimização e Limitação de CPU
+A lógica de limitação de CPU tem como objetivo otimizar o desempenho adaptando-se dinamicamente às necessidades da aplicação. O código divide a alocação padrão de CPU por dois, promovendo uma abordagem eficiente de utilização de recursos. No entanto, condições específicas alteram esse comportamento:
+
+Se a **alocação padrão de CPU da aplicação** for <ins>1vCPU</ins>, a **CPU é definida como 1**. (liberação total)
+
+**Caso contrário**, a **alocação de CPU varia de acordo** com o **tamanho da RAM da aplicação**:
+- Se a **RAM for menor ou igual a 1024**, a CPU é definida como o **máximo de metade** da CPU ou 1.
+- Se a **RAM for 2048** ou <ins>**mais**</ins>, a **CPU permanece inalterada**. (liberação total)
+- Para **tamanhos de RAM entre 1024 e 2048**, a CPU é definida como **metade da CPU**.
+
+Essa estratégia visa equilibrar a eficiência de CPU com demandas variáveis do sistema, garantindo desempenho adequado em diferentes cenários.
+
+## Limitações de Rede
+As limitações de rede são essenciais para garantir distribuição justa de recursos e uma experiência de alta qualidade para todos os usuários.
+A **velocidade de rede aumenta 50 Mbps** para cada **256 MB adicionais** de RAM alocada.
+
+Veja as limitações de rede com base na alocação de RAM:
+
+- **256 MB RAM:** 50 Mbps de velocidade de rede
+- **512 MB RAM:** 100 Mbps de velocidade de rede
+- **1024 MB RAM:** 200 Mbps de velocidade de rede
+- **2048 MB RAM:** 400 Mbps de velocidade de rede
+- **4096 MB RAM:** 800 Mbps de velocidade de rede
+- **8192 MB RAM:** 1600 Mbps de velocidade de rede
+- **10240 MB RAM:** 2000 Mbps de velocidade de rede
+
+Para aplicações que requerem velocidades de rede superiores a 2000 Mbps, entre em contato com nossa equipe de suporte para discutir suas necessidades específicas.
+
+## Limitações de Armazenamento
+As limitações de armazenamento são cruciais para garantir distribuição equitativa de recursos e proporcionar uma experiência de alta qualidade para todos os usuários.
+- **Todos os projetos:** Cada projeto recebe 10GB de armazenamento.
+
+## Limites de Serviço
+A VirtusCloud implementa limites de serviço para garantir utilização justa e eficiente de recursos para todos os usuários. Esses limites são categorizados como:
+
+### LACK_OF_RAM
+Se uma aplicação exceder o limite de RAM alocado conforme especificado em seu [arquivo de configuração virtuscloud.app](../getting-started/config-file), ela será marcada por violação de LACK_OF_RAM e encerrada para preservar sua segurança e a de todos os outros.
+
+### LACK_OF_CPU
+Se uma aplicação exceder e sobrecarregar seu limite de processamento alocado, ela será marcada por violação de LACK_OF_CPU e encerrada para preservar sua segurança e a de todos os outros. É importante lembrar que a VirtusCloud não permite a hospedagem de aplicações que minerem criptomoedas, por exemplo.
+
+A VirtusCloud é dedicada a proporcionar um ambiente seguro e equilibrado para todos os usuários, garantindo conformidade com suas políticas.

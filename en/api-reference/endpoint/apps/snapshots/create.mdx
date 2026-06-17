@@ -1,0 +1,108 @@
+---
+title: "Create Snapshot"
+description: "Perform a snapshot of your application. It has a rate limit of 1 request every 5 seconds."
+---
+
+# Create Snapshot
+
+> Perform a snapshot of your application. It has a rate limit of 1 request every 5 seconds.
+
+<Warning>Each account can perform up to (RAM / 256) \* 2 snapshots every 24 hours.</Warning>
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Soft deadline behavior
+
+This route follows a **soft deadline** model — it no longer always responds synchronously.
+
+* If the snapshot finishes within **\~90 seconds**, the route responds with `200 success` and a signed download URL (valid for 30 days), exactly as before.
+* If the snapshot takes longer than **\~90 seconds** to generate, the route responds **immediately** with `202` and the code `SNAPSHOT_PROCESSING`. **This is not a failure.** The snapshot keeps generating in the background and will appear in the [snapshot listing](/en/api-reference/endpoint/apps/snapshots/list) on its own, typically within \~2 minutes. This is expected behavior for large applications.
+
+<Warning>
+  Do not use this `POST` endpoint as a polling mechanism. To check whether a `SNAPSHOT_PROCESSING` snapshot has completed, use the [List Snapshots](/en/api-reference/endpoint/apps/snapshots/list) (`GET`) endpoint — **not** another `POST`. Re-posting after the snapshot has finished starts a brand-new snapshot from scratch.
+</Warning>
+
+The client should branch on the response as follows:
+
+| Response                                                  | Meaning                       | What to do                                                                                                                         |
+| --------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `status === "success"`                                    | Snapshot is ready.            | Use the `url` to download it.                                                                                                      |
+| `status === "error"` and `code === "SNAPSHOT_PROCESSING"` | Snapshot is still generating. | Wait \~2 minutes, then confirm via [List Snapshots](/en/api-reference/endpoint/apps/snapshots/list) (`GET`). Do **not** re-`POST`. |
+| `status === "error"` with any other `code`                | Actual failure.               | Handle the error (see below).                                                                                                      |
+
+### Response
+
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
+<ResponseField name="response" type="object">
+  The contents of the response. Present only when `status` is `success`.
+
+  <Expandable title="Toggle object">
+    <ResponseField name="url" type="string">
+      The URL to download the snapshot of your application.
+    </ResponseField>
+
+    <ResponseField name="key" type="string">
+      The key to download the snapshot of your application.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="SNAPSHOT_PROCESSING" type="202">
+  Returned when the snapshot exceeds the \~90 second soft deadline. The snapshot is still being generated in the background and will appear in the snapshot listing on its own, typically within \~2 minutes. Not an error — wait and confirm via the `GET` listing endpoint.
+</ResponseField>
+
+### Errors
+
+A snapshot request can be rejected with `429 Too Many Requests`. Use the `code` field to tell the two cases apart:
+
+<ResponseField name="KEEP_CALM" type="429">
+  Short-term cooldown — you hit the per-user (1 request / 5s) or per-application (1 request / 180s) limit. Back off and retry shortly.
+</ResponseField>
+
+<ResponseField name="DAILY_SNAPSHOTS_LIMIT_REACHED" type="429">
+  Daily quota reached — the account used up its plan's daily snapshot allowance ((RAM / 256) × 2 per 24h). The quota frees up as the rolling 24-hour window advances; for a higher daily allowance, upgrade the plan.
+</ResponseField>
+
+<ResponseExample>
+  ```json 200 Success theme={null}
+  {
+      "status": "success",
+      "response": {
+          "url": "https://snapshots.virtuscloud.app/applications/23457145698959364/a23d130fcc9ddaf2d288ae9599a4292c32.zip?AWSAccessKeyId=i06Xdad2dRD74Pm8Xly&Expires=1753081182&Signature=riWPedawcsouRAPGU5n3kGHnWoOuw%3D",
+          "key": "AWSAccessKeyId=i06Xdad2dRD74Pm8Xly&Expires=1753081182&Signature=riWPedawcsouRAPGU5n3kGHnWoOuw%3D"
+      }
+  }
+  ```
+
+  ```json 202 SNAPSHOT_PROCESSING theme={null}
+  {
+    "status": "error",
+    "code": "SNAPSHOT_PROCESSING"
+  }
+  ```
+
+  ```json 429 KEEP_CALM theme={null}
+  {
+    "status": "error",
+    "code": "KEEP_CALM",
+    "message": "You already requested a snapshot recently. Please wait a minute before trying again. 1r/5s"
+  }
+  ```
+
+  ```json 429 DAILY_SNAPSHOTS_LIMIT_REACHED theme={null}
+  {
+    "status": "error",
+    "code": "DAILY_SNAPSHOTS_LIMIT_REACHED",
+    "message": "You are being rate limited for daily snapshots. 8r/24h"
+  }
+  ```
+</ResponseExample>

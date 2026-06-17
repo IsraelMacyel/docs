@@ -1,0 +1,98 @@
+---
+title: "Get Application Metrics"
+description: "Gets the metrics of your hosted application."
+---
+
+# Get Application Metrics
+
+> Gets the metrics of your hosted application.
+
+Returns up to 288 data points (24h sampled every 5 minutes) of CPU, RAM and network usage. Available only for applications with at least 512 MB of RAM. Results are cached for 2.5 minutes per (owner, application).
+
+## Request
+
+### Headers
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+### Path
+
+<ParamField path="app_id" type="string" placeholder="Application ID" required>
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+## Response
+
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
+<ResponseField name="response" type="array">
+  The contents of the response.
+
+  <Expandable title="Toggle object">
+    <ResponseField name="date" type="string">
+      The date in ISO format.
+    </ResponseField>
+
+    <ResponseField name="cpu" type="number">
+      The CPU usage percentage at the given point in time.
+    </ResponseField>
+
+    <ResponseField name="ram" type="number">
+      The RAM usage in MB at the given point in time.
+    </ResponseField>
+
+    <ResponseField name="net" type="int[]">
+      An array representing total network used. First the input, second the output.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+  ```json theme={null}
+  {
+      "status": "success",
+      "response": [
+          {
+              "date": "2025-08-13T12:55:01.348Z",
+              "cpu": 0.45,
+              "ram": 111.27,
+              "net": [
+                  16834,
+                  126
+              ]
+          },
+          {
+              "date": "2025-08-13T12:50:01.349Z",
+              "cpu": 0.45,
+              "ram": 111.22,
+              "net": [
+                  16834,
+                  126
+              ]
+          },
+          {
+              "date": "2025-08-13T12:45:01.350Z",
+              "cpu": 0.58,
+              "ram": 111.36,
+              "net": [
+                  16834,
+                  126
+              ]
+          },
+          {
+              "date": "2025-08-13T12:40:01.348Z",
+              "cpu": 0.43,
+              "ram": 118.44,
+              "net": [
+                  16834,
+                  126
+              ]
+          }
+      ]
+  }
+  ```
+</ResponseExample>

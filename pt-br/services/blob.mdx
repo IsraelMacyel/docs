@@ -1,0 +1,72 @@
+---
+title: "Blob — Armazenamento Serverless"
+description: "Descubra as capacidades de armazenamento serverless da VirtusCloud."
+icon: "database"
+---
+
+<img src="/images/services/blob.png" />
+
+<Note>O Blob está atualmente em beta. Se encontrar algum problema ou tiver feedback, [entre em contato](/contact).</Note>
+
+A **VirtusCloud** oferece armazenamento serverless de alto desempenho através do **Blob**, eliminando a complexidade do gerenciamento de infraestrutura de armazenamento.
+
+## Recursos e Suporte
+
+<CardGroup cols={2}>
+  <Card title="Sem Taxas de Ingresso ou Egresso" icon="money-bill">
+    Diga adeus a cobranças inesperadas com ZERO taxas para tráfego de entrada e saída de dados.
+  </Card>
+  <Card title="Zero Gerenciamento" icon="server">
+    Simplifique seu fluxo de trabalho eliminando procedimentos complexos de configuração. Apenas envie seus arquivos e a VirtusCloud cuida do resto.
+  </Card>
+  <Card title="Construído para Aplicações Modernas" icon="terminal">
+    Projetado para integrar-se perfeitamente às suas aplicações, oferecendo entrega de conteúdo de alta velocidade através de uma CDN global.
+  </Card>
+  <Card title="Armazenamento Redundante" icon="box">
+    Seus dados são protegidos com replicação tripla rápida e criptografia de ponta a ponta.
+  </Card>
+</CardGroup>
+
+## Modelo de Preços
+
+Nosso modelo de preços é simples e previsível, sem taxas ocultas. Você paga apenas pelo que usa.
+
+| Incluído em TODOS OS PLANOS | **Baseado em Uso** |
+|---|---|
+| Baixa latência | Sempre baixa latência |
+| 1GB de armazenamento incluído | Até **1PB de armazenamento** (1GB/R$ 0,25) |
+| 250 objetos incluídos | Até **1 bilhão de objetos** (250/R$ 0,50) |
+| Até 1 milhão de requisições/dia gratuitas | Até **1 bilhão de requisições/dia** |
+
+<Info>Quando seu plano expirar, nada acontece imediatamente. Apenas no mês seguinte, o faturamento do VirtusCloud Blob será ativado.</Info>
+<Warning>Todos os preços estão em Real Brasileiro (R$). Para usar o VirtusCloud Blob, você precisa ter uma conta válida com um plano pago.</Warning>
+
+## Tipos de Arquivo Suportados
+
+| Tipo de Arquivo | Extensões |
+|---|---|
+| Vídeo | .mp4, .mpeg, .webm, .flv, .m4v |
+| Imagem | .jpeg, .png, .apng, .tiff, .gif, .webp, .bmp, .svg, .ico, .heic, .heif |
+| Áudio | .mp3, .mp4, .wav, .ogg, .opus, .mpeg, .aac |
+| Texto | .txt, .html, .css, .csv, .x-sql |
+| Aplicação | .xml, .sql, .sqlite3, .pdf, .json, .javascript, .p12 |
+
+## Como Usar o Blob?
+
+<Steps>
+  <Step title="Configuração Inicial" icon="file">
+    Envie seu arquivo através do [endpoint put](/blob-reference/endpoint/put).
+  </Step>
+  <Step title="URL de Acesso" icon="globe">
+    Acesse seu arquivo através da URL fornecida na resposta do passo anterior.
+  </Step>
+</Steps>
+
+## Benchmarks
+
+- **Latência**: Latência média de ~20ms para receber um arquivo.
+- **Throughput**: Throughput médio de ~10-15MB/s (80-120mbps).
+- **Disponibilidade**: Disponibilidade média de 99,999999999% (11 noves).
+
+<Info>Os benchmarks não são garantidos. A latência e o throughput podem variar dependendo da sua localização, tamanho do arquivo e condições de rede.</Info>
+<Warning>A **latência na África e em algumas localidades da Ásia é maior**. Estamos trabalhando para melhorar isso em breve.</Warning>

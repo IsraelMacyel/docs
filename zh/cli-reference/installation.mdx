@@ -1,0 +1,48 @@
+---
+title: "安装"
+icon: "download"
+description: "了解安装 VirtusCloud CLI 所需的内容。"
+---
+
+VirtusCloud CLI 是一个命令行工具，允许您与 VirtusCloud 服务进行交互。您可以使用它来部署应用程序、管理服务等。
+
+## 安装
+要使用 CLI，您需要在本地机器上安装它。
+
+使用以下命令安装 CLI：
+
+<br/>
+
+<CodeGroup>
+```bash macOS、Linux 和 WSL
+curl -fsSL https://cli.virtuscloud.app/install | bash
+```
+
+```bash Windows（npm）
+npm install -g @virtuscloud/cli
+```
+
+```bash Windows（yarn）
+yarn global add @virtuscloud/cli
+```
+</CodeGroup>
+
+## 更新 CLI
+要更新 CLI，运行以下命令：
+<CodeGroup>
+```bash Windows
+npm update -g @virtuscloud/cli
+```
+```bash Linux、macOS 和 WSL
+curl -fsSL https://cli.virtuscloud.app/install | bash
+```
+</CodeGroup>
+
+就是这样！您已成功更新 VirtusCloud CLI。🎉
+
+## 下一步
+安装 CLI 后，您需要向 VirtusCloud API 进行身份验证。
+
+<Card title="身份验证" href="/cli-reference/authentication">
+    了解向 VirtusCloud CLI 进行身份验证所需的内容。
+</Card>

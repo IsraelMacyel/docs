@@ -1,0 +1,1375 @@
+---
+title: "Changelog"
+description: "Discover the latest news and improvements in Virtus Cloud. Follow product releases, performance optimizations, and much more."
+---
+
+# Changelog
+
+> Discover the latest news and improvements in Virtus Cloud. Follow product releases, performance optimizations, and much more.
+
+<Update label="June 13, 2026" description="Virtus Cloud now in 8 languages, a faster website and dashboard, smarter auto-renewal, and broad improvements across the platform">
+  ## 🌍 8 languages, a faster dashboard, smarter renewals, and improvements across the platform!
+
+  Since the last changelog, we focused this window on two goals: making Virtus Cloud truly yours anywhere in the world, and making day-to-day use faster and smoother. The big highlight is the arrival of **four new languages** — now **eight** — covering the website, the dashboard, your account emails, and the sign-in flow. Alongside it comes an extensive round of performance, billing, integration, and experience improvements.
+
+  ### 🌍 Virtus Cloud now speaks 8 languages
+
+  The platform gained **four new languages**: **Japanese (日本語), French (Français), German (Deutsch), and Italian (Italiano)**, joining Portuguese, English, Spanish, and Chinese — for a total of **eight languages**.
+
+  * **Full coverage:** the translation spans the **entire website, the dashboard, your account emails, and the whole sign-in flow**, for a consistent end-to-end experience.
+  * **A language that follows you:** your language preference now **persists across sessions** and stays in sync when you switch languages.
+
+  ### ⚡ Faster, from the cluster to the dashboard
+
+  We invested in end-to-end performance — from the platform core to your browser — so everything responds faster, on any connection.
+
+  * **Cluster \~2x faster:** deep optimizations in the platform core made communication with your apps and containers about **2x snappier**.
+  * **Modernized to React 19** with deferred loading of heavy chunks (charts, payments, animations), speeding up page loads.
+  * **Images and assets \~59% smaller** after a full recompression of the site.
+  * **Faster marketing pages** via prerendering, preconnect, and trimmed translation payloads.
+  * **Smoother scrolling**, with a less janky header and fewer re-renders in background animations.
+  * **Improved PWA:** correct theme color, maskable icon, iOS standalone support, and a smoother sign-in flow in the installed app.
+
+  ### 🎨 What's new in the dashboard
+
+  * **Bulk file upload** in the file manager, with automatic compression and validation.
+  * **Redeem history:** a new **redeemed gift codes** section in your account, plus a redesigned redeem page with FAQ and "how it works" sections.
+  * **Auto-renewal, rethought:** setting it up takes seconds — save a card and your plan renews on its own, with the next charge's status always clear and visible in the dashboard. Less friction to set up, and peace of mind around expiry.
+  * **Smart PostgreSQL suggestion** when creating a MySQL database, helping you pick the right tool for the job.
+  * **Snapshot experience:** cooldown and processing feedback modals, and dark/light theme file previews.
+  * **Google account connection** suggested directly in your notifications.
+  * **Clearer file-content modal**, with save support.
+
+  ### 🤝 A more integrated Discord
+
+  * **Roles always up to date:** when you sign in with Discord, your account **automatically rejoins the Virtus Cloud server and re-syncs your roles**, keeping your access correct even if something drifted.
+  * **More reliable sign-in:** linking and signing in with Discord became more robust, with better error handling and automatic retries.
+
+  ### 🌐 Hosted sites
+
+  * **Faster real-time:** we improved support for **WebSocket and Server-Sent Events** connections to your hosted apps — more speed and smoothness for live dashboards, chats, and long-lived streams.
+  * **DNS up to 6x faster:** analysis of newly added domains and subdomains is now about **6x faster**, making them reachable much sooner.
+
+  ### 💳 Billing and renewals
+
+  * **Smarter auto-renewal:** added a card right before your plan expires? Renewal still happens on time — with safeguards to make sure **you're never billed twice** for the same cycle, including when a manual payment is in flight.
+  * **Richer history:** your **gift codes redeemed in the last 12 months** now appear alongside your invoices.
+  * **More robust payment** processing.
+
+  ### 📦 API and storage
+
+  * **Large-app snapshots in the background:** heavy snapshots now build in the background and show up in your list automatically when ready — fire it off and keep working.
+  * **More reliable daily snapshots:** automated daily snapshots can now resume from where they left off if a run is interrupted.
+  * **Faster loading** of workspaces and the dashboard, thanks to backend performance improvements.
+  * **Clearer errors and docs:** oversized file reads now return a proper "file too large" response, and several endpoint descriptions are more precise.
+  * **More flexible API key rotation** and a smoother free-tier experience when accessing paid-plan features.
+  * **Storage (Blob):** **faster object listing** and **more stable uploads** even when you push several at once.
+
+  ### 📧 Your account emails, rethought
+
+  We refined the whole account-email experience this cycle:
+
+  * **Localized in all 8 languages**, matching the platform's new translation coverage.
+  * **Refreshed onboarding:** welcome messages now show how to get the most out of the platform — the **VS Code extension** (deploy straight from your editor), the **CLI**, and the **mobile app** to monitor and restart your apps from anywhere.
+  * **Clearer follow-up emails** (welcome, tips, and reminders), better organized and consistently formatted.
+
+  ### 📈 Web, privacy, and discovery
+
+  * **llms.txt** so AI search assistants can accurately describe Virtus Cloud's plans, runtimes, and features.
+  * **Privacy controls** for analytics (GA4) with a granular preferences panel on the Privacy page.
+  * **2026 revision** of the Terms of Service, Usage Policy, and Privacy Policy.
+
+  ### 🔐 Security and reliability
+
+  We continue with **ongoing security and session-reliability improvements** behind the scenes, keeping your account protected without getting in your way.
+
+  ### 📊 Quick summary
+
+  | Area         | Highlight                                                                                                            |
+  | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+  | Languages    | **+4 languages** (Japanese, French, German, Italian) → **8 total**, covering website, dashboard, emails, and sign-in |
+  | Performance  | **Cluster \~2x faster**, React 19, assets **\~59% smaller**, faster pages                                            |
+  | Dashboard    | Bulk upload, rethought auto-renewal, redeems, and snapshot experience                                                |
+  | Discord      | Server rejoin + role re-sync on sign-in                                                                              |
+  | Hosted sites | Faster real-time (WebSocket/SSE), **DNS \~6x faster**                                                                |
+  | Billing      | Smarter auto-renewal with no double-billing, gift-code history                                                       |
+
+  Thank you for building with Virtus Cloud. Every one of these updates was born from the feedback of people who use the platform every day — keep your ideas and suggestions coming. There's much more on the way. ❤️
+</Update>
+
+<Update label="May 30, 2026" description="VS Code Extension v5, Node.js SDK v4, stable API Types v1.0, and a dashboard with a brand new plan upgrade system">
+  ## 🚀 New VS Code extension, Node.js SDK v4, stable types, and a completely rethought dashboard!
+
+  Ten days of intense work across nearly every Virtus Cloud product, and the result is one of the largest batches of releases we have ever shipped in a single window. We rewrote the VS Code extension from scratch, published a new major version of the official Node.js SDK, stabilized the API types, updated and expanded the OpenAPI documentation, and redesigned a large part of the dashboard experience — from the notification center to a brand new plan upgrade system.
+
+  ### 🧩 VS Code Extension v5
+
+  The Virtus Cloud extension for Visual Studio Code received its **biggest update since launch**. This was not a small set of incremental improvements: the extension was **completely rewritten** on top of the new generation of our SDK, opening the door to features the community had been asking for and leaving the codebase much more solid for what is still to come.
+
+  * **Workspaces directly in the editor:** the full workspace organization of your applications, previously available only in the web dashboard, is now accessible directly from the VS Code sidebar.
+  * **Databases at your fingertips:** support for MongoDB, Redis, PostgreSQL, and MySQL inside the editor — view your instances and the overview of your data infrastructure without opening the browser.
+  * **Environment variables:** check and adjust your application variables without leaving VS Code. Perfect for debugging configuration issues in seconds.
+  * **Status in the editor status bar:** the state of your applications appears in real time in the VS Code status bar, without needing to open any tab or panel.
+  * **More stable, more consistent:** the rewrite on top of SDK v4 made the extension predictable, with a polished experience across all supported languages.
+
+  ### 📦 Official Node.js SDK v4
+
+  The official Virtus Cloud SDK for JavaScript/TypeScript reached its **new major version: v4**, and this is by far the largest evolution of the library in its entire history. v4 opens programmatic access to nearly the entire platform, with entirely new modules and deep improvements to the existing ones.
+
+  * **Databases (brand new module):** list, create, and check the status of your instances. The new `Database` class gives you complete control: start, stop, update, delete, metrics, TLS certificate read, password/certificate rotation, and **database snapshots** with list, create, and **restore**.
+  * **Workspaces:** manage them entirely through code — `list`, `find`, `create`, `leave`, and `delete` workspaces, generate invite codes, manage members (add, update, remove, roles), and share/unshare applications.
+  * **Environment variables:** dedicated application module with `list`, `set`, `replace`, and `delete` — perfect for deploy automations and keeping environments in sync.
+  * **Metrics and realtime:** `getMetrics()` returns the time series of **CPU, RAM, and network from the last 24 hours**. `realtime()` opens a **Server-Sent Events** stream with live updates from your application.
+  * **GitHub-integrated deploys:** `linkGithubApp()`, `unlinkGithubApp()`, and `current()` to automate your deploy pipeline directly from the SDK.
+  * **Application snapshots and restore:** the old "backups" concept became **snapshots** across the entire library, with clearer naming and **snapshot restore** (`snapshots.restore`) — a long-requested feature. Listing snapshots in the user scope is also available.
+  * **Edge analytics and Network suite:** complete observability with **errors**, **logs**, **performance**, and **cache purge**, plus **DNS** data. `purgeCache()` was simplified and now clears the cache for the entire application.
+  * **Platform health and new data:** `service.status()` in a single call, new fields on databases (language, creation date), applications (domain, custom domain, creation date), and users, plus **public error codes** accessible via `err.code` (e.g., `err.code === "FAILED_READ"`).
+  * **Next-generation types and quality:** consumption of the new **API Types** line (now stable), more accurate autocomplete, several bug fixes, and **runnable examples** ready to copy and run.
+
+  > **Breaking changes (3.x → v4):** `client.users.*` became `client.user.*`; `app.backup` / `app.backups` became `app.snapshots`; `app.deploys.list()` returns `Deployment[][]` (use `.flat()` for the old behavior); `app.network.dns()` returns `{ ownership, ssl }`; `app.network.analytics()` requires `{ start, end }`; in workspaces, `members` / `applications` became `memberList` / `applicationList`; **minimum Node is now 20+**.
+
+  ### 🔌 Public API and official types
+
+  The Virtus Cloud public API, the entry point for any integration with the platform, received a significant round of improvements.
+
+  * **Revised and expanded OpenAPI documentation:** we expanded coverage to more endpoints and enriched the schemas for applications, databases, runtime statistics, file uploads, and more. Descriptions, response messages, and status codes were reviewed — you spend less time guessing the format of a response and more time building your integration.
+  * **New Network endpoints:** focused on performance and errors, exposing data that was previously hard to access. These same endpoints power the new Network module in the Node.js SDK.
+  * **Richer responses:** workspaces and users now carry the join moment (`joinedAt`), runtime statistics gained more detail, file reading now handles UTF-8 content better, and descriptions were revised across multiple endpoints.
+  * **API Types v1.0: stable types.** The official API types reached their first stable version, with proper semantic versioning, full predictability for those who depend on them, and coordinated evolution alongside the simplification of the cache purge feature.
+
+  ### 🎨 Dashboard
+
+  The web dashboard, where most people experience Virtus Cloud day to day, is where we concentrated the largest volume of improvements during this period. Dozens of refinements, from brand new features to careful usability polish.
+
+  * **New notification center with 1-click renewal:** redesigned bell and notification system from scratch. When your plan is close to expiring, the notification itself offers immediate renewal, without you needing to navigate through several screens. Usage and expiration notices migrated to this new system.
+  * **New plan upgrade system:**
+    * **Upgrade at any time, including mid-cycle** — the larger resources take effect immediately, without waiting for renewal.
+    * **Proportional (pro-rata) charge with preview before confirming** — you see exactly how much you will pay, calculated based on the time remaining in your current cycle.
+    * **Plan transition without overlapping charges** — the replaced plan's charge is automatically cancelled, with a unified calculation for the migration.
+    * **Clearly identified invoices** in the history and **updated FAQ** explaining how everything works.
+  * **New credit card experience:** redesigned flow, mobile-optimized, with **3DS authentication** from banks when needed. Lighter loading and more direct form filling.
+  * **Reformulated billing page:** the old "invoices" gave way to the new **Billing** section, with much clearer history and details, identification of upgrade-related charges, and a dedicated tab for billing details.
+  * **New pricing page and updated FAQ:** clearer and more direct plan presentation, working side by side with the new upgrade system.
+  * **Redesigned file manager:** performance improvements when opening files and folders, smoother navigation, and clearer messages on actions like folder deletion.
+  * **Improved analytics and logs:** quick content copy directly from the table, making issue investigation much faster.
+  * **New section on the Bots page**, with more relevant information for those hosting bots.
+  * **Translated DNS status** in every language.
+  * **Light/dark theme** with several fine adjustments to contrast, icons, and logos.
+  * **Broad mobile improvements**, with online/offline status, snapshots, and deploy screens redesigned for touch.
+  * **More robust automatic reconnection** on real-time screens and stability fixes that make navigation feel solid overall.
+
+  ### 📊 Quick version summary
+
+  | Product              | Version  | Main highlight                                                                                                                                 |
+  | -------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+  | VS Code Extension    | **v5**   | Workspaces, databases, environment variables, and real-time status, in a complete rewrite                                                      |
+  | Official Node.js SDK | **v4**   | New modules for databases, workspaces, environment variables, metrics, realtime (SSE), GitHub deploys, and edge analytics                      |
+  | API Types            | **v1.0** | First stable version of the official types                                                                                                     |
+  | Dashboard            | n/a      | New plan upgrade system (pro-rata with preview), notification center with 1-click renewal, new card experience, redesigned billing and pricing |
+
+  Thank you for building with Virtus Cloud. Each of these releases was born from feedback from those who use the platform every day. Keep sending your ideas and suggestions — there is much more to come.
+</Update>
+
+<Update label="May 2026" description="Runtime Hub, Mobile App, updated environments, and broad improvements across the website, API, and infrastructure">
+  ## 🚀 Mobile App, Runtime Hub, updated environments, and broad improvements across the entire platform!
+
+  This cycle brings updates to every corner of Virtus Cloud: we launched a dedicated runtime hub with a specific page for each supported language, officially integrated our Android app into the platform, updated the full environment matrix, completed the light theme across the entire website, and shipped a broad round of UX, performance, and security improvements.
+
+  ### 📱 Official Mobile App
+
+  * **Native Android app** officially integrated into the platform. Virtus Cloud links now open directly in the app when you have it installed, without going through the browser.
+  * **New dedicated page at `/resources/app`** presenting the app, its features, and the download link.
+  * **Feature spotlight on the website** inviting users to try the app from strategic navigation points.
+  * **Optimized installation size** to fit comfortably on any phone, with accurate descriptions in every supported language.
+  * Available in **Portuguese, English, Spanish, and Chinese**, with full content parity across languages.
+
+  ### 🧭 New Runtime Hub
+
+  We launched a complete set of pages dedicated to the languages supported by the platform:
+
+  * **Index page at `/runtimes`** with a visual grid and comparison table across all languages — available versions, key features, and a direct link to each specific page.
+  * **Dynamic `/runtimes/[language]` page** with a custom hero, technical specifications, real use cases, available version listings, and a ready-to-copy configuration example for your `virtuscloud.app`.
+  * **Website header and mobile dropdown** updated with direct runtime navigation — now your language documentation is one click away.
+  * **Shared FAQ across all pages** with the most common questions about each environment.
+  * **Localized sitemap, metadata, and banners** for SEO in every supported language.
+  * Everything is available in **PT-BR, EN, ES, and ZH**.
+
+  ### 🆕 Environment Updates
+
+  We keep our runtime matrix on the latest stable versions in the industry. These are the versions available starting with this cycle:
+
+  * **JavaScript \[Node.js]** → Recommended: `24.15.0` | Latest: `26.1.0`
+  * **Python** → Recommended: `3.13.13` | Latest: `3.14.5`
+  * **DOTNET** → Recommended/Latest: `10.0.8`
+  * **Rust** → Recommended/Latest: `1.95.0`
+  * **Ruby** → Recommended/Latest: `4.0.4`
+  * **PHP** → Recommended/Latest: `8.5.6`
+  * **Go** → Recommended/Latest: `1.26.3`
+
+  Node application cold starts became slightly faster in preliminary tests with the new matrix (this varies a lot by workload — we are still validating the real production numbers).
+
+  ### ⚡ Faster and More Robust API
+
+  * **Faster responses** on routes that depend on multiple checks, with no changes required on your end.
+  * **Lower memory usage under load**, helping maintain stability during traffic peaks.
+  * **Graceful shutdown** during maintenance and deployments — in-flight requests are completed correctly before maintenance proceeds.
+  * **Improved handling of abrupt disconnections**, preventing ghost connections in monitoring tools and dashboards.
+  * **More resilient workspace cleanup**, with clearer error handling in maintenance operations.
+
+  ### 🛡️ Security and Privacy
+
+  * **New account deletion page**, fully aligned with the **LGPD**. You always had this right — now the path is documented, translated, and one click away.
+  * **Hardened upload validation:** file names, content types, and payload limits are now checked more consistently by scope.
+  * **Improved workspace permission checks** on administrative actions.
+  * **Refined security headers:** CSP and Referrer-Policy adjusted across the entire site for better protection against XSS and referrer leaks.
+  * **Hardened token and API key comparison routines.**
+  * **Improved validation for return links and redirects.**
+  * External links now use `rel="noopener noreferrer"` across the entire website.
+
+  ### 🎨 Renovated Website
+
+  A large part of the website was touched in this cycle:
+
+  * **New landing page** with a redesigned visual identity and header fixes.
+  * **Complete light theme:** every component, modal, chart, and page now respects your system preference (light/dark).
+  * **Bundle reduced by approximately 43%.** The site loads faster on any connection.
+  * **New `/about` page** telling our story. The old page was moved to the documentation.
+  * **New `/support` page** with chat, email, and contact channels organized clearly.
+  * **New Help Center** in developer resources, grouping documentation, guides, and useful links.
+  * **New Blob dashboard** with grid and list views, image previews, debounced search, and much faster object management.
+  * **New Workspace creation page** with a simplified flow and clearer messages.
+  * **New mobile header navigation** that feels much smoother.
+  * **Footer with links grouped by category** — much easier to find what you are looking for.
+  * **Complete refactor of the `/services` and `/resources` pages** for a more consistent experience across verticals.
+
+  ### 📦 Upload and File Manager
+
+  * **Bulk delete with live progress** and a "select all" action in the File Manager — managing many files is finally fast.
+  * **Stricter upload validations** with clear error messages for invalid, empty, or corrupted files.
+  * **New code editor** with autocomplete, automatic bracket closing, and better shortcuts — designed for long editing sessions.
+  * **Automatic environment variable detection** in the upload context was kept and refined.
+
+  ### 🗄️ Blob and Storage
+
+  * **Automatic cleanup of orphaned objects** in storage — saving space and optimizing costs.
+  * **Faster and more reliable inactive account reconciliation**, with better error reporting at each step.
+
+  ### 💳 Billing and Checkout
+
+  * **Selected duration remembered** between checkout screens — no more selecting monthly or yearly twice.
+  * **Enterprise plan slider** redesigned with a dedicated label and better readability.
+  * **Billing logic adapted** to the light theme across all components (payment cards, plan duration, etc.).
+  * **Tier order reorganized** in the plan selector for a more intuitive path between options.
+  * **Plan notices** refactored for better visual structure and clearer copy.
+
+  ### ♿ Accessibility
+
+  * **Hidden element behavior** fixed to work properly with screen readers and keyboard focus.
+  * **Full `prefers-reduced-motion` support** across the entire site — animations and transitions are automatically disabled for users who prefer reduced motion.
+  * **Optimized images** for better perceived performance and lower data usage.
+
+  ### 🌍 Internationalization
+
+  * **Full translation refactor** in **PT-BR, EN, ES, and ZH** with paired quality review across all 4 languages.
+  * **FAQs about services, bots, and databases** are now 100% covered in Chinese.
+  * **Language disclaimer** added to legal pages in all 4 languages, making it clear which version prevails in case of divergence.
+  * **Standardized the term `workspace`** in Spanish as `espacio de trabajo` across all texts.
+  * **Standardized database naming** (`MongoDB Hosting`, `Redis Hosting`, etc.) across the entire site, copy, and metadata.
+  * Fixed several typos and grammar issues in existing translations.
+
+  ### 🆘 Support and Communication
+
+  * **New Support page** with live chat, email, and alternative channels clearly organized.
+  * **WhatsApp** added as an official contact channel.
+  * **Live chat** with automatic real-time online status detection.
+  * **Chat synchronized** with the site theme (light/dark) and the user's session.
+
+  ### 🤖 PWA and Android App Links
+
+  * **Native Android app integration** published — platform links can be opened directly in the app without the browser prompt.
+  * **Manifest and icons revised** for a better experience on any device.
+  * **Improved metadata** for mobile application support on every relevant page.
+
+  ### 🧩 Modals and CTAs
+
+  * **Unified modal system** across all pages, with consistent performance and usability.
+  * **New useful modals:** gift code redemption, insufficient memory, and verification code confirmation.
+  * **Shared CTA** replacing duplicated CTAs across all product pages — communication is now consistent across the entire site.
+
+  ### 🔧 Hotfixes and Quality of Life
+
+  * Fixed pending redirects from the old `/sac` to `/support` across links, sitemap, and redirects.
+  * Headers, modals, alerts, and tooltips received visibility fixes in the light theme.
+  * Correct truncation of long IDs on mobile in application and database listings. (thanks to everyone who reported this!)
+  * SEO structure with localized structured data by language and breadcrumb support on all main pages.
+  * Several spelling and grammar fixes in existing translations.
+</Update>
+
+<Update label="April 2026" description="Faster API, stronger infrastructure, completely renovated dashboard">
+  ## 🚀 Faster API, stronger infrastructure, and completely renovated dashboard!
+
+  This is the largest update cycle at Virtus Cloud since the platform's launch. We rewrote the API core, expanded Realtime, completely redesigned Snapshots, and delivered a faster and more beautiful dashboard — all at the same time.
+
+  ### 🧭 New API Foundation
+
+  We rewrote how our routes process requests internally. The result is visible without any changes on your end:
+
+  * **Faster responses** on all routes that depend on multiple checks.
+  * **Fairer quota:** invalid requests are now rejected before consuming your limit.
+  * **Correct rate limits in workspaces:** workspace members share the limit accurately — no loopholes.
+  * **HTTP codes aligned with standards:** 401, 403, and 404 where they should be. No more generic errors that don't explain what happened.
+  * **Improved compatibility** with clients that send non-standard headers.
+  * **More secure file manager:** reinforced path validation by the File Manager to prevent human errors and improved speed when handling large directories.
+
+  ### 🔌 Realtime with more capacity
+
+  * **Up to 10 simultaneous connections per application** (previously 5). Live dashboards, logs, and observability tools now work without competing for slots.
+  * Abrupt disconnections are handled much more robustly — terminated connections are completely freed, without accumulation over time.
+  * Clearer error messages when the connection limit is reached.
+
+  ### 🗄️ Snapshots and Backups
+
+  The snapshot system was completely rewritten from scratch during this cycle:
+
+  * **More efficient engine:** lower resource usage during backup generation, with adaptive compression based on snapshot type.
+  * **Restore with guaranteed integrity:** restoration time was increased to **60 seconds**, ensuring all data is completely stable before your application goes back online.
+  * **Lists and details cached** for longer, reducing wait time when browsing between snapshots.
+  * Errors during backup generation are now reported correctly — no silent failures. (thanks to everyone who reported this!)
+
+  ### 🤖 New AI Engine
+
+  * AI response generation migrated to a new provider and now **automatically selects the best available model** with each request. Direct result: faster and more consistent responses.
+  * New **AI Analytics dashboard** available in the dashboard, with insights from your application. Available in Portuguese, English, Spanish, and Chinese.
+
+  ### 🔁 Deploy via Git
+
+  * We blocked the creation of two deploys pointing to the **same repository + branch** on the same account, preventing accidental duplicate deploys and confusion when managing multiple environments.
+  * Deploy and code commits now complete correctly even under adverse network conditions — no silent errors or timeouts without response.
+
+  ### 🎨 Renovated Dashboard
+
+  * **Much faster real-time console** — logs appear almost instantly, without the sensation of freezing.
+  * **Lighter dashboard** with pages that open faster especially on mobile.
+  * **Improved mobile filter navigation** — filters take up less screen space, leaving more room for content.
+  * **New pricing page (`/pricing`):** clearer comparisons, duration selection that remembers your choice, and reorganized layout.
+  * **New paywall** on application and database pages — more visual, with rotating testimonials and direct button to choose a plan.
+  * **New header and new footer** with reorganized links and more accessible language button.
+  * **Redesigned heroes** on `/bots`, `/sites`, `/blob`, and `/databases`.
+  * **New page `/resources/infrastructure`**.
+  * **Revised banners** across the platform, with more consistent visuals.
+  * **New code editor** with better shortcuts (including indentation with `Tab`), more readable syntax highlighting, and new font optimized for extended reading.
+
+  ### 📦 Application Upload
+
+  * We accept **`.zip` files up to 1GB on upload** to identify and inform exactly what needs to be removed (`node_modules`, caches, `.git`) — instead of simply rejecting the file.
+  * The **platform's real limit remains 100MB**, but the experience of reaching that limit is now much clearer and friendlier.
+  * If your `.zip` already contains a `virtuscloud.app` or `.env` file, we ask if you want to **import the configuration automatically**.
+  * Much clearer error messages for corrupted, empty, or unsupported format files.
+  * Compressed files uploaded to the platform now go through extra validations and inappropriate files are **automatically blocked**.
+
+  ### 🤝 Workspaces and Members
+
+  * **Workspace members** can now add and remove subdomains without needing the account owner.
+  * **Resource-specific paywalls** clearly inform, in a friendly way, what each plan unlocks — no surprises.
+
+  ### 💳 Billing and Checkout
+
+  * Checkout, renewal, and upgrade **preserve the chosen duration** between screens — no confusion.
+  * **Blindsided downgrade:** before reducing the plan, we check if there are workspaces or custom domains incompatible with the destination plan.
+  * (it was an intentional feature, but we noticed it could lead to inconsistencies even if domains were deactivated some time after the downgrade).
+  * Canceled invoices go straight to checkout — no need to look for the right button.
+  * Downgrade modal with step-by-step explanations and more human messages.
+
+  ### 🔐 Account and Security
+
+  * **Discord signup** now available, with all legal notices in place. (we resumed accepting new Discord registrations after we had disabled it).
+  * Simplified login flow — fewer intermediate screens, less confusion.
+  * More reliable sessions and logout in case of account switching.
+
+  ### 🧱 General Stability
+
+  * Reinforced internal network infrastructure, preventing connectivity issues in corporate environments.
+  * Reduction of processing spikes during high-volume deploy hours.
+  * When a workspace doesn't exist, the response is now a **clear 404** — no ambiguity.
+  * Commits per minute limit adjusted to reduce burst deploy abuse.
+
+  ### 🌍 Translations
+
+  * **Portuguese, English, Spanish, and Chinese** reviewed end-to-end.
+  * Correction of various typos and standardization of technical terms in all languages.
+  * Regulatory notices (PayPal, Pix) with dedicated text in each language. (thanks to everyone who pointed this out!)
+
+  ### 📈 Observability
+
+  * The log pipeline was migrated to a more secure and modern authentication method, making integration simpler to operate.
+  * The log buffer was reinforced to not lose events in the first few seconds after application boot.
+  * We expanded the capacity of simultaneous connections made by the platform to external services. Fewer queues during peak times, fewer sporadic timeouts for your applications.
+</Update>
+
+<Update label="February 8, 2026" description="O(1) Performance, New Runtimes and Infrastructure Redesign">
+  ## 🚀 Brutal Performance, Data Intelligence and New Era of Infrastructure!
+
+  Today we deliver the biggest technical leap in Virtus Cloud's history. We're not just scaling hardware; we're rewriting our platform's core with low-level algorithms to ensure an unprecedented development experience.
+
+  > **CEO Note:** "This update sets the new efficiency standard at Virtus Cloud. By optimizing processing to $O(1)$ and refining snapshot orchestration, we deliver infrastructure that doesn't just host, but amplifies the growth of every project."
+
+  ### ⚡ Performance Engineering: O(1) Core Engine
+
+  We dove deep into our network and telemetry layer to eliminate every millisecond of overhead:
+
+  * **Rate Limiting 2.0 (200x Gain):** We migrated to a more efficient constant-flow model. Traffic validation is now instant, regardless of load.
+  * **Accelerated Realtime-Console:** We reduced round-trips and streamlined active connection handling. The console now responds in real time.
+  * **Lean Runtime:** We performed stripping of obsolete dependencies and redundant validations in the execution environment, guaranteeing more actual CPU and RAM for your application.
+  * **Smart Analysis System:** Intelligent system that automatically tracks deploys and performs random re-analyses hours later to ensure runtime integrity.
+
+  ### 🗄️ Databases: Integrity, Encryption and Snapshots
+
+  We solved complex orchestration challenges to ensure your data is always accessible:
+
+  * **Credential Consistency Fix (MongoDB/MySQL):** Fixed a credential consistency issue after database snapshot restoration. Restores now keep account access flows consistent.
+  * **Snapshots Management:** Restore cooldown increased from **30s to 60s** to ensure physical data stabilization and index propagation.
+  * **Dedicated Pages:** Launch of optimized dashboards for `Redis`, `MySQL`, `PostgreSQL` and `MongoDB`.
+
+  ### 📦 Runtime Update (2026 Stack)
+
+  Maintaining our commitment to the state of the art, we updated our official environments:
+
+  * **DOTNET:** Updated to **10.0.2**.
+  * **ELIXIR:** Updated to **1.19.5**.
+  * **GOLANG:** Updated to **1.25.7**.
+  * **RUST:** Updated to **1.93.0**.
+
+  ### 🛠️ Developer Experience (DX) and UX
+
+  We optimized the workflow to make file and deployment management more fluid:
+
+  * **File Manager Pro:** Added support for **bulk selection (up to 50 files)**, deletion confirmation via modal and `ESC` shortcut for quick deselection.
+  * **Smart Upload:** Support for **Drag & Drop .zip files** with content visualization and automatic framework detection (**Next.js, Vite and Vue**).
+  * **Git App (Case-Sensitivity):** Fixed bug that forced branches to lowercase. Now, the system respects original casing (e.g., `Dev` remains `Dev`).
+  * **Network Intelligence:** Quick buttons to copy URLs and new `/network/logs` route (exclusive PRO/Enterprise) with date filters (`?start` and `?end`).
+
+  ### ⚖️ Sustainability and Pro Infrastructure
+
+  We redefined our limits to ensure global stability at all levels:
+
+  * **New PRO Tier (24GB):** 12 high-performance vCPUs and 250GB Blob Storage.
+  * **Enterprise Scale-Out:** Now starting at **16 base vCPUs** and support for **Enterprise-1024** (up to 1024 distributed vCPUs).
+  * **Burst Logic 2.0:** New contextual CPU allocation algorithm that allows performance spikes based on project's actual need.
+  * **Hobby Plan Focus:** To preserve global performance, the Hobby plan now focuses exclusively on applications, removing dedicated database instances and massive global snapshots to ensure 100% network availability.
+
+  We continue building the future of hosting, one commit at a time. 🚀
+</Update>
+
+<Update label="December 30, 2025" description="New Look, Secrets Improvements, LGPD and Optimizations">
+  ## 🚀 Visual Overhaul, LGPD and Core Optimizations!
+
+  Today we’re launching an update focused on a visual overhaul of our main pages, critical improvements to the developer experience (DX), and a major data cleanup for compliance and performance.
+
+  > **Black Friday Note:** Thank you for the massive participation! Our infrastructure operated with total stability during the period. The focus now is 100% back on product evolution.
+
+  ### 🎨 New Design and User Experience (UX)
+
+  We redesigned key areas of the platform to make it more modern and accessible:
+
+  * **New Home and Authentication:** A completely new and smooth login/signup experience.
+  * **Documentation Improvements:** General review and enhancement for greater technical clarity.
+  * **Workspace Experience:** Admins now have better visual feedback on permissions, and Owners receive clearer guidance on resource allocation.
+
+  ### 🔐 Secrets Tab Redesign
+
+  By popular demand, we rebuilt the UI/UX for environment variable management to be more productive:
+
+  * **VIRTUSCLOUD\_APP\_ID:** Automatic injection of this ENV with the application ID.
+  * **Quick Actions:** Button to clear all ENVs and new validation on export.
+  * **Advanced Interaction (Shift):** Holding `SHIFT` turns the menu button into a trash can for quick deletion.
+  * **Direct Editing:** Click the input to edit the value immediately, no need to open menus.
+  * **Compact Design:** Reduced overall padding for a denser and more efficient information view.
+
+  ### 🛠️ Deploy and File Features
+
+  We expanded your control over files and databases:
+
+  * **Directory Handling:** You can now **rename and move directories** directly from the dashboard.
+  * **Commit API (`?path=`):** Added support for allocating commits to specific subdirectories via API.
+  * **Static Environments:** When deploying via runtime, the system automatically detects HTML/CSS projects, hides unnecessary commands, and makes publishing easier.
+  * **Postgres:** PostgreSQL databases now start with the `virtuscloud` database created by default, avoiding connection errors for beginners.
+
+  ### 🔒 Security, LGPD and Infrastructure
+
+  We focused on privacy and core platform stability:
+
+  * **Data Cleanup (LGPD):** In compliance with privacy regulations, we permanently deleted **50,000+ support chats** and **40,000+ contacts** inactive for over 365 days.
+  * **squareweb.app Scope:** Now accepts and manages connections from the Tor network (with security challenge).
+  * **Smart Cache Reset:** New intelligent global cache cleaning system.
+  * **VSCode Extension:** Fixes applied to resolve involuntary logouts.
+  * **Hobby T1 Standardization:** Multithreading adjustment in this tier for standardization with the rest of the existing plans.
+
+  ### 📉 Data Lifecycle Optimization
+
+  We refined backup retention to improve storage efficiency and eliminate obsolete data:
+
+  * **Application Snapshots:** Old versions now last up to **44 days** (30 days primary + 14 days retention).
+  * **Database Backups:** Old versions now last up to **21 days** (14 days + 7 days retention).
+
+  We continue working to make Virtus Cloud more and more efficient.
+</Update>
+
+<Update label="November 27, 2025" description="Black Friday, MySQL, Articles and Globalization">
+  ## 🚀 Black Friday, MySQL, Articles and Globalization!
+
+  Today we're launching an update focused on tooling improvements, globalization of several areas, and enhanced overall platform usability. And there's more: the **only promotion of the year** is now live!
+
+  ### 🎉 Black Friday — THE ONLY 2025 PROMOTION
+
+  **Annual discount DOUBLED: 30% OFF** on any renewal, upgrade, or first purchase on the annual plan.
+
+  Discounted pricing examples: (values in BRL)
+
+  * **Standard T1:** from **34,90** to **24,43** month
+  * **Pro T1:** from **100** to **70** month
+
+  Take advantage of this exclusive opportunity to save and scale your projects on Virtus Cloud!
+
+  ### ✨ Dashboard styling overhaul and bug fixes
+
+  We completely redesigned the platform navigation, making several areas more accessible and modern:
+
+  * Redesigned navigation to facilitate access to important features.
+  * Optimizations to improve the experience for developers who rely on screen readers.
+  * New rendering logic across much of the website, making everything more dynamic and faster.
+  * Improved visualization of what gets removed when downgrading a plan.
+  * Semiannual option removed — we now offer only two clearer and easier-to-understand options (monthly and annual).
+  * Fixed several bugs that impacted navigation.
+  * Improved compatibility with legacy browsers.
+
+  ### 🛠️ Deploy experience improvements + new Database
+
+  We expanded database support and optimized the deployment process:
+
+  * **MySQL v9:** Now available and optimized for production.
+  * **Elixir:** Runtime issues fixed + updated to version **1.19.2**.
+  * Implemented more aggressive limits on file viewing via File Manager API (no more trying to view a 1GB file 😊).
+  * Fixed a Git integration issue that caused higher-than-expected latency:
+    * Listing reduced to the last 5 deploys.
+    * Improved error notifications in responses.
+  * **\~14ms global reduction** in deploys with the new architecture.
+  * Fixed error that prevented viewing the Snapshots tab in some workspaces.
+  * Fixed bug that imported empty environment variable when deploying with a partially invalid file.
+
+  ### 📚 New articles and tutorials
+
+  We added comprehensive guides to facilitate deployment of different frameworks and technologies:
+
+  * **Angular:** [How to deploy an Angular project](https://docs.virtuscloud.app/en/tutorials/website/angular)
+  * **AstroJS:** [How to deploy an AstroJS project](https://docs.virtuscloud.app/en/tutorials/website/astrojs)
+  * **Nuxt:** [How to deploy a Nuxt project](https://docs.virtuscloud.app/en/tutorials/website/nuxt)
+  * **Gatsby:** [How to deploy a Gatsby project](https://docs.virtuscloud.app/en/tutorials/website/gatsby)
+  * **Laravel:** [How to deploy a Laravel API](https://docs.virtuscloud.app/en/tutorials/api/laravel)
+  * **Spring Boot:** [How to deploy a Spring Boot API](https://docs.virtuscloud.app/en/tutorials/api/spring-boot)
+
+  These tutorials cover everything from initial configuration to complete deployment, helping you get your projects live quickly.
+
+  ### 🌍 Globalization and general improvements
+
+  We continue expanding and improving the platform's international experience, with focus on accessibility, performance, and communication clarity.
+
+  These are just some of the new features! We continue listening to the community and working daily to make Virtus Cloud even better.
+</Update>
+
+<Update label="November 6, 2025" description="Dashboard, Blob, Environments and more">
+  ## What's new and improvements (11/06/2025)
+
+  We shipped an important set of usability, media-preview and runtime infrastructure improvements — all designed to speed up your workflows and make the platform friendlier for everyone, from trial users to high-traffic teams.
+
+  ### Improved dashboard for users without an active plan
+
+  The dashboard now offers a warmer, more informative experience for users who don't have an active plan. The UI highlights recommended actions (start a deploy, connect a repository, redeem credits), with clearer navigation and panels focused on what new users need most.
+
+  ### Enhanced Blob previews
+
+  The Blob page now lets you preview images and videos directly in the browser without downloading them. This makes content inspection faster, speeds up validations and reduces the time spent debugging multimedia assets.
+
+  ### Dynamic application listing
+
+  Application lists now adapt automatically to the user's screen height, making better use of vertical space on large monitors and providing a consistent experience across devices.
+
+  ### Better empty states
+
+  Sections such as "Applications" and "Databases" received redesigned empty states: clearer messaging, suggested next steps and helpful CTAs that make the first-time experience more guided and actionable.
+
+  ### Plan downgrade now available
+
+  You can now downgrade your plan directly from the **My Account** tab — fully automated, secure and transparent, with confirmation steps and an audit history.
+
+  ### Export environment variables
+
+  We added a one-click export button in the **Environment Variables** panel. Download all your variables in common formats (dotenv / JSON) for backups or fast migration between projects.
+
+  ### GitHub upload with automatic configuration
+
+  When uploading from GitHub the platform will attempt to auto-detect and configure the repository (package manager, start command, build scripts), reducing configuration errors and accelerating the first deploy.
+
+  ### Search button in the file editor
+
+  We implemented a native search button in the file editor optimized for mobile devices — making it easier to find code snippets directly from your phone.
+
+  ### Global rate limit display fixed
+
+  > We fixed an issue that in some scenarios caused a client-side exception when displaying the global rate limit. The UI is now stable and resilient.
+
+  ### Website now uses the React Compiler
+
+  We migrated the site to the React Compiler, improving rendering performance, reducing TTFB and making navigation smoother on pages with dynamic content.
+
+  ### Snapshot filename format standardized
+
+  Snapshot download filenames are now standardized to include app name, timestamp and app id for easier organization and traceability. New pattern:
+
+  ```
+  <appname>_2025-12-31_12-59-59_<id>.zip
+  ```
+
+  ### Detailed plan comparison
+
+  The **Pricing** page has been redesigned with a visual comparison of tiers. It's now easier to understand limits, benefits and pick the plan that fits your needs.
+
+  ## Environment updates
+
+  We updated and expanded runtime and language support:
+
+  * **Ruby \[New runtime]**
+    * Available for production workloads.
+    * `recommended`/`latest`: **3.4.7**.
+  * **Java \[Gradle & Maven support]**
+    * `recommended`/`latest`: **JDK 25**.
+  * **Node.js**
+    * `recommended`: **v24.11.0** (LTS) — now adopted as default.
+    * `latest`: **v25.1.0** — supported; in tests we observed up to **\~40% web-performance gains** in specific scenarios.
+    * *Note: Node 25 is recommended for performance-focused workloads — test before migrating production.*
+  * **Python**
+    * `recommended`: **3.13.9**.
+    * `latest`: **3.14.0**.
+  * **C# (ASP.NET)** — `recommended`/`latest`: **9.0.10**.
+  * **Elixir**
+    * `recommended`/`latest`: **1.91.1**.
+  * **Rust**
+    * `recommended`/`latest`: **1.91.0**.
+  * **PHP**
+    * `recommended` & `latest`: **8.4.14**.
+  * **Go**
+    * `recommended` & `latest`: **1.25.4**.
+
+  Notes: Ruby support was implemented in this release; Java now supports Gradle and Maven projects. Node 24 LTS is the default runtime; Node 25 is available for users who need extra performance.
+
+  ## Fixes & minor adjustments
+
+  * UX refinements across panels and modals (multiple friction points reduced).
+  * Snapshot filename normalization and download improvements.
+  * Small fixes in GitHub upload flow and repository auto-validation.
+  * Blob now validates available capacity faster for large uploads.
+
+  These updates are rolling out gradually. We're listening to the community and prioritizing changes that directly boost your productivity.
+</Update>
+
+<Update label="October 2, 2025" description="Upload and GitHub Integration Redesign">
+  ## Upload and GitHub Integration Redesign
+
+  We have focused our efforts on revolutionizing the deployment and GitHub integration experience, bringing significant improvements that make the workflow simpler, more modern, and efficient. Check out the main new features that are now available:
+
+  ### New Upload Experience
+
+  We've created a completely rethought upload experience for modern developers.
+
+  * **New upload page:** We now have a page dedicated exclusively to uploads, completely redesigned to offer a simpler, more modern, and intuitive experience.
+  * The upload page is now available at `/upload` instead of `/dashboard/upload`. In addition to convenience, this change contributes to the site's SEO, making the upload page public and improving its indexing in search engines.
+
+  ### Revolutionized GitHub Integration
+
+  We have drastically simplified the process of integrating with GitHub repositories.
+
+  * **Upload via GitHub (without an access token):** We've made the repository integration process even easier. You can now upload directly from GitHub without needing to manually enter an access token.
+  * **Full integration with GitHub repositories:** You can connect your GitHub repository directly to your application, simplifying the deployment flow and making automation even more practical and secure.
+  * **Direct connection with your GitHub account:** Connecting to GitHub is now even easier: just authenticate with your account to enjoy all integration features in a centralized and transparent way.
+  * **Login via GitHub:** In addition to connecting for integrations, you can now use your own GitHub account to log in or create an account on our platform, making the authentication process fast, secure, and hassle-free.
+
+  ### UI and SEO Improvements
+
+  We have enhanced the platform's visual experience and online presence.
+
+  * **Complete redesign of the "My Account" tab:** The profile and settings section has undergone a complete redesign, featuring a cleaner, more modern, and organized interface, allowing you to manage your information more simply.
+  * **Website SEO improvement:** In addition to the new route, the site has undergone technical and content adjustments aimed at search engine optimization, ensuring better indexing performance and greater visibility on Google.
+
+  ### Enhanced VSCode Extension
+
+  We have improved the development experience directly from your favorite editor.
+
+  * **Improved extension loading:** We have optimized the loading process of the VSCode extension, making initialization faster and more efficient for a smoother development experience.
+
+  ### Modernized Snapshot System
+
+  We have completely replaced the previous system with a more advanced solution.
+
+  * **Complete migration from backups to snapshots:** The old backups have been replaced by the snapshot system, offering greater efficiency, faster restoration speeds, and better management of your application's version history.
+
+  ### Modernized Tax Invoice System
+
+  We have updated our fiscal infrastructure for greater compatibility and efficiency.
+
+  * **Migration to the new ISSNet from the Goiânia City Hall:** Our electronic service tax invoice (NFSe) system has been completely migrated to use the new ISSNet from the Goiânia City Hall, ensuring greater stability, compliance, and agility in issuing service tax invoices.
+
+  ### PHP + Swoole
+
+  Improved Swoole support has been launched in conjunction with PHP version 8.4.12.
+
+  ### Critical Fixes
+
+  We have resolved important issues that affected file integrity.
+
+  * **Fix in the file upload and compression process:** We identified and corrected a bug that affected the recompression of files uploaded through the platform. In some specific cases, this flaw resulted in the generation of corrupted binary files after the upload. The process has now been fully adjusted and validated to ensure that all files are stored and distributed with integrity and reliability, eliminating the risk of inconsistencies.
+
+  These improvements represent a significant milestone in the evolution of Virtus Cloud, solidifying our position as **the most modern and intuitive platform for the new generation of developers.**
+</Update>
+
+<Update label="September 13, 2025" description="More affordable plan and + DISCOUNTS!">
+  ## EVEN MORE affordable plan and + DISCOUNTS!
+
+  We continue our mission to listen to you and optimize every detail of the platform. We have gathered a series of **performance improvements, new features, and quality of life adjustments** that are already available and will boost your development experience. Check out what we have prepared:
+
+  ## New Hobby plan and discounts = Virtus Cloud listening to you.
+
+  Following the philosophy of going **against the market**, we brought more advantages for your pocket.
+
+  * **Real-Time Downgrade:** We launched the new **instant downgrade** system. No waiting, no bureaucracy, you have full control of your plan.
+  * **New Affordable Hobby Plan:** We introduced the Hobby plan with two tiers, with prices starting at **R\$ 8.49/month** on the annual cycle.
+  * **MORE DISCOUNTS, BECAUSE YOU DESERVE IT:** We increased the discounts! Now it's **10% for the semiannual plan** and **15% for the annual plan**.
+
+  ### Performance and speed optimizations
+
+  We made everything even faster so you can focus on what matters: your code.
+
+  * **Instant sync:** When updating RAM, the CPU is now adjusted in real time, with no delay.
+  * **Ultra-fast realtime:** We reduced latency in primary loads, with an average improvement of 45ms.
+
+  - We improved loading speed when interacting with bots and sites hosted on the platform.
+
+  ### More control and flexibility for Your Account
+
+  We upgraded customization tools so you have total autonomy.
+
+  * **Editable subdomain and runtime:** Now you can edit your subdomain (`.virtuscloud.app` and `.config`) and set the `RUNTIME` (javascript, typescript, etc.) directly in the application. (documentation for the `RUNTIME` field will be released soon).
+  * **New "My Account" page and language:** Manage your information on a redesigned page and change the region/language to receive standardized emails.
+
+  - We increased the limit to up to 3 username changes per day for your Virtus Cloud account.
+
+  ### Experience and interface improvements
+
+  We refined the interface for a cleaner and more productive workflow.
+
+  * **Completely rewritten Logs tab:** The tab has been redesigned, including realtime, and now allows you to **delete all old records with a single click**.
+  * **More intuitive dashboard:** We added icons for each language in the dashboard, making it easier to identify your applications.
+
+  - We fixed an error that permanently redirected cookies to the login page in some cases.
+
+  ### General Platform Adjustments
+
+  * The API now returns the status `CONTAINER_TEMPORARILY_SUSPENDED` in cases of request abuse to ensure stability.
+  * Inactive workspaces of users without active plans are now removed within 24 hours.
+
+  These are just **some** of the new features we implemented with you in mind. Our commitment is to keep listening to the community and evolving to be **the best and most complete platform for the new generation of developers.**
+</Update>
+
+<Update label="August 27, 2025" description="New Documentation in PT-BR and PostgreSQL Support">
+  ## New Documentation in PT-BR and PostgreSQL Support!
+
+  Once again, we listened to the community and brought some really cool news, focusing on improving the developer experience on our platform. It's time to present a series of improvements — some have been available for a few days, but may have gone unnoticed. Check them out below:
+
+  ### Completely Renewed Documentation in Portuguese
+
+  We created top-notch documentation, designed for Brazilian developers.
+
+  * 100% in Portuguese (BR): Not a translation, but fully localized content, including images and tutorials.
+  * Comprehensive Content: New guides, tutorials for specific scenarios, and detailed information about the platform.
+
+  Check it out: **[https://docs.virtuscloud.app/en/getting-started/overview](https://docs.virtuscloud.app/en/getting-started/overview)**
+
+  ### Enterprise-Scale PostgreSQL Support
+
+  Create your PostgreSQL database with professional-level performance and security.
+
+  * No limit on outbound and inbound network transfer.
+  * Generous IOPS with NVME Enterprise.
+  * Exclusive peer-to-peer certificate per database (mTLS).
+  * Dedicated memory and CPU according to the plan.
+  * Smart daily snapshots.
+  * MySQL will be available in the coming days.
+  * Virtus Cloud does not launch services that are not ready for production.
+
+  ### Faster Snapshots
+
+  We optimized the performance and stability of our backup system.
+
+  * Performance: We doubled the internal bandwidth, processing up to 1,000 snapshots per minute.
+  * Instant and free restoration of any snapshot from the last 30 days.
+</Update>
+
+<Update label="August 13, 2025" description="Environment Update">
+  ## Environment Update
+
+  We are always improving our services to ensure you have access to the latest and most stable versions of the main programming languages. Check out what's new in this update!
+
+  ### **New versions available:**
+
+  * **JavaScript \[Node.js]** → Recommended: 22.18.0 | Latest: 24.5.0
+  * **Python** → Recommended: 3.13.6 | Latest: 3.13.6
+  * **Elixir** → Recommended: 1.18.4 | Latest: 1.18.4
+  * **Rust** → Recommended: 1.89.0 | Latest: 1.89.0
+  * **Go** → Recommended: 1.24.6 | Latest: 1.24.6
+  * **PHP** → Recommended: 8.4.11 | Latest: 8.4.11
+
+  \-- Improved support for Redis & MongoDB, with native support for the C-written library for Redis.
+
+  What does this mean for you?
+
+  * More stability and compatibility with modern applications.
+
+  The updates are already available. 😄
+</Update>
+
+<Update label="August 2, 2025" description="General Platform Improvement">
+  ## General Platform Improvement (LOTS OF AMAZING NEWS!)
+
+  Recently, we focused our efforts on **revolutionizing** the developer experience on our platform. It's time to present a series of **powerful new features** — some have been available for a few days, but may have gone unnoticed. Check out the improvements already live below:
+
+  ### 100% Integrated Environment Variables
+
+  * Now you can set environment variables directly via deploy or API.
+  * Variables are automatically injected with a simple **restart** of the application. No need to use `.env` or extra packages!
+  * Public routes available for **POST, PUT, DELETE, and GET** of variables.
+
+  ### New Snapshot System (goodbye, manual backups)
+
+  * Extremely generous limits: each plan can generate `(RAM / 256) * 2` snapshots per day. E.g.: Hobby plan with 2048MB = **16 daily snapshots** or up to **480/month**!
+  * **Instant and FREE restoration** — recover any snapshot from the last 30 days in seconds. (gradual release for everyone in the coming days)
+  * Virtus is going **against the market**: no charges, no hassle.
+
+  ### Real-Time Configurable Start
+
+  * Forget redeploying just to change the start script (START field in your config file).
+  * Now you can **edit the START line directly**, restart the app, and that's it. All in real time and hassle-free.
+
+  ### Advanced Databases (Redis & Mongo available!)
+
+  * Create your real database with just 1 click.
+  * **Exclusive peer-to-peer certificate** per database (no generic certificates). (mTLS)
+  * RAM and processing from your plan, with total dedicated performance for the database.
+  * 10GB of enterprise storage included with future expansion plans.
+  * **Daily and automatic snapshots**.
+  * **Intelligent and proactive snapshot system**: detects suspicious deletions and creates emergency backup (beta).
+  * No bandwidth limitation and up to **512 simultaneous connections** per database.
+  * Certificate and password reset in **one click**.
+  * Databases already available: **Redis** and **MongoDB** — new databases coming soon!
+
+  ### Faster and Smoother Dashboard
+
+  * New "Settings" tab inside an application.
+  * Deploys tab moved to Settings → Deploys.
+  * Dedicated Environment Variables panel (Settings → Environment Variables).
+  * Settings page now segmented into **5 sections** for easier navigation: General, Deploys, Environment Variables, Network, and Risk Zone.
+  * New Pricing page and new page about Virtus Cloud Enterprise infrastructure and its exclusive plans (/enterprise).
+  * New Analytics tab (viewing new data and interactive charts), with extremely accurate and improved insights for websites hosted on Virtus Cloud.
+  * New application upload, more fluid and beautiful, with automatic detection of environment variables via .env file or internal context (automatic import). Oh, you can also paste variables using Ctrl+C and Ctrl+V.
+  * The API now returns realtime records with surgical precision since the application start.
+
+  These are just **some** of the improvements we are releasing for you. We keep listening to the community and working daily to make Virtus Cloud **the best platform for next-generation developers.**
+
+  Note: we have greatly reduced and compacted the release notes, changed a lot in recent weeks, and focused on improving your experience. Thanks to everyone who participated or participates in our early access or beta test programs. @everyone
+</Update>
+
+<Update label="June 14, 2025" description="Security and Performance">
+  ## General Security and Performance Update
+
+  Recently, we have focused our efforts on improving the performance of some critical Virtus Cloud services.
+
+  ### Security and Encryption
+
+  * **Minimum TLS:** We now require TLS 1.2 as the standard for all of Virtus Cloud, including custom domains.
+  * **Custom domains:** All custom domains have been configured to a minimum of TLS 1.2.
+  * **Virtus Cloud proprietary domains:** For anti-phishing domains and enterprise scopes, the minimum TLS is 1.3.
+
+  ### Log Management
+
+  * **Application Log Limitation:** The maximum number of logs per category (logs/crash) in `.virtuscloud` files has been reduced from 10 to 5.
+  * **Log Infrastructure Change:** We have migrated our log infrastructure from Logtail (BetterStack) to Loki (Grafana).
+  * **Log Coverage and Retention:** We now log 100% of requests to our main infrastructure (API, Website, Blob, etc.), with a 7 times greater data retention.
+
+  ### Performance Optimization
+
+  * **Asset Pre-processing:** We have improved asset pre-processing in our infrastructure, resulting in higher processing capacity (throughput).
+  * **IAM Optimization:** We have optimized the encoding of each validation layer of IAM (Identity and Access Management).
+  * **Blob Performance:** Direct actions on the Blob are 20-35% faster, and full logging has been implemented.
+
+  ### API and Environment Improvements
+
+  * **New Query for Application Status:** The `/v2/apps/status` route now accepts the `"workspaceId"` query to facilitate state data collection.
+  * **Clearer Error Messages:** Environments now return specific error messages like `"CONTAINER_ALREADY_STARTED"` or `"CONTAINER_ALREADY_STOPPED"`, instead of the generic `"ACTION_FAILED"`, for direct scenarios.
+
+  Fun facts about Virtus Cloud:
+
+  Even though this is the Virtus Cloud community server, we are currently the **second largest programming server on the Brazilian Discord**, behind only Rocketseat.
+</Update>
+
+<Update label="June 4, 2025" description="API – Workspaces">
+  ### API Update – Extended Support for Workspaces
+
+  We are excited to announce the addition of new API routes to facilitate the complete management of **workspaces**, **applications**, and **members**. This update provides greater control and flexibility for developers and team administrators.
+
+  ### Workspaces
+
+  * `GET /v2/workspaces`: Lists all workspaces of the authenticated user.
+
+  * `GET /v2/workspaces/:workspaceId`: Retrieves the details of a specific workspace.
+
+  * `POST /v2/workspaces`: Creates a new workspace.
+    **Body:** `{ name: string }`
+    **Validation:** Name must follow the regex `/^[\w ]{1,32}$/`.
+
+  * `DELETE /v2/workspaces`: Removes an existing workspace.
+    **Body:** `{ workspaceId: string }`
+
+  * `DELETE /v2/workspaces/leave`: Allows a user to leave a workspace.
+    **Body:** `{ workspaceId: string }`
+
+  ### Workspaces – Applications
+
+  * `POST /v2/workspaces/applications`: Associates an application with a workspace.
+    **Body:** `{ workspaceId: string, appId: string }`
+
+  * `DELETE /v2/workspaces/applications`: Removes an application from a workspace.
+    **Body:** `{ workspaceId: string, appId: string }`
+
+  ### Workspaces – Members
+
+  * `GET /v2/workspaces/members/code`: Generates an invitation code for new members to join a workspace.
+
+  * `POST /v2/workspaces/members`: Adds a new member to the workspace using an invitation code.
+    **Body:** `{ workspaceId: string, code: string, group: string }`
+
+  * `PATCH /v2/workspaces/members`: Updates a member's group within the workspace.
+    **Body:** `{ workspaceId: string, memberId: string, group: string }`
+
+  * `DELETE /v2/workspaces/members`: Removes a member from the workspace.
+    **Body:** `{ workspaceId: string, memberId: string }`
+
+  Workspaces now adopt Virtus's unique ID model (40 characters).
+
+  Virtus no longer deletes a workspace when its creator's plan expires.
+
+  By default, **we have reset all teams on the platform**, meaning: **teams created before this update milestone have been deleted**.
+
+  These changes aim to make workspace management more robust, collaborative, and efficient. 🚀
+
+  General changes:
+
+  * New route for GLOBAL listing of backups: `/v2/users/backups` (GET).
+  * The global application status listing route now defaults to listing only your applications; workspace applications require the `workspaceId` query.
+
+  For more technical details, consult the official API documentation.
+
+  > A new documentation update is expected to be published within 24 hours.
+</Update>
+
+<Update label="May 19, 2025" description="Environment Update">
+  ## Environment Update
+
+  We are always improving our services to ensure you have access to the latest and most stable versions of the main programming languages. Check out what's new in this update!
+
+  ### New versions available:
+
+  * **JavaScript \[Node.js]** → Recommended: 22.15.1 | Latest: 24.0.2
+  * **Python** → Recommended: 3.13.3 | Latest: 3.13.3
+  * **Elixir** → Recommended: 1.18.3 | Latest: 1.18.3
+  * **Rust** → Recommended: 1.87.0 | Latest: 1.87.0
+  * **PHP** → Recommended: 8.4.7 | Latest: 8.4.7
+  * **Go** → Recommended: 1.24.3 | Latest: 1.24.3
+
+  ### New for PHP environments:
+
+  Node.js v22 updated & npm updated by default. COMPOSER\_HOME set to application (base of your project), we also improved the general interoperability of PHP environments.
+
+  1. * Extensions active by default:
+
+  `pdo`, `pdo_mysql`, `pdo_pgsql`, `pdo_sqlite`, `pgsql`, `mysqli`, `mbstring`, `exif`, `pcntl`, `bcmath`, `gd`, `zip`, `opcache`, `sockets`, `intl`, `ldap`, `xml`, `tidy`, `xsl`, `gmp`, `sodium`, `curl`, `ctype`, `fileinfo`, `posix`, `simplexml`, `xmlreader`, `xmlwriter`, `dom`.
+
+  2. Libraries and dependencies have been improved, ensuring better integration with PHP frameworks. List:
+
+  `build-essential`, `git`, `curl`, `wget`, `unzip`, `sqlite3`, `libonig-dev`, `libsqlite3-dev`, `libpq-dev`, `libzip-dev`, `libpng-dev`, `libjpeg-dev`, `libfreetype6-dev`, `zlib1g-dev`, `libssl-dev`, `libcurl4-openssl-dev`, `libldap2-dev`, `unixodbc-dev`, `libicu-dev`, `libxslt-dev`, `libtidy-dev`, `libmemcached-dev`, `libxml2-dev`, `libevent-dev`, `libgmp-dev`, `libreadline-dev`, `libargon2-dev`, `libsodium-dev`, `ca-certificates`, `gnupg`, `nodejs`.
+
+  💡 **What does this mean for you?**
+
+  * More stability and security in all environments.
+  * More compatibility for modern and production-focused applications.
+
+  The updates are already available. 😄
+
+  Note: Redis support will be released soon in version 7.4.0, initially in open testing with users.
+</Update>
+
+<Update label="May 4, 2025" description="Technical and general balancing changes">
+  ## Technical and general balancing changes.
+
+  Over the past week, we have made a series of adjustments aimed at improving the performance and stability of our API. Here are the main highlights:
+
+  `/v2/apps/status`
+
+  * Now returns statuses in **real-time**, without using cache.
+  * New limit of **15 requests per 60 seconds** (rate class: `KEEP CALM`).
+
+  `/v2/apps/:appId/logs`
+
+  * Reduced cooldown between requests: from **10s to 5s**.
+
+  `/v2/apps/:appId/metrics`
+
+  * **Increased rate and throughput**.
+  * Output now with **compression enabled**.
+  * New limit: **10 requests every 5 seconds**.
+
+  `/v2/apps/:appId/commit`
+
+  * Cooldown reduction: from **5s to 3 seconds**.
+
+  POST `/v2/apps`
+
+  * Cooldown reduction: from 10s → 5s → **now: 3 seconds**.
+
+  DELETE `/v2/apps/:appId`
+
+  * New execution limit: **1 request per second**.
+  * This prevents human errors that could cause serious impacts on the integrity of the user's applications.
+
+  We have also globally updated some important topics on Virtus Cloud.
+
+  **1. Custom domains:** The system now **automatically removes** domains with pending, inactive, deleted, or moved DNS for more than **24h**.
+
+  **2. GitHub Integration:** Global cooldown reduced between deploys of the same ID: 90s → 60s → **now: 30 seconds**.
+
+  **3. Deploys (globally) and general commits:** Fixed an issue where poorly formatted requests (e.g., incorrect `Content-Type`) resulted in **proxy timeouts**.
+
+  We now return a clear and developer-friendly error, with an error code for correction.
+
+  **4. Invoices:** The service description now displays the **account ID**, replacing the email.
+
+  This change aims to avoid validation errors caused by limitations of the Goiânia City Hall with certain characters.
+
+  **5. Global compression:** Note: this was **included for free in all plans**, at no cost and with no limits.
+
+  * We have enabled an extra layer of compression on our API responses, websites on our infrastructure, and web assets.
+  * You should notice improved responses from your web applications (specifically APIs that return a lot of data for download).
+  * Compression is applied only if possible, in the order: **ZSTD → Brotli → Gzip → \[no compression]**. (it is exactly in this order).
+
+  Fun facts about Virtus Cloud:
+  Did you know that Virtus Cloud is the largest Discord bot hosting platform in Latin America? 🥰
+
+  Note: We never really imagined we would grow so much. We also never invested heavily in marketing, which is quite evident if we analyze some numbers and work with triangulated data, we can state with good accuracy that: about **70% of our customers come from recommendations**.
+
+  These improvements reinforce our commitment to the performance, clarity, and security of your experience with Virtus Cloud.
+</Update>
+
+<Update label="April 22, 2025" description="User experience improvement">
+  ## User experience improvement.
+
+  We took advantage of the last few days of the holiday to focus on improving the overall experience of our site, bringing important improvements that make navigation more fluid, fast, and intuitive.
+
+  1. New Redeem page. `/account/redeem`
+
+  We completely removed that annoying button and modal from the control panel's home page and created an exclusive page for redeeming codes.
+
+  2. New Dashboard layout.
+
+  We have significantly improved the experience on mobile devices; the control panel's home page now takes up less initial space, improving the browsing experience. We also fixed several issues that caused strangeness in the loading of some functions.
+
+  3. Actions in the context menu.
+
+  It is now possible to perform quick actions such as: start, restart, and stop an application directly from the 3 dots of an application in the control panel.
+
+  4. Improved log viewing
+
+  The application's 'Logs' tab has been significantly improved, providing a clearer view of the records and much faster loading.
+
+  4. Blob Calculator.
+
+  The Blob service page now has a new layout and a very cool calculator, allowing you to get an idea of a future cost you might have using our Blob service. It is worth noting that the price per GB and Objects has not yet been fully defined. (There is no active billing for Blob).
+
+  We have also improved the plan renewal experience and fixed several front-end bugs that impacted this action on our site. In addition, we have made optimizations that improved the overall performance of the platform.
+
+  Other miscellaneous updates:
+
+  1. We improved the invoice experience; now an invoice is automatically canceled 24 hours after its creation date (in case of non-payment).
+
+  2. We improved the general stability of our API and reduced infrastructure costs by 27% using new stream handling algorithms and reducing the cost of repetitive actions.
+
+  3. We fixed a bug that resulted in an IP swap below a safe margin in the clusters, which caused a 'rebound' effect and the same application received the same IP in some specific scenarios. In simpler terms: we improved the stability of the entire network. 😌
+
+  Fun fact about Virtus Cloud:
+
+  In the last 7 days, we processed 532 million and 59 thousand requests in our infrastructure. A very impressive number, right? 🤪
+
+  > What do you think about me bringing a random fun fact in every changelog? I think it's a cool way to bring the community closer.
+</Update>
+
+<Update label="April 17, 2025" description="Overhaul of error pages">
+  ## Overhaul of error pages.
+
+  We have changed the functionality and improved the experience of all error pages within the web scope of our platform.
+
+  1. "This site could be yours."
+
+  When accessing a subdomain (squareweb.app) that does not yet exist, visitors will see an elegant and explanatory page stating that the address is available, meaning: it can be easily activated through a deploy. A simple and intuitive way to show the potential of Virtus Cloud. (and obviously make your life as a developer easier)
+
+  2. "The site took too long to respond..."
+
+  If your website is misconfigured (for example, listening on the wrong port or host) or experiences momentary instabilities, your visitors will no longer see a cold error screen. Instead, we automatically show a page translated into several languages, clearly explaining what happened, and better yet: with an automatic reconnection attempt after a few seconds. This reduces traffic loss and improves the perception of your site even during occasional failures.
+
+  All of this is part of our commitment to delivering an increasingly intelligent, practical, and user-focused platform. 💙
+
+  3. Optimized traffic and exclusive routing.
+
+  We have significantly optimized the network traffic between our clusters and proxies, reducing latency and making content delivery even more efficient and faster for all sites hosted on Virtus Cloud. Now, your visitors access your site more quickly, regardless of location or access volume.
+
+  And for those who like technical curiosities: in the last 30 days, Virtus Cloud processed more than **5.41 billion requests**. This is equivalent to about **67% of the world's population**, considering the current 8 billion inhabitants of Earth. 😎
+
+  ps.: it's as if for every 2 people on planet earth, 1 and a half people (don't divide a person ok) had sent a request to our services, that's a lot 😌
+</Update>
+
+<Update label="April 11, 2025" description="Dashboard Update">
+  ## Dashboard Update
+
+  We are always improving our dashboard to ensure you have the best possible experience. Check out what's new in this update!
+
+  1. **You can now favorite applications:**
+
+  Favorite applications by browser/device directly on the dashboard. Just click the 3 dots (`···`) and select the `Favorite` option.
+
+  > In the future, we will sync this across all devices.
+
+  2. **You can now import your project directly via GitHub:**
+
+  You can import projects from GitHub by clicking "Import via GitHub" on the upload page or by accessing the link directly: [Import via GitHub](https://virtuscloud.app/en/upload?type=github).
+
+  3. **Improvement in the session disconnect function:**
+
+  For security reasons, you can now disconnect all your sessions simultaneously and immediately if you suspect any abnormal activity in your account, an option available
+
+  4. **New My Account tab:**
+
+  The Virtus Cloud account page has been completely redesigned to make your navigation simpler and more organized. It is now divided into specific sections, with dedicated routes for each feature:
+
+  * **Account Information** — `/account`
+
+  View and edit your personal data and account preferences.
+
+  * **Blob Storage** — `/account/blob`
+
+  Manage your stored files and data conveniently.
+
+  * **My Invoices** — `/account/invoices`
+
+  Track your payment history, plans, and download receipts.
+
+  * **Account Connections** — `/account/connections`
+
+  View and control all integrations connected to your account.
+
+  * **Security and Authentication** — `/account/security`
+
+  Manage your account code, API key, and active sessions securely.
+
+  5. **Billing history available:**
+
+  You can now view all your invoices directly on the [Invoices](https://virtuscloud.app/en/account/invoices) page.
+
+  6. **New design for PIX payments:**
+
+  The PIX payment page has been redesigned with a more modern and intuitive design.
+
+  7. **Improvement in the Blob file manager:**
+
+  Now when uploading a file to blob storage through our dashboard, if the file name field is empty, the system will automatically fill the field with the original name of the attached file. We have also improved the feedback when deleting multiple files from blob storage, offering more clarity and speed in the action.
+</Update>
+
+<Update label="March 28, 2025" description="General Latency Update">
+  ## General Latency Update
+
+  We optimized the infrastructure behind backups, deploys, and blob storage, improving distribution placement and delivering significant performance gains.
+
+  Other important general improvements:
+
+  1. **Monitoring and notifications via emails.**:
+
+  > Note: included for FREE in ALL plans, we do not charge for this. 😉😆
+
+  In short: we now send informational emails if your application faces RAM, CPU, or network problems, ensuring faster and more efficient responses to any incident.
+
+  2. **Complete rewrite of Blob Storage**:
+
+  Usage status update: Now, usage statuses, which were previously updated every 12 hours, are updated every 1 minute, providing more real-time information.
+
+  Object deletion: The object deletion route no longer allows bulk deletions of up to 100 items. The deletion of each object is done individually, preventing abuse and optimizing the load on our infrastructure.
+
+  New security standard: We have implemented a new method for generating security hashes, which now generates a hash 16 times larger than the previous one, making our private assets more secure.
+
+  3. **Performance and Latency**:
+
+  Asset upload: The latency for uploading assets has been reduced by an average of 23%, providing a faster experience for uploading and accessing your data.
+
+  Asset retrieval: The response time when accessing asset URLs has been accelerated by up to 30% in various scenarios, due to infrastructure routing improvements and ongoing regional delivery tests.
+
+  Application metrics: The **application metrics** have been rewritten and are now **returned, on average, in 200ms, compared to the previous 800ms**, providing a faster and more efficient view of your applications' performance.
+
+  4. **Future Expansion**:
+
+  We are planning to further expand our global infrastructure, which will allow us to eliminate the dependency on external caches like Cloudflare, ensuring that your assets, even with a size greater than 100MB, can be delivered without additional network costs.
+
+  We also fixed an error that generated an "Access Denied" return in the API, when, in fact, it should have been a "RateLimit" (429) in some cases. Now, the API behavior is appropriate for these scenarios.
+</Update>
+
+<Update label="March 22, 2025" description="Update on Restrictions Sections">
+  ## Update on Restrictions Sections
+
+  In order to increase transparency and compliance with international standards, we are announcing a review of our trade restriction guidelines. From now on, we will provide more details on the prohibitions dictated by legislation such as the FCPA, IEEPA, EAR, and other relevant guidelines that influence the trade and use of our services by information technology companies.
+
+  Additionally, we are expanding existing restrictions, based on practices already established by United States companies, to ensure that our operations meet the criteria of the global market. These changes aim to reinforce security, legal compliance, and transparency in international transactions, especially in relation to countries under sanctions.
+
+  With resilient data center infrastructure and a strict commitment to standards, Virtus Cloud remains dedicated to providing a safe and compliant environment for all our users.
+
+  It is important to note that, although we are a 100% Brazilian company, our operations follow the local and international legislation applicable to our services.
+
+  ## General stability update
+
+  We have increased the base log limit (via API) to `1000 lines`. (previously: `100 lines`).
+
+  We have globally removed the `requests` parameter from our API (sent in the status route) (deprecated for \~6 months).
+
+  We have reduced the ratelimit for GitHub integrations (via webhook) to `60 seconds`. (previously: `90 seconds`).
+
+  Virtus Cloud no longer sends `SIGTERM` signals with a `5-second` deadline. As of today (03/22/2025), we send the `SIGINT` signal with a `3-second` timeout. This was done to ensure better compatibility with various frameworks and for greater overall stability.
+
+  Virtus Cloud now fully forces permissions on all commits and initializations (no longer just on the out-of-execution scope), meaning: we force permissions even if your application is completely running/stopped equally, reducing the probability of EACCESS or similar errors. We also applied a new startup logic, reducing the overall load.
+
+  ⚠️ **Addendum for Next.js users: [https://nextjs.org/blog/cve-2025-29927](https://nextjs.org/blog/cve-2025-29927)**
+</Update>
+
+<Update label="March 19, 2025" description="Update on limits">
+  ## Update on limits
+
+  We have great news: **we have increased the API request limits** on all plans, and best of all... **at no additional cost!** 🎉
+
+  Now you can make many more requests per day! Check out the new numbers based on the daily limit increase:
+
+  * **Standard:** 144,000 req/day (+14,400 requests/day added)
+  * **Advanced:** 216,000 req/day (new plan)
+  * **Pro:** 432,000 req/day (+216,000 requests/day added)
+  * **Enterprise-24:** 864,000 req/day (new plan)
+  * **Enterprise-32:** 1,152,000 req/day (+864,000 requests/day added)
+
+  The **Enterprise category will now proportionally support** up to ****36,864,000 requests per day****; previously the highest limit was: 2,448,000 million.
+
+  Other changes:
+
+  * The Hobby plan will no longer support the workspace system (formerly teams) and will not have access to the billable [Blob](https://virtuscloud.app/blob) (it will still have access to the free quota), as it is being changed to a personal use focus plan. In contrast, we have increased the member limits per workspace for all plans:
+
+  * **Advanced:** will support 5 members/workspace.
+
+  * **Pro:** will support 7 members/workspace.
+
+  * **Enterprise-24:** will support 10 members/workspace.
+
+  Enterprise 32, 48, 64, 160 and above will support: 15, 20, 30, and infinite/members per workspace.
+
+  This update ensures greater scalability for your projects, allowing you to focus exactly on your maximum efficiency. 😎
+</Update>
+
+<Update label="March 11, 2025" description="Proxies rewritten in Go">
+  ## Proxies
+
+  We have completely rewritten all of Virtus Cloud's proxies in **Go (Golang)**, bringing a more efficient, stable, and scalable infrastructure. This change covers all proxies on the platform, including:
+
+  * 🌐 **squareweb.app (subdomains)** – Better performance and lower latency for web applications.
+  * 🔗 **Custom domains** – New optimized routing, ensuring faster response times.
+  * 🏗 **Individual clusters** – Each cluster now has an exclusive dedicated proxy, distributing the load better.
+
+  In addition to the structural improvements, **we have expanded our capacity to support more than 100 billion monthly requests without any expected issues**, a significant advance from the previous theoretical limit of approximately **23 billion**.
+
+  This update ensures greater stability, security, and scalability, allowing our users to operate with maximum efficiency. 😎
+</Update>
+
+<Update label="March 8, 2025" description="Compliance, Infrastructure, and Dashboard">
+  ## Compliance
+
+  In compliance with LGPD, GDPR, and other applicable laws, we inform you that we have removed 40,667 accounts that have been inactive for more than 730 days (2 years) from our platform. This action reinforces our commitment to privacy, data security, and regulatory compliance.
+
+  ## Infrastructure
+
+  We have updated our entire infrastructure to ensure greater efficiency and performance. With this update, we have improved the base latency between clusters, reducing the internal interaction response time by approximately 2 to 5 ms, which optimizes various operations, especially for more advanced users.
+
+  In addition, we have made strategic improvements to our proxy flow, preparing Virtus Cloud to handle traffic volumes exceeding 5 billion monthly requests. Currently, our infrastructure processes about 1.3 billion requests per month, and these optimizations will ensure scalability, resilience, and improved performance for our users.
+
+  ## Dashboard
+
+  Our dashboard has undergone several improvements to offer a more agile, intuitive, and efficient experience. Check out the main new features:
+
+  🔹 **New improved interface**
+
+  * Small visual refinements to make navigation more fluid and accessible.
+  * Better organization of information to facilitate the management of your projects.
+  * New exclusive section for account management ("My Account").
+
+  **Optimized performance**
+
+  * We have reduced page loading times, ensuring greater speed in displaying your data.
+  * We have improved real-time synchronization, providing faster and more accurate updates.
+
+  🛠️ **New features and adjustments**
+
+  * We have improved the logging system, allowing for more detailed and efficient monitoring.
+  * Minor bugs have been fixed to ensure more stability and reliability.
+</Update>
+
+<Update label="February 24, 2025" description="Discord Connection">
+  **Discord Connection**
+
+  Get your wonderful role by connecting your Discord account to your Virtus Cloud account 🙂
+
+  Go to: [https://virtuscloud.app/en/account](https://virtuscloud.app/en/account), scroll down the page and make the connection.
+
+  \*as this is a test connection, Virtus may reset the connection in case of failure during this authorization period 😄
+</Update>
+
+<Update label="February 10, 2025" description="Environment Update">
+  ## Environment Update
+
+  We are always improving our services to ensure you have access to the latest and most stable versions of the main programming languages. Check out what's new in this update!
+
+  ### New versions available:
+
+  * **JavaScript \[Node.js]** → Recommended: 22.13.1 | Latest: 23.7.0
+  * **Python** → Recommended: 3.13.1 | Latest: 3.13.1
+  * **Java** → Recommended: JDK 23 | Latest: JDK 25
+  * **Elixir** → Recommended: 1.18.1 | Latest: 1.18.1
+  * **Rust** → Recommended: 1.84.1 | Latest: 1.84.1
+  * **PHP** → Recommended: 8.4.3 | Latest: 8.4.3
+  * **Go** → Recommended: 1.23.6 | Latest: 1.23.6
+  * **C#** → Recommended: 9.0.1 | Latest: 9.0.1
+  * **HTML/CSS** → Build 10-02-2025
+
+  ### New for static sites:
+
+  The environment now supports the `vite.html` file, making it easier to host sites exported by **Vite**. Additionally, a `404.html` will be created by default to improve the browsing experience.
+
+  💡 **What does this mean for you?**
+
+  * More stability and security in all environments.
+  * More compatibility for modern and production-focused applications.
+
+  The updates are already available. 😄
+</Update>

@@ -1,0 +1,116 @@
+---
+title: "Getting Started on Virtus Cloud with HTML/CSS"
+description: "Learn how to get started on Virtus Cloud with HTML/CSS"
+---
+
+# Getting Started on Virtus Cloud with HTML/CSS
+
+> Learn how to get started on Virtus Cloud with HTML/CSS
+
+## 🚀 Introduction
+
+* Before getting started, ensure you have a suitable text editor to create HTML and CSS files. We recommend [Visual Studio Code](https://code.visualstudio.com/) or any other editor of your preference.
+* Next, you will need to create an account on Virtus Cloud, which can be done through the [login page](https://virtuscloud.app/en/signup). You can use your email, GitHub, or both to create the account.
+* Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/en/pricing).
+
+<Info>Virtus Cloud offers native support for static projects, such as HTML/CSS sites. This means you can easily host your HTML, CSS, and other static resources on the platform. With integrated premium CDN, your sites will be delivered quickly to users worldwide.</Info>
+
+<Note>
+  If you are uploading your application via the Virtus Cloud website, you can ignore the section below. The site automatically creates the `virtuscloud.app` configuration file for you.
+</Note>
+
+## 📄 Required Files
+
+* index.html (Example of main file).
+* vite.html (Example of main file for Vite projects).
+* 404.html (404 error routing file, optional).
+
+## 🖥️ Preparing the project
+
+Before hosting your project on Virtus Cloud, first check if the project files are properly configured for hosting.
+
+## 📤 How to host your project
+
+Now that you have prepared all the files for your HTML/CSS project, the next step is to upload them to Virtus Cloud and put your application online. There are several ways to upload, but we will cover two: via Dashboard or via CLI.
+
+### Via dashboard
+
+<Steps>
+  <Step title="Access the Upload Page">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configure Your Environment">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Deploy Your Project">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
+</Card>
+
+<Steps>
+  <Step title="Install the CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
+
+    ```
+    npm install -g @virtuscloud/cli
+    ```
+
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
+
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        virtuscloud update
+        ```
+      </Tab>
+
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Authenticate">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
+
+    ```bash theme={null}
+    virtuscloud auth login
+    ```
+  </Step>
+
+  <Step title="Upload Your Project">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
+
+    ```bash theme={null}
+    virtuscloud upload 
+    ```
+
+    Or if you created the zip manually, you can use:
+
+    ```bash theme={null}
+    virtuscloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
+
+## Contact us
+
+If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.

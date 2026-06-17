@@ -1,0 +1,149 @@
+---
+title: "Cómo crear tu archivo de configuración virtuscloud.app"
+sidebarTitle: "Archivo de configuración"
+icon: "gear-complex-code"
+description: "Aprende cómo crear el archivo de configuración de VirtusCloud"
+---
+
+## ¿Archivo de configuración? ¿Qué es eso? 🤔
+El archivo de configuración es un archivo que contiene los parámetros de tu aplicación, como el archivo principal, memoria, versión y otros parámetros. Este archivo se usa para configurar y desplegar tu aplicación en la plataforma VirtusCloud.
+
+## Creando el archivo de configuración
+Es muy sencillo crear el archivo de configuración: simplemente crea un archivo con el nombre `virtuscloud.app` o `virtuscloud.config` y coloca los parámetros de configuración dentro de él.
+
+<Steps>
+    <Step title="Selecciona la extensión">
+        El archivo de configuración puede tener dos extensiones: **.app** o **.config**. Puedes elegir la extensión que prefieras. Consejo: usa **.app** para ayudar a promover VirtusCloud (virtuscloud.app). 😂
+        <Info>En **macOS**, recomendamos usar la extensión **.config**.</Info>
+        <Warning>Nota: **.app** o **.config** es la **extensión del archivo**, **no el nombre**.</Warning>
+    </Step>
+    <Step title="Crea el archivo">
+        Crea un archivo con la extensión seleccionada y coloca los parámetros de configuración dentro de él.
+    </Step>
+</Steps>
+
+## Parámetros de configuración
+A continuación puedes ver los parámetros de configuración que puedes usar en tu archivo de configuración.
+
+<Steps>
+    <Step title="MAIN [*]" icon="file">
+        El parámetro **MAIN** se usa para definir el archivo principal de tu aplicación.
+        ```systemd Ejemplo:
+        MAIN=index.js
+        ```
+        ```systemd También admite subdirectorios.
+        MAIN=src/loaders/index.js
+        ```
+        <Info>Este parámetro tiene un máximo de **32 caracteres**.</Info>
+        <Info>Esta configuración es **IGNORADA** si usas el parámetro START.</Info>
+    </Step>
+    <Step title="MEMORY [*]" icon="memory">
+        El parámetro **MEMORY** se usa para definir la cantidad de memoria que usará tu aplicación en la plataforma VirtusCloud.
+        ```systemd
+        MEMORY=256
+        ```
+        <Info>El valor está en megabytes (MB).</Info>
+        <Note>La memoria mínima para un bot es **256MB** y para un sitio web es **512MB**.</Note>
+    </Step>
+    <Step title="VERSION [*]" icon="arrow-up-9-1">
+        El parámetro **VERSION** se usa para definir la versión de tu aplicación.
+        ```systemd
+        VERSION=recommended
+        ```
+        <Info>Para cada lenguaje hay una versión diferente, consulta la tabla a continuación.</Info>
+        | Lenguaje                 | Versión `recommended`  | Versión `latest` |
+        | ------------------------ | ---------------------- | ---------------- |
+        | JavaScript [Node.js]     | 22.18.0                | 24.5.0           |
+        | Python                   | 3.13.6                 | 3.13.6           |
+        | Java                     | JDK 23                 | JDK 25           |
+        | Elixir                   | 1.18.4                 | 1.18.4           |
+        | Rust                     | 1.89.0                 | 1.89.0           |
+        | PHP                      | 8.4.11                 | 8.4.11           |
+        | Go                       | 1.24.6                 | 1.24.6           |
+        | C#                       | 9.0.1                  | 9.0.1            |
+        | HTML/CSS                 | Build 10-02-2025       | Build 10-02-2025 |
+
+        <Tip>Recomendamos usar la versión `recommended` ya que nuestro equipo ha realizado pruebas exhaustivas en todas las versiones recomendadas.</Tip>
+    </Step>
+    <Step title="DISPLAY_NAME [*]" icon="text">
+        El parámetro **DISPLAY_NAME** se usa para definir el nombre de tu aplicación.
+        ```systemd Ejemplo:
+        DISPLAY_NAME=Admin BOT
+        ```
+        <Info>Este parámetro tiene un máximo de **32 caracteres**.</Info>
+    </Step>
+    <Step title="DESCRIPTION" icon="text">
+        El parámetro **DESCRIPTION** se usa para definir la descripción de tu aplicación.
+        ```systemd Ejemplo:
+        DESCRIPTION=Este bot está diseñado para ayudarte con tus tareas diarias.
+        ```
+        <Info>Este parámetro tiene un máximo de **280 caracteres**.</Info>
+    </Step>
+    <Step title="AUTORESTART" icon="rotate">
+        El parámetro **AUTORESTART** se usa para definir si tu aplicación debe reiniciarse automáticamente en caso de fallo.
+        ```systemd Ejemplo:
+        AUTORESTART=true
+        ```
+        <Info>Por defecto, este parámetro está configurado como `false`.</Info>
+    </Step>
+    <Step title="SUBDOMAIN" icon="globe">
+        El parámetro **SUBDOMAIN** se usa para definir el subdominio de tu sitio web.
+        ```systemd Ejemplo:
+        SUBDOMAIN=misitio
+        ```
+        <Info>Este parámetro tiene un máximo de **63 caracteres**.</Info>
+        <Note>La URL del sitio será: misitio.virtusapp.cloud</Note>
+    </Step>
+    <Step title="START" icon="play">
+        El parámetro **START** se usa para definir un comando de inicio personalizado para tu aplicación.
+        ```systemd Ejemplo:
+        START=npm run start
+        ```
+        <Info>Este parámetro tiene un máximo de **256 caracteres**.</Info>
+        <Info>Este parámetro **ignora** el parámetro MAIN.</Info>
+        <Info>Las aplicaciones subidas después del 19 de junio de 2025 pueden editar este campo sin volver a subirlas</Info>
+    </Step>
+</Steps>
+
+
+## Ejemplos de configuración para bots
+
+```systemd Este ejemplo solo usa los parámetros obligatorios. (configuración mínima)
+MAIN=index.js
+MEMORY=256
+VERSION=recommended
+DISPLAY_NAME=Robin bot
+```
+
+```systemd Este ejemplo es un bot con todos los parámetros.
+MAIN=index.js
+MEMORY=256
+VERSION=recommended
+DISPLAY_NAME=Robin bot
+DESCRIPTION=Robin es un bot diseñado para ayudarte con tus tareas diarias.
+AUTORESTART=true
+```
+
+## Ejemplos de configuración para sitios web
+
+<Info>La URL del sitio será: misitio.virtusapp.cloud</Info>
+```systemd Este ejemplo usa todos los parámetros y COMANDO DE INICIO PERSONALIZADO en un sitio web.
+MAIN=index.js
+MEMORY=512
+VERSION=recommended
+DISPLAY_NAME=Mi sitio web!
+DESCRIPTION=¡Mi sitio web es muy genial!
+SUBDOMAIN=misitio
+START=npm run build && npm run start
+AUTORESTART=true
+```
+
+## Límites de los parámetros
+
+| Parámetro     | Límite de caracteres |
+| ------------- | -------------------- |
+| MAIN          | 32 caracteres        |
+| DISPLAY_NAME  | 32 caracteres        |
+| DESCRIPTION   | 280 caracteres       |
+| START         | 256 caracteres       |
+| SUBDOMAIN     | 63 caracteres        |

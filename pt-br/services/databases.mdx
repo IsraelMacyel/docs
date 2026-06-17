@@ -1,0 +1,82 @@
+---
+title: "Hospedagem de Banco de Dados"
+description: "Hospede bancos de dados para suas aplicações com a maior plataforma da América Latina. Performance e segurança empresarial para seus dados."
+---
+
+# Hospedagem de Banco de Dados
+
+> Hospede bancos de dados para suas aplicações com a maior plataforma da América Latina. Performance e segurança empresarial para seus dados.
+
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/services/en/database.png" alt="Visão geral do serviço de Bancos de Dados da Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+## Por que escolher a Virtus Cloud?
+
+<CardGroup cols={2}>
+  <Card title="Armazenamento Empresarial" icon="bolt">
+    Hardware de última geração com **SSDs NVMe Samsung Enterprise** garantindo **máxima performance** e **latência ultrabaixa** para seus dados.
+  </Card>
+  <Card title="Zero taxas de rede" icon="wifi">
+    Você pode **transferir dados** de e para seu banco de dados **sem se preocupar com taxas de rede**, permitindo que você se concentre em construir sua aplicação.
+  </Card>
+  <Card title="Snapshots Inteligentes" icon="server">
+    Tecnologia **exclusiva** para pontos de restauração com **1 clique**, incluídos **sem custo adicional**, garantindo **segurança completa** para seus dados.
+  </Card>
+  <Card title="Segurança Avançada" icon="shield-halved">
+    **Conexões seguras com certificados** gerenciados pela Virtus Cloud, garantindo que seus dados sejam protegidos com medidas de segurança empresarial.
+  </Card>
+</CardGroup>
+
+## Bancos de Dados Suportados
+
+Oferecemos alguns bancos de dados já configurados para você conectar e começar a usar.
+
+<CardGroup cols={2}>
+  <Card title="PostgreSQL" icon="elephant" href="https://virtuscloud.app/en/databases/postgresql" />
+  <Card title="MongoDB" icon="leaf" href="https://virtuscloud.app/en/databases/mongodb" />
+  <Card title="MySQL" icon="database" href="https://virtuscloud.app/en/databases/mysql" />
+  <Card title="Redis" icon="r" href="https://virtuscloud.app/en/databases/redis" />
+</CardGroup>
+
+### Versões
+
+| SGBD | Versão |
+| :---: | :---: |
+| PostgreSQL | 17.x.x |
+| MySQL | 9.x.x |
+| MongoDB | 8.x.x |
+| Redis | 7.4.x |
+
+## Como hospedar meu banco de dados?
+
+Hospedar seu banco de dados com a Virtus Cloud é simples — você precisa de um **plano Standard ativo ou superior**.
+
+<Steps>
+  <Step title="Criar uma nova instância de banco de dados">
+    Acesse a página de [Bancos de Dados](https://virtuscloud.app/en/dashboard/databases) e clique em "Criar Banco de Dados".
+  </Step>
+  <Step title="Configurar sua instância">
+    Selecione o tipo de banco de dados e preencha as informações necessárias, como nome e RAM.
+  </Step>
+  <Step title="Finalizar a criação">
+    Clique em "Criar" e aguarde o banco de dados ser criado. Quando estiver pronto, você encontrará os detalhes de conexão no painel do banco de dados.
+  </Step>
+</Steps>
+
+## Como me conectar ao meu banco de dados?
+
+Nossos bancos de dados são configurados para permitir apenas conexões seguras com certificado.
+
+<Steps>
+  <Step title="Obter credenciais e certificados">
+    Obtenha as credenciais de conexão (host, porta, usuário e senha) e os certificados no painel do banco de dados.
+  </Step>
+  <Step title="Conectar com SSL/TLS">
+    Use as credenciais e certificados para conectar ao banco de dados usando seu cliente ou biblioteca preferido. Certifique-se de usar SSL/TLS.
+    <Note>Normalmente você precisará apenas do `.pem`, mas alguns clientes podem exigir os arquivos `.key` e `.cert` separadamente ou o arquivo `.p12`.</Note>
+  </Step>
+  <Step title="Começar a usar">
+    Após conectado, você pode começar a usar sua instância de banco de dados e monitorar a performance pelo painel da Virtus Cloud.
+  </Step>
+</Steps>

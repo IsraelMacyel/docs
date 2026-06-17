@@ -1,0 +1,44 @@
+---
+title: "解决 MODULE_NOT_FOUND"
+sidebarTitle: "解决 MODULE_NOT_FOUND"
+description: "了解如何解决应用程序中的 MODULE_NOT_FOUND 问题。"
+---
+
+## 何时发生？
+当您的应用程序尝试使用环境中未安装的库时会出现此错误。
+
+```bash javascript
+Error: Cannot find module 'discord.js'
+```
+
+```bash python
+ModuleNotFoundError: No module named 'discord.py'
+```
+
+## 为什么发生？
+
+当您尝试使用默认情况下未在环境中安装的库时可能会发生这种情况。
+
+## 如何修复
+
+要修复此问题，您需要将缺少的库添加到项目的依赖文件中。对于 Python，此文件称为 `requirements.txt`；对于 JavaScript，称为 `package.json`。
+
+```json package.json
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "discord.js": "14.14.1"
+  }
+}
+```
+
+```txt requirements.txt
+discord.py
+```
+
+### 重启您的应用程序
+
+将必要的库添加到项目的依赖文件后，您应该重启应用程序，以便环境识别并安装新添加的库。
+
+如果您继续遇到任何问题，请随时[联系我们的支持团队](/company/support)。

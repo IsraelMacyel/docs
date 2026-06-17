@@ -1,0 +1,32 @@
+---
+title: "Remove Member"
+description: "Removes a workspace member from the workspace."
+api: "DELETE https://api.virtuscloud.app/v2/workspaces/members"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField body="workspaceId" type="string" placeholder="Workspace Id">
+  The ID of the workspace.
+</ParamField>
+
+<ParamField body="memberId" type="string" placeholder="Member ID">
+  The member ID.
+</ParamField>
+
+
+### Response
+
+<Status />
+
+<ResponseExample>
+```json
+{
+  "status": "success"
+}
+```
+</ResponseExample>

@@ -1,0 +1,90 @@
+---
+title: "Snapshots"
+description: "List, create, download and restore application snapshots — the v4 replacement for the legacy backup API."
+---
+
+# Snapshots
+
+> List, create, download and restore application snapshots — the v4 replacement for the legacy backup API.
+
+<Info>
+  Snapshots replace the v3 `backup` / `backups` API. `app.backup` and `app.backups` are still exported in v4 but they print a deprecation warning and proxy to `app.snapshots`. Update your code to use the new name.
+</Info>
+
+`app.snapshots` exposes the [`SnapshotsModule`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/modules/snapshots.ts).
+
+```typescript theme={null}
+const app = await api.applications.fetch("abc123def456abc123def456");
+app.snapshots; // SnapshotsModule
+```
+
+## Listing snapshots
+
+`app.snapshots.list()` returns an array of `Snapshot` instances.
+
+```typescript theme={null}
+const snapshots = await app.snapshots.list();
+
+for (const snap of snapshots) {
+    console.log(snap.url);          // signed download URL (valid for 30 days)
+    console.log(snap.size);         // bytes
+    console.log(snap.modifiedAt);   // Date
+    console.log(snap.key);          // signed query string
+}
+```
+
+Each snapshot can be downloaded directly:
+
+```typescript theme={null}
+const buffer = await snapshots[0].download();
+```
+
+## Creating a new snapshot
+
+`app.snapshots.create()` triggers a fresh snapshot and returns the signed URL and key.
+
+```typescript theme={null}
+const fresh = await app.snapshots.create();
+console.log(fresh.url); // valid for 30 days
+console.log(fresh.key);
+```
+
+## Download in one step
+
+`app.snapshots.download()` creates a snapshot and downloads it as a `Buffer`.
+
+```typescript theme={null}
+import { writeFile } from "node:fs/promises";
+
+const buffer = await app.snapshots.download();
+await writeFile("./backup.zip", buffer);
+```
+
+## Restoring from a snapshot
+
+`app.snapshots.restore({ snapshotId, versionId })` rolls the application back to a previous snapshot version.
+
+```typescript theme={null}
+await app.snapshots.restore({
+    snapshotId: "00000000-0000-4000-8000-000000000000",
+    versionId: "abc123def4567890",
+});
+```
+
+| Field        | Type     | Description                             |
+| ------------ | -------- | --------------------------------------- |
+| `snapshotId` | `string` | Snapshot identifier (UUID v4)           |
+| `versionId`  | `string` | Version identifier returned by `list()` |
+
+## Listing snapshots account-wide
+
+`api.user.snapshots(scope)` returns every snapshot you own across all your applications or databases.
+
+```typescript theme={null}
+const appSnapshots = await api.user.snapshots("applications");
+const dbSnapshots  = await api.user.snapshots("databases");
+```
+
+<Note>
+  `api.user.snapshots()` requires an active paid subscription.
+</Note>

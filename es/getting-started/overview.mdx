@@ -1,0 +1,153 @@
+---
+title: "😁 Bienvenido a VirtusCloud"
+sidebarTitle: "Descripción General"
+icon: "book"
+description: "VirtusCloud es una plataforma que ofrece servicios de alojamiento empresarial sin complicaciones y fáciles de usar. Comienza en minutos. ✨"
+---
+
+<CardGroup>
+  <Card
+    title="Guía de Inicio Rápido"
+    icon="book"
+    href="/getting-started/quick-start"
+  >
+    Obtén una visión general rápida de tus primeros pasos con VirtusCloud.
+  </Card>
+  <Card title="API Oficial" icon="code" href="/api-reference">
+    Nuestra documentación de API para desarrolladores (¡y estás aquí!).
+  </Card>
+</CardGroup>
+
+<Snippet file="before-begin.mdx" />
+
+Una vez que te hayas registrado, puedes comenzar a desplegar tus aplicaciones en VirtusCloud después de seleccionar el plan que mejor se adapte a tus necesidades.
+
+## Facilita tu viaje con la CLI 💻
+Esta descripción general utiliza la [CLI de VirtusCloud](/cli) para desplegar tus aplicaciones. La CLI es una herramienta de línea de comandos que te permite interactuar con los servicios de VirtusCloud. Puedes usarla para desplegar aplicaciones, administrar servicios y ver registros.
+
+Para usar la CLI, necesitas instalarla en tu máquina local. Puedes instalarla con los siguientes comandos:
+
+<br/>
+
+<CodeGroup>
+```bash macOS, Linux y WSL
+curl -fsSL https://cli.virtuscloud.app/install | bash
+```
+
+```bash Windows con npm
+npm install -g @virtuscloud/cli
+```
+
+```bash Windows con yarn
+yarn global add @virtuscloud/cli
+```
+</CodeGroup>
+
+<Steps>
+  <Step title="Lee las instrucciones sobre tu lenguaje">
+    <Snippet file="languages.mdx" />
+    <Info>Para este ejemplo, usaremos el lenguaje JavaScript (Node.js).</Info>
+  </Step>
+  <Step title="Crea tu archivo de configuración de VirtusCloud">
+    Después de instalar la CLI, necesitas crear un archivo de configuración. Puedes crear un [archivo de configuración](/getting-started/config-file) leyendo este artículo [aquí](/getting-started/config-file).
+
+    Mi archivo de configuración se ve así:
+    ```systemd
+    MAIN=index.js
+    MEMORY=512
+    VERSION=recommended
+    DISPLAY_NAME=Robin bot
+    DESCRIPTION=Este sistema de bot está diseñado para ayudarte con tus tareas diarias.
+    ```
+  </Step>
+  <Step title="Sube tu proyecto">
+    Después de este proceso, necesitas subir tu proyecto a VirtusCloud. Puedes hacerlo ejecutando el siguiente comando:
+    ```bash
+    virtuscloud upload
+    ```
+  </Step>
+</Steps>
+
+
+## Facilita tu viaje con la interfaz web 😉
+Si no te gustan las líneas de comandos o prefieres usar la interfaz web, puedes subir tu proyecto directamente al sitio web de VirtusCloud. Para ello, sigue estos pasos:
+
+<Steps>
+  <Step title="Accede al sitio web de VirtusCloud">
+    Accede al [panel de VirtusCloud](https://virtuscloud.app/dashboard) con tu cuenta.
+  </Step>
+  <Step title="Crea tu archivo de configuración de VirtusCloud">
+    Después de acceder al panel, necesitas crear un archivo de configuración. Puedes crear un [archivo de configuración](/getting-started/config-file) leyendo el artículo [aquí](/getting-started/config-file).
+  </Step>
+  <Step title="Comprime tu proyecto en ZIP">
+    Después de crear el archivo de configuración, necesitas comprimir tu proyecto.
+    ```bash Usando la CLI
+    virtuscloud zip
+    ```
+
+    O puedes comprimir tu proyecto manualmente:
+    <CodeGroup>
+      ```bash Windows
+      1. Localiza el archivo o carpeta que deseas comprimir.
+      2. Mantén presionado (o haz clic derecho) en el archivo o carpeta, selecciona Enviar a y luego Carpeta comprimida (zip).
+      3. Se crea una nueva carpeta comprimida con el mismo nombre en la misma ubicación.
+      ```
+      ```bash Linux
+      1. Localiza el archivo o carpeta que deseas comprimir.
+      2. Haz clic derecho en el archivo o carpeta, luego elige Comprimir en el menú contextual.
+      3. Se crea una nueva carpeta comprimida con el mismo nombre en la misma ubicación.
+      ```
+      ```bash macOS
+      1. Localiza el archivo o carpeta que deseas comprimir.
+      2. Ctrl-clic en el archivo o carpeta, luego elige Comprimir en el menú contextual.
+      3. Se crea una nueva carpeta comprimida con el mismo nombre en la misma ubicación.
+      ```
+    </CodeGroup>
+
+    O puedes usar la línea de comandos para comprimir la carpeta de tu proyecto:
+    <CodeGroup>
+    ```bash macOS, Linux y WSL
+    zip -r mi-proyecto.zip .
+    ```
+
+    ```bash Windows (powershell)
+    Compress-Archive -Path . -DestinationPath mi-proyecto.zip
+    ```
+    </CodeGroup>
+   </Step>
+  <Step title="Despliega tu proyecto">
+    Después de subir tu proyecto, haz clic en el botón "Agregar nuevo" para desplegar tu proyecto.
+  </Step>
+</Steps>
+
+## ¿Qué sigue?
+Ahora que has aprendido cómo desplegar tu proyecto, puedes explorar más la plataforma VirtusCloud. Aquí hay algunos recursos para ayudarte a comenzar:
+
+<CardGroup>
+  <Card
+    title="Referencia de API"
+    icon="server"
+    href="/api-reference"
+  >
+    Aprende más sobre la API de VirtusCloud.
+  </Card>
+  <Card
+    title="Referencia de CLI"
+    icon="code"
+    href="/cli-reference"
+  >
+    Aprende más sobre la CLI de VirtusCloud.
+  </Card>
+</CardGroup>
+
+Únete a nuestra comunidad en [Discord](https://discord.gg/virtuscloud) para obtener ayuda de otros desarrolladores y compartir tus experiencias.
+<Card
+  title="Comunidad VirtusCloud"
+  icon="discord"
+  href="https://discord.gg/virtuscloud"
+  color="#7289DA"
+>
+  ¡Únete a nuestra comunidad en Discord. Estamos aquí para ayudarte!
+</Card>
+
+Si tienes alguna pregunta o necesitas ayuda, puedes comunicarte con nuestro [equipo de soporte](https://virtuscloud.app/dashboard/support). ¡Estamos aquí para ayudar! 🚀

@@ -1,0 +1,68 @@
+---
+title: "Blob — 无服务器存储"
+description: "探索 VirtusCloud 的无服务器存储能力。"
+icon: "database"
+---
+
+<img src="/images/services/blob.png" />
+
+<Note>Blob 目前处于测试阶段。如遇问题或有任何反馈，请[联系我们](/contact)。</Note>
+
+**VirtusCloud** 通过 **Blob** 提供高性能无服务器存储，消除存储基础设施管理的复杂性。
+
+## 功能与支持
+
+<CardGroup cols={2}>
+  <Card title="零入口/出口费用" icon="money-bill">
+    告别意外收费——数据上传和下载均无额外费用。
+  </Card>
+  <Card title="零管理开销" icon="server">
+    简化工作流程，只需上传资产，VirtusCloud 负责其余一切。
+  </Card>
+  <Card title="专为现代应用构建" icon="terminal">
+    通过全球 CDN 提供高速内容分发，与您的应用无缝集成。
+  </Card>
+  <Card title="冗余存储" icon="box">
+    数据通过快速三重复制和端到端加密得到保护。
+  </Card>
+</CardGroup>
+
+## 定价模式
+
+| 所有套餐包含 | **按用量计费** |
+|---|---|
+| 低延迟 | 始终低延迟 |
+| 包含 1GB 存储 | 最高 **1PB 存储** |
+| 包含 250 个对象 | 最高 **10 亿个对象** |
+| 每天最多 100 万次免费请求 | 每天最多 **10 亿次请求** |
+
+<Warning>所有价格以巴西雷亚尔 (R$) 计算。使用 VirtusCloud Blob 需要有效账户和付费套餐。</Warning>
+
+## 支持的文件类型
+
+| 文件类型 | 扩展名 |
+|---|---|
+| 视频 | .mp4, .mpeg, .webm, .flv, .m4v |
+| 图片 | .jpeg, .png, .apng, .tiff, .gif, .webp, .bmp, .svg, .ico, .heic, .heif |
+| 音频 | .mp3, .mp4, .wav, .ogg, .opus, .mpeg, .aac |
+| 文本 | .txt, .html, .css, .csv, .x-sql |
+| 应用程序 | .xml, .sql, .sqlite3, .pdf, .json, .javascript, .p12 |
+
+## 如何使用 Blob？
+
+<Steps>
+  <Step title="初始设置" icon="file">
+    通过 [put 端点](/blob-reference/endpoint/put) 上传您的文件。
+  </Step>
+  <Step title="访问 URL" icon="globe">
+    通过上一步响应中提供的 URL 访问您的文件。
+  </Step>
+</Steps>
+
+## 基准测试
+
+- **延迟**：接收文件的平均延迟约为 20ms。
+- **吞吐量**：平均吞吐量约为 10-15MB/s。
+- **可用性**：平均可用性 99.999999999%（11 个 9）。
+
+<Info>基准测试结果不作保证，延迟和吞吐量可能因位置、文件大小和网络条件而异。</Info>

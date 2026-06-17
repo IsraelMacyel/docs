@@ -1,0 +1,98 @@
+---
+title: "Deploys & Git integration"
+description: "Inspect deploy history, link a repository through the Virtus Cloud GitHub App, or use the legacy webhook flow."
+---
+
+# Deploys & Git integration
+
+> Inspect deploy history, link a repository through the Virtus Cloud GitHub App, or use the legacy webhook flow.
+
+`app.deploys` exposes the [`DeploysModule`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/modules/deploys.ts), which covers both the deploy timeline and the two GitHub integration paths.
+
+```typescript theme={null}
+const app = await api.applications.fetch("abc123def456abc123def456");
+app.deploys; // DeploysModule
+```
+
+## Listing the deploy history
+
+`app.deploys.list()` returns `Deployment[][]` — **one inner array per deploy**, each walking through the lifecycle states: `pending → clone → commit → restarting → success | error`.
+
+```typescript theme={null}
+const history = await app.deploys.list();
+
+for (const timeline of history) {
+    const last = timeline.at(-1);
+    console.log(`Deploy ${last?.id} ended as ${last?.state}`);
+
+    for (const event of timeline) {
+        if (event.state === "clone")  console.log(`  cloned branch ${event.branch}`);
+        if (event.state === "commit") console.log(`  files`, event.files);
+    }
+}
+```
+
+Flatten the result if you want a single chronological list:
+
+```typescript theme={null}
+const flat = history.flat();
+```
+
+<Warning>
+  In v3 this method returned a flat `Deployment[]`. v4 returns `Deployment[][]` so you can group events by deploy. Use `.flat()` to keep the old shape.
+</Warning>
+
+<Note>
+  `Deployment.id` is now a plain commit SHA-1 (40 hex chars). In v3 it was formatted as `` `git-${string}` ``.
+</Note>
+
+## Linking via the Virtus Cloud GitHub App (recommended)
+
+`app.deploys.linkGithubApp({ repositoryName, repositoryBranch })` links a GitHub repository to the application via the official GitHub App.
+
+```typescript theme={null}
+const repo = await app.deploys.linkGithubApp({
+    repositoryName: "octocat/hello-world",
+    repositoryBranch: "main",
+});
+
+console.log(`Linked ${repo.full_name}#${repo.branch}`);
+```
+
+To remove the link:
+
+```typescript theme={null}
+await app.deploys.unlinkGithubApp();
+```
+
+<Warning>
+  `linkGithubApp` and `unlinkGithubApp` require a **session token (JWT)** as your API key — plain API keys are not accepted by these endpoints.
+</Warning>
+
+## Linking via the legacy webhook flow
+
+`app.deploys.integrateGithubWebhook(accessToken)` configures the legacy webhook-based integration using a GitHub Personal Access Token.
+
+```typescript theme={null}
+const webhookUrl = await app.deploys.integrateGithubWebhook("ghp_xxx...");
+console.log(`Configure GitHub to POST to: ${webhookUrl}`);
+```
+
+Pass `"@"` to remove the webhook:
+
+```typescript theme={null}
+await app.deploys.integrateGithubWebhook("@");
+```
+
+## Inspecting the current configuration
+
+`app.deploys.current()` returns the GitHub App linkage and webhook URL currently configured, if any.
+
+```typescript theme={null}
+const current = await app.deploys.current();
+
+console.log(current.app);     // GitHub App linkage (or null)
+console.log(current.webhook); // legacy webhook URL (or null)
+```
+
+There is also a shortcut `app.deploys.webhookURL()` that returns only the webhook URL (or `undefined`).

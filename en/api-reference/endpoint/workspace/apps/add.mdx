@@ -1,0 +1,31 @@
+---
+title: "Add Application"
+description: "Add an application into the workspace."
+api: "POST https://api.virtuscloud.app/v2/workspaces/applications"
+authMethod: "none"
+---
+
+import Authorization from "/snippets/api/auth.mdx";
+import Status from "/snippets/api/status.mdx";
+
+<Authorization />
+
+<ParamField body="workspaceId" type="string" placeholder="Workspace Id">
+  The ID of the workspace.
+</ParamField>
+
+<ParamField body="appId" type="string" placeholder="Application ID">
+  The ID of the application. You can find this in the URL of your application's dashboard.
+</ParamField>
+
+### Response
+
+<Status />
+
+<ResponseExample>
+```json
+{
+  "status": "success"
+}
+```
+</ResponseExample>
