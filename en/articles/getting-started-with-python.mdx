@@ -1,143 +1,168 @@
 ---
-title: "Getting Started on VirtusCloud with Python"
-sidebarTitle: "Getting Started with Python"
-description: "Learn how to get started on VirtusCloud with Python"
+title: "Getting Started on Virtus Cloud with Python"
 ---
+
+# Getting Started on Virtus Cloud with Python
+
+> Learn how to get started on Virtus Cloud with Python
 
 ## 🚀 Introduction
 
-- Before you begin, make sure you have Python on your system. If you don't have them yet, you can download them from the [official Python website](https://www.python.org/).
-- Next, you will need to create an account on VirtusCloud, which can be done through the [login page](https://virtuscloud.app/login). You can use either your email or Discord, or both, to create an account.
-- Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/plans).
+* Before getting started, ensure that Python is installed on your system. If you don't have it yet, you can download it from the [official Python website](https://www.python.org/).
+* Next, you will need to create an account on Virtus Cloud, which can be done through the [login page](https://virtuscloud.app/en/signup). You can use your email, GitHub, or both to create the account.
+* Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/en/pricing).
 
-## ⚙️ Creating the virtuscloud config file
+## ⚙️ virtuscloud.app file configuration
 
-<Card
-  title="Learn about: how to make the configuration file for VirtusCloud."
-  icon="link"
-  href="https://docs.virtuscloud.app/getting-started/config-file"
->
+<Note>
+  If you are uploading your application via the Virtus Cloud website, you can ignore this section. The site automatically creates the `virtuscloud.app` configuration file for you.
+</Note>
+
+<Card title="Learn more: how to create the configuration file for Virtus Cloud." icon="link" href="https://docs.virtuscloud.app/en/getting-started/config-file">
   The virtuscloud.app file is a configuration file that will be used to
-  configure your application; it will be used to define the name, description,
+  configure your application; it will serve to define the name, description,
   version, main file, among other things.
 </Card>
 
-## ▶️ Start Application
+## 📄 Required Files
 
-- If the `START` field is not defined in the configuration file, VirtusCloud will run `python MAIN` to execute the Python file specified in the `MAIN` field. If the `START` field is defined in the configuration file, the value in the `START` field will be executed directly. For more information on configuration file parameters, visit [configuration parameters](https://docs.virtuscloud.app/getting-started/config-file#configuration-parameters).
+* If the `START` field is not defined in the configuration file, Virtus Cloud will execute `python MAIN` to run the Python file specified in `MAIN`. If the `START` field is defined in the configuration file, the value in it will be executed directly. For more information about configuration file parameters, visit [configuration parameters](https://docs.virtuscloud.app/en/getting-started/config-file#configuration-parameters).
 
-- VirtusCloud uses `pip install` to install all dependencies listed in the `requirements.txt`.
+* Virtus Cloud uses `pip install` to install all dependencies listed in `requirements.txt`.
 
-## 🖥️ Preparing Your Python Project
+## 🖥️ Preparing the project
 
 ### 📁 Essential Configuration Files
 
-When preparing your Python project for deployment on VirtusCloud, ensure that you include your configuration file (`virtuscloud.app/.config`) and the essential files of your application in a zip file.
+When preparing your Python project for deploy on Virtus Cloud, ensure you include the configuration file (`virtuscloud.app/.config`) and the essential files of your application inside a zip file.
 
-<Warning>The configuration (`virtuscloud.app/.config`) file must be located in the root of the zip file. Otherwise, VirtusCloud will not be able to find it during deployment.</Warning>
+<Warning>The configuration file (`virtuscloud.app/.config`) must be located at the root of the zip file. Otherwise, Virtus Cloud will not be able to find it during deploy.</Warning>
 
 #### 🗑️ Files to Exclude Before Uploading
 
-- `ffmpeg`: This software is pre-installed in the VirtusCloud environment, so there's no need to include this folder in your project.
-- `.venv`: This folder contains the virtual environment for your project. VirtusCloud provides an isolated environment, so this folder is not required.
-- `poetry.lock`: Since VirtusCloud does not currently support Poetry, this file should be excluded to avoid any potential issues during deployment.
+* `ffmpeg`: This software comes pre-installed in the Virtus Cloud environment, so it is not necessary to include it in your project.
+* `.venv`: This folder contains your project's virtual environment. Virtus Cloud provides an isolated environment, so there is no need to upload this folder.
+* `poetry.lock`: Since Virtus Cloud does not currently support Poetry, this file should be excluded to avoid compatibility issues during deploy.
 
 ### 🤔 Why Exclude These Files?
 
-Excluding `ffmpeg`, `.venv` and `poetry.lock` is important for several reasons:
+Excluding `ffmpeg`, `.venv`, and `poetry.lock` is important for several reasons:
 
-1. **Clean Environment:** VirtusCloud creates a fresh environment for your project. Including these files is unnecessary and could lead to conflicts with the cloud environment's configurations.
+1. **Clean environment:** Virtus Cloud creates a new environment for your project. Including these files is unnecessary and may cause conflicts with the cloud environment configurations.
 
-2. **Efficiency:** Removing these files reduces the size of your upload, making the process faster and more streamlined.
+2. **Efficiency:** Removing these files reduces the upload size, making the process faster and leaner.
 
-3. **Compatibility:** Excluding `poetry.lock` ensures that there are no compatibility issues, as VirtusCloud relies on `requirements.txt` for installing dependencies.
+3. **Compatibility:** Excluding `poetry.lock` avoids compatibility issues, as Virtus Cloud uses `requirements.txt` to install dependencies.
 
-Before uploading, make sure to zip your project files in **.zip** format, excluding the unnecessary files mentioned above. This will help ensure that your Python application is ready for a successful deployment to VirtusCloud.
+Before uploading, compress your project files into **.zip** format, excluding the unnecessary files mentioned above. This will help ensure your Python application is ready for a successful deploy on Virtus Cloud.
 
 ### 📄 Required Files
 
-- main.py (Example of main file).
-- [requirements.txt](./how-to-create-your-requirements) (Dependency file).
-- OR [pyproject.toml] (Dependency file).
-- [virtuscloud.app](/getting-started/config-file) (file that contains the VirtusCloud configuration).
+* main.py (Example of main file).
+* [requirements.txt](./how-to-create-your-requirements) (Dependencies file).
+* OR \[pyproject.toml] (Dependencies file).
+* [virtuscloud.app](https://docs.virtuscloud.app/en/getting-started/config-file) (file containing Virtus Cloud configuration).
 
 ## 💡 Troubleshooting
 
 <AccordionGroup>
-  <Accordion
-    title="The main file is invalid or corrupted"
-    icon="file"
-    iconType="solid"
-  >
-    This error occurs when the file defined as "main" for your application in
-    the configuration file does not exist, is written incorrectly, or the path
-    is incorrect. If your main file is inside a folder, for example, you should
-    enter `folder/file.js`.
+  <Accordion title="The main file is invalid or corrupted" icon="file" iconType="solid">
+    This error occurs when the file defined as "main" for your application
+    in the configuration file does not exist, is written incorrectly, or the
+    path is incorrect. If your main file is inside a
+    folder, for example, specify `folder/file.py`.
   </Accordion>
-  <Accordion title="Bad Memory" icon="memory" iconType="solid">
-    The minimum amount of RAM required to host a bot is 256MB, and for a
-    website/API, it's 512MB. However, depending on the size and complexity of
+
+  <Accordion title="Insufficient memory" icon="memory" iconType="solid">
+    The minimum amount of RAM required to host a bot is 256MB and for
+    a site/API is 512MB. However, depending on the size and complexity of
     your application, it may be advisable to allocate a larger amount of RAM to
-    avoid the
-    [LACK_OF_RAM](https://docs.virtuscloud.app/faqs/troubleshooting/LACK_OF_RAM)
-    error.
+    avoid your application running out of memory and crashing.
   </Accordion>
 </AccordionGroup>
 
-## 📤 Uploading Project to VirtusCloud
+## 📤 How to host your project
 
-After preparing your project files, you can now upload them to VirtusCloud and host your project.
+Now that you have prepared all the files for your Python project, the next step is to upload them to Virtus Cloud and put your application online. There are several ways to upload, but we will cover two: via Dashboard or via CLI.
 
-<Tabs>
-  <Tab title="Dashboard Upload">
-    Access the [VirtusCloud
-    Dashboard](https://virtuscloud.app/dashboard/upload) and upload your project
-    files.
+### Via dashboard
+
+<Steps>
+  <Step title="Access the Upload Page">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configure Your Environment">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Deploy Your Project">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
     <Frame>
-      <img src="/images/uploading.gif" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
     </Frame>
-  </Tab>
-  <Tab title="CLI Upload">
-    <Steps>
-      <Step title="First Step">
-        First, you need to have the CLI installed in your environment. If you
-        don't have it yet, run the following command in your terminal:
-        ```
-        npm install -g @virtuscloud/cli
-        ```
-        If you already have it, we recommend updating it. To do this, run the following command in your terminal:
-        <Tabs>
-          <Tab title="Windows">
-            ```bash
-            virtuscloud update
-            ```
-          </Tab>
-          <Tab title="Linux, macOS, and WSL">
-            ```bash
-            curl -fsSL https://cli.virtuscloud.app/install | bash
-            ```
-          </Tab>
-        </Tabs>
-      </Step>
-      <Step title="Second Step">
-        Now, to authenticate and use other CLI commands, you will find your
-        authorization key [here](https://virtuscloud.app/account) by clicking on
-        "Request API Key". After obtaining your authorization key, run the
-        following command: 
-        ```bash 
-        virtuscloud login
-        ```
-      </Step>
-      <Step title="Third Step">
-        Finally, to deploy your application to VirtusCloud using the CLI, you
-        need to execute the following command, passing the path of your zip
-        file: 
-        ```bash 
-        virtuscloud upload zip
-        ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+  </Step>
+</Steps>
 
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
+</Card>
+
+<Steps>
+  <Step title="Install the CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
+
+    ```
+    npm install -g @squarecloud/cli
+    ```
+
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
+
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        squarecloud update
+        ```
+      </Tab>
+
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Authenticate">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
+
+    ```bash theme={null}
+    squarecloud auth login
+    ```
+  </Step>
+
+  <Step title="Upload Your Project">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
+
+    ```bash theme={null}
+    squarecloud upload 
+    ```
+
+    Or if you created the zip manually, you can use:
+
+    ```bash theme={null}
+    squarecloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
+
+## Contact us
+
+If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.

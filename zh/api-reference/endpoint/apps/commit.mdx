@@ -1,35 +1,37 @@
 ---
 title: "Commit Application"
-description: "Send a change to your application. It has a rate limit of 1 request every 3 seconds."
-api: "POST https://api.virtuscloud.app/v2/apps/{app_id}/commit"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Commit Application
 
-<Authorization />
+> Send a change to your application. It has a rate limit of 1 request every 3 seconds.
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 <ParamField path="app_id" type="string" placeholder="Application ID" required>
   The ID of the application. You can find this in the URL of your application's dashboard.
 </ParamField>
 
 <ParamField body="file" type="file" placeholder="commit.zip" required>
-  Use FormData or NodeJS Buffer (single file or compress [zip])
+  Use FormData or NodeJS Buffer (single file or compress \[zip])
 </ParamField>
 
 ### Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
 
 <ResponseField name="message" type="string">
   A message indicating the status of the commit.
 </ResponseField>
 
 <ResponseExample>
-```json
-{
-    "status": "success"
-}
-```
+  ```json theme={null}
+  {
+      "status": "success"
+  }
+  ```
 </ResponseExample>

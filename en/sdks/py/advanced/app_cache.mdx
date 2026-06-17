@@ -1,14 +1,17 @@
 ---
 title: "App Cache"
-description: "Learn how to use the App cache."
 ---
+
+# App Cache
+
+> Learn how to use the App cache.
 
 When a request is made, it returns application information and caches it in the Application object itself. This is useful if you need to access this information again in a relatively short time, meaning it's not worth making a new API request for updated data. In such cases, you can access `Application.cache`.
 
-```python
-import virtuscloud as virtus
+```python theme={null}
+import squarecloud as square
 
-client = virtus.Client('API_KEY')
+client = square.Client('API_KEY')
 
 async def example():
     app = await client.app('application_id')
@@ -33,10 +36,10 @@ async def example():
 
 If, for some reason, you don't want to update the cache when making a request, you can pass the `update_cache=False` argument.
 
-```python
-import virtuscloud as virtus
+```python theme={null}
+import squarecloud as square
 
-client = virtus.Client('API_KEY')
+client = square.Client('API_KEY')
 
 async def example():
     app = await client.app('application_id')
@@ -45,17 +48,17 @@ async def example():
 ```
 
 <Note>
-    If the arguments you pass to `cache.update` are not an instance of `StatusData`, `LogsData`, or `BackupData`, a `VirtusException` error will be raised.
+  If the arguments you pass to `cache.update` are not an instance of `StatusData`, `LogsData`, or `BackupData`, a `SquareException` error will be raised.
 </Note>
 
 ## Manually clearing the cache
 
 You can manually clear the cache using `cache.clear`.
 
-```python
-import virtuscloud as virtus
+```python theme={null}
+import squarecloud as square
 
-client = virtus.Client('API_KEY')
+client = square.Client('API_KEY')
 
 
 async def example():
@@ -71,10 +74,10 @@ async def example():
 
 You can also manually update it using the `cache.update` method.
 
-```python
-import virtuscloud as virtus
+```python theme={null}
+import squarecloud as square
 
-client = virtus.Client('API_KEY')
+client = square.Client('API_KEY')
 
 
 async def example():

@@ -1,9 +1,10 @@
 ---
 title: "Get Service Status"
-description: "Check the real-time status of VirtusCloud services"
-api: "GET https://api.virtuscloud.app/v2/service/status"
-authMethod: "none"
 ---
+
+# Get Service Status
+
+> Check the real-time status of Virtus Cloud services
 
 <Info>
   This route has a 5-minute cache and does not reflect the real-time status of
@@ -13,16 +14,18 @@ authMethod: "none"
 ### Response
 
 <ResponseField name="status" type="string">
-The current status of VirtusCloud, with `online` indicating the service is online, `degraded` indicating issues, and `unknown` indicating unavailable.
+  The current status of Virtus Cloud, with `online` indicating the service is online, `degraded` indicating issues, and `unknown` indicating unavailable.
 </ResponseField>
+
 <ResponseField name="message" type="string">
-Message about the current status of VirtusCloud services.
+  Message about the current status of Virtus Cloud services.
 </ResponseField>
+
 <ResponseExample>
-```json
-{
-    "status": "online",
-    "message": "All services are online."
-}
-```
+  ```json theme={null}
+  {
+      "status": "online",
+      "message": "All services are online."
+  }
+  ```
 </ResponseExample>

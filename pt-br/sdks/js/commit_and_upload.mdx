@@ -1,93 +1,76 @@
 ---
-title: "Commit and Upload"
-description: "In this section you will learn how to make commits and uploads using the VirtusCloud JavaScript SDK."
+title: "Commit and upload"
 ---
 
-## Making a commit
+# Commit and upload
 
-`application.commit()` is a method that allows you to commit a file to your application.
+> Upload a new application to Virtus Cloud or commit new files to an existing one.
 
-<Tabs>
-    <Tab title="Using Buffer">
-    ```javascript
-    const { VirtusCloudAPI } = require("@virtuscloud/api");
-    const api = new VirtusCloudAPI("Your API Key");
+## Uploading a new application
 
-    const application = await api.applications.get("Application ID");
+`api.applications.create(file)` uploads a zip and creates a brand-new application. The `file` argument is either a local file path or a `Buffer`.
 
-    // Specify the content and name of the file you want to commit
-    const fileContent = Buffer.from("Your file content");
-    const fileName = "file.txt";
+```typescript theme={null}
+import { VirtusCloudAPI } from "@squarecloud/api";
+import { join } from "node:path";
 
-    // Perform the commit operation
-    const success = await application.commit(fileContent, fileName);
+const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY!);
 
-    // Handle the result accordingly
-    if (success) {
-        console.log(`File "${fileName}" committed successfully.`);
-    } else {
-        console.error(`Failed to commit file "${fileName}".`);
-    }
-    ```
-    </Tab>
-    <Tab title="Using Absolute Path">
-    ```javascript
-    const { VirtusCloudAPI } = require("@virtuscloud/api");
-    const api = new VirtusCloudAPI("Your API Key");
+const result = await api.applications.create(join(__dirname, "my-app.zip"));
 
-    const application = await api.applications.get("Application ID");
-
-   // Specify the content and name of the file you want to commit
-    const { join } = require("node:path");
-    const fileName = "file.txt";
-    const filePath = join(__dirname, fileName);
-
-    // Optionally, set whether the application should restart after the commit
-    const shouldRestart = true;
-
-    // Perform the commit operation
-    const success = await application.commit(filePath, fileName, shouldRestart);
-
-    // Handle the result accordingly
-    if (success) {
-        console.log(`File "${fileName}" committed successfully.`);
-    } else {
-        console.error(`Failed to commit file "${fileName}".`);
-    }
-    ```
-    </Tab>
-</Tabs>
-
-## Making a upload
-
-`application.create()` is a method that allows you to upload a application to VirtusCloud.
-
-```javascript
-const { VirtusCloudAPI } = require("@virtuscloud/api");
-const api = new VirtusCloudAPI("Your API Key");
-
-// Specify the content and name of the zip file you want to upload
-const { join } = require("node:path");
-const fileName = "application.zip";
-const filePath = join(__dirname, fileName);
-
-// Perform the upload operation
-const success = await api.applications.create(filePath);
-
-// Handle the result accordingly
-if (success) {
-    console.log(`Application uploaded successfully.`, success);
-    // Return the application uploaded information (id, tag, description, etc.)
-} else {
-    console.error(`Failed to upload application.`);
-}
+console.log(result.id);   // newly created application ID
+console.log(result.name); // display name
+console.log(result.lang); // language slug (e.g. "javascript")
+console.log(result.ram);  // allocated RAM in MB
 ```
 
-**Remember that to upload an application you need a zip that contains (at least) the following files:**:
+The zip must contain at least:
 
-- Main file: responsible for starting your application
-- Dependencies file: contains information about which dependencies are necessary
-- Configuration file (virtuscloud.app): a configuration file specifying the
-name,
-description, main file name, version, etc. To learn more about the
-configuration file, take a look at this [guide](https://docs.virtuscloud.app/getting-started/config-file).
+* **Main file** — entry point of your application
+* **Dependencies file** — `package.json`, `requirements.txt`, etc.
+* **`virtuscloud.app`** — configuration file with name, description, main file, version, etc. See the [config file guide](/en/getting-started/config-file)
+
+## Committing files to an existing application
+
+`app.commit(file, fileName?)` uploads files into an already-deployed application. Pass a zip to replace multiple files at once, or a single file to update just that one.
+
+| Parameter  | Type               | Description                                                                                                      |
+| ---------- | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `file`     | `string \| Buffer` | Local file path or `Buffer` content                                                                              |
+| `fileName` | `string?`          | Name attached to the upload. `.zip` is extracted on the server; any other extension is written as a single file. |
+
+<Tabs>
+  <Tab title="Commit a single file (Buffer)">
+    ```typescript theme={null}
+    const content = Buffer.from("console.log('hello')\n");
+    await app.commit(content, "index.js");
+    ```
+  </Tab>
+
+  <Tab title="Commit a zip from disk">
+    ```typescript theme={null}
+    import { readFile } from "node:fs/promises";
+
+    const zip = await readFile("./dist.zip");
+    await app.commit(zip, "dist.zip");
+    ```
+  </Tab>
+
+  <Tab title="Commit a file by path">
+    ```typescript theme={null}
+    import { join } from "node:path";
+
+    const filePath = join(__dirname, "index.js");
+    await app.commit(filePath, "index.js");
+    ```
+  </Tab>
+</Tabs>
+
+<Warning>
+  In v3 `commit()` accepted a third `restart` argument. **In v4 the third parameter has been removed** — use `app.restart()` after the commit if you need a restart.
+</Warning>
+
+```typescript theme={null}
+await app.commit(zip, "dist.zip");
+await app.restart();
+```

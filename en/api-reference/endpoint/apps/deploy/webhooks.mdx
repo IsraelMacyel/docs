@@ -1,50 +1,50 @@
 ---
 title: "Set GitHub Webhook"
-description: "Integrate VirtusCloud with GitHub webhooks."
-api: "POST https:/api.virtuscloud.app/v2/apps/{app_id}/deploy/webhook"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Set GitHub Webhook
 
-<Authorization />
+> Integrate Virtus Cloud with GitHub webhooks.
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 <ParamField path="app_id" type="string" placeholder="Application ID" required>
   The ID of the application. You can find this in the URL of your application's dashboard.
 </ParamField>
 
-<ParamField body="access_token" type="string" placeholder="ghp_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" required>
+<ParamField body="access_token" type="string" placeholder="YOUR_GITHUB_TOKEN" required>
   The access token for your GitHub repository. You can find this in your [GitHub Tokens Classic](https://github.com/settings/tokens/new)
 </ParamField>
 
 ### Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
 <ResponseField name="message" type="string">
   A message indicating the status of the commit.
 </ResponseField>
 
 <ResponseField name="response" type="object">
+  The contents of the response.
 
-The contents of the response.
-
-<Expandable title="Toggle object">
-
-<ResponseField name="webhook" type="string">
-  The URL of the webhook.
-</ResponseField>
-
-</Expandable>
+  <Expandable title="Toggle object">
+    <ResponseField name="webhook" type="string">
+      The URL of the webhook.
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
 <ResponseExample>
-```json
-{
-    "status": "success",
-    "response": {
-        "webhook": "https://api.virtuscloud.app/v2/git/webhook/<webhook-code>"
-    },
-}
-```
+  ```json theme={null}
+  {
+      "status": "success",
+      "response": {
+          "webhook": "https://api.virtuscloud.app/v2/git/webhook/<webhook-code>"
+      }
+  }
+  ```
 </ResponseExample>

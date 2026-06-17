@@ -1,13 +1,12 @@
 ---
 title: "How to deploy your PG Admin"
-description: "Learn how to host your pgadmin to access your PostGreSQL database anywhere"
 ---
 
 # How to deploy your PG Admin
 
 > Learn how to host your pgadmin to access your PostGreSQL database anywhere
 
-## Introduction
+## Introducción
 
 * This article guides you through creating and hosting a PG Admin application on Virtus Cloud.
 * Before getting started, make sure you have an account on Virtus Cloud, which can be done through the sign up page. You can use your email to create an account.
@@ -45,7 +44,7 @@ SQLITE_PATH = '/application/.pgadmin/pgadmin4.db'
 ```
 
 <Info>
-  We already have everything ready for deploy on our repository [here](https://github.com/virtuscloud-education/pgadmin4-web/releases). You just need to download the `project.zip` and upload it.
+  We already have everything ready for deploy on our repository [here](https://github.com/squarecloud-education/pgadmin4-web/releases). You just need to download the `project.zip` and upload it.
 </Info>
 
 ## 📁 Necessary Files
@@ -57,9 +56,9 @@ The following files are necessary in your zip:
 
 ## ⚙️ Configuration File
 
-* You need to configure runtime environment to `Detect manually` and set it to `Python`. In a virtuscloud.config or virtuscloud.app will look like this:
+* You need to configure runtime environment to `Detect manually` and set it to `Python`. In a squarecloud.config or virtuscloud.app will look like this:
 
-```systemd virtuscloud theme={null}
+```systemd squarecloud theme={null}
 DISPLAY_NAME=App name
 RUNTIME=python
 MEMORY=1024
@@ -77,7 +76,7 @@ PGADMIN_SETUP_PASSWORD=yourSecurePassword
 
 ## Uploading the Project to Virtus Cloud
 
-After preparing your project files, you can now upload them to Virtus Cloud and host your project.
+Después de preparar los archivos del proyecto, ahora puedes subirlos a Virtus Cloud y alojar tu proyecto.
 
 <Tabs>
   <Tab title="Upload via Dashboard">
@@ -94,7 +93,7 @@ After preparing your project files, you can now upload them to Virtus Cloud and 
         First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
         ```
-        npm install -g @virtuscloud/cli
+        npm install -g @squarecloud/cli
         ```
 
         If you already have it, we recommend updating it. To do this, run the following command in your terminal:
@@ -102,7 +101,7 @@ After preparing your project files, you can now upload them to Virtus Cloud and 
         <Tabs>
           <Tab title="Windows">
             ```bash theme={null}
-            virtuscloud update
+            squarecloud update
             ```
           </Tab>
 
@@ -115,10 +114,10 @@ After preparing your project files, you can now upload them to Virtus Cloud and 
       </Step>
 
       <Step title="Second Step">
-        Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
+        Ahora, para autenticarte y usar otros comandos de la CLI, encontrarás tu clave de autorización [aquí](https://virtuscloud.app/es/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
         ```bash theme={null}
-        virtuscloud auth login
+        squarecloud auth login
         ```
       </Step>
 
@@ -126,7 +125,7 @@ After preparing your project files, you can now upload them to Virtus Cloud and 
         Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command, passing the path to your zip file:
 
         ```bash theme={null}
-        virtuscloud upload zip
+        squarecloud upload zip
         ```
       </Step>
     </Steps>

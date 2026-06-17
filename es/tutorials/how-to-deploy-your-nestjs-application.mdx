@@ -1,42 +1,92 @@
 ---
-title: "Hosting a Nestjs Application on VirtusCloud"
-sidebarTitle: "Nestjs application"
-description: "This article guides you on creating and hosting a Nestjs app on VirtusCloud"
+title: "Cómo Alojar Aplicaciones NestJS"
+sidebarTitle: "NestJS"
+description: "Aprende cómo crear y alojar aplicaciones NestJS en Virtus Cloud."
 ---
 
-## Introduction
+# How to Host NestJS Applications
 
-- Before you begin, make sure you have Node.js and npm installed on your system. If you don't have them yet, you can download them from the [official Node.js website](https://nodejs.org/).
-- Next, you will need to create an account on VirtusCloud, which can be done through the [sign up page](https://virtuscloud.app/signup). You can use your email to create an account.
-- Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/pricing).
+> Learn how to create and host NestJS applications on Virtus Cloud.
 
-### Setting up NestJS CLI
+export const PortNote = ({lang}) => {
+  if (lang == 'pt-br') {
+    return <Note>
+            <b>Qual porta devo usar para o meu servidor?</b><br />
+            Você deve usar a porta <b>80</b> para o seu servidor. A porta 80 é a porta padrão para tráfego HTTP; a Virtus Cloud a encaminha para 443 (HTTPS) para estabelecer uma conexão segura.<br />
+            Certifique-se de configurá-la antes de compactar e enviar seu projeto.
+        </Note>;
+  }
+  return <Note>
+            <b>What port should I use for my server?</b><br />
+            You should use port <b>80</b> for your server. Port 80 is the default port for HTTP traffic, which is handled by Virtus Cloud to route it to 443, HTTPS, for a secure connection.<br />
+            Make sure to configure it before compressing and uploading your project.
+        </Note>;
+};
 
-To use the NestJS command-line interface (CLI), you need to install it globally on your system. Run the following command:
+export const RecommendedPlan = ({lang, plan, tier, cpu, appType}) => {
+  const url = `https://virtuscloud.app/${lang}/pay?plan=${plan.toLowerCase()}&tier=${tier}`;
+  if (lang == 'en') {
+    return <Note>
+        <b>Wondering how much RAM and CPU your plan needs to host {appType}?</b><br />
+        Don't worry, we're here to help.
+        Our <a href={url}>{plan}</a> plan offers <b>{tier}GB</b> of RAM and <b>{cpu}vCPU</b>, which should be sufficient for most {appType}. 
+        However, if you are working on a larger project and seeking extra stability, we recommend considering our <b>Pro</b> plan. With additional resources, you can maintain stability even during demand spikes. 
+        To purchase, simply click <a href="https://virtuscloud.app/en/pay?plan=pro">here</a>.
+      </Note>;
+  } else {
+    return <Note>
+          <b>Está se perguntando quanta RAM e CPU seu plano precisa para hospedar {appType}?</b><br />
+          Não se preocupe, estamos aqui para ajudar.
+          Nosso plano <a href={url}>{plan}</a> oferece <b>{tier}GB</b> de RAM e <b>{cpu}vCPU</b>, o que deve ser suficiente para a maioria dos {appType}.
+          No entanto, se você estiver trabalhando em um projeto maior e precisar de mais estabilidade, recomendamos considerar nosso plano <b>Pro</b>.
+          Com recursos adicionais, você pode manter a estabilidade mesmo durante picos de demanda.
+          Para comprar, basta clicar <a href={`https://virtuscloud.app/${lang}/pay?plan=pro`}>aqui</a>.
+        </Note>;
+  }
+};
 
-```bash
+export const appType_0 = "a NestJS application"
+
+## Introducción
+
+To develop and host {appType_0} on Virtus Cloud, it's essential to follow a structured sequence of configurations and prerequisites. This technical guide will cover the entire process, from initial setup to production deployment.
+
+### Prerequisites
+
+* **Virtus Cloud Account**: Register through the [signup page](https://virtuscloud.app/en/signup) using your email.
+* **Active Paid Plan**: Ensures dedicated resources and optimized performance for your application. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the most suitable for your needs.
+
+<RecommendedPlan appType="NestJS applications" plan="Standard" tier="4" cpu="4" lang="en" />
+
+## Creando el proyecto
+
+To create a NestJS application, you need to have Node.js and npm installed on your system before following the steps.
+
+### CLI installation
+
+To use the NestJS command line interface (CLI), you need to install it globally on your system. Run the following command:
+
+```bash theme={null}
 npm install -g @nestjs/cli
 ```
 
-This command installs the `@nestjs/cli` package globally on your system, which allows you to use the `nest` command from anywhere in your terminal.
+This command installs the `@nestjs/cli` package globally on your system, allowing you to use the `nest` command from anywhere in your terminal.
 
-### Creating a NestJS Project
+### Developing project
 
 To create a new NestJS project, run the following command:
 
-```bash
+```bash theme={null}
 nest new my-app
 ```
 
 In this command, `nest new my-app` is used to create a new NestJS project. The `nest new` command is a tool that comes with `nest`, the NestJS CLI (Command Line Interface). It is used to initialize a new NestJS application.
 
-`my-app` is the name of the new application. This command creates a new directory named `my-app` and sets up the necessary files and dependencies for a basic NestJS application.
+`my-app` is the name of the new application. This command creates a new directory called `my-app` and sets up the necessary files and dependencies for a basic NestJS application.
 
-## Configuring Port 80
+After generating the NestJS project with the `nest new my-app` command, the file you need to modify to change the port is `main.ts`. This file is located at the root of your project directory, inside the `src` folder.
 
-After generating the NestJS project with the command `nest new my-app`, the file you need to modify to change the port is `main.ts`. This file is located at the root of your project directory, inside the `src` folder.
-
-```typescript
+```typescript theme={null}
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
@@ -46,130 +96,153 @@ async function bootstrap() {
 }
 bootstrap();
 ```
-Port 80 is the default port for HTTP traffic.
 
-## Building the Application
+Port 80 is the default port for HTTP traffic.\
+You can start your development server with the following command:
 
-NestJS uses TypeScript, so you could compile your TypeScript code to JavaScript before you can run your application.
+```bash theme={null}
+npm run start:dev
+```
 
-You can build your application by running the following command:
+## Compilando el proyecto
 
-```bash
+NestJS uses TypeScript, so you must compile your TypeScript code to JavaScript before running your application.
+
+You can compile your application by running the following command:
+
+```bash theme={null}
 npm run build
 ```
 
-This command runs the `build` script defined in your `package.json` file, which in turn runs the `nest build` command. This command compiles your TypeScript code to JavaScript.
+This command executes the `build` script defined in your `package.json` file, which in turn runs the `nest build` command. This command compiles your TypeScript code to JavaScript.\
+After running this command, the compiled JavaScript files will be located in the `dist` directory of your project. These files are what you will use to run your application in a production environment.\
+The main file to run your application will be `dist/main.js`.
 
-## Creating the virtuscloud config file
+## Despliegue
 
-<Card title="Learn about: how to make the configuration file for VirtusCloud." icon="link" href="https://docs.virtuscloud.app/getting-started/config-file">
-The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define the name, description, version, main file, among other things.
+Después de preparar los archivos del proyecto, ahora puedes subirlos a Virtus Cloud y alojar tu proyecto.
+To do so, create a ZIP file containing all your project files.
+
+<PortNote lang="en" />
+
+### Via dashboard
+
+<Steps>
+  <Step title="Acceder a la Página de Carga">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configurar tu Entorno">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Desplegar tu Proyecto">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
 </Card>
 
-## Configuring the MAIN field
+<Steps>
+  <Step title="Instalar la CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
-You need to specify the main file of your application in the `MAIN` field of virtuscloud.app. For a NestJS application, the main file is the compiled JavaScript file of your `main.ts` file, which is `dist/main.js`.
+    ```
+    npm install -g @squarecloud/cli
+    ```
 
-Here's how you can set it:
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
 
-```app virtuscloud.app
-MAIN=dist/main.js
-```
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        squarecloud update
+        ```
+      </Tab>
 
-## Configuring the START Field
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
 
-In the VirtusCloud configuration file, the **START** field is optional and is only necessary if you are using a custom script to start the website or API. In the example provided, the **START** field is not necessary.
+  <Step title="Autenticar">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
-## Purchasing a Plan Before Uploading Your Project
+    ```bash theme={null}
+    squarecloud auth login
+    ```
+  </Step>
 
-Before you can upload your project to VirtusCloud, it's important to understand that you need to purchase a plan. The type of plan you choose will depend on the resources required by your application. You can view our plans [here](https://virtuscloud.app/pricing).
+  <Step title="Subir tu Proyecto">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
 
-<Note>**Are you wondering how much RAM and CPU your plan needs to host a NestJS application?** Don't worry, we're here to help. NestJS is a progressive Node.js framework for building efficient and scalable server-side applications. It's modular, testable, and strongly typed with TypeScript, making it a great choice for complex back-end development. Our **[Standard](https://virtuscloud.app/pay?plan=standard&tier=4&duration=monthly)** plan offers **4GB** of RAM and **4vCPU**, which should be sufficient for most Nestjs applications. However, if you're working on a larger project or need more stability, we recommend considering our Pro plan. With additional resources, you can ensure smooth performance even under high demand. To purchase, simply click [here](https://virtuscloud.app/pay?plan=pro&tier=12&duration=monthly).</Note>
+    ```bash theme={null}
+    squarecloud upload 
+    ```
 
-## Uploading Project to VirtusCloud
+    Or if you created the zip manually, you can use:
 
-After preparing your project files, you can now upload them to VirtusCloud and host your project.
+    ```bash theme={null}
+    squarecloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
 
-<Tabs>
-  <Tab title="Dashboard Upload">
-    Access the [VirtusCloud
-    Dashboard](https://virtuscloud.app/dashboard/upload) and upload your project
-    files.
+## Recursos Adicionales
+
+For more information about NestJS and its tools, visit the [official NestJS documentation](https://docs.nestjs.com/). There, you will find detailed guides, tutorials, and API documentation to help you make the most of NestJS.
+
+## Solución de Problemas
+
+<CardGroup cols={1}>
+  ### Custom Domain
+
+  <Card horizontal>
+    To use a custom domain (e.g., `mysite.com`) instead of the default URL `mysite.virtuscloud.app`, you need the **Standard plan or higher**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
+  </Card>
+
+  ### Minimum RAM Requirements
+
+  <Card horizontal>
+    **Minimum: 512MB RAM** for simple websites/APIs. For sites with frameworks (Next.JS, React, Vue, Angular, etc.), we always recommend **at least 1GB RAM**. For larger applications, allocate more RAM to prevent the application from running out of memory and crashing.
+  </Card>
+
+  ### Could not find this site.
+
+  <Card horizontal>
+    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Square to enable **first access**.
+
     <Frame>
-      <img src="/images/uploading.gif" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/unauthorized.webp" alt="Cloudflare site not found error" style={{ borderRadius: "0.2rem" }} />
     </Frame>
-  </Tab>
-  <Tab title="CLI Upload">
-    <Steps>
-      <Step title="First Step">
-        First, you need to have the CLI installed in your environment. If you
-        don't have it yet, run the following command in your terminal:
-        ```
-        npm install -g @virtuscloud/cli
-        ```
-        If you already have it, we recommend updating it. To do this, run the following command in your terminal:
-        <Tabs>
-          <Tab title="Windows">
-            ```bash
-            virtuscloud update
-            ```
-          </Tab>
-          <Tab title="Linux, macOS, and WSL">
-            ```bash
-            curl -fsSL https://cli.virtuscloud.app/install | bash
-            ```
-          </Tab>
-        </Tabs>
-      </Step>
-      <Step title="Second Step">
-        Now, to authenticate and use other CLI commands, you will find your
-        authorization key [here](https://virtuscloud.app/account/security) by clicking on
-        "Request API Key". After obtaining your authorization key, run the
-        following command: 
-        ```bash 
-        virtuscloud login
-        ```
-      </Step>
-      <Step title="Third Step">
-        Finally, to deploy your application to VirtusCloud using the CLI, you
-        need to execute the following command, passing the path of your zip
-        file: 
-        ```bash 
-        virtuscloud upload zip
-        ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+  </Card>
 
-## Troubleshooting
+  ### Site took too long to respond...
 
-<AccordionGroup>
-  <Accordion title="Custom Domain" icon="globe" iconType="solid">
-    If you want to use a custom domain for your app hosted on VirtusCloud, note that by default, the URL will be something like `https://mysite.virtusapp.cloud/`. The subdomain is determined by the SUBDOMAIN field in the configuration file. However, if you prefer using a custom domain, such as `mysite.com`, you'll need to purchase the `Standard` plan or a higher plan. We detail each step to set up your custom domain in our article: [How to set up your custom domain](https://docs.virtuscloud.app/tutorials/how-to-set-up-your-domain).
-  </Accordion>
+  <Card horizontal>
+    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Square's forced environment variables: **PORT** and **HOST** from the `.env` file.
 
-  <Accordion title="Minimum RAM Requirements" icon="memory" iconType="solid">
-    The minimum amount of RAM required to host a website or API is 512MB. However, depending on the size and complexity of your NestJS application, it may be advisable to use a larger amount of RAM to avoid the [LACK_OF_RAM](https://docs.virtuscloud.app/faqs/troubleshooting/LACK_OF_RAM) error.
-  </Accordion>
-
-  <Accordion title="Temporarily Denied Access" icon="ban" iconType="solid">
-    If you receive the message "Your access has been temporarily denied." when trying to access the site, wait for some time. If the issue persists, feel free to contact us at https://virtuscloud.app/dashboard/support.
     <Frame>
-      <img src="/images/articles/troubleshooting/temporarily-denied-access.png" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/timeout.webp" alt="Cloudflare request timeout error" style={{ borderRadius: "0.2rem" }} />
     </Frame>
-  </Accordion>
+  </Card>
+</CardGroup>
 
-  <Accordion title="Website took too long to respond..." icon="clock" iconType="solid">
-     If you receive the message "Website took too long to respond..." make sure you have correctly set port 80 on your application. If the issue persists, feel free to contact us at https://virtuscloud.app/dashboard/support.
-    <Frame>
-      <img src="/images/articles/troubleshooting/website-took-too-long-to-respond.png" style={{ borderRadius: "0.2rem" }} />
-    </Frame>
-  </Accordion>
-</AccordionGroup>
+## Contáctanos
 
-## Additional Resources
-
-For more information about Nestjs and its tools, visit the [official Nestjs documentation](https://docs.nestjs.com/). There, you'll find detailed guides, tutorials, and API documentation to help you make the most of Nestjs.
-
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+Si continúas enfrentando **dificultades técnicas**, nuestro **equipo de soporte especializado** está disponible para ayudarte. [**Contáctanos**](https://virtuscloud.app/es/support) y estaremos encantados de ayudarte.

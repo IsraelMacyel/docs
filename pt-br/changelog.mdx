@@ -1,6 +1,5 @@
 ---
 title: "Changelog"
-description: "Discover the latest news and improvements in Virtus Cloud. Follow product releases, performance optimizations, and much more."
 ---
 
 # Changelog
@@ -479,7 +478,7 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
 
   By popular demand, we rebuilt the UI/UX for environment variable management to be more productive:
 
-  * **VIRTUSCLOUD\_APP\_ID:** Automatic injection of this ENV with the application ID.
+  * **SQUARECLOUD\_APP\_ID:** Automatic injection of this ENV with the application ID.
   * **Quick Actions:** Button to clear all ENVs and new validation on export.
   * **Advanced Interaction (Shift):** Holding `SHIFT` turns the menu button into a trash can for quick deletion.
   * **Direct Editing:** Click the input to edit the value immediately, no need to open menus.
@@ -492,14 +491,14 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
   * **Directory Handling:** You can now **rename and move directories** directly from the dashboard.
   * **Commit API (`?path=`):** Added support for allocating commits to specific subdirectories via API.
   * **Static Environments:** When deploying via runtime, the system automatically detects HTML/CSS projects, hides unnecessary commands, and makes publishing easier.
-  * **Postgres:** PostgreSQL databases now start with the `virtuscloud` database created by default, avoiding connection errors for beginners.
+  * **Postgres:** PostgreSQL databases now start with the `squarecloud` database created by default, avoiding connection errors for beginners.
 
   ### 🔒 Security, LGPD and Infrastructure
 
   We focused on privacy and core platform stability:
 
   * **Data Cleanup (LGPD):** In compliance with privacy regulations, we permanently deleted **50,000+ support chats** and **40,000+ contacts** inactive for over 365 days.
-  * **squareweb.app Scope:** Now accepts and manages connections from the Tor network (with security challenge).
+  * **virtuscloud.app Scope:** Now accepts and manages connections from the Tor network (with security challenge).
   * **Smart Cache Reset:** New intelligent global cache cleaning system.
   * **VSCode Extension:** Fixes applied to resolve involuntary logouts.
   * **Hobby T1 Standardization:** Multithreading adjustment in this tier for standardization with the rest of the existing plans.
@@ -850,7 +849,7 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
 
   * Extremely generous limits: each plan can generate `(RAM / 256) * 2` snapshots per day. E.g.: Hobby plan with 2048MB = **16 daily snapshots** or up to **480/month**!
   * **Instant and FREE restoration** — recover any snapshot from the last 30 days in seconds. (gradual release for everyone in the coming days)
-  * Virtus is going **against the market**: no charges, no hassle.
+  * Square is going **against the market**: no charges, no hassle.
 
   ### Real-Time Configurable Start
 
@@ -898,7 +897,7 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
 
   ### Log Management
 
-  * **Application Log Limitation:** The maximum number of logs per category (logs/crash) in `.virtuscloud` files has been reduced from 10 to 5.
+  * **Application Log Limitation:** The maximum number of logs per category (logs/crash) in `.squarecloud` files has been reduced from 10 to 5.
   * **Log Infrastructure Change:** We have migrated our log infrastructure from Logtail (BetterStack) to Loki (Grafana).
   * **Log Coverage and Retention:** We now log 100% of requests to our main infrastructure (API, Website, Blob, etc.), with a 7 times greater data retention.
 
@@ -960,9 +959,9 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
   * `DELETE /v2/workspaces/members`: Removes a member from the workspace.
     **Body:** `{ workspaceId: string, memberId: string }`
 
-  Workspaces now adopt Virtus's unique ID model (40 characters).
+  Workspaces now adopt Square's unique ID model (40 characters).
 
-  Virtus no longer deletes a workspace when its creator's plan expires.
+  Square no longer deletes a workspace when its creator's plan expires.
 
   By default, **we have reset all teams on the platform**, meaning: **teams created before this update milestone have been deleted**.
 
@@ -1124,7 +1123,7 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
 
   1. "This site could be yours."
 
-  When accessing a subdomain (squareweb.app) that does not yet exist, visitors will see an elegant and explanatory page stating that the address is available, meaning: it can be easily activated through a deploy. A simple and intuitive way to show the potential of Virtus Cloud. (and obviously make your life as a developer easier)
+  When accessing a subdomain (virtuscloud.app) that does not yet exist, visitors will see an elegant and explanatory page stating that the address is available, meaning: it can be easily activated through a deploy. A simple and intuitive way to show the potential of Virtus Cloud. (and obviously make your life as a developer easier)
 
   2. "The site took too long to respond..."
 
@@ -1294,7 +1293,7 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
 
   We have completely rewritten all of Virtus Cloud's proxies in **Go (Golang)**, bringing a more efficient, stable, and scalable infrastructure. This change covers all proxies on the platform, including:
 
-  * 🌐 **squareweb.app (subdomains)** – Better performance and lower latency for web applications.
+  * 🌐 **virtuscloud.app (subdomains)** – Better performance and lower latency for web applications.
   * 🔗 **Custom domains** – New optimized routing, ensuring faster response times.
   * 🏗 **Individual clusters** – Each cluster now has an exclusive dedicated proxy, distributing the load better.
 
@@ -1342,7 +1341,7 @@ description: "Discover the latest news and improvements in Virtus Cloud. Follow 
 
   Go to: [https://virtuscloud.app/en/account](https://virtuscloud.app/en/account), scroll down the page and make the connection.
 
-  \*as this is a test connection, Virtus may reset the connection in case of failure during this authorization period 😄
+  \*as this is a test connection, Square may reset the connection in case of failure during this authorization period 😄
 </Update>
 
 <Update label="February 10, 2025" description="Environment Update">

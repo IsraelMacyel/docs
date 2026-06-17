@@ -1,55 +1,41 @@
 ---
-title: "Solving ABUSE_REQUESTS"
-sidebarTitle: "Solving ABUSE_REQUESTS"
-description: "Learn how to address the ABUSE_REQUESTS error, caused by excessive requests to Discord and/or Amino APIs, and ensure your application runs smoothly."
+title: "解决 ABUSE_REQUESTS"
+sidebarTitle: "解决 ABUSE_REQUESTS"
+description: "了解如何解决由于向 Discord 和/或 Amino API 发出过多请求而导致的 ABUSE_REQUESTS 错误。"
 ---
 
-## When does it occur?
+## 何时发生？
 
-The ABUSE_REQUESTS error occurs when your application is shut down due to a high volume of requests made to the Discord and/or Amino APIs. This may result from inefficient coding practices, lack of caching mechanisms, or surpassing the allocated request limits.
+当您的应用程序因向 Discord 和/或 Amino API 发出大量请求而被关闭时，会发生 ABUSE_REQUESTS 错误。
 
 ```bash
 [SQUARE-SHIELD] ABUSE_REQUESTS
 ```
 
-## Why does it occur?
+## 为什么发生？
 
-This error typically arises when your application exceeds the permissible limits for making requests to the Discord and/or Amino APIs. It could be a consequence of a rapid increase in user activity or inefficient coding that generates an excessive number of API calls.
+当您的应用程序超过向 API 发出请求的允许限制时会发生此错误。
 
-## How to fix
+## 如何修复
 
-Addressing the ABUSE_REQUESTS error involves monitoring and optimizing the sections of your code responsible for API requests, implementing effective caching mechanisms, and, if necessary, requesting an increase in your API request limit through the official support channels.
+### 监控和优化代码
 
-### Monitor and Optimize Your Code
+- 使用日志工具识别生成大量 API 请求的代码部分。
+- 优化 API 调用，最小化不必要的请求。
 
-- Identify Problematic Code: Use logging tools or profiling to pinpoint sections of your code that generate a large number of API requests.
-- Optimize API Calls: Review and optimize the code responsible for API calls. Minimize unnecessary requests and ensure that each call is essential for your application's functionality.
+### 实施缓存机制
 
-### Implement Caching Mechanisms
+- 使用本地缓存存储频繁请求的数据。
+- 设置缓存过期时间。
 
-- Use Local Caching: Store frequently requested data locally to avoid unnecessary API calls. This reduces the load on the servers and improves response times.
-- Set Expiry Times: Implement caching with expiration times to ensure that your application fetches fresh data when necessary while minimizing the number of API requests.
+### 保持应用程序更新
 
-### Request an Increase in Request Limit
-
-If your application genuinely requires a higher API request limit, consider reaching out to the Discord and/or Amino support channels to request an increase. Provide justifications for the increased limit and any measures you've taken to optimize your code.
-
-### Keep Your Application Updated
-
-Ensure your application is using the latest version of any libraries or SDKs interacting with the APIs. Regularly check for updates, as developers often release new versions to address performance issues and improve efficiency.
-
-```bash Update discord.js
+```bash 更新 discord.js
 npm install discord.js@latest
-# or update in your package.json
 ```
 
-```bash Update discord.py
+```bash 更新 discord.py
 pip install discord.py
-# or update in your requirements.txt
 ```
 
-### Test and Restart Your Application
-
-After making the necessary changes, thoroughly test your application to ensure that the modifications effectively reduce the number of API requests. Additionally, restart your application to apply the updates and monitor its performance. 
-
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+如果您继续遇到问题，请[联系我们的支持团队](/company/support)。

@@ -1,153 +1,218 @@
 ---
-title: "😁 Bem-vindo à VirtusCloud"
-sidebarTitle: "Visão Geral"
-icon: "book"
-description: "A VirtusCloud é uma plataforma que oferece serviços de hospedagem empresarial sem complicações e fáceis de usar. Comece em minutos. ✨"
+title: "Cloud Hosting for Developers | Deploy in Seconds | Virtus Cloud"
 ---
 
-<CardGroup>
-  <Card
-    title="Guia de Início Rápido"
-    icon="book"
-    href="/getting-started/quick-start"
-  >
-    Tenha uma visão rápida dos seus primeiros passos com a VirtusCloud.
-  </Card>
-  <Card title="API Oficial" icon="code" href="/api-reference">
-    Nossa documentação de API para desenvolvedores (e você está aqui!).
-  </Card>
-</CardGroup>
+# Cloud Hosting for Developers | Deploy in Seconds | Virtus Cloud
 
-<Snippet file="before-begin.mdx" />
+> High-performance cloud hosting platform for developers. Deploy bots, websites, APIs and databases (Redis, MongoDB, PostgreSQL) in seconds with automatic scalability. Robust and uncomplicated infrastructure.
 
-Após se cadastrar, você pode começar a fazer o deploy das suas aplicações na VirtusCloud depois de selecionar o plano que melhor atende às suas necessidades.
+export const ServicesCard = ({src, title, description, href}) => <a className="group cursor-pointer pb-8" href={href} target="_blank" rel="noopener noreferrer">
+    <div className="overflow-hidden rounded-lg">
+      <img src={src} alt={title} className="block pointer-events-none group-hover:scale-110 scale-100 transition-transform duration-300" />
+    </div>
+    <h3 className="mt-5 text-lg font-semibold text-gray-900 dark:text-zinc-50">{title}</h3>
+    <p className="mt-1.5 text-gray-600 dark:text-zinc-400">{description}</p>
+  </a>;
 
-## Facilite sua jornada com a CLI 💻
-Esta visão geral utiliza a [CLI da VirtusCloud](/cli) para fazer deploy das suas aplicações. A CLI é uma ferramenta de linha de comando que permite interagir com os serviços da VirtusCloud. Você pode usá-la para fazer deploy de aplicações, gerenciar serviços e visualizar logs.
+<div className="relative">
+  <div className="px-4 py-24 lg:py-32 max-w-5xl mx-auto text-center">
+    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-zinc-50 tracking-tight">
+      Instant deployment for
+      <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">modern developers</span>
+    </h1>
 
-Para usar a CLI, você precisa instalá-la na sua máquina local. Use os seguintes comandos para instalar:
+    <p className="max-w-3xl mx-auto mt-6 text-lg md:text-xl text-gray-600 dark:text-zinc-400">
+      We handle the infrastructure so you can focus on what you do best: <strong className="font-semibold text-gray-900 dark:text-zinc-100">create and innovate</strong>. Deploy in seconds and scale with one click.
+    </p>
 
-<br/>
+    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-10">
+      <a href="/en/getting-started/quick-start" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200 text-base">
+        Start building now
+      </a>
 
-<CodeGroup>
-```bash macOS, Linux e WSL
-curl -fsSL https://cli.virtuscloud.app/install | bash
-```
+      <a href="/en/tutorials/introduction" className="w-full sm:w-auto border border-gray-300 dark:border-zinc-900 hover:bg-gray-100 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-colors duration-200 text-base">
+        Explore Tutorials
+      </a>
+    </div>
+  </div>
 
-```bash Windows com npm
-npm install -g @virtuscloud/cli
-```
+  <div className="px-4 max-w-6xl mx-auto mt-16 lg:mt-24">
+    <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-zinc-50 mb-4">
+      Enterprise-Grade Features, No Hidden Costs
+    </h2>
 
-```bash Windows com yarn
-yarn global add @virtuscloud/cli
-```
-</CodeGroup>
+    <p className="text-lg text-center text-gray-600 dark:text-zinc-400 mb-12 lg:mb-16 max-w-3xl mx-auto">
+      A complete platform with everything you need to scale your projects. Built by developers, for developers.
+    </p>
 
-<Steps>
-  <Step title="Leia as instruções sobre sua linguagem">
-    <Snippet file="languages.mdx" />
-    <Info>Para este exemplo, usaremos a linguagem JavaScript (Node.js).</Info>
-  </Step>
-  <Step title="Crie seu arquivo de configuração VirtusCloud">
-    Após instalar a CLI, você precisa criar um arquivo de configuração. Você pode criar um [arquivo de configuração](/getting-started/config-file) lendo o artigo [aqui](/getting-started/config-file).
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <ServicesCard src="https://cdn.virtuscloud.app/docs/services/en/bots.webp" title="Bot Hosting" description="Host bots for Discord, Telegram and more, with high availability and low latency." href="/en/services/bots" />
 
-    Meu arquivo de configuração ficou assim:
-    ```systemd
-    MAIN=index.js
-    MEMORY=512
-    VERSION=recommended
-    DISPLAY_NAME=Robin bot
-    DESCRIPTION=Este sistema de bot foi criado para ajudá-lo nas suas tarefas diárias.
-    ```
-  </Step>
-  <Step title="Faça upload do seu projeto">
-    Após esta etapa, você precisa fazer upload do seu projeto para a VirtusCloud. Execute o seguinte comando:
-    ```bash
-    virtuscloud upload
-    ```
-  </Step>
-</Steps>
+      <ServicesCard src="https://cdn.virtuscloud.app/docs/services/en/sites.webp" title="Websites & APIs" description="Deploy your sites and APIs with support for the most popular frameworks in the market." href="/en/services/sites" />
 
+      <ServicesCard src="https://cdn.virtuscloud.app/docs/services/en/blob.webp" title="Blob Storage" description="Serverless object storage with infinite scalability." href="/en/services/blob" />
+    </div>
 
-## Facilite sua jornada com a interface web 😉
-Se você não gosta de linhas de comando ou prefere usar a interface web, pode fazer upload do seu projeto diretamente no site da VirtusCloud. Para isso, siga estas etapas:
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      <div className="p-6 border border-gray-200 dark:border-zinc-900 rounded-xl">
+        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
 
-<Steps>
-  <Step title="Acesse o site da VirtusCloud">
-    Acesse o [painel da VirtusCloud](https://virtuscloud.app/dashboard) usando sua conta.
-  </Step>
-  <Step title="Crie seu arquivo de configuração VirtusCloud">
-    Após acessar o painel, você precisa criar um arquivo de configuração. Você pode criar um [arquivo de configuração](/getting-started/config-file) lendo o artigo [aqui](/getting-started/config-file).
-  </Step>
-  <Step title="Compacte seu projeto em ZIP">
-    Após criar o arquivo de configuração, você precisa compactar seu projeto.
-    ```bash Usando a CLI
-    virtuscloud zip
-    ```
+        <h3 className="font-semibold text-gray-900 dark:text-zinc-100 mb-2">Smart Deployment</h3>
+        <p className="text-gray-600 dark:text-zinc-400 text-sm">Automate your deployments with native GitHub integrations and a powerful CLI.</p>
+      </div>
 
-    Ou você pode compactar seu projeto manualmente:
-    <CodeGroup>
-      ```bash Windows
-      1. Localize o arquivo ou pasta que deseja compactar.
-      2. Pressione e segure (ou clique com o botão direito) no arquivo ou pasta, selecione Enviar para e depois Pasta compactada (zipada).
-      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local. Para renomeá-la, clique com o botão direito na pasta, selecione Renomear e digite o novo nome.
-      ```
-      ```bash Linux
-      1. Localize o arquivo ou pasta que deseja compactar.
-      2. Clique com o botão direito no arquivo ou pasta e escolha Compactar no menu de atalho.
-      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
-      ```
-      ```bash macOS
-      1. Localize o arquivo ou pasta que deseja compactar.
-      2. Clique com Ctrl no arquivo ou pasta e escolha Compactar no menu de atalho.
-      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
-      ```
-    </CodeGroup>
+      <div className="p-6 border border-gray-200 dark:border-zinc-900 rounded-xl">
+        <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        </div>
 
-    Ou use a linha de comando para compactar a pasta do projeto:
-    <CodeGroup>
-    ```bash macOS, Linux e WSL
-    zip -r meu-projeto.zip .
-    ```
+        <h3 className="font-semibold text-gray-900 dark:text-zinc-100 mb-2">Unlimited Scalability</h3>
+        <p className="text-gray-600 dark:text-zinc-400 text-sm">Your application adapts to demand, ensuring performance and cost control.</p>
+      </div>
 
-    ```bash Windows (powershell)
-    Compress-Archive -Path . -DestinationPath meu-projeto.zip
-    ```
-    </CodeGroup>
-   </Step>
-  <Step title="Faça o deploy do seu projeto">
-    Após fazer upload do seu projeto, clique no botão "Adicionar novo" para fazer o deploy.
-  </Step>
-</Steps>
+      <div className="p-6 border border-gray-200 dark:border-zinc-900 rounded-xl">
+        <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
 
-## O que vem a seguir?
-Agora que você aprendeu como fazer o deploy do seu projeto, pode explorar mais a plataforma VirtusCloud. Aqui estão alguns recursos para ajudá-lo a começar:
+        <h3 className="font-semibold text-gray-900 dark:text-zinc-100 mb-2">Enterprise-Grade Security</h3>
+        <p className="text-gray-600 dark:text-zinc-400 text-sm">DDoS protection, WAF and automatic SSL on all applications, at no additional cost.</p>
+      </div>
 
-<CardGroup>
-  <Card
-    title="Referência da API"
-    icon="server"
-    href="/api-reference"
-  >
-    Saiba mais sobre a API da VirtusCloud.
-  </Card>
-  <Card
-    title="Referência da CLI"
-    icon="code"
-    href="/cli-reference"
-  >
-    Saiba mais sobre a CLI da VirtusCloud.
-  </Card>
-</CardGroup>
+      <div className="p-6 border border-gray-200 dark:border-zinc-900 rounded-xl">
+        <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
 
-Junte-se à nossa comunidade no [Discord](https://discord.gg/virtuscloud) para obter ajuda de outros desenvolvedores e compartilhar suas experiências.
-<Card
-  title="Comunidade VirtusCloud"
-  icon="discord"
-  href="https://discord.gg/virtuscloud"
-  color="#7289DA"
->
-  Junte-se à nossa comunidade no Discord. Estamos aqui para ajudá-lo!
-</Card>
+        <h3 className="font-semibold text-gray-900 dark:text-zinc-100 mb-2">High Performance</h3>
+        <p className="text-gray-600 dark:text-zinc-400 text-sm">Global infrastructure with NVMe SSDs and integrated CDN for maximum speed.</p>
+      </div>
 
-Se tiver alguma dúvida ou precisar de ajuda, entre em contato com nossa [equipe de suporte](https://virtuscloud.app/dashboard/support). Estamos aqui para ajudar! 🚀
+      <div className="p-6 border border-gray-200 dark:border-zinc-900 rounded-xl">
+        <div className="w-12 h-12 bg-cyan-100 dark:bg-cyan-900/30 rounded-lg flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+          </svg>
+        </div>
+
+        <h3 className="font-semibold text-gray-900 dark:text-zinc-100 mb-2">Managed Databases</h3>
+        <p className="text-gray-600 dark:text-zinc-400 text-sm">Provision Redis, MongoDB, PostgreSQL and MySQL databases with one click.</p>
+      </div>
+
+      <div className="p-6 border border-gray-200 dark:border-zinc-900 rounded-xl">
+        <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4">
+          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </div>
+
+        <h3 className="font-semibold text-gray-900 dark:text-zinc-100 mb-2">Unlimited Traffic</h3>
+        <p className="text-gray-600 dark:text-zinc-400 text-sm">Focus on growth, not bandwidth limits. No surprises on your bill.</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="bg-gray-50 dark:bg-zinc-900/50 py-16 lg:py-24">
+    <div className="px-4 max-w-4xl mx-auto text-center">
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-zinc-50 mb-4">
+        Start building in minutes
+      </h2>
+
+      <p className="text-lg text-gray-600 dark:text-zinc-400 mb-12">
+        Choose the tool that best fits your workflow.
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-8 text-left">
+        <div className="bg-white dark:bg-zinc-800 p-8 rounded-xl border border-gray-200 dark:border-zinc-900">
+          <div className="w-12 h-12 bg-gray-900 dark:bg-white rounded-lg flex items-center justify-center mb-5">
+            <svg className="w-6 h-6 text-white dark:text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-zinc-100 mb-3">CLI for Developers</h3>
+          <p className="text-gray-600 dark:text-zinc-400 mb-5">Manage your entire infrastructure directly from the terminal. Ideal for automation and advanced workflows.</p>
+          <code className="block w-full bg-gray-100 dark:bg-zinc-700 px-3 py-2 rounded text-sm text-left">npm install -g @squarecloud/cli</code>
+
+          <div className="mt-5">
+            <a href="/en/cli-reference/installation" className="text-blue-600 hover:text-blue-700 font-medium" target="_blank" rel="noopener noreferrer">
+              View CLI documentation →
+            </a>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-zinc-800 p-8 rounded-xl border border-gray-200 dark:border-zinc-900">
+          <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-5">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+            </svg>
+          </div>
+
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-zinc-100 mb-3">Dashboard</h3>
+          <p className="text-gray-600 dark:text-zinc-400 mb-5">A complete visual interface to deploy, manage and monitor your applications with ease.</p>
+          <div className="block w-full bg-gray-100 dark:bg-zinc-700 px-3 py-2 rounded text-sm text-left">Upload via drag-and-drop.</div>
+
+          <div className="mt-5">
+            <a href="https://virtuscloud.app/en/dashboard" className="text-blue-600 hover:text-blue-700 font-medium" target="_blank" rel="noopener noreferrer">
+              Access Dashboard →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="px-4 max-w-4xl mx-auto py-16 lg:py-24 text-center">
+    <div className="pt-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-zinc-50 mb-4">
+        Before you begin
+      </h2>
+
+      <p className="text-gray-600 dark:text-zinc-400 mb-8">
+        To get started, create a Virtus Cloud account. Then you can <a href="https://virtuscloud.app/en/pricing" className="text-blue-600 hover:text-blue-700">select the right plan</a> for you.
+      </p>
+
+      <div className="grid sm:grid-cols-2 gap-6 mb-8">
+        <Card title="Sign Up" icon="user-plus" href="https://virtuscloud.app/en/signup" color="#95979b">
+          If you've never used Square before, sign up to get started.
+        </Card>
+
+        <Card title="Sign In" icon="right-to-bracket" href="https://virtuscloud.app/en/signin" color="#95979b">
+          If you already have an account, sign in to get started.
+        </Card>
+      </div>
+    </div>
+
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-zinc-50 mb-12 mt-16">
+      Explore the Platform
+    </h2>
+
+    <div className="grid sm:grid-cols-2 gap-6">
+      <Card title="Quick Start" icon="rocket" href="/en/getting-started/quick-start" color="#10B981">
+        Make your first deployment in less than 5 minutes.
+      </Card>
+
+      <Card title="Practical Tutorials" icon="graduation-cap" href="/en/tutorials/introduction" color="#8B5CF6">
+        Learn with real projects and step-by-step examples.
+      </Card>
+
+      <Card title="API Reference" icon="code" href="/en/api-reference/authentication" color="#3B82F6">
+        Automate and integrate with our complete REST API.
+      </Card>
+
+      <Card title="Discord Community" icon="discord" href="https://go.virtuscloud.app/discord" color="#5865F2">
+        Join over 80,000 developers and get your questions answered.
+      </Card>
+    </div>
+  </div>
+</div>

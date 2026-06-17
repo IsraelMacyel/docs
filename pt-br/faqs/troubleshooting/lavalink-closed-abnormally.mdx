@@ -1,28 +1,27 @@
 ---
-title: "Solving Lavalink Closed Abnormally issue"
-sidebarTitle: "Lavalink Closed Abnormally"
-description: "Due to recent Lavalink updates you may come across the following error: Lavalink Closed Abnormally. This article will help you solve this issue."
+title: "Resolvendo problema de Lavalink Fechado Anormalmente"
+sidebarTitle: "Lavalink Fechado Anormalmente"
+description: "Devido a atualizações recentes do Lavalink, você pode encontrar o erro: Lavalink Closed Abnormally."
 ---
 
-## When does it occur?
-When you are trying to connect your Lavalink server to your app hosted on VirtusCloud, you may come across the following error:
+## Quando ocorre?
+Ao tentar conectar seu servidor Lavalink ao app hospedado na VirtusCloud:
 
 ```
 Error: Unexpected server response: 400
 Error: WebSocket closed abnormally with code 1006.
 ```
 
-## Why does it occur?
-You will receive this error if you are using a Lavalink version that is not compatible with the library you are using.
-For example, if you are using the Lavalink version 4.0.0, you will receive this error if you are using the Lavalink client version 3, as the Lavalink version 4 is entirely REST.
+## Por que ocorre?
+Você receberá este erro se estiver usando uma versão do Lavalink incompatível com a biblioteca que está usando. Por exemplo, se você usa o Lavalink versão 4.0.0 com um cliente Lavalink versão 3, pois o Lavalink v4 é completamente REST.
 
-## How to fix
-To fix this error, you will need to update your Lavalink client to the latest version. Or use a Lavalink version that is compatible with your Lavalink client.
+## Como corrigir
+Atualize seu cliente Lavalink para a versão mais recente, ou use uma versão do Lavalink compatível com seu cliente.
 
-### Bonus Tips:
-- Remember to open your Lavalink server in port 80.
-- Connect in your Lavalink server using port 443 and option `secure: true`.
+### Dicas Extras:
+- Lembre-se de abrir seu servidor Lavalink na porta 80.
+- Conecte-se ao seu servidor Lavalink usando a porta 443 e a opção `secure: true`.
 
-Congratulations! You have successfully solved the Lavalink Closed Abnormally issue. Now you can connect your Lavalink to your app hosted on VirtusCloud. 
+Parabéns! Você resolveu o problema do Lavalink Fechado Anormalmente.
 
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+Se continuar com problemas, [entre em contato com nosso suporte](/company/support).

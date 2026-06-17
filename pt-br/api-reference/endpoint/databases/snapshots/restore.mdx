@@ -1,42 +1,47 @@
 ---
 title: "Restore Snapshot"
-description: "Restores a database based on a snapshot of it."
-api: "POST https://api.virtuscloud.app/v2/databases/{databaseId}/snapshots/restore"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Restore Snapshot
+
+> Restores a database based on a snapshot of it.
+
+<Warning>This route has a rate limit of 1 request every 60 seconds.</Warning>
 
 ## Request
 
 ### Headers
 
-<Authorization />
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 ### Path
 
-<ParamField path="databaseId" type="string" placeholder="Database ID" required>
+<ParamField path="database_id" type="string" placeholder="Database ID" required>
   The ID of the database.
 </ParamField>
 
 ### Body
 
-<ParamField body="snapshotId" type="string" placeholder="Database ID" required>
-  The database id you wanna restore.
+<ParamField body="snapshotId" type="string" placeholder="Snapshot ID" required>
+  The ID of the snapshot to restore for this database (database\_id).
 </ParamField>
-<ParamField body="versionId" type="string" placeholder="Database Snapshot ID" required>
-  The snapshot of the database you wanna restore.
+
+<ParamField body="versionId" type="string" placeholder="Snapshot Version Key" required>
+  The version key of the snapshot.
 </ParamField>
 
 ## Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
 
 <ResponseExample>
-```json
-{
-  "status":"success"
-}
-```
+  ```json theme={null}
+  {
+    "status":"success"
+  }
+  ```
 </ResponseExample>

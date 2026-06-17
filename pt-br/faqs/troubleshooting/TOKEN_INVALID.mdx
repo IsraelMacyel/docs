@@ -1,11 +1,11 @@
 ---
-title: "Solving TOKEN_INVALID"
-sidebarTitle: "Solving TOKEN_INVALID"
-description: "Learn how to resolve the TOKEN_INVALID code error and ensure smooth communication with the Discord API."
+title: "Resolvendo TOKEN_INVALID"
+sidebarTitle: "Resolvendo TOKEN_INVALID"
+description: "Aprenda como resolver o erro TOKEN_INVALID e garantir a comunicação suave com a API do Discord."
 ---
 
-## When does it occur?
-The authentication token for your Discord bot was not found or appears to be invalid. This might happen if the token is regenerated, revoked, or the bot's access to the server is restricted.
+## Quando ocorre?
+O token de autenticação do seu bot do Discord não foi encontrado ou parece ser inválido.
 
 ```bash discord.js
 Error [TOKEN_INVALID]: An invalid token was provided.
@@ -15,37 +15,31 @@ Error [TOKEN_INVALID]: An invalid token was provided.
 LoginFailure: Improper token has been passed.
 ```
 
-## Why does it occur?
-You will encounter this error when your application attempts to authenticate with the Discord API using an invalid or outdated bot token.
+## Por que ocorre?
+Este erro ocorre quando sua aplicação tenta autenticar com a API do Discord usando um token inválido ou desatualizado.
 
-## How to fix
+## Como corrigir
 
-Ensure that the token provided when creating the Discord.js client is accurate and up-to-date. If you suspect the token might be invalid, regenerate it on the Discord Developer Portal.
+Certifique-se de que o token fornecido está correto e atualizado. Se suspeitar que o token é inválido, regenere-o no Portal do Desenvolvedor do Discord.
 
-### Regenerate the Token
-If you have confirmed that the current token is invalid or compromised, generate a new one on the [Discord Developer Portal](https://discord.com/developers/applications). 
+### Regenerar o Token
+Se o token atual for inválido, gere um novo no [Portal do Desenvolvedor do Discord](https://discord.com/developers/applications).
 
-### Update the Token in Your Code
-If you are using a `.env` file to store the token, make sure to update the file with the new token.
+### Atualizar o Token no seu Código
+Se estiver usando um arquivo `.env`, atualize-o com o novo token.
 
-Generally, the token is stored in `.env` or `config,json` files. If you are using a different method to store the token, update the code accordingly.
+### Manter a biblioteca atualizada
 
-### Keep the library up to date
-
-Ensure you are using the latest version of your library. Developers regularly update the library to fix bugs and address compatibility issues.
-
-```bash Update discord.js
+```bash Atualizar discord.js
 npm install discord.js@latest
-# or update in your package.json
 ```
 
-```bash Update discord.py
+```bash Atualizar discord.py
 pip install discord.py
-# or update in your requirements.txt
 ```
 
-### Reboot Your Application
+### Reiniciar sua Aplicação
 
-After implementing the changes, restart your application to apply the updates. This ensures that the new token and any code modifications take effect.
+Após as alterações, reinicie sua aplicação.
 
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+Se continuar com problemas, [entre em contato com nosso suporte](/company/support).

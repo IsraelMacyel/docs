@@ -1,89 +1,120 @@
 ---
-title: "Início Rápido"
-sidebarTitle: "Início Rápido"
-icon: "square-terminal"
-description: "Do zero ao herói em minutos com a VirtusCloud. Este guia vai te ajudar a começar com a VirtusCloud e entender o poder da nossa plataforma."
+title: "Quickstart"
 ---
 
-## Serviços da VirtusCloud 🚀
-A VirtusCloud foi projetada do zero para ser uma plataforma amigável para desenvolvedores. A plataforma é composta por vários serviços que podem ser usados para fazer deploy de aplicações de forma rápida e segura.
+# Quickstart
 
-<Card
-    title="Hospedagem de Bots."
-    href="/services/bots"
->
-    Faça o deploy dos seus bots na VirtusCloud e receba as melhores soluções para hospedagem de bots.
-    A VirtusCloud oferece uma localização estratégica para as plataformas mais famosas, garantindo baixa latência e alta disponibilidade.
+> Go from zero to hero in minutes with Virtus Cloud. This guide will help you get started with Virtus Cloud and understand the power of our platform.
+
+## Virtus Cloud Services 🚀
+
+Virtus Cloud has been designed from the ground up to be a developer-friendly platform. The platform is composed of various services that can be used to deploy applications quickly and securely.
+
+<Card title="Bot hosting." href="/en/services/bots">
+  Deploy your bots to Virtus Cloud and receive the best solutions for bot hosting.
+  Square offers a strategic location for the most famous platforms, ensuring low latency and high availability.
 </Card>
 
-<Card
-    title="Hospedagem Web."
-    href="/services/web"
->
-    Faça o deploy das suas aplicações web na VirtusCloud e receba as melhores soluções para hospedagem web.
-    Oferecemos integração premium com Cloudflare, DNS rápido e Web Application Firewall (WAF) para garantir o melhor desempenho e segurança.
+<Card title="Web hosting." href="/en/services/sites">
+  Deploy your web applications to Virtus Cloud and receive the best solutions for web hosting.
+  We provide premium Cloudflare integration, fast DNS, and a Web Application Firewall (WAF) to ensure the best performance and security.
 </Card>
 
-<Card
-    title="Armazenamento Serverless, Blob Storage."
-    href="/services/blob"
->
-    Armazene seus dados com a VirtusCloud e aproveite os benefícios do armazenamento serverless.
-    Nosso serviço de armazenamento é projetado para ser simples, escalável e econômico.
+<Card title="Serverless Storage, Blob Storage." href="/en/services/blob">
+  Store your data with Virtus Cloud and enjoy the benefits of serverless storage.
+  Our storage service is designed to be simple, scalable, and cost-effective.
 </Card>
 
-<Snippet file="before-begin.mdx" />
+## Before you begin
 
-## Faça upload do seu projeto 😁
-Você pode fazer upload do seu projeto para a VirtusCloud em alguns passos simples, conforme mostrado abaixo:
+To get started, create a Virtus Cloud account. Then you can [select the plan](https://virtuscloud.app/pricing) that's right for you.
+
+<CardGroup>
+  <Card title="Sign Up" icon="user-plus" href="https://virtuscloud.app/signup" color="#95979b">
+    If you've never used Square before, sign up to get started.
+  </Card>
+
+  <Card title="Log in" icon="right-to-bracket" href="https://virtuscloud.app/signin" color="#95979b">
+    If you already have an account, log in to get started.
+  </Card>
+</CardGroup>
+
+## Upload your project 😁
+
+You can upload your project to Virtus Cloud in a few simple steps, as shown below:
 
 <Steps>
-  <Step title="Primeiro, leia as instruções sobre sua linguagem:">
-    <Snippet file="languages.mdx" />
-    <Info>Para este exemplo, usaremos a linguagem JavaScript (Node.js).</Info>
-  </Step>
-  <Step title="Em seguida, crie seu arquivo de configuração VirtusCloud.">
-    Após acessar o painel, você precisa criar um arquivo de configuração. Você pode criar um [arquivo de configuração](/getting-started/config-file) lendo o artigo [aqui](/getting-started/config-file).
+  <Step title="First, read the instructions about your language:">
+    <CardGroup cols={3}>
+      <Card title="JavaScript" icon="node-js" href="../articles/getting-started-with-nodejs" />
 
-    ```systemd Exemplo de arquivo de configuração para um bot
+      <Card title="Python" icon="python" href="../articles/getting-started-with-python" />
+
+      <Card title="Java" icon="java" href="../articles/getting-started-with-java" />
+
+      <Card title="Rust" icon="rust" href="../articles/getting-started-with-rust" />
+
+      <Card title="Elixir" icon="droplet" href="../articles/getting-started-with-elixir" />
+
+      <Card title="PHP" icon="php" href="../articles/getting-started-with-php" />
+
+      <Card title="Go" icon="golang" href="../articles/getting-started-with-go" />
+
+      <Card title="C#" icon="c" href="../articles/getting-started-with-csharp" />
+
+      <Card title="Ruby" icon="gem" href="../articles/getting-started-with-ruby" />
+    </CardGroup>
+
+    <Info>For this example, we will use the JavaScript (Node.js) language.</Info>
+  </Step>
+
+  <Step title="After, create your Virtus Cloud config file.">
+    After accessing the dashboard, you need to create a configuration file. You can create a [configuration file](https://docs.virtuscloud.app/en/getting-started/config-file) reading this article [here](https://docs.virtuscloud.app/en/getting-started/config-file).
+
+    ```systemd Example of a config file for a bot theme={null}
     MAIN=index.js
     MEMORY=512
     VERSION=recommended
     DISPLAY_NAME=Batman bot
-    DESCRIPTION=Este bot é o cavaleiro das trevas da noite.
+    DESCRIPTION=This bot is the dark knight of the night.
     ```
 
-    ```systemd Exemplo de arquivo de configuração para uma aplicação web. (URL configurada como "batman.virtusapp.cloud")
+    ```systemd Example for website. (URL: "batman.virtuscloud.app") theme={null}
     MAIN=index.js
     MEMORY=512
     VERSION=recommended
     SUBDOMAIN=batman
     START=npm run build && npm run start
     DISPLAY_NAME=Batman website
-    DESCRIPTION=Este site é o cavaleiro das trevas da noite.
+    DESCRIPTION=This website is the dark knight of the night.
     ```
   </Step>
-  <Step title="E então, compacte seu projeto em ZIP.">
-    Após criar o arquivo de configuração, você precisa compactar seu projeto.
+
+  <Step title="And then, ZIP your project.">
+    After creating the configuration file, you need to zip your project.
+
     <CodeGroup>
-      ```bash Windows
-      1. Localize o arquivo ou pasta que deseja compactar.
-      2. Pressione e segure (ou clique com o botão direito) no arquivo ou pasta, selecione Enviar para e depois Pasta compactada (zipada).
-      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+      ```bash Windows theme={null}
+      1. Locate the file or folder that you want to zip.
+      2. Press and hold (or right-click) the file or folder, select (or point to) Send to, and then select Compressed (zipped) folder.
+      3. A new zipped folder with the same name is created in the same location. To rename it, press and hold (or right-click) the folder, select Rename, and then type the new name.
       ```
-      ```bash Linux
-      1. Localize o arquivo ou pasta que deseja compactar.
-      2. Clique com o botão direito no arquivo ou pasta e escolha Compactar no menu de atalho.
-      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+
+      ```bash Linux theme={null}
+      1. Locate the file or folder that you want to zip.
+      2. Right-click the file or folder, then choose Compress from the shortcut menu.
+      3. A new zipped folder with the same name is created in the same location. To rename it, press and hold (or right-click) the folder, select Rename, and then type the new name.
       ```
-      ```bash macOS
-      1. Localize o arquivo ou pasta que deseja compactar.
-      2. Clique com Ctrl no arquivo ou pasta e escolha Compactar no menu de atalho.
-      3. Uma nova pasta compactada com o mesmo nome é criada no mesmo local.
+
+      ```bash macOS theme={null}
+      1. Locate the file or folder that you want to zip.
+      2. Control-click the file or folder, then choose Compress from the shortcut menu.
+      3. A new zipped folder with the same name is created in the same location. To rename it, press and hold (or right-click) the folder, select Rename, and then type the new name.
       ```
     </CodeGroup>
   </Step>
-  <Step title="Por fim, faça upload do seu projeto. 😉">
-    Após fazer upload do seu projeto, clique no botão "Adicionar novo" para fazer o deploy.
+
+  <Step title="Finally, upload your project. 😉">
+    After uploading your project, click on the "Add New" button to deploy your project.
   </Step>
 </Steps>

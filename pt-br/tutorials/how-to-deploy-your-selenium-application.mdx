@@ -1,119 +1,134 @@
 ---
-title: "Hosting a Selenium on VirtusCloud"
-sidebarTitle: "Web Navigation with Selenium"
-description: "This article guides you to automate web navigation using Selenium and Chromium on VirtusCloud."
+title: "How to Host a Selenium Application on Virtus Cloud"
 ---
 
-## Creating a New Selenium Script
+# How to Host a Selenium Application on Virtus Cloud
 
-- Before you start, make sure you have **Python** and **pip** installed on your system. If you don't have them yet, you can download them from the [official Python website](https://www.python.org/) and the [official Pip website](https://pypi.org/).
-- Next, you will need to create an account on VirtusCloud, which can be done through the [sign up page](https://virtuscloud.app/signup). You can use your email to create an account.
-- Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/pricing).
+> Complete guide for automating web navigation using Selenium and Chromium on Virtus Cloud with professional implementation and advanced configurations.
 
-With Python and pip installed, you can create a new Selenium script. First, install Selenium using pip:
+## Professional Selenium Script Development
 
-```bash
+To implement efficient web automation on Virtus Cloud, it's essential to establish a proper development environment and follow configuration best practices.
+
+### Essential Technical Prerequisites
+
+* **Python and pip**: Make sure you have **Python** and **pip** installed on your system. If you don't have them, download from the [official Python website](https://www.python.org/) and the [official Pip website](https://pypi.org/).
+* **Virtus Cloud Account**: Create your account through the [signup page](https://virtuscloud.app/en/signup), using your email address for registration.
+* **Active Paid Plan**: A paid plan is necessary to ensure adequate resources for running Selenium applications. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the most suitable for your needs.
+
+### Selenium Environment Configuration
+
+With Python and pip installed, proceed with creating the Selenium script. First, install the Selenium library:
+
+```bash Terminal theme={null}
 pip install selenium
 ```
 
-Next, create a new Python file (for example, `main.py`) and add the following code to create a basic Selenium script:
+Next, create a Python file (for example, `main.py`) and add the following code to implement a basic Selenium script:
 
-```python
+```python main.py theme={null}
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
-# Define options for Chromium
+# Configuration options for Chromium
 options = Options()
-options.add_argument("--headless")  # Run in the background. This means that the browser runs without opening a browser window.
-options.add_argument("--no-sandbox")  # Required when you are running as root. This allows Selenium to start in a user-unsupported environment.
-options.add_argument("--disable-dev-shm-usage")  # This overcomes limitations when dealing with elements on large pages.
+options.add_argument("--headless")  # Runs in background without graphical interface
+options.add_argument("--no-sandbox")  # Required for execution as root in containerized environments
+options.add_argument("--disable-dev-shm-usage")  # Overcomes shared memory limitations on large pages
 
-# Initialize the driver
-service = Service('/usr/bin/chromedriver') # On VirtusCloud, the path to the Chromium driver is '/usr/bin/chromedriver'
+# Driver initialization
+service = Service('/usr/bin/chromedriver')  # Default ChromeDriver path on Virtus Cloud
 driver = webdriver.Chrome(service=service, options=options)
 
-# Set the window size to larger dimensions
-driver.set_window_size(1920, 1080)  # Adjust these values as needed
+# Browser window dimensions configuration
+driver.set_window_size(1920, 1080)  # Adjust as needed for your application
 
-# Open the web page
+# Navigate to web page
 driver.get('https://www.google.com')
 
-# Loop to take a print of the page every 1 minute
+# Loop for screenshot capture every minute
 while True:
     driver.save_screenshot('page.png')
-    print("Page print saved.")
-    time.sleep(60)  # Pause for 60 seconds
+    print("Page screenshot saved successfully.")
+    time.sleep(60)  # 60-second pause between captures
 ```
 
-## Managing Dependencies with the requirements.txt file
+## Dependency Management with requirements.txt
 
-The `requirements.txt` file is a file that lists all the external libraries needed for your project. You should list all the libraries that your project will use, excluding native libraries like `random` and `datetime`. This file should be included when submitting your application to VirtusCloud.
+The `requirements.txt` file is an essential component that lists all external libraries needed for your project. It's crucial to include all dependencies used, excluding native Python libraries like `random` and `datetime`. This file should be included when submitting your application to Virtus Cloud.
 
-```txt requirements.txt
+```txt requirements.txt theme={null}
 selenium
 ```
 
-## Chromium path
+## Chromium Path Configuration
 
-In the example provided above, it's not necessary to explicitly define the Chromium path because the Selenium WebDriver can automatically find the browser if it's installed in a standard system location. The ChromeDriver, specified with `Service('/usr/bin/chromedriver')`, knows where to look for the Chromium/Chrome executable.
+In the implementation presented above, it's not necessary to explicitly define the Chromium path, as the Selenium WebDriver can automatically locate the browser when installed in a standard system location. The ChromeDriver, specified with `Service('/usr/bin/chromedriver')`, has knowledge about where to locate the Chromium/Chrome executable.
 
-In VirtusCloud, Chromium is installed in `/usr/bin/chromium`, which is standard. Therefore, the Selenium WebDriver can automatically locate it through the specified ChromeDriver. Thus, there's no need to explicitly specify the Chromium path in the code, unless there are specific reasons to do so, such as custom installations or different environment configurations.
+### Virtus Cloud Architecture
 
-## Creating the virtuscloud config file
+On Virtus Cloud, Chromium is installed at `/usr/bin/chromium`, which is the standard system location. Therefore, the Selenium WebDriver can locate it automatically through the specified ChromeDriver. Thus, there's no need to explicitly specify the Chromium path in the code, unless there are specific reasons to do so, such as custom installations or different environment configurations.
 
-<Card title="Learn about: how to make the configuration file for VirtusCloud." icon="link" href="https://docs.virtuscloud.app/getting-started/config-file">
-The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define the name, description, version, main file, among other things.
+## Virtus Cloud Configuration File
+
+<Card title="Learn about: how to create the configuration file for Virtus Cloud." icon="link" href="https://docs.virtuscloud.app/en/getting-started/config-file">
+  The virtuscloud.app file is an essential configuration file that will be used to configure your application on Virtus Cloud. It defines name, description, version, main file, among other fundamental configurations.
 </Card>
 
-## Uploading Project to VirtusCloud
+## Project Upload to Virtus Cloud
 
-After preparing your project files, you can now upload them to VirtusCloud and host your project.
+After preparing all project files, proceed with uploading to Virtus Cloud and host your application professionally.
 
 <Tabs>
   <Tab title="Dashboard Upload">
-    Access the [VirtusCloud
-    Dashboard](https://virtuscloud.app/dashboard/upload) and upload your project
-    files.
+    Access the [Virtus Cloud Dashboard](https://virtuscloud.app/en/upload) and upload your project files.
+
     <Frame>
-      <img src="/images/uploading.gif" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
     </Frame>
   </Tab>
+
   <Tab title="CLI Upload">
     <Steps>
       <Step title="First Step">
-        First, you need to have the CLI installed in your environment. If you
-        don't have it yet, run the following command in your terminal: ```npm install -g @virtuscloud/cli``` If you already have it, we
-        recommend updating it. To do this, run the following command in your
-        terminal: 
-        ```bash 
-        virtuscloud update
+        First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in the terminal:
+
+        ```bash Terminal theme={null}
+        npm install -g @squarecloud/cli
+        ```
+
+        If you already have it, we recommend updating it. To do this, run the following command in the terminal:
+
+        ```bash Terminal theme={null}
+        squarecloud update
         ```
       </Step>
+
       <Step title="Second Step">
-        Now, to authenticate and use other CLI commands, you will find your
-        authorization key [here](https://virtuscloud.app/account/security) by clicking on
-        "Request API Key". After obtaining your authorization key, run the
-        following command: 
-        ```bash 
-        virtuscloud login
+        To authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking "Request API Key". After obtaining your authorization key, run the following command:
+
+        ```bash Terminal theme={null}
+        squarecloud auth login
         ```
       </Step>
+
       <Step title="Third Step">
-        Finally, to deploy your application to VirtusCloud using the CLI, you
-        need to execute the following command, passing the path of your zip
-        file: 
-        ```bash 
-        virtuscloud upload zip
+        Finally, to deploy your application to Virtus Cloud using the CLI, execute the following command, providing the path to your zip file:
+
+        ```bash Terminal theme={null}
+        squarecloud upload zip
         ```
       </Step>
     </Steps>
   </Tab>
 </Tabs>
 
-## Additional Resources
+## Recursos Adicionais and Documentation
 
-For more information about Selenium and its tools, visit the [official Selenium documentation](https://www.selenium.dev/pt-br/documentation/webdriver/getting_started/). There, you'll find detailed guides, tutorials, and API documentation to help you make the most out of Selenium.
+For more detailed information about Selenium and its advanced tools, visit the [official Selenium documentation](https://www.selenium.dev/documentation/webdriver/getting_started/). There you'll find detailed technical guides, specialized tutorials, and complete API documentation to maximize the use of Selenium functionalities.
 
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+## Fale Conosco
+
+Se você continuar enfrentando **dificuldades técnicas**, nossa **equipe de suporte especializada** está disponível para ajudá-lo. [**Fale Conosco**](https://virtuscloud.app/pt-br/support) and we'll be happy to help you resolve any issue.

@@ -1,31 +1,37 @@
 ---
 title: "Using pydantic"
-description: "Learn how to use pydantic to data validation."
 ---
 
+# Using pydantic
+
+> Learn how to use pydantic to data validation.
+
 ## What is pydantic?
+
 Pydantic is an awesome and modern Python library for data validation using
 type annotations. It enforces type constraints, ensuring data consistency and
 providing clear error messages when validation fails. Pydantic is both
 powerful and easy to use, making it a popular choice for developers working
 with structured data.
 
-## Installation
+## Instalação
 
 To use Pydantic with this SDK, you need to install the SDK with the pydantic
 extra dependency, as it is not included by default:
-```bash
-pip install "virtuscloud[pydantic]"
+
+```bash theme={null}
+pip install "squarecloud[pydantic]"
 ```
 
 ## Features
+
 In this SDK, Pydantic is used to cast an extra parameter from a dictionary
 into a Pydantic model, allowing for more robust data
 validation and manipulation.
 
-````python
-import virtuscloud as virtus
-from virtuscloud import Endpoint
+```python theme={null}
+import squarecloud as square
+from squarecloud import Endpoint
 from pydantic import BaseModel
 
 class Animal(BaseModel):
@@ -38,9 +44,9 @@ async def get_extra_param(before, after, extra: Animal):
     print(extra.age)
 
 async def main():
-    client = virtus.Client('your api key')
+    client = square.Client('your api key')
     await client.app_status('application_id', extra={'name': 'felix', 'age': 3})
-````
+```
 
 In this example, the Animal class is a Pydantic model with two
 fields: name and age. When a request is made to the status endpoint,

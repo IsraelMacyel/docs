@@ -1,42 +1,123 @@
 ---
-title: "Límites y Restricciones"
-description: "Descubre las restricciones y límites de la Plataforma VirtusCloud."
-icon: "shield-dog"
+title: "Platform limits and restrictions"
 ---
 
-## Requisitos Mínimos de Recursos
-Cada proyecto alojado en la Plataforma VirtusCloud tiene requisitos mínimos específicos de recursos para garantizar un rendimiento óptimo:
+# Platform limits and restrictions
 
-- **Bots:** Mínimo 256MB de RAM requeridos.
-- **Sitios web:** Mínimo 512MB de RAM requeridos.
-- **Bases de Datos Cache:** Mínimo 512MB de RAM requeridos.
-- **Bases de Datos Generales:** Mínimo 1GB de RAM requeridos.
+> Technical specifications for RAM/CPU allocation, network and storage limits on Virtus Cloud.
 
-## ¿Por qué hay requisitos mínimos de RAM?
-VirtusCloud impone requisitos mínimos de RAM para garantizar la estabilidad y el rendimiento óptimo de las aplicaciones. RAM insuficiente puede causar fallos en las aplicaciones y una experiencia degradada para el usuario.
+Virtus Cloud implements container-based resource limits to ensure isolation, stability, and fair distribution of infrastructure across applications.
 
-Tenga en cuenta que aunque VirtusCloud ofrece planes con hasta **1TB de RAM**, la **asignación máxima de RAM** para cualquier **aplicación es de 32GB**. <ins>Si necesitas más de 32GB, contacta a nuestro equipo de soporte.</ins>
+## Minimum Resource Requirements
 
-## Limitaciones de Red
-La **velocidad de red aumenta 50 Mbps** por cada **256 MB adicionales** de RAM asignada.
+Each project hosted on the Virtus Cloud Platform has specific minimum resource requirements to ensure optimal performance:
 
-- **256 MB RAM:** 50 Mbps
-- **512 MB RAM:** 100 Mbps
-- **1024 MB RAM:** 200 Mbps
-- **2048 MB RAM:** 400 Mbps
-- **4096 MB RAM:** 800 Mbps
-- **8192 MB RAM:** 1600 Mbps
-- **10240 MB RAM:** 2000 Mbps
+* **Bots:** Minimum of 256 MB RAM required.
+* **Websites:** Minimum of 512 MB RAM required.
+* **Cache Databases:** Minimum of 512 MB RAM required.
+* **General Databases:** Minimum of 1 GB RAM required.
 
-## Limitaciones de Almacenamiento
-- **Todos los proyectos:** Cada proyecto recibe 10GB de almacenamiento.
+### Why do RAM minimums exist?
 
-## Límites de Servicio
+Containers have mandatory operational overhead: language runtime, OS libraries, and network buffers. Below 256 MB, the kernel's OOM Killer tends to terminate processes during boot or garbage collection, making the application inviable.
 
-### LACK_OF_RAM
-Si una aplicación excede el límite de RAM asignado, será marcada por violación de LACK_OF_RAM y apagada.
+**Technical implications:**
 
-### LACK_OF_CPU
-Si una aplicación excede su límite de procesamiento asignado, será marcada por violación de LACK_OF_CPU y apagada. VirtusCloud no permite alojar aplicaciones que minen criptomonedas.
+* Each container consumes 1 dynamic IPv4 and NVMe storage IOPS
+* Minimum allocations prevent resource fragmentation (noisy neighbor effect)
+* Daily snapshot formula: `(Total RAM / 256) * 2`
 
-VirtusCloud está dedicada a proporcionar un entorno seguro y equilibrado para todos los usuarios.
+<Note>**Impact Data:** After implementing the 256 MB minimum limit, application stability increased drastically, reducing the crash rate due to OOM (Out of Memory) by **97.7%**.</Note>
+
+## CPU allocation
+
+Short answer: CPU is allocated based on configured RAM. Increasing RAM typically grants more vCPUs.
+
+### Rules
+
+#### Single vCPU plans
+
+Applications on 1 vCPU plans receive full capacity without throttling.
+
+#### Multicore plans (≥2 vCPU)
+
+* Performance floor: applications with ≥512 MB RAM receive at least 2 vCPUs.
+* Proportional scaling:
+  * Hobby (≤2 vCPU): +1 vCPU per 512 MB RAM
+  * Standard / Pro / Enterprise: +1 vCPU per 1 GB (1024 MB) RAM
+
+### Examples
+
+| Plan       | Plan capacity    | Configured RAM | vCPUs allocated |
+| ---------- | ---------------- | -------------: | --------------: |
+| Standard   | 4 GB / 4 vCPU    |           1 GB | 2 vCPUs (floor) |
+| Standard   | 4 GB / 4 vCPU    |           4 GB |   4 vCPUs (max) |
+| Enterprise | 128 GB / 16 vCPU |           2 GB |         2 vCPUs |
+| Enterprise | 128 GB / 16 vCPU |          16 GB |        16 vCPUs |
+
+Throttling and safety limits
+
+The system enforces the plan vCPU limit and applies leveling to keep distribution fair. Short-term elasticity may grant extra vCPUs during spikes but is not guaranteed.
+
+Prohibited CPU uses:
+
+* Cryptocurrency mining
+* Unrestricted, intensive ML workloads without authorization
+* Deliberate resource abuse
+
+Violations result in `LACK_OF_CPU` status and immediate suspension.
+
+## Network limits
+
+Bandwidth scales with RAM: **+50 Mbps per 256 MB RAM**.
+
+| RAM allocated | Bandwidth |
+| ------------: | --------: |
+|        256 MB |   50 Mbps |
+|        512 MB |  100 Mbps |
+|          1 GB |  200 Mbps |
+|          2 GB |  400 Mbps |
+|          4 GB |  800 Mbps |
+|          8 GB | 1600 Mbps |
+|         10 GB | 2000 Mbps |
+
+For requirements above 2000 Mbps contact support.
+
+## Storage limits
+
+All projects receive **10 GB NVMe** storage by default.
+
+Characteristics:
+
+* Enterprise-grade NVMe
+* Persistent across deploys and restarts
+* High IOPS and throughput
+
+## Limit exceeded statuses
+
+### LACK\_OF\_RAM
+
+When: application exceeds allocated RAM or kernel signals OOM.
+
+Action: process is terminated immediately to protect host stability.
+
+How to fix:
+
+1. Find memory leaks with profilers (Node.js: `--inspect`, Python: `memory_profiler`).
+2. Reduce in-memory caches or move caches to Redis.
+3. Increase allocated RAM in the control panel.
+
+### LACK\_OF\_CPU
+
+When: sustained CPU usage exceeds reasonable limits for the allocation.
+
+Action: process terminated with status `LACK_OF_CPU`.
+
+How to fix:
+
+1. Profile CPU hotspots (Node.js: `0x`, Python: `cProfile`).
+2. Optimize hot loops, DB queries and I/O-bound operations.
+3. Increase RAM to obtain more vCPUs (see CPU allocation table).
+4. Offload heavy work to asynchronous workers or batch jobs.
+
+Trade-off: increasing RAM to gain CPU raises costs. Measure whether code optimization is cheaper than scaling up.

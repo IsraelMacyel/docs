@@ -1,28 +1,26 @@
 ---
-title: "Configuring MongoDB Atlas Whitelist"
-sidebarTitle: "Whitelisting VirtusCloud in MongoDB"
-description: "Due to how VirtusCloud works in a way that has a dynamic IP, by an exclusive technology, it is impossible to provide you with an IP, since every restart in the application, you receive a unique IP."
+title: "Configurando la Lista Blanca de MongoDB Atlas"
+sidebarTitle: "Lista Blanca en MongoDB"
+description: "Dado que VirtusCloud usa IP dinámico por tecnología exclusiva, es imposible proporcionar una IP fija."
 ---
 
-**VirtusCloud** stands out with its **dynamic IP allocation**, assigning a **unique address** with **each application restart**. Unlike static IPs, this dynamic approach enhances security by constantly changing the network footprint, **making it more resilient against potential threats**. 
+**VirtusCloud** se destaca con su **asignación de IP dinámica**, asignando una **dirección única** con **cada reinicio de la aplicación**.
 
-## When does it occur?
-When you are trying to connect your MongoDB Atlas database to your app hosted on VirtusCloud, you may come across the following error:
+## ¿Cuándo ocurre?
+Al intentar conectar tu base de datos MongoDB Atlas a tu app alojada en VirtusCloud:
 
 ```
 MongoNetworkError: connection 0 to shard-xxx-xxx.mongodb.net:27017 closed
 ```
 
-## Why does it occur?
-You will receive this error message if you have not included the MongoDB Atlas addresses, the IP where your app is hosted, on the whitelist.
+## ¿Por qué ocurre?
+Recibirás este mensaje si no has incluido las direcciones de MongoDB Atlas en la lista blanca.
 
-## How to fix
-To fix this error, you need to whitelist the IP address, according to the [mongodb documentation](https://www.mongodb.com/docs/atlas/security/ip-access-list/), you need to whitelist 0.0.0.0/0 IP address.
+## Cómo corregir
+Debes agregar la IP `0.0.0.0/0` a la lista blanca según la [documentación de MongoDB](https://www.mongodb.com/docs/atlas/security/ip-access-list/).
 
 <Frame>
   <img src="/images/troubleshooting/mongodb-whitelist.png" style={{ borderRadius: '0.2rem' }} />
 </Frame>
 
-Congratulations! You have successfully whitelisted the IP address 0.0.0.0/0 for your MongoDB Atlas database. Now you can connect your database to your app hosted on VirtusCloud. 
-
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+Si continúas con problemas, [contacta a nuestro soporte](/company/support).

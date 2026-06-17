@@ -1,39 +1,150 @@
 ---
 title: "How to create your requirements.txt file"
-sidebarTitle: "Create your requirements.txt"
-description: "Learn how to create a requirements.txt file for Python projects"
 ---
 
-# Creating Your requirements.txt File
+# How to create your requirements.txt file
 
-A `requirements.txt` file is a standard way to specify the dependencies of your Python project. It lists all the external packages your project relies on, making it easier for others to reproduce your environment and for you to manage your dependencies. Here"s a step-by-step guide on how to create your `requirements.txt` file.
+> Complete guide to the requirements.txt file in Python: learn how to create, list dependencies with pip freeze, pin versions, and prepare your project for production.
 
-## Step 1: Activate Virtual Environment (optional but recommended)
+# 📋 requirements.txt file for Python
 
-Before creating the `requirements.txt` file, it"s a good practice to work within a virtual environment to keep your project dependencies isolated. Activate your virtual environment using the appropriate command for your operating system.
+The `requirements.txt` file is the industry standard for specifying and managing dependencies in Python projects. This guide shows how to create, configure and use `requirements.txt` to ensure consistency between development and production environments.
 
-## Step 2: List Dependencies
-<Warning>Specify the exact version (using ==) for each package to ensure consistency and reproducibility</Warning>
+## What is a requirements.txt file?
 
-Manually list all the external packages and their versions that your project depends on in the `requirements.txt` file. For example:
+A `requirements.txt` file lists all external Python packages your project needs, with their specific versions. This allows:
 
-```plaintext requirements.txt
-discord.py
-```
+* You and your team to maintain identical environments
+* New collaborators to reproduce the environment exactly
+* Deploy on Virtus Cloud to work with the correct dependencies
 
-## Step 3: Review and Edit
+***
 
-Open the `requirements.txt` file with a text editor and review the list of packages. You may want to add or remove packages or update their versions as needed.
+<Steps>
+  <Step title="Activate the virtual environment">
+    Working inside a virtual environment is essential to keep your project dependencies isolated from the global Python system. This avoids version conflicts and ensures reproducibility.
 
-## Step 4: Share and Use
+    Activate your virtual environment with one of the commands below, depending on your system:
 
-With your `requirements.txt` file ready, you can share it with your team or other developers. They can then create a virtual environment and install the exact same packages and versions.
+    **Windows:**
 
-Host your project on VirtusCloud now to take advantage of our seamless development environment and collaboration tools.
+    ```bash theme={null}
+    venv\Scripts\activate
+    ```
 
-## Bonus Tips:
+    **macOS/Linux:**
 
-- Update the `requirements.txt` file regularly as you add or update dependencies in your project.
-- Be cautious with using `pip freeze` with the system-wide Python environment, as it may include packages that are not strictly required for your project.
+    ```bash theme={null}
+    source venv/bin/activate
+    ```
+  </Step>
 
-Creating a `requirements.txt` file is a valuable step in managing your Python project"s dependencies and ensuring a seamless development experience for you and your collaborators.
+  <Step title="List project dependencies">
+    <Warning>
+      Always specify exact versions with `==` to ensure reproducibility and prevent breakage from incompatible updates in production.
+    </Warning>
+
+    ### Option A: Create manually (Recommended)
+
+    Create a `requirements.txt` file in the root of your project and list all external packages with their versions:
+
+    ```plaintext requirements.txt theme={null}
+    discord.py==2.3.0
+    requests==2.31.0
+    python-dotenv==1.0.0
+    ```
+
+    ### Option B: Generate automatically with pip freeze
+
+    After installing dependencies in your virtual environment, you can automatically generate the file. There are two main ways:
+
+    **Option B1: Use `pip freeze` (includes everything)**
+
+    ```bash theme={null}
+    pip freeze > requirements.txt
+    ```
+
+    <Warning>
+      Caution: `pip freeze` includes all globally installed packages, which may include unnecessary packages for your project. Review the file after generating and remove dependencies that are not strictly necessary.
+    </Warning>
+
+    **Option B2: Use `pipdeptree` or `pip freeze` with filtering (Recommended)**
+
+    To capture ONLY your project's dependencies (without auxiliary environment packages), use:
+
+    ```bash theme={null}
+    pip freeze --user > requirements.txt
+    ```
+
+    Or, for a cleaner solution, install `pipdeptree`:
+
+    ```bash theme={null}
+    pip install pipdeptree
+    pipdeptree -p your_project > requirements.txt
+    ```
+
+    Alternative: Use a manual list check or check which package was installed specifically for your project:
+
+    ```bash theme={null}
+    pip list | grep -i "your-package"
+    ```
+
+    <Note>
+      If you are working in a virtual environment (recommended), `pip freeze` will work perfectly as the environment will be isolated and contain only your project's dependencies.
+    </Note>
+  </Step>
+
+  <Step title="Review and validate dependencies">
+    Open the `requirements.txt` file in your text editor and:
+
+    1. Review the package list
+    2. Remove unnecessary dependencies
+    3. Update versions as needed
+    4. Ensure you are using exact versions (with `==`)
+  </Step>
+
+  <Step title="Install dependencies">
+    To install all listed dependencies:
+
+    ```bash theme={null}
+    pip install -r requirements.txt
+    ```
+
+    This command guarantees that all collaborators and production environments use exactly the same versions.
+  </Step>
+
+  <Step title="Version and share">
+    With `requirements.txt` ready, you can:
+
+    * Share it with your team
+    * Put it in version control (git)
+    * Ensure everyone works with the same versions
+    * Simplify deployment on Virtus Cloud
+
+    When you host your project on Virtus Cloud, the `requirements.txt` file is automatically detected and all dependencies are installed during build.
+  </Step>
+</Steps>
+
+***
+
+## 💡 Best Practices and Tips:
+
+* **Keep updated**: Review and update `requirements.txt` regularly as you add new dependencies
+* **Use exact versions**: Always use `==` instead of `>`, `>=` or no version to avoid surprises in production
+* **Review pip freeze**: If using `pip freeze`, review the file before committing, as it may include unnecessary auxiliary packages
+* **Versioning**: Commit `requirements.txt` to git to track dependency changes
+* **Isolated environment**: Maintain one virtual environment per project to avoid global conflicts
+* **Test locally**: Before deploying, test the file with `pip install -r requirements.txt` in a new environment
+
+***
+
+## 🚀 Next Steps
+
+With your `requirements.txt` file configured:
+
+1. Commit to your Git repository.
+2. Host your project on **Virtus Cloud**.
+3. Configure automatic deploy via GitHub.
+4. Welcome to professional Python application hosting!
+
+A well-structured `requirements.txt` file is the foundation for any successful Python application, ensuring your application works perfectly on Virtus Cloud.

@@ -1,23 +1,25 @@
 ---
-title: "How to create your Lavalink Server"
-sidebarTitle: "Lavalink Server"
-description: "Learn how to host your Lavalink server and stream high-quality music to your Discord bot."
+title: "How to create your Lavalink server"
 ---
 
-## Introduction 🚀
+# How to create your Lavalink server
 
-- Follow the tutorial below and host your Lavalink server today it"s super simple! If you need any assistance, feel free to reach out to us through our official support channels.
-- Next, you will need to create an account on VirtusCloud, which can be done through the [sign up page](https://virtuscloud.app/signup). You can use your email, to create an account.
-- Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/pricing).
+> Learn how to create and host your own Lavalink server for Discord - Complete setup tutorial with optimized performance for music bots
+
+## Introdução 🚀
+
+* Follow the tutorial below and host your Lavalink server today, it's super simple! If you need any assistance, feel free to contact us through our official support channels.
+* Next, you'll need to create an account on Virtus Cloud, which can be done through the [signup page](https://virtuscloud.app/signup). You can use your email to create an account.
+* Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/en/pricing).
 
 ## Choosing the Version
 
 Choose your desired version of `Lavalink` by clicking [here](https://github.com/freyacodes/Lavalink/releases/). We recommend selecting the latest version for the best experience.
 
-## Creating the virtuscloud config file
+## Creating the Virtus Cloud configuration file
 
-<Card title="Learn about: how to make the configuration file for VirtusCloud." icon="link" href="https://docs.virtuscloud.app/getting-started/config-file">
-The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define the name, description, version, main file, among other things.
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="https://docs.virtuscloud.app/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define the name, description, version, main file, among other things.
 </Card>
 
 ## Creating the application.yml
@@ -30,60 +32,66 @@ Create a configuration file for your Lavalink server. You can access an example 
 
 It is highly recommended to configure a secure password in the `password` field of your configuration file (application.yml). We recommend using a password with at least 32 characters.
 
-<Note>It is important to remember that you must use port 443 (SSL) and the `secure` option in `true` to connect to your lavalink.</Note>
+<Note>It's important to remember that you should use port 443 (SSL) and the `secure` option as `true` to connect to your lavalink.</Note>
 
-## Uploading Project to VirtusCloud
+## How to host my Lavalink?
 
-Create a compressed file (.zip) containing the `Lavalink.jar` and `application.yml`. Then, upload your configuration file to VirtusCloud.
+Create a compressed file (.zip) containing the `Lavalink.jar` and `application.yml`. Then, upload your configuration file to Virtus Cloud.
 
 <Tabs>
-  <Tab title="Dashboard Upload">
-    Access the [VirtusCloud
-    Dashboard](https://virtuscloud.app/dashboard/upload) and upload your project
-    files.
+  <Tab title="Upload via Dashboard">
+    Access the [Virtus Cloud Dashboard](https://virtuscloud.app/en/upload) and upload your project files.
+
     <Frame>
-      <img src="/images/uploading.gif" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
     </Frame>
   </Tab>
-  <Tab title="CLI Upload">
+
+  <Tab title="Upload via CLI">
     <Steps>
       <Step title="First Step">
-        First, you need to have the CLI installed in your environment. If you
-        don't have it yet, run the following command in your terminal:
+        First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
+
         ```
-        npm install -g @virtuscloud/cli
+        npm install -g @squarecloud/cli
         ```
-        If you already have it, we recommend updating it. To do this, run the following command in your terminal:
+
+        If you already have it, we recommend updating it. To do so, run the following command in your terminal:
+
         <Tabs>
           <Tab title="Windows">
-            ```bash
-            virtuscloud update
+            ```bash theme={null}
+            squarecloud update
             ```
           </Tab>
-          <Tab title="Linux, macOS, and WSL">
-            ```bash
+
+          <Tab title="Linux, macOS and WSL">
+            ```bash theme={null}
             curl -fsSL https://cli.virtuscloud.app/install | bash
             ```
           </Tab>
         </Tabs>
       </Step>
+
       <Step title="Second Step">
-        Now, to authenticate and use other CLI commands, you will find your
-        authorization key [here](https://virtuscloud.app/account/security) by clicking on
-        "Request API Key". After obtaining your authorization key, run the
-        following command: 
-        ```bash
-        virtuscloud login 
+        Now, to authenticate and use other CLI commands, you'll find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking "Request API Key". After obtaining your authorization key, run the following command:
+
+        ```bash theme={null}
+        squarecloud auth login 
         ```
       </Step>
+
       <Step title="Third Step">
-        Finally, to deploy your application to VirtusCloud using the CLI, you need to execute the following command, passing the path of your zip file:
-        ```bash
-        virtuscloud upload server.zip
-        ``` 
+        Finally, to deploy your application on Virtus Cloud using the CLI, you need to run the following command, passing the path to your zip file:
+
+        ```bash theme={null}
+        squarecloud upload server.zip
+        ```
       </Step>
     </Steps>
   </Tab>
 </Tabs>
 
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+## Fale Conosco
+
+Se você continuar enfrentando **dificuldades técnicas**, nossa **equipe de suporte especializada** está disponível para ajudá-lo. [**Fale Conosco**](https://virtuscloud.app/pt-br/support) and we'll be happy to help you resolve any issue.

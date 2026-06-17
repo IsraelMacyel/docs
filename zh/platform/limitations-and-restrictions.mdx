@@ -1,42 +1,123 @@
 ---
-title: "限制与约束"
-description: "了解 VirtusCloud 平台的约束和限制。"
-icon: "shield-dog"
+title: "Platform limits and restrictions"
 ---
 
-## 最低资源要求
-VirtusCloud 平台上托管的每个项目都有特定的最低资源要求，以确保最佳性能：
+# Platform limits and restrictions
 
-- **机器人：** 至少需要 256MB RAM。
-- **网站：** 至少需要 512MB RAM。
-- **缓存数据库：** 至少需要 512MB RAM。
-- **通用数据库：** 至少需要 1GB RAM。
+> Technical specifications for RAM/CPU allocation, network and storage limits on Virtus Cloud.
 
-## 为什么有最低 RAM 要求？
-VirtusCloud 强制执行最低 RAM 要求，以确保应用程序的稳定性和最佳性能。RAM 不足可能导致应用程序崩溃和降低用户体验。
+Virtus Cloud implements container-based resource limits to ensure isolation, stability, and fair distribution of infrastructure across applications.
 
-请注意，虽然 VirtusCloud 提供最高 **1TB RAM** 的计划，但任何**应用程序的最大 RAM 分配为 32GB**。<ins>如果您需要超过 32GB，请联系我们的支持团队寻求帮助。</ins>
+## Minimum Resource Requirements
 
-## 网络限制
-每增加 **256 MB** RAM，**网络速度增加 50 Mbps**。
+Each project hosted on the Virtus Cloud Platform has specific minimum resource requirements to ensure optimal performance:
 
-- **256 MB RAM：** 50 Mbps
-- **512 MB RAM：** 100 Mbps
-- **1024 MB RAM：** 200 Mbps
-- **2048 MB RAM：** 400 Mbps
-- **4096 MB RAM：** 800 Mbps
-- **8192 MB RAM：** 1600 Mbps
-- **10240 MB RAM：** 2000 Mbps
+* **Bots:** Minimum of 256 MB RAM required.
+* **Websites:** Minimum of 512 MB RAM required.
+* **Cache Databases:** Minimum of 512 MB RAM required.
+* **General Databases:** Minimum of 1 GB RAM required.
 
-## 存储限制
-- **所有项目：** 每个项目分配 10GB 存储空间。
+### Why do RAM minimums exist?
 
-## 服务限制
+Containers have mandatory operational overhead: language runtime, OS libraries, and network buffers. Below 256 MB, the kernel's OOM Killer tends to terminate processes during boot or garbage collection, making the application inviable.
 
-### LACK_OF_RAM
-如果应用程序超出配置文件中指定的 RAM 限制，它将因违反 LACK_OF_RAM 而被标记并关闭。
+**Technical implications:**
 
-### LACK_OF_CPU
-如果应用程序超出其分配的处理限制，它将因违反 LACK_OF_CPU 而被标记并关闭。VirtusCloud 不允许托管挖矿加密货币的应用程序。
+* Each container consumes 1 dynamic IPv4 and NVMe storage IOPS
+* Minimum allocations prevent resource fragmentation (noisy neighbor effect)
+* Daily snapshot formula: `(Total RAM / 256) * 2`
 
-VirtusCloud 致力于为所有用户提供安全、平衡的环境。
+<Note>**Impact Data:** After implementing the 256 MB minimum limit, application stability increased drastically, reducing the crash rate due to OOM (Out of Memory) by **97.7%**.</Note>
+
+## CPU allocation
+
+Short answer: CPU is allocated based on configured RAM. Increasing RAM typically grants more vCPUs.
+
+### Rules
+
+#### Single vCPU plans
+
+Applications on 1 vCPU plans receive full capacity without throttling.
+
+#### Multicore plans (≥2 vCPU)
+
+* Performance floor: applications with ≥512 MB RAM receive at least 2 vCPUs.
+* Proportional scaling:
+  * Hobby (≤2 vCPU): +1 vCPU per 512 MB RAM
+  * Standard / Pro / Enterprise: +1 vCPU per 1 GB (1024 MB) RAM
+
+### Examples
+
+| Plan       | Plan capacity    | Configured RAM | vCPUs allocated |
+| ---------- | ---------------- | -------------: | --------------: |
+| Standard   | 4 GB / 4 vCPU    |           1 GB | 2 vCPUs (floor) |
+| Standard   | 4 GB / 4 vCPU    |           4 GB |   4 vCPUs (max) |
+| Enterprise | 128 GB / 16 vCPU |           2 GB |         2 vCPUs |
+| Enterprise | 128 GB / 16 vCPU |          16 GB |        16 vCPUs |
+
+Throttling and safety limits
+
+The system enforces the plan vCPU limit and applies leveling to keep distribution fair. Short-term elasticity may grant extra vCPUs during spikes but is not guaranteed.
+
+Prohibited CPU uses:
+
+* Cryptocurrency mining
+* Unrestricted, intensive ML workloads without authorization
+* Deliberate resource abuse
+
+Violations result in `LACK_OF_CPU` status and immediate suspension.
+
+## Network limits
+
+Bandwidth scales with RAM: **+50 Mbps per 256 MB RAM**.
+
+| RAM allocated | Bandwidth |
+| ------------: | --------: |
+|        256 MB |   50 Mbps |
+|        512 MB |  100 Mbps |
+|          1 GB |  200 Mbps |
+|          2 GB |  400 Mbps |
+|          4 GB |  800 Mbps |
+|          8 GB | 1600 Mbps |
+|         10 GB | 2000 Mbps |
+
+For requirements above 2000 Mbps contact support.
+
+## Storage limits
+
+All projects receive **10 GB NVMe** storage by default.
+
+Characteristics:
+
+* Enterprise-grade NVMe
+* Persistent across deploys and restarts
+* High IOPS and throughput
+
+## Limit exceeded statuses
+
+### LACK\_OF\_RAM
+
+When: application exceeds allocated RAM or kernel signals OOM.
+
+Action: process is terminated immediately to protect host stability.
+
+How to fix:
+
+1. Find memory leaks with profilers (Node.js: `--inspect`, Python: `memory_profiler`).
+2. Reduce in-memory caches or move caches to Redis.
+3. Increase allocated RAM in the control panel.
+
+### LACK\_OF\_CPU
+
+When: sustained CPU usage exceeds reasonable limits for the allocation.
+
+Action: process terminated with status `LACK_OF_CPU`.
+
+How to fix:
+
+1. Profile CPU hotspots (Node.js: `0x`, Python: `cProfile`).
+2. Optimize hot loops, DB queries and I/O-bound operations.
+3. Increase RAM to obtain more vCPUs (see CPU allocation table).
+4. Offload heavy work to asynchronous workers or batch jobs.
+
+Trade-off: increasing RAM to gain CPU raises costs. Measure whether code optimization is cheaper than scaling up.

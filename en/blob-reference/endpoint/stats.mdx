@@ -1,14 +1,14 @@
 ---
 title: "Blob Account Stats"
-sidebarTitle: "Account Stats"
-description: "This documentation provides a comprehensive overview of the GET /v1/stats endpoint of the VirtusCloud Blob API."
-api: "GET https://blob.virtuscloud.app/v1/account/stats"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
+# Blob Account Stats
 
-<Authorization />
+> This documentation provides a comprehensive overview of the GET /v1/stats endpoint of the VirtusCloud Blob API.
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 <Warning>Status updates every 1 minute.</Warning>
 
@@ -19,78 +19,80 @@ import Authorization from "/snippets/api/auth.mdx";
 </ResponseField>
 
 <ResponseField name="response" type="object">
+  <Expandable title="Toggle object">
+    <ResponseField name="usage" type="object">
+      <ResponseField name="objects" type="number">
+        The total number of objects in your account.
+      </ResponseField>
 
-<Expandable title="Toggle object">
+      <ResponseField name="storage" type="number">
+        The total size of all objects in your account, in bytes.
+      </ResponseField>
+    </ResponseField>
 
-<ResponseField name="usage" type="object">
-<ResponseField name="objects" type="number">
-  The total number of objects in your account.
-</ResponseField>
-<ResponseField name="storage" type="number">
-  The total size of all objects in your account, in bytes.
-</ResponseField>
-</ResponseField>
+    <ResponseField name="plan" type="object">
+      <ResponseField name="included" type="number">
+        The total storage size included on the plan, in bytes.
+      </ResponseField>
+    </ResponseField>
 
-<ResponseField name="plan" type="object">
-<ResponseField name="included" type="number">
-The total storage size included on the plan, in bytes.
-</ResponseField>
-</ResponseField>
+    <ResponseField name="billing" type="object">
+      <ResponseField name="extraStorage" type="number">
+        The extra space used, in bytes.
+      </ResponseField>
 
-<ResponseField name="billing" type="object">
-<ResponseField name="extraStorage" type="number">
-  The extra space used, in bytes.
-</ResponseField>
-<ResponseField name="storagePrice" type="number">
-  The total price of storage for all objects in your account, in BRL.
-</ResponseField>
-<ResponseField name="objectsPrice" type="number">
-  The total price of all objects in your account, in BRL.
-</ResponseField>
-<ResponseField name="totalEstimate" type="number">
-  The total price of all objects in your account, in BRL.
-</ResponseField>
-</ResponseField>
-</Expandable>
+      <ResponseField name="storagePrice" type="number">
+        The total price of storage for all objects in your account, in BRL.
+      </ResponseField>
 
+      <ResponseField name="objectsPrice" type="number">
+        The total price of all objects in your account, in BRL.
+      </ResponseField>
+
+      <ResponseField name="totalEstimate" type="number">
+        The total price of all objects in your account, in BRL.
+      </ResponseField>
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
 <ResponseExample>
-```json Response - [1m cache]
-{
-  "status": "success",
-  "response": {
-    "usage": {
-      "objects": 0,
-      "storage": 0
-    },
-    "plan": {
-      "included": 0
-    },
-    "billing": {
-      "extraStorage": 0,
-      "storagePrice": 0,
-      "objectsPrice": 0,
-      "totalEstimate": 0
+  ```json Response - [1m cache] theme={null}
+  {
+    "status": "success",
+    "response": {
+      "usage": {
+        "objects": 0,
+        "storage": 0
+      },
+      "plan": {
+        "included": 0
+      },
+      "billing": {
+        "extraStorage": 0,
+        "storagePrice": 0,
+        "objectsPrice": 0,
+        "totalEstimate": 0
+      }
     }
   }
-}
-```
+  ```
 </ResponseExample>
 
 ### Troubleshooting
-<Tabs>
-    <Tab title="401 Status Code">
-        ### Unauthorized
-        <CodeGroup>
-        ```json ACCESS_DENIED
-        // Just set the correct API key in the Authorization header.
-        {
-            "status": "error",
-            "code": "ACCESS_DENIED"
-        }
-        ```
-        </CodeGroup>
-    </Tab>
-</Tabs>
 
+<Tabs>
+  <Tab title="401 Status Code">
+    ### Unauthorized
+
+    <CodeGroup>
+      ```json ACCESS_DENIED theme={null}
+      // The API key is missing or invalid. Set a valid key in the Authorization header.
+      {
+          "status": "error",
+          "code": "ACCESS_DENIED"
+      }
+      ```
+    </CodeGroup>
+  </Tab>
+</Tabs>

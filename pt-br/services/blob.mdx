@@ -1,72 +1,117 @@
 ---
-title: "Blob — Armazenamento Serverless"
-description: "Descubra as capacidades de armazenamento serverless da VirtusCloud."
-icon: "database"
+title: "Serverless Storage - Virtus Cloud Blob Storage"
 ---
 
-<img src="/images/services/blob.png" />
+# Serverless Storage - Virtus Cloud Blob Storage
 
-<Note>O Blob está atualmente em beta. Se encontrar algum problema ou tiver feedback, [entre em contato](/contact).</Note>
+> Scalable serverless storage with global CDN, zero transfer fees, and 99.999999999% availability. Virtus Cloud Blob Storage is ideal for applications requiring reliable storage.
 
-A **VirtusCloud** oferece armazenamento serverless de alto desempenho através do **Blob**, eliminando a complexidade do gerenciamento de infraestrutura de armazenamento.
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/services/en/blob.webp" alt="Virtus Cloud Blob Storage service overview" style={{ borderRadius: "0.2rem" }} />
+</Frame>
 
-## Recursos e Suporte
+## Why choose Virtus Cloud Blob Storage?
+
+As the **largest bot hosting platform in Latin America**, trusted by **80 of the 100 largest Brazilian Discord servers**, we built Blob Storage to overcome the **limitations imposed by Discord’s CDN**. Our enterprise-grade solution ensures **stability and availability** for thousands of developers who need reliable asset storage.
+
+In short, **Blob Storage** is a **serverless storage service** by Virtus Cloud that is **fast and scalable**, with **generous quotas** included in every plan and a **flexible pay-as-you-go model** for overages.
+
+<Note>Blob Storage is currently in beta. If you have any feedback, please [contact us](https://virtuscloud.app/en/support).</Note>
+
+## Key Features
 
 <CardGroup cols={2}>
-  <Card title="Sem Taxas de Ingresso ou Egresso" icon="money-bill">
-    Diga adeus a cobranças inesperadas com ZERO taxas para tráfego de entrada e saída de dados.
+  <Card title="No Transfer Fees" icon="money-bill">
+    **Zero ingress/egress fees** – free data transfer.
   </Card>
-  <Card title="Zero Gerenciamento" icon="server">
-    Simplifique seu fluxo de trabalho eliminando procedimentos complexos de configuração. Apenas envie seus arquivos e a VirtusCloud cuida do resto.
+
+  <Card title="Managed Infrastructure" icon="server">
+    **Automatic resource orchestration** with **dynamic provisioning**.
   </Card>
-  <Card title="Construído para Aplicações Modernas" icon="terminal">
-    Projetado para integrar-se perfeitamente às suas aplicações, oferecendo entrega de conteúdo de alta velocidade através de uma CDN global.
+
+  <Card title="High-Performance Global CDN" icon="globe">
+    **Optimized distribution** via Cloudflare’s global network with **edge caching**.
   </Card>
-  <Card title="Armazenamento Redundante" icon="box">
-    Seus dados são protegidos com replicação tripla rápida e criptografia de ponta a ponta.
+
+  <Card title="Scalable Limits" icon="chart-line">
+    **Up to 1PB of storage** and **1 billion free requests/day** available.
   </Card>
 </CardGroup>
 
-## Modelo de Preços
+## Quotas and Pricing
 
-Nosso modelo de preços é simples e previsível, sem taxas ocultas. Você paga apenas pelo que usa.
+Blob Storage offers clear, transparent pricing so you can choose the plan that fits your needs.
 
-| Incluído em TODOS OS PLANOS | **Baseado em Uso** |
-|---|---|
-| Baixa latência | Sempre baixa latência |
-| 1GB de armazenamento incluído | Até **1PB de armazenamento** (1GB/R$ 0,25) |
-| 250 objetos incluídos | Até **1 bilhão de objetos** (250/R$ 0,50) |
-| Até 1 milhão de requisições/dia gratuitas | Até **1 bilhão de requisições/dia** |
+### Included Quotas
 
-<Info>Quando seu plano expirar, nada acontece imediatamente. Apenas no mês seguinte, o faturamento do VirtusCloud Blob será ativado.</Info>
-<Warning>Todos os preços estão em Real Brasileiro (R$). Para usar o VirtusCloud Blob, você precisa ter uma conta válida com um plano pago.</Warning>
+Each paid plan includes a **free storage quota** at no extra cost:
 
-## Tipos de Arquivo Suportados
+| Plan       | Free Storage Included |
+| ---------- | --------------------- |
+| Hobby-1    | **5 GB**              |
+| Hobby-2    | **15 GB**             |
+| Standard-4 | **30 GB**             |
+| Standard-6 | **50 GB**             |
+| Standard-8 | **100 GB**            |
+| Pro-12     | **200 GB**            |
+| Pro-16     | **250 GB**            |
+| Enterprise | **250 GB**            |
 
-| Tipo de Arquivo | Extensões |
-|---|---|
-| Vídeo | .mp4, .mpeg, .webm, .flv, .m4v |
-| Imagem | .jpeg, .png, .apng, .tiff, .gif, .webp, .bmp, .svg, .ico, .heic, .heif |
-| Áudio | .mp3, .mp4, .wav, .ogg, .opus, .mpeg, .aac |
-| Texto | .txt, .html, .css, .csv, .x-sql |
-| Aplicação | .xml, .sql, .sqlite3, .pdf, .json, .javascript, .p12 |
+### Pay-as-you-go Overage
 
-## Como Usar o Blob?
+If your usage exceeds the included quota, you automatically switch to **pay-as-you-go**, paying **only for the extra space** you use.
+
+<Card title="Excess Storage Cost" icon="coins">
+  **R\$ 0.25 per additional GB** beyond your free quota.
+</Card>
+
+<Info>The Blob Storage service and pay-as-you-go feature are **only available** to subscribers of **paid plans**.</Info>
+
+## Supported File Extensions
+
+Our platform enforces a **strict MIME type whitelist** to ensure service **security and integrity**. This extension restriction is a **critical security measure** that prevents malicious file uploads and maintains compliance with **corporate security policies**.
+
+| Category        | Supported Extensions                                                                                |
+| --------------- | --------------------------------------------------------------------------------------------------- |
+| **Video**       | `.mp4`, `.mpeg`, `.webm`, `.flv`, `.m4v`                                                            |
+| **Image**       | `.jpg`, `.png`, `.apng`, `.tiff`, `.gif`, `.webp`, `.bmp`, `.svg`, `.ico`, `.cur`, `.heic`, `.heif` |
+| **Audio**       | `.wav`, `.ogg`, `.opus`, `.m4a`, `.mp3`, `.aac`                                                     |
+| **Text**        | `.html`, `.css`, `.csv`, `.txt`, `.sql`                                                             |
+| **Application** | `.xml`, `.sql`, `.sqlite3`, `.p12`, `.pdf`, `.json`, `.js`                                          |
+
+<Warning>
+  **MIME Type Validation**: All files undergo **binary signature verification** to prevent **extension spoofing** and **malicious uploads**.
+</Warning>
+
+<Note>To request support for additional file types or discuss specific use cases, [contact our technical team](https://virtuscloud.app/en/support).</Note>
+
+## Performance & Benchmarks
+
+Our infrastructure has undergone **extensive benchmarks** to ensure Virtus Cloud provides a **robust, reliable serverless storage solution**. Here are some key findings:
+
+* **Latency**: Average file receive latency of **\~11ms**.
+* **Throughput**: Average transfer rates of **\~12.5–18.75 MB/s (100–150 Mbps)** on typical connections, reaching **up to \~500 Mbps** on >1–2 Gbps networks.
+* **Availability**: Average availability of **99.999999999% (11 nines)** (S3-based design).
+
+In our internal tests in New York, latency remains **negligibly low**, well **below average**.
+
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/services/blob-global-latency-test.webp" alt="Blob Storage global latency benchmark" style={{ borderRadius: "0.5rem" }} />
+</Frame>
+
+<Info>**Note**: Benchmark results are based on controlled tests and may vary significantly with **geographic location**, **file sizes**, **network quality**, and **peak usage**. For best performance, run tests in your production environment.</Info>
+<Warning>**Regional Limitations**: Users in **Africa** and some **Asian regions** may experience higher latencies due to **physical distance from data centers** and **local network infrastructure**.</Warning>
+
+## How to host your files
 
 <Steps>
-  <Step title="Configuração Inicial" icon="file">
-    Envie seu arquivo através do [endpoint put](/blob-reference/endpoint/put).
+  <Step title="Upload via Endpoint">
+    Upload your files to the [POST endpoint](/en/blob-reference/endpoint/post).
   </Step>
-  <Step title="URL de Acesso" icon="globe">
-    Acesse seu arquivo através da URL fornecida na resposta do passo anterior.
+
+  <Step title="Access via URL">
+    Access your files using the URL provided in the upload response.
   </Step>
 </Steps>
 
-## Benchmarks
-
-- **Latência**: Latência média de ~20ms para receber um arquivo.
-- **Throughput**: Throughput médio de ~10-15MB/s (80-120mbps).
-- **Disponibilidade**: Disponibilidade média de 99,999999999% (11 noves).
-
-<Info>Os benchmarks não são garantidos. A latência e o throughput podem variar dependendo da sua localização, tamanho do arquivo e condições de rede.</Info>
-<Warning>A **latência na África e em algumas localidades da Ásia é maior**. Estamos trabalhando para melhorar isso em breve.</Warning>
+The process is **simplified**: use your account API key for authentication and upload via a **single HTTPS request**. **No additional configuration** or complex infrastructure needed. Virtus Cloud **handles everything** for you.

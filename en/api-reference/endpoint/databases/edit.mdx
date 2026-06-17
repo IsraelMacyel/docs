@@ -1,42 +1,45 @@
 ---
 title: "Edit Database"
-description: "Edits a database hosted on VirtusCloud, changing name and/or memory"
-api: "PATCH https://api.virtuscloud.app/v2/databases/{databaseId}"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Edit Database
+
+> Edits a database hosted on Virtus Cloud, changing name and/or memory
 
 ## Request
 
 ### Headers
 
-<Authorization />
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 ### Path
 
-<ParamField path="databaseId" type="string" placeholder="Database ID" required>
+<ParamField path="database_id" type="string" placeholder="Database ID" required>
   The ID of the database.
 </ParamField>
 
 ### Body
 
 <ParamField body="name" type="string" placeholder="database name">
-  The name of the Database. Must be [a-z] [A-Z] [0-9].
+  The name of the Database. Must be \[a-z] \[A-Z] \[0-9].
 </ParamField>
+
 <ParamField body="ram" type="int" placeholder="RAM(in MB)">
-  The RAM allocated to it. Redis minimum is 512 and Mongo, 1024.
+  The amount of RAM to allocate, in megabytes. Minimums: Redis 512 MB, MongoDB and PostgreSQL 1024 MB.
 </ParamField>
 
 ## Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
 
 <ResponseExample>
-```json
-{
-  "status":"success"
-}
-```
+  ```json theme={null}
+  {
+    "status":"success"
+  }
+  ```
 </ResponseExample>

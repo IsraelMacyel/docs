@@ -1,82 +1,93 @@
 ---
-title: "Hospedagem de Banco de Dados"
-description: "Hospede bancos de dados para suas aplicações com a maior plataforma da América Latina. Performance e segurança empresarial para seus dados."
+title: "Database Hosting"
 ---
 
-# Hospedagem de Banco de Dados
+# Database Hosting
 
-> Hospede bancos de dados para suas aplicações com a maior plataforma da América Latina. Performance e segurança empresarial para seus dados.
+> Host databases for your applications with the largest platform in Latin America. Enterprise performance and security for your data
 
 <Frame>
-  <img src="https://cdn.virtuscloud.app/docs/services/en/database.png" alt="Visão geral do serviço de Bancos de Dados da Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+  <img src="https://cdn.virtuscloud.app/docs/services/en/database.png" alt="Virtus Cloud Databases service overview" style={{ borderRadius: "0.2rem" }} />
 </Frame>
 
-## Por que escolher a Virtus Cloud?
+## Why choose Virtus Cloud?
 
 <CardGroup cols={2}>
-  <Card title="Armazenamento Empresarial" icon="bolt">
-    Hardware de última geração com **SSDs NVMe Samsung Enterprise** garantindo **máxima performance** e **latência ultrabaixa** para seus dados.
+  <Card title="Enterprise-Level Storage" icon="bolt">
+    Cutting-edge hardware with **enterprise Samsung NVMe SSDs** ensuring **maximum performance** and **ultra-low latency** for your data.
   </Card>
-  <Card title="Zero taxas de rede" icon="wifi">
-    Você pode **transferir dados** de e para seu banco de dados **sem se preocupar com taxas de rede**, permitindo que você se concentre em construir sua aplicação.
+
+  <Card title="Zero network fees" icon="wifi">
+    You can **transfer data** to and from your database **without worrying about network fees**, allowing you to focus on building your application without unexpected costs.
   </Card>
-  <Card title="Snapshots Inteligentes" icon="server">
-    Tecnologia **exclusiva** para pontos de restauração com **1 clique**, incluídos **sem custo adicional**, garantindo **segurança completa** para seus dados.
+
+  <Card title="Smart Snapshots" icon="server">
+    **Exclusive** technology for **1-click** restore points, included **at no additional cost**, ensuring **complete security** for your data.
   </Card>
-  <Card title="Segurança Avançada" icon="shield-halved">
-    **Conexões seguras com certificados** gerenciados pela Virtus Cloud, garantindo que seus dados sejam protegidos com medidas de segurança empresarial.
+
+  <Card title="Advanced Security" icon="shield-halved">
+    **Secure connections with certificates** managed by Virtus Cloud, ensuring that your data is protected with enterprise-grade security measures.
   </Card>
 </CardGroup>
 
-## Bancos de Dados Suportados
+## Supported databases
 
-Oferecemos alguns bancos de dados já configurados para você conectar e começar a usar.
+We offer some databases already configured to connect and start using.
 
 <CardGroup cols={2}>
   <Card title="PostgreSQL" icon="elephant" href="https://virtuscloud.app/en/databases/postgresql" />
+
   <Card title="MongoDB" icon="leaf" href="https://virtuscloud.app/en/databases/mongodb" />
+
   <Card title="MySQL" icon="database" href="https://virtuscloud.app/en/databases/mysql" />
+
   <Card title="Redis" icon="r" href="https://virtuscloud.app/en/databases/redis" />
 </CardGroup>
 
-### Versões
+### Versions
 
-| SGBD | Versão |
-| :---: | :---: |
-| PostgreSQL | 17.x.x |
-| MySQL | 9.x.x |
-| MongoDB | 8.x.x |
-| Redis | 7.4.x |
+|    SGBD    | Version |
+| :--------: | :-----: |
+| PostgreSQL |  17.x.x |
+|    MySQL   |  9.x.x  |
+|   MongoDB  |  8.x.x  |
+|    Redis   |  7.4.x  |
 
-## Como hospedar meu banco de dados?
+## How do I host my database?
 
-Hospedar seu banco de dados com a Virtus Cloud é simples — você precisa de um **plano Standard ativo ou superior**.
+Hosting your database with Virtus Cloud is simple and straightforward, you need an **active Standard plan or higher** and follow these steps:
 
 <Steps>
-  <Step title="Criar uma nova instância de banco de dados">
-    Acesse a página de [Bancos de Dados](https://virtuscloud.app/en/dashboard/databases) e clique em "Criar Banco de Dados".
+  <Step title="Create a new database instance">
+    Go to the [Databases](https://virtuscloud.app/en/dashboard/databases) page and click on the "Create Database" button.
   </Step>
-  <Step title="Configurar sua instância">
-    Selecione o tipo de banco de dados e preencha as informações necessárias, como nome e RAM.
+
+  <Step title="Setting up your database instance">
+    Select the database type you want to host and fill in the required information, such as the database name and RAM.
   </Step>
-  <Step title="Finalizar a criação">
-    Clique em "Criar" e aguarde o banco de dados ser criado. Quando estiver pronto, você encontrará os detalhes de conexão no painel do banco de dados.
+
+  <Step title="Finish your instance creation">
+    Click on the "Create" button and wait for the database to be created. Once it's ready, you can find the connection details in the database dashboard.
   </Step>
 </Steps>
 
-## Como me conectar ao meu banco de dados?
+## How do I connect to my database?
 
-Nossos bancos de dados são configurados para permitir apenas conexões seguras com certificado.
+Our databases are configured to only allow secure connections with certificate. To connect to your brand new database, you need to follow these steps:
 
 <Steps>
-  <Step title="Obter credenciais e certificados">
-    Obtenha as credenciais de conexão (host, porta, usuário e senha) e os certificados no painel do banco de dados.
+  <Step title="Get the credentials and certificates">
+    Get the credentials to connect to your database. You will need the host, port, username and password, which you can find in the URL  and you will need the certificates.
   </Step>
-  <Step title="Conectar com SSL/TLS">
-    Use as credenciais e certificados para conectar ao banco de dados usando seu cliente ou biblioteca preferido. Certifique-se de usar SSL/TLS.
-    <Note>Normalmente você precisará apenas do `.pem`, mas alguns clientes podem exigir os arquivos `.key` e `.cert` separadamente ou o arquivo `.p12`.</Note>
+
+  <Step title="Connect to your database with ssl/tls">
+    Use the credentials and certificates to connect to your database using your preferred database client or library.\
+    Make sure to use SSL/TLS for secure connections and use the certificates as CA, root certificate or client certificate and key certificate.\
+    <Note> Normally you will need only the `.pem` but some clients may require the `.key` and `.cert` files separately or `.p12` file.</Note>
   </Step>
-  <Step title="Começar a usar">
-    Após conectado, você pode começar a usar sua instância de banco de dados e monitorar a performance pelo painel da Virtus Cloud.
+
+  <Step title="Start using your database">
+    Once connected, you can start using your database instance, storing and managing your data.\
+    You can also monitor the performance and usage of your database through the Virtus Cloud dashboard.
   </Step>
 </Steps>

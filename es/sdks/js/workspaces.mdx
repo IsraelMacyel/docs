@@ -1,6 +1,5 @@
 ---
 title: "Workspaces"
-description: "Create workspaces, invite members, manage roles and share applications across a team."
 ---
 
 # Workspaces
@@ -56,7 +55,7 @@ Inviting a member is a two-step handshake — the invitee proves consent by gene
 
 ```typescript theme={null}
 // 1. From the invitee's own SDK client
-const otherApi = new SquareCloudAPI(process.env.OTHER_USER_API_KEY!);
+const otherApi = new VirtusCloudAPI(process.env.OTHER_USER_API_KEY!);
 const code = await otherApi.workspaces.generateInviteCode();
 
 // 2. From the workspace owner's client

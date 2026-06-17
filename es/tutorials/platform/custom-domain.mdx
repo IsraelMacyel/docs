@@ -1,13 +1,12 @@
 ---
 title: "How to Set Up Your Custom Domain"
-description: "Learn how to configure your domain on Virtus Cloud"
 ---
 
 # How to Set Up Your Custom Domain
 
 > Learn how to configure your domain on Virtus Cloud
 
-## Introduction
+## Introducción
 
 To configure your custom domain on Virtus Cloud, you need to have the **Standard** plan or higher. Since Virtus Cloud uses CNAME records for domain functionality, some registrars may not offer complete support for this configuration.
 
@@ -39,7 +38,7 @@ After entering your domain, copy the provided nameservers and paste them in the 
 </Frame>
 
 * Now that the domain is registered on Virtus Cloud, return to Cloudflare, select your domain and access the **DNS** tab.
-* Finally, create a **CNAME** record pointing to `cname.squareweb.app`, replacing the name with your subdomain, and another **TXT** record with the value displayed in **DNS Configuration** after saving.
+* Finally, create a **CNAME** record pointing to `cname.virtuscloud.app`, replacing the name with your subdomain, and another **TXT** record with the value displayed in **DNS Configuration** after saving.
 
 <Frame>
   <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/record-dns.webp" alt="DNS CNAME and TXT record configuration in Cloudflare" style={{ borderRadius: '0.2rem' }} />
@@ -56,7 +55,7 @@ After entering your domain, copy the provided nameservers and paste them in the 
   <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/page-rule-www.webp" alt="Cloudflare page rule for www redirect" style={{ borderRadius: '0.2rem' }} />
 </Frame>
 
-### Troubleshooting
+### Solución de Problemas
 
 * If you receive the error **"Could not find this site."**, try clearing your browser cache and access the site again in 60 seconds.
 

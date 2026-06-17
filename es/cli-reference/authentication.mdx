@@ -1,39 +1,48 @@
 ---
-title: "Autenticación"
-icon: "lock"
-description: "Aprende lo que se necesita para autenticarte en la CLI de VirtusCloud."
+title: "Authentication"
 ---
 
+# Authentication
+
+> Learn what it takes to authenticate to the Virtus Cloud CLI.
+
 <Steps>
-    <Step title="Obtén tu clave de API">
-        Primero necesitas obtener una clave de API desde el [Panel de Desarrollador](https://virtuscloud.app/account/security). Puedes usar esta clave para autenticarte en la CLI de VirtusCloud.
-    </Step>
-    <Step title="Autentícate">
-        Autentícate en la CLI de VirtusCloud usando el siguiente comando:
-        ```bash
-        virtuscloud auth login
-        ```
+  <Step title="Get API key">
+    First you need to get an API key from the [Developer Dashboard](https://virtuscloud.app/en/account/security). You can use this API key to authenticate to the Virtus Cloud CLI.
+  </Step>
 
-        Se te pedirá que ingreses tu clave de API.
-        ```bash
-        Your API Token:
-        > Inserta tu token de API de VirtusCloud
-        ```
+  <Step title="Autenticar">
+    Authenticate to the Virtus Cloud CLI using the following command:
 
-        Después de ingresar tu clave de API, estarás autenticado en la CLI de VirtusCloud.
+    ```bash theme={null}
+    squarecloud auth login
+    ```
 
-        Puedes omitir el prompt pasando tu clave de API con el flag `--token`:
-        ```bash
-        virtuscloud auth login --token=<clave de API>
-        ```
-    </Step>
+    You will be prompted to enter your API key.
+
+    ```bash theme={null}
+    Your API Token:
+    > Insert your square cloud api token
+    ```
+
+    After entering your API key, you will be authenticated to the Virtus Cloud CLI.
+
+    You can skip the prompt by passing your API key with the `--token` flag:
+
+    ```bash theme={null}
+    squarecloud auth login --token=<API key>
+    ```
+  </Step>
 </Steps>
 
 ## Próximos pasos
 
-<Card title="Desplegar tu aplicación" href="/cli-reference/commands">
-    Aprende cómo desplegar tu aplicación usando la CLI de VirtusCloud.
+After authenticating to the Virtus Cloud CLI, you can start deploying your applications.
+
+<Card title="Deploy your application" href="/en/cli-reference/commands/app/upload">
+  Learn how to deploy your application using the Virtus Cloud CLI.
 </Card>
-<Card title="Referencia de Comandos" href="/cli-reference/commands">
-    Conoce los comandos disponibles en la CLI de VirtusCloud.
+
+<Card title="Commands Reference" href="/en/cli-reference/commands/help">
+  Learn about the commands available in the Virtus Cloud CLI.
 </Card>

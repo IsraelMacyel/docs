@@ -1,58 +1,42 @@
 ---
-title: "Solving INVALID_DEPENDENCY"
-sidebarTitle: "Solving INVALID_DEPENDENCY"
-description: "Learn how to resolve the Solving INVALID_DEPENDENCY issue in your application."
+title: "Resolvendo INVALID_DEPENDENCY"
+sidebarTitle: "Resolvendo INVALID_DEPENDENCY"
+description: "Aprenda como resolver o problema INVALID_DEPENDENCY na sua aplicação."
 ---
 
-## When does it occur?
+## Quando ocorre?
 
-This issue occurs when your dependency file could not be located in the root of your application.
+Este problema ocorre quando o arquivo de dependências não pode ser encontrado na raiz da sua aplicação.
 
-## Why does it occur?
+## Por que ocorre?
 
-This issue occurs when your dependency file could not be located in the root of your application. This can happen when your dependency file does not exist or its nominated with an extra `.txt`.
+O arquivo de dependências não existe ou está com uma extensão extra `.txt`.
 
-## How to fix
+## Como corrigir
 
-### For Node.js (package.json)
+### Para Node.js (package.json)
 
-1. **Navigate to the root directory of your project:**
-   Ensure that you are in the main directory of your application.
-
-2. **Check for the presence of `package.json`:**
-   Verify whether the `package.json` file exists in the root directory. If it is not present, create one using the following command:
+1. Certifique-se de estar no diretório raiz da sua aplicação.
+2. Verifique se o arquivo `package.json` existe. Se não existir, crie-o:
    ```bash
    npm init -y
    ```
-   This command initializes a default `package.json` file.
+3. Confirme que o arquivo se chama exatamente `package.json` sem extensões extras.
 
-3. **Ensure correct naming:**
-   Confirm that the file is named exactly as `package.json` and does not have any additional extensions (e.g., `package.json.txt`). If there are any discrepancies, rename the file accordingly.
+### Para Python (requirements.txt)
 
-### For Python (requirements.txt)
-
-1. **Navigate to the root directory of your project:**
-   Make sure you are in the main directory of your application.
-
-2. **Check for the presence of `requirements.txt`:**
-   Confirm whether the `requirements.txt` file exists in the root directory. If it is missing, create one.
-
-3. **Ensure correct naming:**
-   Verify that the file is named exactly as `requirements.txt` without any additional extensions (e.g., `requirements.txt.txt`). If the name is incorrect, rename the file accordingly.
-
-4. **Add dependencies to the file:**
-   Open the `requirements.txt` file and add the necessary dependencies for your Python project. For example:
+1. Certifique-se de estar no diretório raiz da sua aplicação.
+2. Verifique se o arquivo `requirements.txt` existe. Se não existir, crie-o.
+3. Confirme que o arquivo se chama exatamente `requirements.txt` sem extensões extras.
+4. Adicione as dependências necessárias:
 
 ```plaintext requirements.txt
 discord.py
 ```
 
-### Additional Tips:
+### Dicas Adicionais:
 
-- **Double-check file extensions:**
-  Ensure that the file extensions are correct (e.g., `.json` for Node.js, `.txt` for Python). Incorrect extensions might lead to the `INVALID_DEPENDENCY` error.
+- Verifique se as extensões dos arquivos estão corretas (`.json` para Node.js, `.txt` para Python).
+- Consulte a documentação para sua linguagem específica.
 
-- **Review documentation and guides:**
-  Consult the documentation for your specific programming language ([Node.js](/articles/getting-started-with-nodejs)/[Python](/articles/getting-started-with-python)).
-
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+Se continuar com problemas, [entre em contato com nosso suporte](/company/support).

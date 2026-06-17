@@ -1,78 +1,93 @@
 ---
-title: "Alojamiento de Bases de Datos"
-description: "Aloja bases de datos para tus aplicaciones con la plataforma más grande de Latinoamérica."
+title: "Database Hosting"
 ---
 
-# Alojamiento de Bases de Datos
+# Database Hosting
 
-> Aloja bases de datos para tus aplicaciones con la plataforma más grande de Latinoamérica. Rendimiento y seguridad empresarial para tus datos.
+> Host databases for your applications with the largest platform in Latin America. Enterprise performance and security for your data
 
 <Frame>
-  <img src="https://cdn.virtuscloud.app/docs/services/en/database.png" alt="Visión general del servicio de Bases de Datos de Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+  <img src="https://cdn.virtuscloud.app/docs/services/en/database.png" alt="Virtus Cloud Databases service overview" style={{ borderRadius: "0.2rem" }} />
 </Frame>
 
-## ¿Por qué elegir Virtus Cloud?
+## Why choose Virtus Cloud?
 
 <CardGroup cols={2}>
-  <Card title="Almacenamiento Empresarial" icon="bolt">
-    Hardware de última generación con **SSDs NVMe Samsung Enterprise** garantizando **máximo rendimiento** y **latencia ultrabaja**.
+  <Card title="Enterprise-Level Storage" icon="bolt">
+    Cutting-edge hardware with **enterprise Samsung NVMe SSDs** ensuring **maximum performance** and **ultra-low latency** for your data.
   </Card>
-  <Card title="Sin costos de red" icon="wifi">
-    **Transfiere datos** hacia y desde tu base de datos **sin preocuparte por costos de red**.
+
+  <Card title="Zero network fees" icon="wifi">
+    You can **transfer data** to and from your database **without worrying about network fees**, allowing you to focus on building your application without unexpected costs.
   </Card>
-  <Card title="Snapshots Inteligentes" icon="server">
-    Tecnología **exclusiva** para puntos de restauración con **1 clic**, incluidos **sin costo adicional**.
+
+  <Card title="Smart Snapshots" icon="server">
+    **Exclusive** technology for **1-click** restore points, included **at no additional cost**, ensuring **complete security** for your data.
   </Card>
-  <Card title="Seguridad Avanzada" icon="shield-halved">
-    **Conexiones seguras con certificados** gestionados por Virtus Cloud con seguridad empresarial.
+
+  <Card title="Advanced Security" icon="shield-halved">
+    **Secure connections with certificates** managed by Virtus Cloud, ensuring that your data is protected with enterprise-grade security measures.
   </Card>
 </CardGroup>
 
-## Bases de Datos Soportadas
+## Supported databases
+
+We offer some databases already configured to connect and start using.
 
 <CardGroup cols={2}>
   <Card title="PostgreSQL" icon="elephant" href="https://virtuscloud.app/en/databases/postgresql" />
+
   <Card title="MongoDB" icon="leaf" href="https://virtuscloud.app/en/databases/mongodb" />
+
   <Card title="MySQL" icon="database" href="https://virtuscloud.app/en/databases/mysql" />
+
   <Card title="Redis" icon="r" href="https://virtuscloud.app/en/databases/redis" />
 </CardGroup>
 
-### Versiones
+### Versions
 
-| SGBD | Versión |
-| :---: | :---: |
-| PostgreSQL | 17.x.x |
-| MySQL | 9.x.x |
-| MongoDB | 8.x.x |
-| Redis | 7.4.x |
+|    SGBD    | Version |
+| :--------: | :-----: |
+| PostgreSQL |  17.x.x |
+|    MySQL   |  9.x.x  |
+|   MongoDB  |  8.x.x  |
+|    Redis   |  7.4.x  |
 
-## ¿Cómo alojar mi base de datos?
+## How do I host my database?
 
-Necesitas un **plan Standard activo o superior**.
+Hosting your database with Virtus Cloud is simple and straightforward, you need an **active Standard plan or higher** and follow these steps:
 
 <Steps>
-  <Step title="Crear una nueva instancia">
-    Ve a la página de [Bases de Datos](https://virtuscloud.app/en/dashboard/databases) y haz clic en "Crear Base de Datos".
+  <Step title="Create a new database instance">
+    Go to the [Databases](https://virtuscloud.app/en/dashboard/databases) page and click on the "Create Database" button.
   </Step>
-  <Step title="Configurar tu instancia">
-    Selecciona el tipo de base de datos y completa la información requerida.
+
+  <Step title="Setting up your database instance">
+    Select the database type you want to host and fill in the required information, such as the database name and RAM.
   </Step>
-  <Step title="Finalizar la creación">
-    Haz clic en "Crear" y espera a que la base de datos esté lista.
+
+  <Step title="Finish your instance creation">
+    Click on the "Create" button and wait for the database to be created. Once it's ready, you can find the connection details in the database dashboard.
   </Step>
 </Steps>
 
-## ¿Cómo conectarme a mi base de datos?
+## How do I connect to my database?
+
+Our databases are configured to only allow secure connections with certificate. To connect to your brand new database, you need to follow these steps:
 
 <Steps>
-  <Step title="Obtener credenciales y certificados">
-    Obtén las credenciales (host, puerto, usuario y contraseña) y los certificados desde el panel de tu base de datos.
+  <Step title="Get the credentials and certificates">
+    Get the credentials to connect to your database. You will need the host, port, username and password, which you can find in the URL  and you will need the certificates.
   </Step>
-  <Step title="Conectar con SSL/TLS">
-    Usa las credenciales y certificados para conectarte con tu cliente o librería preferida con SSL/TLS.
-    <Note>Normalmente solo necesitarás el `.pem`, pero algunos clientes pueden requerir los archivos `.key` y `.cert` por separado o el archivo `.p12`.</Note>
+
+  <Step title="Connect to your database with ssl/tls">
+    Use the credentials and certificates to connect to your database using your preferred database client or library.\
+    Make sure to use SSL/TLS for secure connections and use the certificates as CA, root certificate or client certificate and key certificate.\
+    <Note> Normally you will need only the `.pem` but some clients may require the `.key` and `.cert` files separately or `.p12` file.</Note>
   </Step>
-  <Step title="Comenzar a usar">
-    Una vez conectado, puedes empezar a usar tu instancia y monitorear su rendimiento desde el panel de Virtus Cloud.
+
+  <Step title="Start using your database">
+    Once connected, you can start using your database instance, storing and managing your data.\
+    You can also monitor the performance and usage of your database through the Virtus Cloud dashboard.
   </Step>
 </Steps>

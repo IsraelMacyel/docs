@@ -543,8 +543,8 @@
     "suggestEdit": true
   },
   "localization": {
-    "locales": ["en", "pt-br", "es", "zh"],
-    "defaultLocale": "en"
+    "locales": ["pt-br", "en", "es", "zh"],
+    "defaultLocale": "pt-br"
   },
   "redirects": [
     {

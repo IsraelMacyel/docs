@@ -1,6 +1,5 @@
 ---
 title: "Managing Databases"
-description: "In this section, you will learn how to manage databases using the Python SDK. Create, retrieve, update, delete, and monitor databases for your applications."
 ---
 
 # Managing Databases
@@ -16,7 +15,7 @@ Databases are managed services provided by Virtus Cloud that allow you to store 
 `client.create_database` returns a `Database` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -45,7 +44,7 @@ async def example():
 `client.get_database_info` returns a `DatabaseInfo` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -68,7 +67,7 @@ async def example():
 `client.get_database_status` returns a `StatusData` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -87,7 +86,7 @@ async def example():
 `client.all_databases_status` returns a list of `ResumedStatus` objects.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -106,7 +105,7 @@ async def example():
 `client.start_database` returns a `Response` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -120,7 +119,7 @@ async def example():
 `client.stop_database` returns a `Response` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -134,7 +133,7 @@ async def example():
 `client.edit_database` returns a `Response` object. You can update the database name and/or memory allocation.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -166,7 +165,7 @@ async def example():
 `client.delete_database` returns a `Response` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -182,7 +181,7 @@ async def example():
 `client.get_database_certificate` returns a `Certificate` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -204,7 +203,7 @@ async def example():
 `client.reset_database_password` returns a new password string.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -218,7 +217,7 @@ async def example():
 `client.reset_database_certificate` returns a `Response` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 

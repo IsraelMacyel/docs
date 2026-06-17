@@ -1,69 +1,72 @@
 ---
 title: "Commit and Upload"
-description: "In this section you will learn how to make commits and uploads using the Client, Application and CLI."
 ---
 
+# Commit and Upload
+
+> In this section you will learn how to make commits and uploads using the Client, Application and CLI.
+
 You can make commits and uploads using Client or Application. You
-just need a `virtuscloud.File` object and pass the path where your
+just need a `squarecloud.File` object and pass the path where your
 zip file is.
 
 ## Making a commit
 
 <Tabs>
-    <Tab title="Using Client">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Client">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client('API_KEY')
+    client = square.Client('API_KEY')
 
     async def example():
         file = square.File('path/to/you/file.zip')
         await client.commit(file=file, app_id='application_id')
     ```
-    </Tab>
+  </Tab>
 
-    <Tab title="Using Application">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Application">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client('API_KEY')
+    client = square.Client('API_KEY')
 
     async def example():
         app = await client.app(app_id='application_id')
         file = square.File('path/to/you/file.zip')
         await app.commit(file=file)
     ```
-    </Tab>
+  </Tab>
 </Tabs>
 
 ## Making a upload
 
-To upload an application, you can use only  the [Client].
+To upload an application, you can use only  the \[Client].
 
 <Tabs>
-    <Tab title="Using Client">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Client">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client(...)
+    client = square.Client(...)
 
     async def example():
         file = square.File('path/to/you/file.zip')
         await client.upload_app(file=file)
     ```
-    </Tab>
+  </Tab>
 </Tabs>
 
 **Remember that to upload an application you need a zip that contains (at least) the following files:**:
 
-- Main file: responsible for starting your application
-- Dependencies file: contains information about which dependencies are necessary
-- Configuration file (virtuscloud.app): a configuration file specifying the
-name,
-description, main file name, version, etc. To learn more about the
-configuration file, take a look at this [guide](https://docs.virtuscloud.app/getting-started/config-file).
+* Main file: responsible for starting your application
+* Dependencies file: contains information about which dependencies are necessary
+* Configuration file (virtuscloud.app): a configuration file specifying the
+  name,
+  description, main file name, version, etc. To learn more about the
+  configuration file, take a look at this [guide](https://docs.virtuscloud.app/en/getting-started/config-file).
 
 <Tip>
-    For your convenience, a class has been added to create this configuration file:
-    `virtuscloud.utils.ConfigFile`.
+  For your convenience, a class has been added to create this configuration file:
+  `squarecloud.utils.ConfigFile`.
 </Tip>

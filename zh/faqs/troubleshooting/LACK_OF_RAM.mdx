@@ -6,23 +6,23 @@ description: "了解如何解决应用程序中的 LACK_OF_RAM 问题。"
 
 ## 何时发生？
 
-当您的应用程序使用的 RAM 超过可用量时会出现此问题。
+当您的应用程序使用的 RAM 超过可用量时会发生此问题。
 
 ```bash
-[VIRTUS-SHIELD] LACK_OF_RAM
+[SQUARE-SHIELD] LACK_OF_RAM
 ```
 
 ## 为什么发生？
 
-当您的应用程序消耗的 RAM 超过当前计划的可用量时会出现此问题。
+当应用程序使用的 RAM 超过当前计划可用量时会发生此情况。
 
 ## 如何修复
 
-进入文件管理器并找到 `virtuscloud.app` 或 `virtuscloud.config` 文件。
+导航到文件管理器并找到 `virtuscloud.app/config` 文件。
 1. 打开文件并找到 `MEMORY` 字段。
-2. 增加 `MEMORY` 字段的值。该值以兆字节 (MB) 为单位。
-3. 我们建议将值增加当前值的 50%。例如，如果当前值为 `512`，则将其增加到 `768`。
+2. 增加 `MEMORY` 字段的值。值以兆字节 (MB) 为单位。
+3. 我们建议将当前值增加 50%。例如，如果当前值为 `512`，则增加到 `768`。
 
-如果您已在使用当前计划允许的最大 RAM，请考虑访问[计划页面](https://virtuscloud.app/pricing)升级到更高级别的计划。
+如果您已经在使用当前计划的最大可用 RAM，请考虑在[计划页面](https://virtuscloud.app/pricing)升级到更高的计划。
 
-如果您继续遇到任何问题，请随时[联系我们的支持团队](/company/support)。
+如果您继续遇到问题，请[联系我们的支持团队](/company/support)。

@@ -1,107 +1,117 @@
 ---
-title: "Blob serverless storage"
-description: "Discover the innovations and robustness of VirtusCloud by exploring the serverless storage capabilities."
-icon: "database"
+title: "Serverless Storage - Virtus Cloud Blob Storage"
 ---
 
-<img src="/images/services/blob.png" />
+# Serverless Storage - Virtus Cloud Blob Storage
 
-<Note>Blob currently in beta. If you encounter any issues or have any feedback, please [contact us](/contact).</Note>
+> Scalable serverless storage with global CDN, zero transfer fees, and 99.999999999% availability. Virtus Cloud Blob Storage is ideal for applications requiring reliable storage.
 
-**VirtusCloud**, an advanced technological platform, stands out for providing comprehensive support for various types of solutions. This article delves into the features and capabilities of serverless storage on **VirtusCloud**.
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/services/en/blob.webp" alt="Virtus Cloud Blob Storage service overview" style={{ borderRadius: "0.2rem" }} />
+</Frame>
 
-## Features and Support
+## Why choose Virtus Cloud Blob Storage?
+
+As the **largest bot hosting platform in Latin America**, trusted by **80 of the 100 largest Brazilian Discord servers**, we built Blob Storage to overcome the **limitations imposed by Discord’s CDN**. Our enterprise-grade solution ensures **stability and availability** for thousands of developers who need reliable asset storage.
+
+In short, **Blob Storage** is a **serverless storage service** by Virtus Cloud that is **fast and scalable**, with **generous quotas** included in every plan and a **flexible pay-as-you-go model** for overages.
+
+<Note>Blob Storage is currently in beta. If you have any feedback, please [contact us](https://virtuscloud.app/en/support).</Note>
+
+## Key Features
 
 <CardGroup cols={2}>
-    <Card title="No Ingress or Egress Fees" icon="money-bill">
-        Say goodbye to unexpected charges with ZERO fees for ingress and egress traffic. Whether you're uploading or retrieving data, there are no additional costs to worry about.
-    </Card>
-    <Card title="Zero Management Overhead" icon="server">
-        Simplify your workflow by eliminating the need for complex setup procedures. Just upload your assets, and VirtusCloud takes care of the rest. Relax and focus on building your applications.
-    </Card>
+  <Card title="No Transfer Fees" icon="money-bill">
+    **Zero ingress/egress fees** – free data transfer.
+  </Card>
 
-    <Card title="Built for Modern Application" icon="terminal">
-        Designed to seamlessly integrate with your applications, offering high-speed content delivery through a global content delivery network (CDN).
-    </Card>
-    <Card title="Redundant Storage" icon="box">
-        Your data is safeguarded with fast triple-replication and end-to-end encryption, ensuring its integrity and confidentiality at all times.
-    </Card>
+  <Card title="Managed Infrastructure" icon="server">
+    **Automatic resource orchestration** with **dynamic provisioning**.
+  </Card>
+
+  <Card title="High-Performance Global CDN" icon="globe">
+    **Optimized distribution** via Cloudflare’s global network with **edge caching**.
+  </Card>
+
+  <Card title="Scalable Limits" icon="chart-line">
+    **Up to 1PB of storage** and **1 billion free requests/day** available.
+  </Card>
 </CardGroup>
 
-## Pricing Model
-Our pricing is simple and predictable, with no hidden fees. You only pay for what you use, with no minimum fees or upfront commitments.
+## Quotas and Pricing
 
-| Included in ALL PLANS                            | **Usage-based**                                     |
-|--------------------------------------------------|-----------------------------------------------------|
-| Low latency                                      | Always Low latency                                  |
-| 1GB of storage included                          | Up to **1PB of storage**. (1GB/R$ 0.25)             |
-| 250 objects included                             | Up to **1 billion objects**. (250/R$ 0.50)          |
-| Up to 1 million requests/day for free. (UTC+0)   | Up to **1 billion requests/day for free**. (UTC+0)  |
+Blob Storage offers clear, transparent pricing so you can choose the plan that fits your needs.
 
-<Info>When your plan expires, actually nothing happens. Only in the next month, VirtusCloud Blob Billing will be enabled.</Info>
-<Warning>All prices are in Brazilian Real (R$). To use VirtusCloud Blob Storage, you need to have a valid account with a paid plan.</Warning>
+### Included Quotas
 
-## Supported File Types
-VirtusCloud supports a wide range of file types, making it a versatile solution for various types of applications. Here's a list of the main file types supported by VirtusCloud:
+Each paid plan includes a **free storage quota** at no extra cost:
 
-| File Type   | Extensions                                                                   |
-|-------------|------------------------------------------------------------------------------|
-| Video       | .mp4, .mpeg, .webm, .flv, .m4v                                               |
-| Image       | .jpeg, .png, .apng, .tiff, .gif, .webp, .bmp, .svg, .ico, .cur, .heic, .heif |
-| Audio       | .mp3, .mp4, .wav, .ogg, .opus, .mpeg, .aac                                   | 
-| Text        | .txt, .html, .css, .csv, .x-sql                                              |
-| Application | .xml, .sql, .x-sql, .sqlite3, .pdf, .json, .javascript, .p12                 |
+| Plan       | Free Storage Included |
+| ---------- | --------------------- |
+| Hobby-1    | **5 GB**              |
+| Hobby-2    | **15 GB**             |
+| Standard-4 | **30 GB**             |
+| Standard-6 | **50 GB**             |
+| Standard-8 | **100 GB**            |
+| Pro-12     | **200 GB**            |
+| Pro-16     | **250 GB**            |
+| Enterprise | **250 GB**            |
 
-<Note> If you have a specific file type that you'd like to use with VirtusCloud, please [contact us](/contact).</Note>
+### Pay-as-you-go Overage
 
-## How to Host My Archive on VirtusCloud?
+If your usage exceeds the included quota, you automatically switch to **pay-as-you-go**, paying **only for the extra space** you use.
+
+<Card title="Excess Storage Cost" icon="coins">
+  **R\$ 0.25 per additional GB** beyond your free quota.
+</Card>
+
+<Info>The Blob Storage service and pay-as-you-go feature are **only available** to subscribers of **paid plans**.</Info>
+
+## Supported File Extensions
+
+Our platform enforces a **strict MIME type whitelist** to ensure service **security and integrity**. This extension restriction is a **critical security measure** that prevents malicious file uploads and maintains compliance with **corporate security policies**.
+
+| Category        | Supported Extensions                                                                                |
+| --------------- | --------------------------------------------------------------------------------------------------- |
+| **Video**       | `.mp4`, `.mpeg`, `.webm`, `.flv`, `.m4v`                                                            |
+| **Image**       | `.jpg`, `.png`, `.apng`, `.tiff`, `.gif`, `.webp`, `.bmp`, `.svg`, `.ico`, `.cur`, `.heic`, `.heif` |
+| **Audio**       | `.wav`, `.ogg`, `.opus`, `.m4a`, `.mp3`, `.aac`                                                     |
+| **Text**        | `.html`, `.css`, `.csv`, `.txt`, `.sql`                                                             |
+| **Application** | `.xml`, `.sql`, `.sqlite3`, `.p12`, `.pdf`, `.json`, `.js`                                          |
+
+<Warning>
+  **MIME Type Validation**: All files undergo **binary signature verification** to prevent **extension spoofing** and **malicious uploads**.
+</Warning>
+
+<Note>To request support for additional file types or discuss specific use cases, [contact our technical team](https://virtuscloud.app/en/support).</Note>
+
+## Performance & Benchmarks
+
+Our infrastructure has undergone **extensive benchmarks** to ensure Virtus Cloud provides a **robust, reliable serverless storage solution**. Here are some key findings:
+
+* **Latency**: Average file receive latency of **\~11ms**.
+* **Throughput**: Average transfer rates of **\~12.5–18.75 MB/s (100–150 Mbps)** on typical connections, reaching **up to \~500 Mbps** on >1–2 Gbps networks.
+* **Availability**: Average availability of **99.999999999% (11 nines)** (S3-based design).
+
+In our internal tests in New York, latency remains **negligibly low**, well **below average**.
+
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/services/blob-global-latency-test.webp" alt="Blob Storage global latency benchmark" style={{ borderRadius: "0.5rem" }} />
+</Frame>
+
+<Info>**Note**: Benchmark results are based on controlled tests and may vary significantly with **geographic location**, **file sizes**, **network quality**, and **peak usage**. For best performance, run tests in your production environment.</Info>
+<Warning>**Regional Limitations**: Users in **Africa** and some **Asian regions** may experience higher latencies due to **physical distance from data centers** and **local network infrastructure**.</Warning>
+
+## How to host your files
+
 <Steps>
-  <Step 
-  
-  title="Initial Setup" icon="file">
-    The first step to host your asset on **VirtusCloud** is to upload your file into the [put endpoint](/blob-reference/endpoint/put). This endpoint allows you to upload your file to the serverless storage.    
+  <Step title="Upload via Endpoint">
+    Upload your files to the [POST endpoint](/en/blob-reference/endpoint/post).
   </Step>
-  <Step 
-  
-  title="Access URL" icon="globe">
-    The second step is to access your file through the URL provided by the response of the previous step. This URL is the public link to your file, and you can use it to access your asset from anywhere.
+
+  <Step title="Access via URL">
+    Access your files using the URL provided in the upload response.
   </Step>
 </Steps>
 
-## Benchmarks
-
-We've conducted extensive benchmarks to ensure that **VirtusCloud** is the fastest and most reliable serverless storage solution. Here are some of the key findings from our benchmarks:
-
-- **Latency**: The average latency for receiving a file is ~20ms.
-- **Throughput**: The average throughput for a file is ~10-15Mybtes/s. (80-120mbps)
-- **Availability**: The average availability is 99.999999999% (11 9's). (powered by a S3 Design)
-
-In VirtusCloud tests, using our infrastructure, in [Tampa, Florida](/platform/overview#our-secure-infrastructure).<br/>
-Latency is lower than 20ms, and throughput is higher than ~100MB/s.
-
-In a expountaneous test, using a famous website testing tool ([check-host](https://check-host.net/check-report/16a4d450kafe)), we tested the latency of our serverless storage in 10 different locations.
-
-| Location [16a4d450kafe] | Latency (ms) |
-|-------------------------|--------------|
-| USA, Chicago			      |      30      |
-| Netherlands, Amsterdam  |      32 		 |
-| Germany, Frankfurt  	  |      32		 	 |
-| France, Paris			      |      32			 |
-| USA, Atlanta			      |      32	  	 |
-| UK, Coventry			      |      44	 		 |
-| Poland, Poznan		      |      49			 |
-| Brazil, Sao Paulo		    |      42			 |
-| Croatia, Sisak		      |      55	 		 |
-| Spain, Barcelona		    |      59			 |
-
-Using higher file sizes, the latency increases, but the latency is still lower than 200ms in most locations. Thanks to our global content delivery network (CDN) provided by [Cloudflare](https://www.cloudflare.com/).
-
-In a another test, we tested the speed of our serverless storage using [Bunny CDN Tool](https://bunny.net/).
-
-<Frame>
-  <img src="/images/services/blob-speed.png" style={{ borderRadius: "0.5rem" }} />
-</Frame>
-
-<br/>
-<Info>Benchmarks are not guaranteed. Remember that the latency and throughput may vary depending on your location, file size, and network conditions.</Info>
-<Warning>The **latency in Africa and some locations in Asia is higher**. We are working to improve the latency in these locations as soon as possible.</Warning>
+The process is **simplified**: use your account API key for authentication and upload via a **single HTTPS request**. **No additional configuration** or complex infrastructure needed. Virtus Cloud **handles everything** for you.

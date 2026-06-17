@@ -1,55 +1,41 @@
 ---
-title: "Solving ABUSE_REQUESTS"
-sidebarTitle: "Solving ABUSE_REQUESTS"
-description: "Learn how to address the ABUSE_REQUESTS error, caused by excessive requests to Discord and/or Amino APIs, and ensure your application runs smoothly."
+title: "Resolviendo ABUSE_REQUESTS"
+sidebarTitle: "Resolviendo ABUSE_REQUESTS"
+description: "Aprende cómo resolver el error ABUSE_REQUESTS causado por exceso de solicitudes a las APIs de Discord y/o Amino."
 ---
 
-## When does it occur?
+## ¿Cuándo ocurre?
 
-The ABUSE_REQUESTS error occurs when your application is shut down due to a high volume of requests made to the Discord and/or Amino APIs. This may result from inefficient coding practices, lack of caching mechanisms, or surpassing the allocated request limits.
+El error ABUSE_REQUESTS ocurre cuando tu aplicación es apagada debido a un alto volumen de solicitudes a las APIs de Discord y/o Amino.
 
 ```bash
 [SQUARE-SHIELD] ABUSE_REQUESTS
 ```
 
-## Why does it occur?
+## ¿Por qué ocurre?
 
-This error typically arises when your application exceeds the permissible limits for making requests to the Discord and/or Amino APIs. It could be a consequence of a rapid increase in user activity or inefficient coding that generates an excessive number of API calls.
+Este error ocurre cuando tu aplicación excede los límites permitidos de solicitudes a las APIs.
 
-## How to fix
+## Cómo corregir
 
-Addressing the ABUSE_REQUESTS error involves monitoring and optimizing the sections of your code responsible for API requests, implementing effective caching mechanisms, and, if necessary, requesting an increase in your API request limit through the official support channels.
+### Monitorear y Optimizar tu Código
 
-### Monitor and Optimize Your Code
+- Identifica secciones problemáticas usando herramientas de logging o profiling.
+- Optimiza las llamadas a la API y minimiza solicitudes innecesarias.
 
-- Identify Problematic Code: Use logging tools or profiling to pinpoint sections of your code that generate a large number of API requests.
-- Optimize API Calls: Review and optimize the code responsible for API calls. Minimize unnecessary requests and ensure that each call is essential for your application's functionality.
+### Implementar Mecanismos de Caché
 
-### Implement Caching Mechanisms
+- Usa caché local para almacenar datos frecuentemente solicitados.
+- Configura tiempos de expiración del caché.
 
-- Use Local Caching: Store frequently requested data locally to avoid unnecessary API calls. This reduces the load on the servers and improves response times.
-- Set Expiry Times: Implement caching with expiration times to ensure that your application fetches fresh data when necessary while minimizing the number of API requests.
+### Mantener tu Aplicación Actualizada
 
-### Request an Increase in Request Limit
-
-If your application genuinely requires a higher API request limit, consider reaching out to the Discord and/or Amino support channels to request an increase. Provide justifications for the increased limit and any measures you've taken to optimize your code.
-
-### Keep Your Application Updated
-
-Ensure your application is using the latest version of any libraries or SDKs interacting with the APIs. Regularly check for updates, as developers often release new versions to address performance issues and improve efficiency.
-
-```bash Update discord.js
+```bash Actualizar discord.js
 npm install discord.js@latest
-# or update in your package.json
 ```
 
-```bash Update discord.py
+```bash Actualizar discord.py
 pip install discord.py
-# or update in your requirements.txt
 ```
 
-### Test and Restart Your Application
-
-After making the necessary changes, thoroughly test your application to ensure that the modifications effectively reduce the number of API requests. Additionally, restart your application to apply the updates and monitor its performance. 
-
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+Si continúas con problemas, [contacta a nuestro soporte](/company/support).

@@ -1,172 +1,281 @@
 ---
-title: "Hosting a Vite Application on VirtusCloud"
-sidebarTitle: "Vite website"
-description: "This article guides you on creating and hosting a Vite app on VirtusCloud"
+title: "Como Hospedar Sites Vite"
+sidebarTitle: "Site Vite"
+description: "Aprenda como fazer deploy do seu site Vite na Virtus Cloud."
 ---
 
-## Introduction
+# How to Host Vite Applications
 
-- Before you begin, make sure you have Node.js and npm installed on your system. If you don't have them yet, you can download them from the [official Node.js website](https://nodejs.org/).
-- Next, you will need to create an account on VirtusCloud, which can be done through the [sign up page](https://virtuscloud.app/signup). You can use your email to create an account.
-- Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/pricing).
+> Learn how to deploy your Vite application to Virtus Cloud.
 
-### Creating a Vite Project
+export const PortNote = ({lang}) => {
+  if (lang == 'pt-br') {
+    return <Note>
+            <b>Qual porta devo usar para o meu servidor?</b><br />
+            Você deve usar a porta <b>80</b> para o seu servidor. A porta 80 é a porta padrão para tráfego HTTP; a Virtus Cloud a encaminha para 443 (HTTPS) para estabelecer uma conexão segura.<br />
+            Certifique-se de configurá-la antes de compactar e enviar seu projeto.
+        </Note>;
+  }
+  return <Note>
+            <b>What port should I use for my server?</b><br />
+            You should use port <b>80</b> for your server. Port 80 is the default port for HTTP traffic, which is handled by Virtus Cloud to route it to 443, HTTPS, for a secure connection.<br />
+            Make sure to configure it before compressing and uploading your project.
+        </Note>;
+};
+
+export const RecommendedPlan = ({lang, plan, tier, cpu, appType}) => {
+  const url = `https://virtuscloud.app/${lang}/pay?plan=${plan.toLowerCase()}&tier=${tier}`;
+  if (lang == 'en') {
+    return <Note>
+        <b>Wondering how much RAM and CPU your plan needs to host {appType}?</b><br />
+        Don't worry, we're here to help.
+        Our <a href={url}>{plan}</a> plan offers <b>{tier}GB</b> of RAM and <b>{cpu}vCPU</b>, which should be sufficient for most {appType}. 
+        However, if you are working on a larger project and seeking extra stability, we recommend considering our <b>Pro</b> plan. With additional resources, you can maintain stability even during demand spikes. 
+        To purchase, simply click <a href="https://virtuscloud.app/en/pay?plan=pro">here</a>.
+      </Note>;
+  } else {
+    return <Note>
+          <b>Está se perguntando quanta RAM e CPU seu plano precisa para hospedar {appType}?</b><br />
+          Não se preocupe, estamos aqui para ajudar.
+          Nosso plano <a href={url}>{plan}</a> oferece <b>{tier}GB</b> de RAM e <b>{cpu}vCPU</b>, o que deve ser suficiente para a maioria dos {appType}.
+          No entanto, se você estiver trabalhando em um projeto maior e precisar de mais estabilidade, recomendamos considerar nosso plano <b>Pro</b>.
+          Com recursos adicionais, você pode manter a estabilidade mesmo durante picos de demanda.
+          Para comprar, basta clicar <a href={`https://virtuscloud.app/${lang}/pay?plan=pro`}>aqui</a>.
+        </Note>;
+  }
+};
+
+export const appType_0 = "a Vite application"
+
+## Introdução
+
+To develop and host {appType_0} on Virtus Cloud, it's essential to follow a structured sequence of configurations and prerequisites. This technical guide will cover the entire process, from initial setup to production deployment.
+
+### Prerequisites
+
+* **Virtus Cloud Account**: Register through the [signup page](https://virtuscloud.app/en/signup) using your email.
+* **Active Paid Plan**: Ensures dedicated resources and optimized performance for your application. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the most suitable for your needs.
+
+<RecommendedPlan appType="Vite Applications" plan="Standard" tier="4" cpu="4" lang="en" />
+
+## Creating the project
+
+Before you begin, make sure you have Node.js and npm installed on your system.
+If you don't have them, you can download them from the [official Node.js website](https://nodejs.org/).
 
 To create a new Vite project, run the following command:
 
-```bash
+```bash theme={null}
 npm create vite@latest my-vite-app
 ```
 
-In the above command, `my-vite-app` is the name of your new project. Replace it with any desired name for your project. By default, this command sets up a Vite project with JavaScript.
+In the command above, `my-vite-app` is the name of your new project. Replace it with any name you want for your project. By default, this command sets up a Vite project with JavaScript.
 
 ### Choosing a Specific Template
 
-Vite allows choosing different templates for your project. When creating a new project, you can specify the desired template using the `--template` option. Here are some examples:
+Vite allows you to choose different templates for your project. When creating a new project, you can specify the desired template using the `--template` option. Here are some examples:
 
-Select a template by: `react`, `vue` & `lit`.
-```bash
-# npm 7+, extra double-dash is needed:
-npm create vite@latest my-vite-app -- --template [template]
+Select a template such as: `react`, `vue`, and `lit`.
+
+```bash theme={null}
+npm create vite@latest my-vite-app --template [template]
 ```
 
-Choose the template that best suits your needs and adjust the project name as needed.
+Choose the template that best fits your needs and adjust the project name as necessary.
 
-### Understanding the Difference Between JavaScript and TypeScript
+### Understanding the Difference between JavaScript and TypeScript
 
-When you choose JavaScript, Vite configures the project with default JavaScript settings. On the other hand, when choosing TypeScript, Vite configures the project with TypeScript settings, including generating a `tsconfig.json` file.
+When you choose JavaScript, Vite configures the project with default JavaScript settings. On the other hand, when you choose TypeScript, Vite configures the project with TypeScript settings, including the generation of a `tsconfig.json` file.
 
-## Configuring Port 80
+## Building the project
 
-Port 80 is the default port for HTTP traffic. To host a Vite app on VirtusCloud, configure the use of port 80. In Vite, you can set the `--port 80` parameter in the startup script to ensure your app runs correctly on this port.
+Before uploading to production, generate the production artifacts using the Vite build:
 
-## Configuring Host 0.0.0.0
+```bash theme={null}
+npm run build
+```
 
-The `--host 0.0.0.0` option is used to bind the Vite server to all available network interfaces. This makes your application accessible not only on `localhost`, but also on external devices within the same network, such as other computers or mobile devices. By default, Vite binds to `localhost`, which restricts access to the machine where it's running. Setting the host to `0.0.0.0` allows the server to listen for incoming requests from any IP address.
+To serve the production version locally (useful for testing in the deployment environment), we recommend using the `vite preview` command, exposing the application on all interfaces and port 80:
 
-## Creating the virtuscloud config file
+```bash theme={null}
+npx vite preview --host 0.0.0.0 --port 80
+```
 
-<Card title="Learn about: how to make the configuration file for VirtusCloud." icon="link" href="https://docs.virtuscloud.app/getting-started/config-file">
-The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define the name, description, version, main file, among other things.
+You can also add a script to your `package.json` to simplify:
+
+```json theme={null}
+{
+	"scripts": {
+		"build": "vite build",
+		"preview": "vite preview --host 0.0.0.0 --port 80"
+	}
+}
+```
+
+Note: On some systems, port 80 requires special privileges. If there is a restriction, use another port (e.g., 8080) and map it on the host/service.
+
+## Choosing a Production Server
+
+For production you have basically two options:
+
+* With our static HTML/CSS runtime, simply rename `index.html` to `vite.html`.
+* Use `vite preview` itself (useful for testing production behavior or in containers running the Node process directly).
+
+### HTML/CSS Runtime
+
+If you choose the static runtime, generate the build (`npm run build`) and copy the contents of `dist/` to the compressed zip file to be sent to Virtus Cloud.
+Remember to rename `index.html` to `vite.html` so that the runtime recognizes the initial file correctly as a Vite application and performs proper asset handling.
+
+### Using `vite preview` in production (or in containers)
+
+`vite preview` serves the files generated by `vite build` with behavior similar to a production static server. To expose the application to the network (for example, within a container on Virtus Cloud) use:
+
+```bash theme={null}
+npx vite preview --host 0.0.0.0 --port 80
+```
+
+This makes the process listen on all interfaces (`0.0.0.0`) and port 80.
+
+### Example of `vite.config.js` with `preview` options
+
+```js theme={null}
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+	preview: {
+		host: '0.0.0.0',
+		port: 80,
+		strictPort: true
+	}
+})
+
+```
+
+## Deploy
+
+After preparing your project files, you can send them to Virtus Cloud and host your project.
+To do this, create a ZIP file containing all your project files.
+
+<PortNote lang="en" />
+
+### Via dashboard
+
+<Steps>
+  <Step title="Acessar a Página de Upload">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configurar Seu Ambiente">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Fazer Deploy do Projeto">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
 </Card>
 
-## Configuring the START Field
+<Steps>
+  <Step title="Instalar a CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
-In the VirtusCloud configuration file, the `START` field is essential to customize the startup command. If you want to build and start your Vite app on VirtusCloud, configure the `START` field as follows:
+    ```
+    npm install -g @squarecloud/cli
+    ```
 
-```app virtuscloud.app
-START=npm run build && npm run preview
-```
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
 
-This command will execute the "build" and "preview" scripts defined in your `package.json`:
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        squarecloud update
+        ```
+      </Tab>
 
-```json package.json
-{
-  "name": "my-vite-app",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0 --port 80"
-  },
-  "devDependencies": {
-    "vite": "^5.1.4"
-  }
-}
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
 
-```
-## Purchasing a Plan Before Uploading Your Project
+  <Step title="Autenticar">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
-Before you can upload your project to VirtusCloud, it's important to understand that you need to purchase a plan. The type of plan you choose will depend on the resources required by your application. You can view our plans [here](https://virtuscloud.app/pricing).
+    ```bash theme={null}
+    squarecloud auth login
+    ```
+  </Step>
 
-<Note>**Are you wondering how much RAM and CPU your plan needs to host a Vite website?** Don't worry, we're here to help. Vite is a modern front-end build tool that provides a faster and leaner development experience for modern web projects. It's designed to provide out-of-the-box support for ES modules, enabling instant server start-up and hot module replacement. Our **[Standard](https://virtuscloud.app/pt-br/pay?plan=standard)** plan offers **4GB** of RAM and **4vCPU**, which should be sufficient for most Vite websites. However, if you're working on a larger project or need more stability, we recommend considering our Pro plan. With additional resources, you can ensure smooth performance even under high demand. To purchase, simply click [here](https://virtuscloud.app/pt-br/pay?plan=pro).</Note>
+  <Step title="Fazer Upload do Projeto">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
 
-## Uploading Project to VirtusCloud
+    ```bash theme={null}
+    squarecloud upload 
+    ```
 
-After preparing your project files, you can now upload them to VirtusCloud and host your project.
+    Or if you created the zip manually, you can use:
 
-<Tabs>
-  <Tab title="Dashboard Upload">
-    Access the [VirtusCloud
-    Dashboard](https://virtuscloud.app/dashboard/upload) and upload your project
-    files.
+    ```bash theme={null}
+    squarecloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
+
+## Recursos Adicionais
+
+For more information about Vite and its tools, visit the [official Vite documentation](https://vitejs.dev/guide/). There you will find detailed guides, tutorials, and API documentation to help you get the most out of Vite.
+
+## Solução de Problemas
+
+<CardGroup cols={1}>
+  ### Custom Domain
+
+  <Card horizontal>
+    Para usar um domínio personalizado (ex.: `meusite.com`) em vez da URL padrão `meusite.virtuscloud.app`, você precisa do **plano Standard ou superior**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
+  </Card>
+
+  ### Minimum RAM Requirements
+
+  <Card horizontal>
+    **Mínimo: 512MB RAM** para sites/APIs simples. For sites with frameworks (Next.JS, React, Vue, Angular, etc.), we always recommend **at least 1GB RAM**. For larger applications, allocate more RAM to prevent the application from running out of memory and crashing.
+  </Card>
+
+  ### Could not find this site.
+
+  <Card horizontal>
+    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Square to enable **first access**.
+
     <Frame>
-      <img src="/images/uploading.gif" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/unauthorized.webp" alt="Cloudflare site not found error" style={{ borderRadius: "0.2rem" }} />
     </Frame>
-  </Tab>
-  <Tab title="CLI Upload">
-    <Steps>
-      <Step title="First Step">
-        First, you need to have the CLI installed in your environment. If you
-        don't have it yet, run the following command in your terminal:
-        ```
-        npm install -g @virtuscloud/cli
-        ```
-        If you already have it, we recommend updating it. To do this, run the following command in your terminal:
-        <Tabs>
-          <Tab title="Windows">
-            ```bash
-            virtuscloud update
-            ```
-          </Tab>
-          <Tab title="Linux, macOS, and WSL">
-            ```bash
-            curl -fsSL https://cli.virtuscloud.app/install | bash
-            ```
-          </Tab>
-        </Tabs>
-      </Step>
-      <Step title="Second Step">
-        Now, to authenticate and use other CLI commands, you will find your
-        authorization key [here](https://virtuscloud.app/account) by clicking on
-        "Request API Key". After obtaining your authorization key, run the
-        following command: 
-        ```bash 
-        virtuscloud login
-        ```
-      </Step>
-      <Step title="Third Step">
-        Finally, to deploy your application to VirtusCloud using the CLI, you
-        need to execute the following command, passing the path of your zip
-        file: 
-        ```bash 
-        virtuscloud upload zip
-        ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+  </Card>
 
-## Troubleshooting
+  ### Site took too long to respond...
 
-<AccordionGroup>
-  <Accordion title="Custom Domain" icon="globe" iconType="solid">
-    If you want to use a custom domain for your app hosted on VirtusCloud, note that by default, the URL will be something like `https://mysite.virtusapp.cloud/`. The subdomain is determined by the SUBDOMAIN field in the configuration file. However, if you prefer using a custom domain, such as `mysite.com`, you'll need to purchase the `Standard` plan or a higher plan. We detail each step to set up your custom domain in our article: [How to set up your custom domain](https://docs.virtuscloud.app/tutorials/how-to-set-up-your-domain).
-  </Accordion>
+  <Card horizontal>
+    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Square's forced environment variables: **PORT** and **HOST** from the `.env` file.
 
-  <Accordion title="Minimum RAM Requirements" icon="memory" iconType="solid">
-      The minimum amount of RAM required to host a website or API is 512MB, however, when building your site directly on VirtusCloud, it's advisable to use a higher amount, or you may encounter the [LACK_OF_RAM](https://docs.virtuscloud.app/faqs/troubleshooting/LACK_OF_RAM) error.
-  </Accordion>
-
-  <Accordion title="Temporarily Denied Access" icon="ban" iconType="solid">
-    If you receive the message "Your access has been temporarily denied." when trying to access the site, wait for some time. If the issue persists, feel free to contact us at https://virtuscloud.app/dashboard/support.
     <Frame>
-      <img src="/images/articles/troubleshooting/temporarily-denied-access.png" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/timeout.webp" alt="Cloudflare request timeout error" style={{ borderRadius: "0.2rem" }} />
     </Frame>
-  </Accordion>
-  
-  <Accordion title="Website took too long to respond..." icon="clock" iconType="solid">
-     If you receive the message "Website took too long to respond..." make sure you have correctly set port 80 on your website. If the issue persists, feel free to contact us at https://virtuscloud.app/dashboard/support.
-    <Frame>
-      <img src="/images/articles/troubleshooting/website-took-too-long-to-respond.png" style={{ borderRadius: "0.2rem" }} />
-    </Frame>
-  </Accordion>
-</AccordionGroup>
+  </Card>
+</CardGroup>
 
-## Additional Resources
+## Fale Conosco
 
-For more information about Vite and its tools, visit the [official Vite documentation](https://vitejs.dev/guide/). There, you'll find detailed guides, tutorials, and API documentation to help you make the most of Vite.
-
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+Se você continuar enfrentando **dificuldades técnicas**, nossa **equipe de suporte especializada** está disponível para ajudá-lo. [**Fale Conosco**](https://virtuscloud.app/pt-br/support) e ficaremos felizes em ajudá-lo a resolver qualquer problema.

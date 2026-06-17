@@ -1,83 +1,84 @@
 ---
-title: "Managing Files"
-description: "In this section, you will find information and examples on how to manipulate the
-files associated with your application. Learn how to list, read, create, and delete
-files using the VirtusCloud JavaScript SDK."
+title: "Managing files"
 ---
 
-## Getting a list of files
+# Managing files
 
-`application.files.list()` return a list of `APIListedFile` objects. 
+> Browse, read, create, move and delete files inside your application through the FilesModule.
 
-````javascript
-const application = await api.applications.get("Application ID");
-const filesList = await application.files.list();
+Every method on this page lives on `app.files`:
 
-console.log(filesList); // Return a Array of File Objects
-// [{type: "file", name: "index.js", size: 123, lastModified: 123456789}]
-````
+```typescript theme={null}
+const app = await api.applications.fetch("abc123def456abc123def456");
+app.files; // FilesModule
+```
+
+## Listing files in a directory
+
+`app.files.list(path?)` returns the entries of a directory. The path defaults to `"/"`.
+
+```typescript theme={null}
+const entries = await app.files.list("/");
+console.log(entries);
+// [
+//   { type: "file",      name: "index.js", size: 123, lastModified: 1717084800000 },
+//   { type: "directory", name: "src",      size: 0,   lastModified: 1717084800000 },
+// ]
+```
 
 ## Reading a file
 
-`application.files.read()` returns a Buffer object.
+`app.files.read(path)` returns a Node.js `Buffer` with the file contents, or `undefined` when the file is missing.
 
-````javascript
-const application = await api.applications.get("Application ID");
-const file = await application.files.read("index.js");
+```typescript theme={null}
+const buffer = await app.files.read("/index.js");
+console.log(buffer?.toString("utf8"));
+```
 
-console.log(file.toString()); // String
-````
+## Creating or overwriting a file
 
-## Creating a file
+`app.files.create(file, fileName, path?)` writes a file at `path/fileName`. The path defaults to `"/"`.
 
-`application.files.create()` returns a Boolean.
+| Parameter  | Type               | Description                                            |
+| ---------- | ------------------ | ------------------------------------------------------ |
+| `file`     | `string \| Buffer` | A local file path or the raw `Buffer` content          |
+| `fileName` | `string`           | File name with extension (e.g. `"version.ts"`)         |
+| `path`     | `string`           | Absolute directory path inside the app (default `"/"`) |
 
 <Tabs>
-    <Tab title="Using Buffer">
-    ```javascript
-    const { VirtusCloudAPI } = require("@virtuscloud/api");
-    const api = new VirtusCloudAPI("Your API Key");
-
-    const application = await api.applications.get("Application ID");
-
-    // Specify the content and name of the file you want to create
-    const fileContent = Buffer.from("archive content here");
-    const filePath = "./folder/test_file.txt";
-
-    // Perform the create file operation
-    const file = await application.files.create(fileContent, filePath);
-
-    console.log(file); // Boolean (true or false)
+  <Tab title="From a Buffer">
+    ```typescript theme={null}
+    const content = Buffer.from("export default 1\n");
+    await app.files.create(content, "version.ts", "/src");
     ```
-    </Tab>
-    <Tab title="Using Absolute Path">
-    ```javascript
-    const { VirtusCloudAPI } = require("@virtuscloud/api");
-    const api = new VirtusCloudAPI("Your API Key");
+  </Tab>
 
-    const application = await api.applications.get("Application ID");
+  <Tab title="From a local path">
+    ```typescript theme={null}
+    import { join } from "node:path";
 
-    // Specify the content and name of the file you want to create
-    const { join } = require("node:path");
-    const fileName = "local_txt_file.txt";
-    const fileContent = join(__dirname, fileName);
-    const filePathtoCreate = "./folder/test_file.txt";
-
-    // Perform the create file operation
-    const file = await application.files.create(fileContent, filePathtoCreate);
-
-    console.log(file); // Boolean (true or false)
+    const localPath = join(__dirname, "version.ts");
+    await app.files.create(localPath, "version.ts", "/src");
     ```
-    </Tab>
+  </Tab>
 </Tabs>
 
-## Deleting a file
+<Warning>
+  The signature changed in v4. Previous versions accepted `create(content, fullPath)` — v4 requires `create(content, fileName, path)`.
+</Warning>
 
-`application.files.delete()` returns a Boolean.
+## Moving or renaming a file
 
-````javascript
-const application = await api.applications.get("Application ID");
-const deleted = await application.files.delete("index.js");
+`app.files.move(path, newPath)` moves or renames a file or directory.
 
-console.log(deleted); // Boolean (true or false)
-````
+```typescript theme={null}
+await app.files.move("/version.ts", "/src/version.ts");
+```
+
+## Deleting a file or directory
+
+`app.files.delete(path)` deletes a file or an entire directory.
+
+```typescript theme={null}
+await app.files.delete("/src/version.ts");
+```

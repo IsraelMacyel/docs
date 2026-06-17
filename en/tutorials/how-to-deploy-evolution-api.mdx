@@ -1,12 +1,12 @@
 ---
 title: "How to deploy Evolution API on Virtus Cloud"
-description: "This tutorial will guide you to create and deploy your Evolution API application on Virtus Cloud."
 ---
 
 # How to deploy Evolution API on Virtus Cloud
 
 > This tutorial will guide you to create and deploy your Evolution API application on Virtus Cloud.
 
+export const PortNote = ({lang}) => {
   if (lang == 'pt-br') {
     return <Note>
             <b>Qual porta devo usar para o meu servidor?</b><br />
@@ -21,6 +21,7 @@ description: "This tutorial will guide you to create and deploy your Evolution A
         </Note>;
 };
 
+export const RecommendedPlan = ({lang, plan, tier, cpu, appType}) => {
   const url = `https://virtuscloud.app/${lang}/pay?plan=${plan.toLowerCase()}&tier=${tier}`;
   if (lang == 'en') {
     return <Note>
@@ -42,6 +43,7 @@ description: "This tutorial will guide you to create and deploy your Evolution A
   }
 };
 
+export const appType_0 = "Evolution API"
 
 ## Introduction
 
@@ -61,7 +63,7 @@ This project allows you to fastly create and connect with an instance through it
 
 ## Setting up the project
 
-First, you need to get the project from some source. You can get it from the [official repository](https://github.com/EvolutionAPI/evolution-api) or from [our repository](https://github.com/virtuscloud-education/evolutionapi-web) which already have the files needed to deploy on the releases.
+First, you need to get the project from some source. You can get it from the [official repository](https://github.com/EvolutionAPI/evolution-api) or from [our repository](https://github.com/squarecloud-education/evolutionapi-web) which already have the files needed to deploy on the releases.
 
 ### Database configuration
 
@@ -70,7 +72,7 @@ After creating, we need to set in our `.env` the URL as `DATABASE_CONNECTION_URI
 
 ```systemd .env theme={null}
 DATABASE_PROVIDER=postgresql
-DATABASE_CONNECTION_URI='postgresql://virtuscloud:password@host:port/database?sslmode=require&sslidentity=path/to/client-identity.p12&sslpassword=p12password'
+DATABASE_CONNECTION_URI='postgresql://squarecloud:password@host:port/database?sslmode=require&sslidentity=path/to/client-identity.p12&sslpassword=p12password'
 DATABASE_CONNECTION_CLIENT_NAME='evolution_exchange'
 DATABASE_SAVE_DATA_INSTANCE=true
 DATABASE_SAVE_DATA_NEW_MESSAGE=true
@@ -111,7 +113,7 @@ SERVER_PORT=80
 # Change the SERVER_URL to your actual server URL.
 # you change it to your app url, selected when creating the app
 # or when set a domain
-SERVER_URL="https://my-evolution-api.squareweb.app"
+SERVER_URL="https://my-evolution-api.virtuscloud.app"
 LANGUAGE=en
 # Other variables below...
 ```
@@ -168,7 +170,7 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
     ```
-    npm install -g @virtuscloud/cli
+    npm install -g @squarecloud/cli
     ```
 
     If you already have it, we recommend updating it. To do this, run the following command in your terminal:
@@ -176,7 +178,7 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     <Tabs>
       <Tab title="Windows">
         ```bash theme={null}
-        virtuscloud update
+        squarecloud update
         ```
       </Tab>
 
@@ -192,7 +194,7 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
     ```bash theme={null}
-    virtuscloud auth login
+    squarecloud auth login
     ```
   </Step>
 
@@ -200,13 +202,13 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
 
     ```bash theme={null}
-    virtuscloud upload 
+    squarecloud upload 
     ```
 
     Or if you created the zip manually, you can use:
 
     ```bash theme={null}
-    virtuscloud upload --file <path/to/zip> 
+    squarecloud upload --file <path/to/zip> 
     ```
   </Step>
 </Steps>
@@ -226,7 +228,7 @@ To configure it, you will also need to download the certificate and set the URL 
 
 ```systemd .env theme={null}
 CACHE_REDIS_ENABLED=true
-CACHE_REDIS_URI="redis://default:MySecurePassword@square-cloud-db-ID.squareweb.app:7170"
+CACHE_REDIS_URI="redis://default:MySecurePassword@square-cloud-db-ID.virtuscloud.app:7170"
 CACHE_REDIS_TTL=604800
 # Prefix serves to differentiate data from one installation to another that are using the same redis
 CACHE_REDIS_PREFIX_KEY=evolution
@@ -240,7 +242,7 @@ CACHE_REDIS_SAVE_INSTANCES=false
   ### Custom Domain
 
   <Card horizontal>
-    To use a custom domain (e.g., `mysite.com`) instead of the default URL `mysite.squareweb.app`, you need the **Standard plan or higher**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
+    To use a custom domain (e.g., `mysite.com`) instead of the default URL `mysite.virtuscloud.app`, you need the **Standard plan or higher**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
   </Card>
 
   ### Minimum RAM Requirements
@@ -252,7 +254,7 @@ CACHE_REDIS_SAVE_INSTANCES=false
   ### Could not find this site.
 
   <Card horizontal>
-    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Virtus to enable **first access**.
+    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Square to enable **first access**.
 
     <Frame>
       <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/unauthorized.webp" alt="Cloudflare site not found error" style={{ borderRadius: "0.2rem" }} />
@@ -262,7 +264,7 @@ CACHE_REDIS_SAVE_INSTANCES=false
   ### Site took too long to respond...
 
   <Card horizontal>
-    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Virtus's forced environment variables: **PORT** and **HOST** from the `.env` file.
+    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Square's forced environment variables: **PORT** and **HOST** from the `.env` file.
 
     <Frame>
       <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/timeout.webp" alt="Cloudflare request timeout error" style={{ borderRadius: "0.2rem" }} />

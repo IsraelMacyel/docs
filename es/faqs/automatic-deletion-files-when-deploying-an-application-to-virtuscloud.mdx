@@ -1,12 +1,12 @@
 ---
-title: "Automatic Deletion of Files When Deploying an Application to VirtusCloud"
-sidebarTitle: "File Whitelisting in VirtusCloud"
-description: "Learn about the files that are automatically deleted when deploying an application to VirtusCloud."
+title: "Eliminación Automática de Archivos al Desplegar una Aplicación en VirtusCloud"
+sidebarTitle: "Lista Blanca de Archivos en VirtusCloud"
+description: "Aprende sobre los archivos que se eliminan automáticamente al desplegar una aplicación en VirtusCloud."
 ---
 
-When deploying your application to VirtusCloud, you might encounter a scenario where certain files are automatically deleted during the deployment process. Understanding the files that are subject to automatic deletion is crucial for ensuring a smooth deployment experience. Here, we provide a list of files that are commonly deleted during deployment and need to be excluded from your deployment package.
+Al desplegar tu aplicación en VirtusCloud, ciertos archivos se eliminan automáticamente durante el proceso. Es importante excluirlos de tu paquete de despliegue.
 
-## List of Files to Exclude:
+## Lista de Archivos a Excluir:
 
 - `.cache`
 - `.config`
@@ -35,10 +35,6 @@ When deploying your application to VirtusCloud, you might encounter a scenario w
 - `.breakpoints`
 - `pycache`
 
-These files are typically related to development environments, build configurations, and dependencies. VirtusCloud may automatically remove them during the deployment process to optimize the application's performance and reduce unnecessary data transfer.
+Estos archivos generalmente están relacionados con entornos de desarrollo, configuraciones de build y dependencias. VirtusCloud puede eliminarlos automáticamente durante el despliegue para optimizar el rendimiento.
 
-It's important to note that certain development tools and platforms generate these files for local development purposes. However, they are not essential for the application to run in a production environment. Therefore, excluding them during deployment ensures a more efficient and streamlined application deployment process.
-
-To prevent these files from being deleted during deployment, make sure to exclude them from your deployment package or configure your deployment process accordingly. Understanding and managing these files will help you deploy your application smoothly on VirtusCloud while maintaining a clean and efficient deployment package.
-
-For more information on deploying applications on VirtusCloud and managing whitelists, refer to the [VirtusCloud documentation](https://docs.virtuscloud.app/).
+Para más información, consulta la [documentación de VirtusCloud](https://docs.virtuscloud.app/).

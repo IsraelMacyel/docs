@@ -1,38 +1,40 @@
 ---
 title: "Remove Variables"
-description: "Remove a environment variable."
-api: "DELETE https://api.virtuscloud.app/v2/apps/{appId}/envs"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Remove Variables
 
-<Authorization />
+> Remove a environment variable.
 
-<ParamField path="appId" type="string" placeholder="App ID" required>
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+<ParamField path="app_id" type="string" placeholder="App ID" required>
   The application ID.
 </ParamField>
 
 <ParamField body="envs" type="string[]" required>
-The array containing the keys to remove.
+  The array containing the keys to remove.
 </ParamField>
 
 ### Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
 <ResponseField name="response" type="object">
   The key and value of all remaining environment variables.
 </ResponseField>
 
-
 <ResponseExample>
-```json
-{
-  "status": "success",
-  "response": {
-    "REMAINING": "secret"
+  ```json theme={null}
+  {
+    "status": "success",
+    "response": {
+      "REMAINING": "secret"
+    }
   }
-}
-```
+  ```
 </ResponseExample>

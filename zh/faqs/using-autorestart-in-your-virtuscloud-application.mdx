@@ -1,97 +1,61 @@
 ---
-title: "How to use Auto Restart in VirtusCloud"
-sidebarTitle: "How to use Auto Restart"
-description: "Learn how to use Auto Restart in VirtusCloud to automatically restart your application in case it crashes."
+title: "如何在 VirtusCloud 中使用自动重启"
+sidebarTitle: "如何使用自动重启"
+description: "了解如何在 VirtusCloud 中使用自动重启，在应用程序崩溃时自动重启。"
 ---
 
-A **VirtusCloud exclusive technology**, Auto Restart is a powerful feature in VirtusCloud that allows your application to **automatically restart in case it crashes**. This ensures that **your app** remains **accessible and functional** even in the **event of unexpected failures**.
+**VirtusCloud 的独家技术**，自动重启是一个强大的功能，允许您的应用程序在**崩溃时自动重启**。
 
-## Enabling Auto Restart
-With Auto Restart, follow these steps to enable it in your application's configuration file:
+## 启用自动重启
 
 <Steps>
-    <Step title="Config file">
-        Create or edit your `virtuscloud.app` or `virtuscloud.config` file.
-        <Card
-          title="How to create a configuration file"
-          href="/getting-started/config-file"
-        >
-    The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define the name, description, version, main file, among other things.
-</Card> 
+    <Step title="配置文件">
+        创建或编辑您的 `virtuscloud.app` 或 `virtuscloud.config` 文件。
+        <Card title="如何创建配置文件" href="/getting-started/config-file">
+    virtuscloud.app 文件是用于配置应用程序的配置文件，定义名称、描述、版本、主文件等。
+</Card>
     </Step>
-    <Step title="Locate parameter">
-        Locate the `AUTORESTART` parameter in the configuration file. Or add it if it doesn't exist.
+    <Step title="定位参数">
+        在配置文件中找到 `AUTORESTART` 参数。如果不存在，请添加它。
     </Step>
-    <Step title="Set value">
-        Set the value of `AUTORESTART` to `true`.
+    <Step title="设置值">
+        将 `AUTORESTART` 的值设置为 `true`。
 
-        Here's an example of how to enable Auto Restart in your configuration file:
-
-        ```systemd virtuscloud.app OR virtuscloud.config
+        ```systemd virtuscloud.app 或 virtuscloud.config
         AUTORESTART=true
         ```
     </Step>
 </Steps>
 
-## How Auto Restart Works
-Auto Restart is a proactive feature that monitors the health of your application. If your application crashes or becomes unresponsive, Auto Restart takes action to get it back up and running.
+## 自动重启的工作原理
 
 <Steps>
-    <Step title="Application goes down">
-        When your application crashes or becomes unresponsive, Auto Restart detects the issue if AUTORESTART is enabled in your configuration file.
+    <Step title="应用程序崩溃">
+        当您的应用程序崩溃时，如果启用了 AUTORESTART，自动重启会检测到问题。
     </Step>
-    <Step title="Application Uptime Verification">
-        If the **application uptime is > 60 seconds**, will proceed to next step.
+    <Step title="应用程序运行时间验证">
+        如果**应用程序运行时间 > 60 秒**，则继续下一步。
     </Step>
-    <Step title="Application Exit Status Verification">
-        If the **application exit status is 1**, will proceed to next step.
+    <Step title="应用程序退出状态验证">
+        如果**应用程序退出状态为 1**，则继续下一步。
     </Step>
-    <Step title="Application Recent Restart Verification">
-       If the **application didn't restart in the last 60 minutes**, will proceed to next step.
+    <Step title="最近重启验证">
+       如果**应用程序在过去 60 分钟内没有重启**，则继续下一步。
     </Step>
-    <Step title="Application Exception Verification">
-        If the application logs contain any of the excluded errors, Auto Restart will not restart the application.
-
-        Examples of excluded errors include:
-        <CodeGroup>
-        ```json SyntaxError
-        SyntaxError: Unexpected token 'X'..
-        SyntaxError: Unexpected identifier 'X'..
-        SyntaxError: Invalid or unexpected token 'X'..
-        ```
-        ```json Version didn't find
-        npm ERR! notarget No matching version found for
-        ERROR: Could not find a version that satisfies the requirement
-        And variations of this error.
-        ```
-        ```json Module not found
-        Error: Cannot find module 'X'
-        Module not found: Can't resolve 'X' in 'Y'
-        And variations of this error.
-        ```
-        ```json Invalid dependency file
-        ERROR: Invalid requirement: 'X'
-        ERROR: Could not open requirements file: 'X'
-        npm ERR! code EJSONPARSE... npm ERR! Failed to parse json
-        And variations of this error.
-        ```
-        </CodeGroup>
-
-        If the application logs contain any of these errors, Auto Restart will not restart the application.
+    <Step title="异常验证">
+        如果日志包含排除的错误，自动重启不会重启应用程序。
     </Step>
-    <Step title="Application Restart">
-        AUTORESTART automatically restarts your application to bring it back. 😉
-        <Info>Cooldown between restarts is 60 minutes.</Info>
+    <Step title="应用程序重启">
+        AUTORESTART 自动重启您的应用程序。😉
+        <Info>重启之间的冷却时间为 60 分钟。</Info>
     </Step>
 </Steps>
 
-## Best Practices
+## 最佳实践
 
-Here are some best practices to make the most of Auto Restart:
+- 定期查看应用程序日志以了解崩溃或重启的原因。
+- 保持 MAIN 文件和内存分配参数最新。
 
--  Regularly review your application's logs to understand the reasons for any crashes or restarts. This can help you identify and address underlying issues.
-- Keep your MAIN file and memory allocation parameters up-to-date to ensure optimal performance and resource usage.
+## 结论
 
-## Conclusion
-
-Auto Restart in VirtusCloud is a valuable feature that enhances the reliability of your application. By automatically handling crashes and unresponsiveness, it helps maintain a seamless user experience. Ensure that you have a plan with Auto Restart enabled and configure it in your `virtuscloud.app` or `virtuscloud.config` file to make the most of this feature.
+VirtusCloud 中的自动重启是一个宝贵的功能，可以增强应用程序的可靠性。在 `virtuscloud.app` 或 `virtuscloud.config` 文件中配置它以充分利用此功能。

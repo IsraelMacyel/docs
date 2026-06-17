@@ -1,33 +1,35 @@
 ---
 title: "Delete Database"
-description: "Deletes a database hosted on VirtusCloud"
-api: "DELETE https://api.virtuscloud.app/v2/databases/{databaseId}"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Delete Database
+
+> Deletes a database hosted on Virtus Cloud
 
 ## Request
 
 ### Headers
 
-<Authorization />
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 ### Path
 
-<ParamField path="databaseId" type="string" placeholder="Database ID" required>
+<ParamField path="database_id" type="string" placeholder="Database ID" required>
   The ID of the database.
 </ParamField>
 
 ## Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
 
 <ResponseExample>
-```json
-{
-  "status":"success"
-}
-```
+  ```json theme={null}
+  {
+    "status":"success"
+  }
+  ```
 </ResponseExample>

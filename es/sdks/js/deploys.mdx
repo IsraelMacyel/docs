@@ -1,6 +1,5 @@
 ---
 title: "Deploys & Git integration"
-description: "Inspect deploy history, link a repository through the Virtus Cloud GitHub App, or use the legacy webhook flow."
 ---
 
 # Deploys & Git integration
@@ -74,7 +73,7 @@ await app.deploys.unlinkGithubApp();
 `app.deploys.integrateGithubWebhook(accessToken)` configures the legacy webhook-based integration using a GitHub Personal Access Token.
 
 ```typescript theme={null}
-const webhookUrl = await app.deploys.integrateGithubWebhook("ghp_xxx...");
+const webhookUrl = await app.deploys.integrateGithubWebhook("YOUR_GITHUB_TOKEN...");
 console.log(`Configure GitHub to POST to: ${webhookUrl}`);
 ```
 

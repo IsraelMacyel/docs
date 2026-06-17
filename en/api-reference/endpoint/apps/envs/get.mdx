@@ -1,34 +1,36 @@
 ---
 title: "List Variables"
-description: "Get environment variables."
-api: "GET https://api.virtuscloud.app/v2/apps/{appId}/envs"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# List Variables
 
-<Authorization />
+> Get environment variables.
 
-<ParamField path="appId" type="string" placeholder="App ID" required>
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
+
+<ParamField path="app_id" type="string" placeholder="App ID" required>
   The application ID.
 </ParamField>
 
 ### Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
+
 <ResponseField name="response" type="object">
   The key and value of all environment variables you defined.
 </ResponseField>
 
-
 <ResponseExample>
-```json
-{
-  "status": "success",
-  "response": {
-    "TEST": "myTest"
+  ```json theme={null}
+  {
+    "status": "success",
+    "response": {
+      "TEST": "myTest"
+    }
   }
-}
-```
+  ```
 </ResponseExample>

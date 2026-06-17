@@ -1,82 +1,131 @@
 ---
-title: "Managing Applications"
-description: "In this section, you will learn how to manage your application using the available library. You can interact with your application in various ways, such as obtaining information about the application status, accessing logs, starting, stopping, and restarting the application, as well as managing files associated with it."
+title: "Managing applications"
 ---
 
-## Getting the status of your application
+# Managing applications
 
-`application.getStatus()` return a `ApplicationStatus` class.
+> Inspect, control and operate an application through the Application class — status, logs, metrics, lifecycle (start, stop, restart) and deletion.
 
-````javascript
-const { VirtusCloudAPI } = require("@virtuscloud/api");
-const api = new VirtusCloudAPI("Your API Key");
+Every operation on this page starts by obtaining an `Application` instance:
 
-const application = await api.applications.get("Application ID");
-const status = await application.getStatus();
+```typescript theme={null}
+import { VirtusCloudAPI } from "@squarecloud/api";
 
-console.log(status.usage.cpu);     // '0.22%'
-console.log(status.usage.ram);     // '70MB'
-console.log(status.usage.network); // {'total': '0 KB ↑ 0 KB ↓', 'now': '0 KB ↑ 0 KB ↓'}
-console.log(status.usage.storage); // '0B'
-console.log(status.running);       // true | false
-console.log(status.status);        // 'running' | 'exited' ...
-````
+const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY!);
+const app = await api.applications.fetch("abc123def456abc123def456");
+```
 
-## Getting logs
+`api.applications.fetch(id)` returns an `Application`. When the app has a website domain bound to it, it is returned as a `WebsiteApplication` — refine the type at runtime with `app.isWebsite()` before using `.network` (see [Network](/en/sdks/js/network)).
 
-`application.getLogs()` return a String.
+## Application properties
 
-````javascript
-const application = await api.applications.get("Application ID");
-const logs = await application.getLogs();
+| Property      | Type             | Description                                                                                                       |
+| ------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `id`          | `string`         | Application ID (24 hex chars)                                                                                     |
+| `name`        | `string`         | Display name                                                                                                      |
+| `description` | `string?`        | Description from `virtuscloud.app`                                                                                |
+| `url`         | `string`         | Web dashboard URL                                                                                                 |
+| `ram`         | `number`         | Allocated RAM in MB                                                                                               |
+| `cluster`     | `string`         | Cluster the app runs on                                                                                           |
+| `language`    | `string`         | `javascript` \| `typescript` \| `python` \| `java` \| `elixir` \| `rust` \| `go` \| `php` \| `dotnet` \| `static` |
+| `domain`      | `string \| null` | Default `<subdomain>.virtuscloud.app` host (`null` for non-web apps)                                                |
+| `custom`      | `string \| null` | Custom domain bound to the app, when configured                                                                   |
+| `createdAt`   | `Date`           | Creation date                                                                                                     |
 
-console.log(logs); // String
-````
+<Note>
+  In v4, `app.custom` is `null` when no custom domain is set (was `undefined` in v3).
+</Note>
 
-## Starting the application
+## Getting the application status
 
-`application.start()` return a Boolean.
+`app.getStatus()` returns an `ApplicationStatus` instance with the live runtime state.
 
-````javascript
-const application = await api.applications.get("Application ID");
-const started = await application.start();
+```typescript theme={null}
+const status = await app.getStatus();
 
-console.log(started); // Boolean (true or false)
-````
+console.log(status.status);          // "running" | "starting" | "restarting" | "exited" | "created" | "deleting"
+console.log(status.running);         // boolean
+console.log(status.usage.cpu);       // "0.22%"
+console.log(status.usage.ram);       // "70MB"
+console.log(status.usage.network);   // { total: "0 KB ↑ 0 KB ↓", now: "0 KB ↑ 0 KB ↓" }
+console.log(status.usage.storage);   // "0B"
+console.log(status.uptime);          // Date | undefined
+console.log(status.uptimeTimestamp); // number | undefined
+```
 
-## Stopping the application
+### Summary status for every application
 
-`application.stop()` return a Boolean.
+To avoid one request per app, call `api.applications.statusAll()`:
 
-````javascript
-const application = await api.applications.get("Application ID");
-const stopped = await application.stop();
+```typescript theme={null}
+const list = await api.applications.statusAll();
 
-console.log(stopped); // Boolean (true or false)
-````
+for (const summary of list) {
+    console.log(`${summary.applicationId} → running=${summary.running}`);
+    if (summary.running) {
+        console.log(`  cpu=${summary.usage.cpu}, ram=${summary.usage.ram}`);
+    }
 
-## Restarting the application
+    // Promote a summary to the full status with .fetch()
+    const full = await summary.fetch();
+    console.log(full.uptime);
+}
+```
 
-`application.restart()` return a Boolean.
+## Getting the logs
 
-````javascript
-const application = await api.applications.get("Application ID");
-const restarted = await application.restart();
+`app.getLogs()` returns the most recent log output as a `string`.
 
-console.log(restarted); // Boolean (true or false)
-````
+```typescript theme={null}
+const logs = await app.getLogs();
+console.log(logs);
+```
+
+## Getting metrics
+
+`app.getMetrics()` returns the last 24 hours of CPU, RAM and network samples (up to **288 points**, one every 5 minutes).
+
+```typescript theme={null}
+const metrics = await app.getMetrics();
+
+console.log(metrics.length, "data points");
+console.log(metrics[0]);
+// { timestamp: 1717084800000, cpu: 12.3, ram: 187, network: { ... } }
+```
+
+<Warning>
+  `getMetrics()` requires the application to have **at least 512MB of RAM** allocated.
+</Warning>
+
+## Real-time event stream
+
+`app.realtime()` opens a [Server-Sent Events](https://developer.mozilla.org/docs/Web/API/Server-sent_events) stream. See the dedicated [Realtime](/en/sdks/js/realtime) page for a full example.
+
+## Lifecycle
+
+All lifecycle methods resolve to `boolean` (`true` on success).
+
+```typescript theme={null}
+await app.start();
+await app.restart();
+await app.stop();
+```
 
 ## Deleting an application
 
-`application.delete()` return a Boolean.
-
 <Warning>
-    This will delete your application **PERMANENTLY**, meaning that unless you have a backup of your application, it cannot be recovered.
+  `app.delete()` permanently removes the application. Unless you have a [snapshot](/en/sdks/js/snapshots), the data **cannot be recovered**.
 </Warning>
 
-````javascript
-const application = await api.applications.get("Application ID");
-const deleted = await application.delete();
+```typescript theme={null}
+const deleted = await app.delete();
+console.log(deleted); // true | false
+```
 
-console.log(deleted); // Boolean (true or false)
-````
+## Refreshing the application data
+
+`app.fetch()` refetches the application from the API and returns a brand-new `Application` instance. Use it when you suspect the cached data is stale.
+
+```typescript theme={null}
+const fresh = await app.fetch();
+```

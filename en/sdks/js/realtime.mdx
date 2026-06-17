@@ -1,6 +1,5 @@
 ---
 title: "Real-time stream"
-description: "Subscribe to live application events through a Server-Sent Events (SSE) stream."
 ---
 
 # Real-time stream
@@ -24,9 +23,9 @@ The stream emits two kinds of frames:
 ## Consuming the stream
 
 ```typescript theme={null}
-import { SquareCloudAPI } from "@virtuscloud/api";
+import { VirtusCloudAPI } from "@squarecloud/api";
 
-const api = new SquareCloudAPI(process.env.SQUARE_API_KEY!);
+const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY!);
 const app = await api.applications.fetch("abc123def456abc123def456");
 
 const response = await app.realtime();

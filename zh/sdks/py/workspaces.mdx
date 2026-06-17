@@ -1,6 +1,5 @@
 ---
 title: "Managing Workspaces"
-description: "In this section, you will learn how to manage workspaces using the Python SDK. Workspaces allow you to organize and collaborate on multiple applications with team members."
 ---
 
 # Managing Workspaces
@@ -16,7 +15,7 @@ Workspaces are a way to organize your applications and collaborate with team mem
 `client.create_workspace` returns a `Workspace` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -36,7 +35,7 @@ async def example():
 `client.get_workspace` returns a `Workspace` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -55,7 +54,7 @@ async def example():
 `client.all_workspaces` returns a list of `Workspace` objects.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -74,7 +73,7 @@ async def example():
 `client.delete_workspace` returns a `Response` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 
@@ -88,7 +87,7 @@ async def example():
 If you are a member of a workspace but not the owner, you can leave the workspace using `client.leave_workspace`, which returns a `Response` object.
 
 ```python theme={null}
-import virtuscloud as square
+import squarecloud as square
 
 client = square.Client(api_key='API_KEY')
 

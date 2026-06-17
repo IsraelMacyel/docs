@@ -1,214 +1,274 @@
 ---
-title: "Hosting a Telegram Bot on VirtusCloud"
-sidebarTitle: "Telegram bot"
-description: "This article guides you through creating and hosting a Telegram bot on VirtusCloud."
+title: "Hospedando un Bot de Telegram en VirtusCloud"
+sidebarTitle: "Bot de Telegram"
+description: "Este artículo te guía en la creación y alojamiento de un bot de Telegram en VirtusCloud."
 ---
 
-## Introduction
+# How to Host Telegram Bots
 
-- Before you start coding, you need to set up your bot properly on Telegram. First, it's necessary to have a Telegram account. If you don't have one yet, you can create one by visiting the [official Telegram website](https://telegram.org/).
-<AccordionGroup>
-  <Accordion title="Getting Started" icon="rocket" iconType="solid">
-    First, you should access [Telegram](https://web.telegram.org/a/) and search for a bot called "BotFather."
+> Learn to create and host Telegram bots on Virtus Cloud. Complete tutorial with configuration, deployment, and practical examples in Node.js and Python.
+
+export const RecommendedPlan = ({lang, plan, tier, cpu, appType}) => {
+  const url = `https://virtuscloud.app/${lang}/pay?plan=${plan.toLowerCase()}&tier=${tier}`;
+  if (lang == 'en') {
+    return <Note>
+        <b>Wondering how much RAM and CPU your plan needs to host {appType}?</b><br />
+        Don't worry, we're here to help.
+        Our <a href={url}>{plan}</a> plan offers <b>{tier}GB</b> of RAM and <b>{cpu}vCPU</b>, which should be sufficient for most {appType}. 
+        However, if you are working on a larger project and seeking extra stability, we recommend considering our <b>Pro</b> plan. With additional resources, you can maintain stability even during demand spikes. 
+        To purchase, simply click <a href="https://virtuscloud.app/en/pay?plan=pro">here</a>.
+      </Note>;
+  } else {
+    return <Note>
+          <b>Está se perguntando quanta RAM e CPU seu plano precisa para hospedar {appType}?</b><br />
+          Não se preocupe, estamos aqui para ajudar.
+          Nosso plano <a href={url}>{plan}</a> oferece <b>{tier}GB</b> de RAM e <b>{cpu}vCPU</b>, o que deve ser suficiente para a maioria dos {appType}.
+          No entanto, se você estiver trabalhando em um projeto maior e precisar de mais estabilidade, recomendamos considerar nosso plano <b>Pro</b>.
+          Com recursos adicionais, você pode manter a estabilidade mesmo durante picos de demanda.
+          Para comprar, basta clicar <a href={`https://virtuscloud.app/${lang}/pay?plan=pro`}>aqui</a>.
+        </Note>;
+  }
+};
+
+export const appType_0 = "a Telegram bots"
+
+## Introducción
+
+To develop and host {appType_0} on Virtus Cloud, it's essential to follow a structured sequence of configurations and prerequisites. This technical guide will cover the entire process, from initial setup to production deployment.
+
+### Prerequisites
+
+* **Virtus Cloud Account**: Register through the [signup page](https://virtuscloud.app/en/signup) using your email.
+* **Active Paid Plan**: Ensures dedicated resources and optimized performance for your application. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the most suitable for your needs.
+
+<RecommendedPlan appType="Telegram bots" plan="Hobby" tier="2" cpu="2" lang="en" />
+
+## Creando el proyecto
+
+A Telegram account is essential for testing and interacting with your bot. If you don't have one, visit the [official Telegram website](https://telegram.org/) to create your account for free.
+
+### Bot application on Telegram
+
+<Steps>
+  <Step title="Getting Started" icon="rocket">
+    Access [Telegram Web](https://web.telegram.org/a/) and search for the official **BotFather** bot, responsible for creating and managing bots on the platform.
+
     <Frame>
-      <img src="/images/articles/telegram/getting-started.png" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/telegram/getting-started.webp" alt="Finding BotFather on Telegram" style={{ borderRadius: "0.2rem" }} />
     </Frame>
-  </Accordion>
+  </Step>
 
-  <Accordion title="Getting the Token" icon="key" iconType="solid">
-    Click on it to start a conversation and type "start." When it sends the message, choose the "/newbot" option. After that, it will ask for the name you want for your bot, and finally, when you choose the name, it will generate the token.
+  <Step title="Obtaining the Authentication Token" icon="key">
+    Start a conversation with BotFather and type `/start`. Then, select the `/newbot` option to create a new bot. The system will ask for a name for your bot and, after confirmation, will automatically generate the necessary authentication token.
+
     <Frame>
-      <img src="/images/articles/telegram/getting-the-token.png" style={{ borderRadius: "0.2rem" }} />
+      <img src="https://cdn.virtuscloud.app/docs/articles/telegram/generating-token.webp" alt="Generating Telegram bot token with BotFather" style={{ borderRadius: "0.2rem" }} />
     </Frame>
-  </Accordion>
-</AccordionGroup>
-<Warning>Remember to keep your bot's token secret as it can be used to control your bot.</Warning>
+  </Step>
+</Steps>
 
-- Next, you will need to create an account on VirtusCloud, which can be done through the [sign up page](https://virtuscloud.app/signup). You can use your email to create an account.
-- Finally, you need to have an active paid plan on your account. You can view our plans and purchase one according to your needs [here](https://virtuscloud.app/pricing).
+<Warning>**Critical Security**: Keep your bot token absolutely secret. This token grants full control over the bot and should be treated as confidential information.</Warning>
 
-# Using wrappers for bot creation
+### Developing project
+
+The choice of library or framework depends on the programming language you intend to use. Below are some of the most popular options:
+
 <Tabs>
-  <Tab title="node-telegram-bot-api">
-    1. Ensure you have Node.js installed on your system. If not, you can download it from the [official Node.js website](https://nodejs.org/).
-    2. Initialize a new Node.js project using `npm init`. This will create a new `package.json` file for your project:
+  <Tab title="Node.js - grammY">
+    **Environment Setup**
 
-```bash
-npm init -y
-```
+    1. Verify that Node.js is installed on your system. Otherwise, download it from the [official Node.js website](https://nodejs.org/).
 
-3. Install the node-telegram-bot-api library using npm:
+    2. Initialize a new Node.js project:
 
-```bash
-npm install node-telegram-bot-api
-```
+    ```bash Terminal theme={null}
+    npm init -y
+    ```
 
-4. Create a new JavaScript file (e.g., `index.js`) and add the following code to create a basic Discord bot:
+    3. Install the grammY library:
 
-```javascript index.js
-// Importing the node-telegram-bot-api library
-const TelegramBot = require("node-telegram-bot-api");
+    ```bash Terminal theme={null}
+    npm install grammy
+    ```
 
-// Configuring the API key
-const token = "your token here";
+    **Basic Implementation**
 
-// Initializing the bot
-const bot = new TelegramBot(token, { polling: true });
+    4. Create the main file (`index.js`) with the following structure:
 
-// Getting bot information
-bot.getMe().then((botInfo) => {
-  // Getting the bot's name
-  const botName = botInfo.username;
+    ```javascript index.js theme={null}
+    const { Bot } = require("grammy");
 
-  // Defining a route for messages that are not commands
-  bot.on("message", (msg) => {
-    // Getting the chat ID
-    const chatId = msg.chat.id;
-    // Getting the user's message
-    const userMsg = msg.text;
-    // Formatting the message to be sent
-    const responseMsg = `${botName} Says: ${userMsg}`;
-    // Sending the message
-    bot.sendMessage(chatId, responseMsg);
-  });
+    // Authentication token configuration
+    const token = "YOUR_TOKEN_HERE";
 
-  // Printing the bot's name
-  console.log(botName);
-});
-```
+    // Bot initialization
+    const bot = new Bot(token);
+
+    (async () => {
+      // Get bot information
+      const botInfo = await bot.api.getMe();
+      const botName = botInfo.username;
+
+      // Define handler for text messages
+      bot.on("message:text", async (ctx) => {
+        const userMsg = ctx.message.text;
+        const responseMsg = `${botName} responds: ${userMsg}`;
+        await ctx.reply(responseMsg);
+      });
+
+      // Start the bot
+      bot.start();
+      console.log(`Bot ${botName} started successfully!`);
+    })();
+    ```
   </Tab>
-    <Tab title="telebot">
-1. Ensure you have Python and Pip (a package manager for Python) installed on your system. If not, you can download them from the [official Python website](https://www.python.org/) and the [official Pip website](https://pypi.org/).
-2. Install the telebot library using pip:
 
-```bash
-pip install telebot
-```
+  <Tab title="Python - telebot">
+    **Environment Setup**
 
-3. Create a new Python file (e.g., `main.py`) and add the following code to create a basic Telegram bot:
+    1. Verify that Python and pip are installed. Otherwise, download them from the [official Python website](https://www.python.org/).
 
-```python main.py
-# Importing the telebot_router library
-from telebot_router import TeleBot
+    2. Install the pyTelegramBotAPI library:
 
-# Initializing the bot
-app = TeleBot(__name__)
+    ```bash Terminal theme={null}
+    pip install pyTelegramBotAPI
+    ```
 
-# Defining a route for messages that are not commands
-@app.route('(?!/).+')
-def parrot(message):
-    # Getting the chat ID
-    chat_dest = message['chat']['id']
-    # Getting the user's message
-    user_msg = message['text']
-    # Getting bot information
-    bot_info = app.get_me()['result']
-    # Getting the bot's name
-    bot_name = bot_info['username']
-    # Formatting the message to be sent
-    msg = "{} Says: {}".format(bot_name, user_msg)
-    # Sending the message
-    app.send_message(chat_dest, msg)
-    
-# Defining the main function
-if __name__ == '__main__':
-    # Configuring the API key
-    app.config['api_key'] = 'your token here'
-    # Getting bot information
-    bot_info = app.get_me()['result']
-    # Getting the bot's name
-    bot_name = bot_info['username']
-    # Printing the bot's name
-    print(f"{bot_name}") 
-    # Starting the bot
-    app.poll(debug=True)
-```
+    **Basic Implementation**
 
-4. Create a `requirements.txt` file to list all external libraries needed for your project:
+    3. Create the main file (`main.py`):
 
-```txt requirements.txt
-telebot
-```
+    ```python main.py theme={null}
+    import telebot
+
+    # Authentication token configuration
+    TOKEN = "YOUR_TOKEN_HERE"
+
+    # Bot initialization
+    bot = telebot.TeleBot(TOKEN)
+
+    # Define handler for non-command messages
+    @bot.message_handler(func=lambda message: not message.text.startswith('/'))
+    def echo_handler(message):
+        # Get bot information
+        bot_info = bot.get_me()
+        bot_name = bot_info.username
+        # Format response message
+        response_msg = f"{bot_name} responds: {message.text}"
+        # Reply to the user
+        bot.reply_to(message, response_msg)
+
+    # Main execution
+    if __name__ == '__main__':
+        bot_info = bot.get_me()
+        print(f"Bot {bot_info.username} started successfully!")
+        # Start polling
+        bot.infinity_polling()
+    ```
+
+    4. Create the `requirements.txt` file to manage dependencies:
+
+    ```txt requirements.txt theme={null}
+    pyTelegramBotAPI
+    ```
   </Tab>
 </Tabs>
 
-## Creating the virtuscloud config file
+## Despliegue
 
-<Card title="Learn about: how to make the configuration file for VirtusCloud." icon="link" href="https://docs.virtuscloud.app/getting-started/config-file">
-The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define the name, description, version, main file, among other things.
+Después de preparar los archivos del proyecto, ahora puedes subirlos a Virtus Cloud y alojar tu proyecto.
+To do so, create a ZIP file containing all your project files.
+
+### Via dashboard
+
+<Steps>
+  <Step title="Acceder a la Página de Carga">
+    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  </Step>
+
+  <Step title="Configurar tu Entorno">
+    After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
+    If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
+  </Step>
+
+  <Step title="Desplegar tu Proyecto">
+    Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
+    After deployment, you can monitor your project's status and logs from the dashboard.
+
+    <Frame>
+      <img src="https://cdn.virtuscloud.app/docs/articles/dashboard/uploading.gif" alt="Uploading application to Virtus Cloud" style={{ borderRadius: "0.2rem" }} />
+    </Frame>
+  </Step>
+</Steps>
+
+### Via CLI
+
+To use this method, you need to create a config file named `virtuscloud.app` in the root directory of your project. This file will contain the necessary configuration for your project.
+
+<Card title="Learn more about: how to create the configuration file for Virtus Cloud." icon="link" href="/en/getting-started/config-file">
+  The virtuscloud.app file is a configuration file that will be used to configure your application; it will be used to define your environment.
 </Card>
 
-## Configuring the START Field
-<Warning>Only use this field if you are really sure about what you are doing.</Warning>
+<Steps>
+  <Step title="Instalar la CLI">
+    First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
-In the VirtusCloud configuration file, the **START** field is optional and only needed if you are using a custom script to start the bot. In the provided example, the **START** field is not necessary.
+    ```
+    npm install -g @squarecloud/cli
+    ```
 
-## Uploading Project to VirtusCloud
+    If you already have it, we recommend updating it. To do this, run the following command in your terminal:
 
-After preparing your project files, you can now upload them to VirtusCloud and host your project.
-
-<Tabs>
-  <Tab title="Dashboard Upload">
-    Access the [VirtusCloud
-    Dashboard](https://virtuscloud.app/dashboard/upload) and upload your project
-    files.
-    <Frame>
-      <img src="/images/uploading.gif" style={{ borderRadius: "0.2rem" }} />
-    </Frame>
-  </Tab>
-  <Tab title="CLI Upload">
-    <Steps>
-      <Step title="First Step">
-        First, you need to have the CLI installed in your environment. If you
-        don't have it yet, run the following command in your terminal:
+    <Tabs>
+      <Tab title="Windows">
+        ```bash theme={null}
+        squarecloud update
         ```
-        npm install -g @virtuscloud/cli
+      </Tab>
+
+      <Tab title="Linux, macOS, and WSL">
+        ```bash theme={null}
+        curl -fsSL https://cli.virtuscloud.app/install | bash
         ```
-        If you already have it, we recommend updating it. To do this, run the following command in your terminal:
-        <Tabs>
-          <Tab title="Windows">
-            ```bash
-            virtuscloud update
-            ```
-          </Tab>
-          <Tab title="Linux, macOS, and WSL">
-            ```bash
-            curl -fsSL https://cli.virtuscloud.app/install | bash
-            ```
-          </Tab>
-        </Tabs>
-      </Step>
-      <Step title="Second Step">
-        Now, to authenticate and use other CLI commands, you will find your
-        authorization key [here](https://virtuscloud.app/account) by clicking on
-        "Request API Key". After obtaining your authorization key, run the
-        following command: 
-        ```bash 
-        virtuscloud login
-        ```
-      </Step>
-      <Step title="Third Step">
-        Finally, to deploy your application to VirtusCloud using the CLI, you
-        need to execute the following command, passing the path of your zip
-        file: 
-        ```bash 
-        virtuscloud upload zip
-        ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+      </Tab>
+    </Tabs>
+  </Step>
 
-## Testing the Bot
+  <Step title="Autenticar">
+    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
-If you have done everything correctly, simply search for your bot on Telegram and send a message; it will echo it back to you.
+    ```bash theme={null}
+    squarecloud auth login
+    ```
+  </Step>
 
-    <Frame>
-      <img src="/images/articles/telegram/testing-bot.png" style={{ borderRadius: "0.2rem" }} />
-    </Frame>
+  <Step title="Subir tu Proyecto">
+    Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
 
-## Additional Resources
+    ```bash theme={null}
+    squarecloud upload 
+    ```
 
-For more information on creating bots with telebot, visit the [official telebot documentation](https://pypi.org/project/telebot/). There, you'll find detailed guides, tutorials, and API documentation to help you make the most of these libraries.
+    Or if you created the zip manually, you can use:
 
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+    ```bash theme={null}
+    squarecloud upload --file <path/to/zip> 
+    ```
+  </Step>
+</Steps>
+
+## Testing the bot
+
+After successful deployment, locate your bot on Telegram and send a test message. The bot should respond by echoing your message, confirming the correct implementation functionality.
+
+<Frame>
+  <img src="https://cdn.virtuscloud.app/docs/articles/telegram/testing-bot.webp" alt="Testing the Telegram bot after deployment" style={{ borderRadius: "0.2rem" }} />
+</Frame>
+
+## Recursos Adicionales
+
+To deepen your knowledge about Telegram bot development, consult the [official pyTelegramBotAPI documentation](https://pypi.org/project/pyTelegramBotAPI/). The documentation offers detailed guides, advanced tutorials, and complete API reference.
+
+## Contáctanos
+
+Si continúas enfrentando **dificultades técnicas**, nuestro **equipo de soporte especializado** está disponible para ayudarte. [**Contáctanos**](https://virtuscloud.app/es/support) y estaremos encantados de ayudarte.

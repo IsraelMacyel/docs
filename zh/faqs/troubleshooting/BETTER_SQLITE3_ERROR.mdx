@@ -1,12 +1,12 @@
 ---
-title: "Solving 'Could not locate the bindings file'"
-sidebarTitle: "Solving BETTER_SQLITE3_ERROR"
-description: "Learn how to resolve the 'Could not locate the bindings file' issue in your application."
+title: "解决 'Could not locate the bindings file'"
+sidebarTitle: "解决 BETTER_SQLITE3_ERROR"
+description: "了解如何解决应用程序中的 'Could not locate the bindings file' 问题。"
 ---
 
-## When does it occur?
+## 何时发生？
 
-This issue happens when the `better-sqlite3` library or a library that depends on it, like `quick.db`, is not updated.
+当 `better-sqlite3` 库或依赖它的库（如 `quick.db`）未更新时会发生此问题。
 
 ```bash
 Error: Could not locate the bindings file. Tried:
@@ -14,38 +14,31 @@ Error: Could not locate the bindings file. Tried:
  [...]
 ```
 
-## Why does it occur?
+## 为什么发生？
 
-This error occurs because the `better-sqlite3` library has not been updated to the latest version. In `better-sqlite3` **11.x.x and earlier**, the library **was not support Node.js LTS v22**.x.x.
+此错误发生是因为 `better-sqlite3` 库未更新到最新版本。在 **11.x.x 及更早版本**中，该库**不支持 Node.js LTS v22**。
 
-## How to fix
+## 如何修复
 
-To fix this issue, you need to update the `better-sqlite3` library to the latest version. Remember to update libraries that depend on `better-sqlite3`, like `quick.db`.
+将 `better-sqlite3` 库更新到最新版本。记得更新依赖它的库，如 `quick.db`。
 
-### Check the latest versions of the libraries:
-   - [npm better-sqlite3](https://www.npmjs.com/package/better-sqlite3)
-   - [npm quick.db](https://www.npmjs.com/package/quick.db)
+### 更新 `package.json`
 
-
-### Update the `better-sqlite3` in your `package.json`
-
-After checking the latest version of the library, you can update it in your `package.json`. For example, if the current version is 11.10.0, you can use the following:
-
-```json Update manually in your package.json
+```json 手动更新 package.json
 "better-sqlite3": "^11.10.0",
-"quick.db": "^9.1.7" // or any other library that depends on better-sqlite3
+"quick.db": "^9.1.7"
 ```
 
-```bash Update using the terminal
+```bash 使用终端更新
 npm install better-sqlite3@latest
 ```
 
-### Removing files for a clean installation
+### 删除文件进行干净安装
 
-After updating your `package.json`, you should remove the files and folders: `node_modules`, `package-lock.json`, and the `.npm` folder.
+删除 `node_modules`、`package-lock.json` 和 `.npm` 文件夹。
 
-### Reboot Your Application
+### 重启您的应用程序
 
-In conclusion, simply restart your application by clicking on the blue button. If you have followed all the steps correctly, your application should no longer encounter this error.
+点击蓝色按钮重启您的应用程序。
 
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+如果您继续遇到问题，请[联系我们的支持团队](/company/support)。

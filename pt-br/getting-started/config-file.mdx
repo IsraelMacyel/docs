@@ -1,172 +1,246 @@
 ---
-title: "Como criar o arquivo de configuração virtuscloud.app"
-sidebarTitle: "Arquivo de configuração"
-icon: "gear-complex-code"
-description: "Aprenda como criar o arquivo de configuração da VirtusCloud"
+title: "How to create your virtuscloud.app configuration file"
 ---
 
-## Arquivo de configuração? O que é isso? 🤔
-O arquivo de configuração é um arquivo que contém os parâmetros da sua aplicação, como o arquivo principal, memória, versão e outros parâmetros. Esse arquivo é utilizado para configurar e fazer o deploy da sua aplicação na plataforma VirtusCloud.
+# How to create your virtuscloud.app configuration file
 
-## Criando o arquivo de configuração
-É muito simples criar o arquivo de configuração: basta criar um arquivo com o nome `virtuscloud.app` ou `virtuscloud.config` e inserir os parâmetros de configuração dentro dele.
+> Learn how to create your Virtus Cloud configuration file
+
+## What is the configuration file?
+
+The configuration file is a file that contains your application's parameters, such as the main file, memory, version and other settings. This file is used to configure and deploy your application on the Virtus Cloud platform.
+
+```systemd virtuscloud.app theme={null}
+MAIN=main_file.js
+DISPLAY_NAME=I am the configuration file
+MEMORY=512
+VERSION=recommended
+```
+
+## Creating the configuration file
+
+Creating the configuration file is very simple: just create a file named `virtuscloud.app` or `squarecloud.config` and add the configuration parameters inside it.
 
 <Steps>
-    <Step title="Selecione a extensão">
-        O arquivo de configuração pode ter duas extensões: **.app** ou **.config**. Você pode escolher a extensão que preferir. Dica: use **.app** para ajudar a promover a VirtusCloud (virtuscloud.app). 😂
-        <Info>No **macOS**, recomendamos usar a extensão **.config**.</Info>
-        <Warning>Atenção: **.app** ou **.config** é a **extensão do arquivo**, **não o nome**.</Warning>
-    </Step>
-    <Step title="Crie o arquivo">
-        Crie um arquivo com a extensão selecionada e insira os parâmetros de configuração dentro dele.
-    </Step>
+  <Step title="Choose extension">
+    The configuration file can have two extensions: **.app** or **.config**. You can use `virtuscloud.app` or `squarecloud.config`, whichever you prefer. Tip: use **.app** to help promote Virtus Cloud. 🥰😂
+    <Info>On **macOS**, we recommend using the **.config** extension.</Info>
+    <Warning>Note: **.app** or **.config** refers to the **file extension**, not the file name.</Warning>
+  </Step>
+
+  <Step title="Create file">
+    Create a file with the selected extension and add the configuration parameters inside it.
+  </Step>
 </Steps>
 
-## Parâmetros de configuração
-Abaixo você pode ver os parâmetros de configuração que podem ser usados no seu arquivo de configuração.
+## Configuration parameters
+
+Below you can see all the configuration parameters available for your configuration file.
+
+| Parameter       | Type    | Editable | Limit     | Usage                                                               |
+| --------------- | ------- | :------: | --------- | ------------------------------------------------------------------- |
+| `MAIN*`         | String  |     ❌    | 32 chars  | Defines the main application file. Ex.: `index.js`, `main.py`, etc. |
+| `VERSION*`      | String  |     ❌    | -         | Language version (Ex.: `recommended`).                              |
+| `MEMORY*`       | Integer |     ✅    | -         | Amount of memory in megabytes.                                      |
+| `DISPLAY_NAME*` | String  |     ✅    | 32 chars  | Display name of the application.                                    |
+| `RUNTIME`       | String  |     ❌    | -         | The runtime environment. Ex.: `typescript`, `nodejs`, `go`.         |
+| `DESCRIPTION`   | String  |     ✅    | 280 chars | Description/metadata of the application.                            |
+| `AUTORESTART`   | Boolean |     ✅    | -         | Auto-restart (`true` or `false`).                                   |
+| `START`         | String  |     ✅    | 256 chars | Custom start command.                                               |
+| `SUBDOMAIN`     | String  |     ✅    | 63 chars  | Website subdomain (if applicable).                                  |
+
+<Info>Editable parameters (✅) can be modified in the dashboard after deployment. Non-editable (❌) parameters require a full reupload of the application to make changes.</Info>
+
+## Detailing the configuration parameters
+
+Below you can see the configuration parameters you can use in your configuration file.
 
 <Steps>
-    <Step title="MAIN [*]" icon="file">
-        O parâmetro **MAIN** é usado para definir o arquivo principal da sua aplicação.
-        ```systemd Exemplo:
-        MAIN=index.js
-        ```
-        ```systemd Também suporta subdiretórios.
-        MAIN=src/loaders/index.js
-        ```
-        <Info>Este parâmetro tem no máximo **32 caracteres**.</Info>
-        <Info>Esta configuração é **IGNORADA** se você usar o parâmetro START.</Info>
-    </Step>
-    <Step title="MEMORY [*]" icon="memory">
-        O parâmetro **MEMORY** é usado para definir a quantidade de memória que sua aplicação usará na plataforma VirtusCloud.
-        ```systemd
-        MEMORY=256
-        ```
-        <Info>O valor é em megabytes (MB).</Info>
-        <Note>A memória mínima para um bot é **256MB** e para um site é **512MB**.</Note>
-    </Step>
-    <Step title="VERSION [*]" icon="arrow-up-9-1">
-        O parâmetro **VERSION** é usado para definir a versão da sua aplicação.
-        ```systemd
-        VERSION=recommended
-        ```
-        <Info>Para cada linguagem há uma versão diferente, veja a tabela abaixo.</Info>
-        | Linguagem                | Versão `recommended`   | Versão `latest`  |
-        | ------------------------ | ---------------------- | ---------------- |
-        | JavaScript [Node.js]     | 22.18.0                | 24.5.0           |
-        | Python                   | 3.13.6                 | 3.13.6           |
-        | Java                     | JDK 23                 | JDK 25           |
-        | Elixir                   | 1.18.4                 | 1.18.4           |
-        | Rust                     | 1.89.0                 | 1.89.0           |
-        | PHP                      | 8.4.11                 | 8.4.11           |
-        | Go                       | 1.24.6                 | 1.24.6           |
-        | C#                       | 9.0.1                  | 9.0.1            |
-        | HTML/CSS                 | Build 10-02-2025       | Build 10-02-2025 |
+  <Step title="MAIN [*]" icon="file">
+    **Type**: String | **Editable**: ❌ | **Limit**: 32 chars
 
-        <Tip>Recomendamos usar a versão `recommended`, pois nossa equipe realizou testes extensivos em todas as versões recomendadas.</Tip>
-    </Step>
-    <Step title="DISPLAY_NAME [*]" icon="text">
-        O parâmetro **DISPLAY_NAME** é usado para definir o nome da sua aplicação.
-        ```systemd Exemplo:
-        DISPLAY_NAME=Admin BOT
-        ```
-        <Info>Este parâmetro tem no máximo **32 caracteres**.</Info>
-    </Step>
-    <Step title="DESCRIPTION" icon="text">
-        O parâmetro **DESCRIPTION** é usado para definir a descrição da sua aplicação.
-        ```systemd Exemplo:
-        DESCRIPTION=Este bot foi criado para ajudá-lo nas suas tarefas diárias.
-        ```
-        <Info>Este parâmetro tem no máximo **280 caracteres**.</Info>
-    </Step>
-    <Step title="AUTORESTART" icon="rotate">
-        O parâmetro **AUTORESTART** é usado para definir se sua aplicação deve reiniciar automaticamente em caso de falha.
-        ```systemd Exemplo:
-        AUTORESTART=true
-        ```
-        <Info>Por padrão, este parâmetro é definido como `false`.</Info>
-    </Step>
-    <Step title="SUBDOMAIN" icon="globe">
-        O parâmetro **SUBDOMAIN** é usado para definir o subdomínio do seu site.
-        ```systemd Exemplo:
-        SUBDOMAIN=meusite
-        ```
-        <Info>Este parâmetro tem no máximo **63 caracteres**.</Info>
-        <Note>A URL do site será: meusite.virtusapp.cloud</Note>
-    </Step>
-    <Step title="START" icon="play">
-        O parâmetro **START** é usado para definir um comando de inicialização personalizado para sua aplicação.
-        ```systemd Exemplo:
-        START=npm run start
-        ```
-        <Info>Este parâmetro tem no máximo **256 caracteres**.</Info>
-        <Info>Este parâmetro **ignora** o parâmetro MAIN, que é usado para unir os comandos de inicialização padronizados da VirtusCloud.</Info>
-        <Info>Aplicações enviadas após 19 de junho de 2025 podem editar este campo sem precisar fazer upload novamente</Info>
-    </Step>
+    Defines the main application file.
+
+    ```systemd theme={null}
+    MAIN=index.js
+    ```
+
+    ```systemd theme={null}
+    MAIN=src/loaders/index.js
+    ```
+
+    <Info>When this parameter is set, the runtime environment will be inferred based on the main file extension</Info>
+    <Tip>This setting is **IGNORED** if you use the START parameter.</Tip>
+  </Step>
+
+  <Step title="MEMORY [*]" icon="memory">
+    **Type**: Integer | **Editable**: ✅ | **Limit**: Minimum 256MB (bot), 512MB (site)
+
+    Defines the amount of memory your application will use.
+
+    ```systemd theme={null}
+    MEMORY=256
+    ```
+
+    <Info>The value must be specified in megabytes (MB).</Info>
+  </Step>
+
+  <Step title="VERSION [*]" icon="arrow-up-9-1">
+    **Type**: String | **Editable**: ❌ | **Values**: `recommended`, `latest` or specific version
+    <Tip>We recommend using `recommended` for optimal stability.</Tip>
+
+    Defines the language version for your application.
+
+    ```systemd theme={null}
+    VERSION=recommended
+    ```
+
+    | Language           | `recommended` | `latest` |
+    | ------------------ | ------------- | -------- |
+    | Node.js \[JS & TS] | 24.15.0       | 26.1.0   |
+    | Python             | 3.13.13       | 3.14.5   |
+    | Java               | JDK 25        | JDK 25   |
+    | Elixir             | 1.19.5        | 1.19.5   |
+    | Rust               | 1.95.0        | 1.95.0   |
+    | Ruby               | 4.0.4         | 4.0.4    |
+    | PHP                | 8.5.6         | 8.5.6    |
+    | Go                 | 1.26.3        | 1.26.3   |
+    | .NET/C#            | 10.0.8        | 10.0.8   |
+  </Step>
+
+  <Step title="DISPLAY_NAME [*]" icon="text">
+    **Type**: String | **Editable**: ✅ | **Limit**: 32 chars
+
+    Defines the display name of your application.
+
+    ```systemd theme={null}
+    DISPLAY_NAME=Admin BOT
+    ```
+  </Step>
+
+  <Step title="DESCRIPTION" icon="text">
+    **Type**: String | **Editable**: ✅ | **Limit**: 280 chars
+
+    Defines the description of your application.
+
+    ```systemd theme={null}
+    DESCRIPTION=This bot is designed to help you with your daily tasks.
+    ```
+  </Step>
+
+  <Step title="AUTORESTART" icon="rotate">
+    **Type**: Boolean | **Editable**: ✅ | **Values**: `true`, `false` | **Default**: `false`
+
+    Defines whether the application should automatically restart on failure.
+
+    ```systemd theme={null}
+    AUTORESTART=true
+    ```
+  </Step>
+
+  <Step title="SUBDOMAIN" icon="globe">
+    **Type**: String | **Editable**: ✅ | **Limit**: 63 chars | **Default**: `undefined`
+
+    Defines the subdomain for your site (web applications only).
+
+    ```systemd theme={null}
+    SUBDOMAIN=mysite
+    ```
+
+    <Note>The final URL will be: `mysite.virtuscloud.app`</Note>
+  </Step>
+
+  <Step title="RUNTIME" icon="server">
+    **Type**: String | **Editable**: ❌
+
+    Defines a runtime environment manually.
+
+    ```systemd theme={null}
+    RUNTIME=nodejs
+    ```
+
+    Check the accepted values and environments below.
+
+    | Environment | RUNTIME                  |
+    | ----------- | ------------------------ |
+    | Nodejs      | `nodejs`, `javascript`   |
+    | TypeScript  | `typescript`             |
+    | Python      | `python`                 |
+    | C#/Dotnet   | `c#`, `dotnet`, `csharp` |
+    | Elixir      | `Elixir`                 |
+    | Java        | `java`                   |
+    | Rust        | `Rust`                   |
+    | PHP         | `php`                    |
+    | Golang      | `go`, `golang`           |
+    | HTML/CSS    | `static`, `html`         |
+
+    <Warning>If you set this parameter, you'll don't need to set the MAIN, instead, you'll need to set a custom START command.</Warning>
+  </Step>
+
+  <Step title="START" icon="play">
+    **Type**: String | **Editable**: ✅ | **Limit**: 256 chars | **Default**: `undefined`
+
+    Defines a custom start command.
+
+    ```systemd theme={null}
+    START=npm run start
+    ```
+
+    <Warning>This parameter **overrides** the default MAIN behavior.</Warning>
+  </Step>
 </Steps>
 
+## Configuration examples for bots
 
-## Exemplos de configuração para bots
-Temos alguns exemplos de configurações para bots, veja alguns exemplos abaixo.
+Here are some examples of configuration for bots:
 
-```systemd Este exemplo usa apenas os parâmetros obrigatórios. (configuração mínima)
+```systemd theme={null}
+# Required parameters.
 MAIN=index.js
-MEMORY=256
+MEMORY=512
 VERSION=recommended
 DISPLAY_NAME=Robin bot
 ```
 
-```systemd Este exemplo é um bot com todos os parâmetros.
+```systemd theme={null}
+# Example with all parameters.
 MAIN=index.js
-MEMORY=256
+MEMORY=512
 VERSION=recommended
 DISPLAY_NAME=Robin bot
-DESCRIPTION=Robin é um bot criado para ajudá-lo nas suas tarefas diárias.
+DESCRIPTION=This bot was created to help with your daily tasks.
+START=npm run start
 AUTORESTART=true
 ```
 
-```systemd Este exemplo usa todos os parâmetros e COMANDO DE INICIALIZAÇÃO PERSONALIZADO em um bot.
-MAIN=index.js
-MEMORY=512
-VERSION=recommended
-DISPLAY_NAME=Batman force
-START=npm run start
-```
+## Configuration examples for sites
 
-## Exemplos de configuração para sites
-Temos alguns exemplos de configurações para sites, veja alguns exemplos abaixo.
+Here are some examples of configuration for websites:
 
-<Info>A URL do site será: meusite.virtusapp.cloud</Info>
-```systemd Este exemplo usa todos os parâmetros e COMANDO DE INICIALIZAÇÃO PERSONALIZADO em um site.
+<Info>The site URL will be: `mysite.virtuscloud.app`</Info>
+
+```systemd theme={null}
+# Example with all parameters.
 MAIN=index.js
-MEMORY=512
+MEMORY=1024
 VERSION=recommended
-DISPLAY_NAME=Meu site!
-DESCRIPTION=Meu site é muito legal!
-SUBDOMAIN=meusite
+DISPLAY_NAME=My site
+DESCRIPTION=My site is really cool!
+SUBDOMAIN=mysite
 START=npm run build && npm run start
 AUTORESTART=true
 ```
 
-<Info>MAIN `next.config.js` usado apenas para o sistema reconhecer o projeto como um projeto JavaScript ou TypeScript (outro arquivo .ts/.tsx)</Info>
-```systemd Exemplo de site Next.js.
+<Info>`next.config.js` as MAIN is only used to let the system recognize the project as a JavaScript or TypeScript project (another .ts/.tsx file)</Info>
+
+```systemd theme={null}
+# Example for a Next.js site.
 MAIN=next.config.js
-MEMORY=1024
+MEMORY=2048
 VERSION=recommended
-DISPLAY_NAME=Site Next.js
-DESCRIPTION=Este site é construído com Next.js.
+DISPLAY_NAME=Next.js site
+DESCRIPTION=This site was built with Next.js.
 SUBDOMAIN=nextjs
 START=npm run build && npm run start
 AUTORESTART=true
 ```
-
-## Reforçando os limites
-Por razões de segurança e desempenho, há limites nos parâmetros de configuração, veja abaixo os limites de cada parâmetro.
-
-| Parâmetro     | Limite de caracteres |
-| ------------- | -------------------- |
-| MAIN          | 32 caracteres        |
-| DISPLAY_NAME  | 32 caracteres        |
-| DESCRIPTION   | 280 caracteres       |
-| START         | 256 caracteres       |
-| SUBDOMAIN     | 63 caracteres        |

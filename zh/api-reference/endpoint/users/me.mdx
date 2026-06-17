@@ -1,135 +1,193 @@
 ---
-title: "Get Account Info"
-api: "GET https://api.virtuscloud.app/v2/users/me"
-authMethod: "none"
-description: "Get information about your account."
+title: "Account Information"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Account Information
 
-<Authorization />
+> Get information about your account.
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 ### Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
 
 <ResponseField name="response" type="object">
+  The response content.
 
-The contents of the response.
+  <Expandable title="Toggle object">
+    <ResponseField name="user" type="object">
+      <Expandable title="Toggle object">
+        <ResponseField name="id" type="string">
+          The user's ID.
+        </ResponseField>
 
-<Expandable title="Toggle object">
+        <ResponseField name="name" type="string">
+          The user's name.
+        </ResponseField>
 
-<ResponseField name="user" type="object">
+        <ResponseField name="email" type="string">
+          The user's email.
+        </ResponseField>
 
-<Expandable title="Toggle object">
+        <ResponseField name="locale" type="string">
+          The user's locale.
+        </ResponseField>
 
-<ResponseField name="id" type="string">
-  The user's ID.
-</ResponseField>
+        <ResponseField name="plan" type="object">
+          <Expandable title="Toggle object">
+            <ResponseField name="name" type="string">
+              The user's plan name.
+            </ResponseField>
 
-<ResponseField name="name" type="string">
-  The user's name.
-</ResponseField>
+            <ResponseField name="memory" type="object">
+              The user's plan memory details.
 
-<ResponseField name="email" type="string">
-  The user's email.
-</ResponseField>
+              <Expandable title="Toggle object">
+                <ResponseField name="limit" type="number">
+                  The user's plan memory limit in MB.
+                </ResponseField>
 
-<ResponseField name="plan" type="object">
-<Expandable title="Toggle object">
+                <ResponseField name="available" type="number">
+                  The user's plan available memory in MB.
+                </ResponseField>
 
-<ResponseField name="name" type="string">
-  The user's plan name.
-</ResponseField>
+                <ResponseField name="used" type="number">
+                  The user's plan used memory in MB.
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
 
-<ResponseField name="duration" type="number">
-  The user's plan duration in milliseconds.
-</ResponseField>
+            <ResponseField name="duration" type="number">
+              The user's plan duration in milliseconds.
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
 
-</Expandable>
-</ResponseField>
+        <ResponseField name="created_at" type="date">
+          The user's account creation date.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
 
-</Expandable>
-</ResponseField>
+    <ResponseField name="applications" type="array">
+      <Expandable title="Toggle object">
+        <ResponseField name="name" type="string">
+          The application's name.
+        </ResponseField>
 
-<ResponseField name="applications" type="array">
+        <ResponseField name="id" type="string">
+          The application's ID.
+        </ResponseField>
 
-<Expandable title="Toggle object">
+        <ResponseField name="desc" type="string">
+          The application's description.
+        </ResponseField>
 
-<ResponseField name="name" type="string">
-    The application's name.
-</ResponseField>
+        <ResponseField name="ram" type="number">
+          The application's RAM usage.
+        </ResponseField>
 
-<ResponseField name="id" type="string">
-    The application's ID.
-</ResponseField>
+        <ResponseField name="lang" type="string">
+          The application's language.
+        </ResponseField>
 
-<ResponseField name="desc" type="string">
-    The application's description.
-</ResponseField>
+        <ResponseField name="domain" type="string">
+          The application's domain.
+        </ResponseField>
 
-<ResponseField name="ram" type="number">
-    The application's RAM usage.
-</ResponseField>
+        <ResponseField name="custom" type="string">
+          The application's custom domain.
+        </ResponseField>
 
-<ResponseField name="lang" type="string">
-    The application's language.
-</ResponseField>
+        <ResponseField name="cluster" type="string">
+          The application's cluster.
+        </ResponseField>
 
-<ResponseField name="domain" type="string">
-    The application's domain.
-</ResponseField>
+        <ResponseField name="created_at" type="date">
+          The application's creation date.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
 
-<ResponseField name="custom" type="string">
-    The application's custom domain.
-</ResponseField>
+    <ResponseField name="databases" type="array">
+      <Expandable title="Toggle object">
+        <ResponseField name="id" type="string">
+          The database's ID.
+        </ResponseField>
 
-<ResponseField name="cluster" type="string">
-    The application's cluster.
-</ResponseField>
+        <ResponseField name="name" type="string">
+          The database's name.
+        </ResponseField>
 
-</Expandable>
-</ResponseField>
+        <ResponseField name="ram" type="number">
+          The database's RAM usage.
+        </ResponseField>
 
-</Expandable>
+        <ResponseField name="type" type="string">
+          The database's type.
+        </ResponseField>
+
+        <ResponseField name="cluster" type="string">
+          The database's cluster.
+        </ResponseField>
+
+        <ResponseField name="created_at" type="date">
+          The database's creation date.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
 <ResponseExample>
-
-```json Response
-{
-  "status": "success",
-  "response": {
-    "user": {
-      "id": "313397145698959364",
-      "name": "joaootavios",
-      "email": "joao@virtuscloud.app",
-      "plan": {
-        "name": "standard-4",
-        "memory": {
-          "limit": 4096,
-          "available": 3840,
-          "used": 256
+  ```json Response theme={null}
+  {
+    "status": "success",
+    "response": {
+      "user": {
+        "id": "313397145698959364",
+        "name": "joaootavios",
+        "email": "joao@virtuscloud.app",
+        "plan": {
+          "name": "standard-4",
+          "memory": {
+            "limit": 4096,
+            "available": 3840,
+            "used": 256
+          },
+          "duration": 1732072955446
         },
-        "duration": 1732072955446
-      }
-    },
-    "applications": [
-      {
-        "name": "VirtusCloud Example APP",
-        "id": "446b0b4118634a1c99e73bac9a54e475",
-        "desc": "This is a example of description",
-        "ram": 512,
-        "lang": "javascript",
-        "domain": "square-example-app.virtusapp.cloud",
-        "custom": "mydomain.com",
-        "cluster": "suki-cluster"
-      }
-    ],
-    "databases": []
+        "created_at": "2022-01-10T12:00:00Z"
+      },
+      "applications": [
+        {
+          "name": "Square Example APP",
+          "id": "446b0b4118634a1c99e73bac9a54e475",
+          "desc": "This is a example of description",
+          "ram": 512,
+          "lang": "javascript",
+          "domain": "square-example-app.virtuscloud.app",
+          "custom": "mydomain.com",
+          "cluster": "suki-cluster",
+          "created_at": "2023-02-20T14:30:00Z"
+        }
+      ],
+      "databases": [
+        {
+          "id": "db1234567890",
+          "name": "example-database",
+          "type": "mongodb",
+          "cluster": "suki-cluster",
+          "ram": 1024,
+          "created_at": "2023-01-15T10:00:00Z"
+        }
+      ]
+    }
   }
-}
-```
-
+  ```
 </ResponseExample>

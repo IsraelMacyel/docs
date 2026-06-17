@@ -1,61 +1,123 @@
 ---
-title: "Limites e Restrições"
-description: "Descubra as restrições e limites da Plataforma VirtusCloud."
-icon: "shield-dog"
+title: "Platform limits and restrictions"
 ---
 
-## Requisitos Mínimos de Recursos
-Cada projeto hospedado na Plataforma VirtusCloud possui requisitos mínimos específicos de recursos para garantir desempenho ideal:
+# Platform limits and restrictions
 
-- **Bots:** Mínimo de 256MB de RAM necessário.
-- **Sites:** Mínimo de 512MB de RAM necessário.
-- **Bancos de Dados Cache:** Mínimo de 512MB de RAM necessário.
-- **Bancos de Dados Gerais:** Mínimo de 1GB de RAM necessário.
+> Technical specifications for RAM/CPU allocation, network and storage limits on Virtus Cloud.
 
-## Por que requisitos mínimos de RAM?
-A VirtusCloud impõe requisitos mínimos de RAM para garantir estabilidade e desempenho ideal das aplicações. Esses requisitos são baseados nos padrões típicos de consumo de recursos de diferentes tipos de aplicações. RAM insuficiente pode levar a falhas nas aplicações, mau desempenho e experiência degradada para o usuário. Ao definir esses mínimos, garantimos que suas aplicações tenham memória adequada para lidar com suas operações principais, processos em segundo plano e picos inesperados de tráfego sem comprometer a funcionalidade.
+Virtus Cloud implements container-based resource limits to ensure isolation, stability, and fair distribution of infrastructure across applications.
 
-Observe que, embora a VirtusCloud ofereça planos com até **1TB de RAM**, a **alocação máxima de RAM** para qualquer **aplicação é de 32GB**. <ins>Se precisar de mais de 32GB, entre em contato com nossa equipe de suporte.</ins>
+## Minimum Resource Requirements
 
-## Otimização e Limitação de CPU
-A lógica de limitação de CPU tem como objetivo otimizar o desempenho adaptando-se dinamicamente às necessidades da aplicação. O código divide a alocação padrão de CPU por dois, promovendo uma abordagem eficiente de utilização de recursos. No entanto, condições específicas alteram esse comportamento:
+Each project hosted on the Virtus Cloud Platform has specific minimum resource requirements to ensure optimal performance:
 
-Se a **alocação padrão de CPU da aplicação** for <ins>1vCPU</ins>, a **CPU é definida como 1**. (liberação total)
+* **Bots:** Minimum of 256 MB RAM required.
+* **Websites:** Minimum of 512 MB RAM required.
+* **Cache Databases:** Minimum of 512 MB RAM required.
+* **General Databases:** Minimum of 1 GB RAM required.
 
-**Caso contrário**, a **alocação de CPU varia de acordo** com o **tamanho da RAM da aplicação**:
-- Se a **RAM for menor ou igual a 1024**, a CPU é definida como o **máximo de metade** da CPU ou 1.
-- Se a **RAM for 2048** ou <ins>**mais**</ins>, a **CPU permanece inalterada**. (liberação total)
-- Para **tamanhos de RAM entre 1024 e 2048**, a CPU é definida como **metade da CPU**.
+### Why do RAM minimums exist?
 
-Essa estratégia visa equilibrar a eficiência de CPU com demandas variáveis do sistema, garantindo desempenho adequado em diferentes cenários.
+Containers have mandatory operational overhead: language runtime, OS libraries, and network buffers. Below 256 MB, the kernel's OOM Killer tends to terminate processes during boot or garbage collection, making the application inviable.
 
-## Limitações de Rede
-As limitações de rede são essenciais para garantir distribuição justa de recursos e uma experiência de alta qualidade para todos os usuários.
-A **velocidade de rede aumenta 50 Mbps** para cada **256 MB adicionais** de RAM alocada.
+**Technical implications:**
 
-Veja as limitações de rede com base na alocação de RAM:
+* Each container consumes 1 dynamic IPv4 and NVMe storage IOPS
+* Minimum allocations prevent resource fragmentation (noisy neighbor effect)
+* Daily snapshot formula: `(Total RAM / 256) * 2`
 
-- **256 MB RAM:** 50 Mbps de velocidade de rede
-- **512 MB RAM:** 100 Mbps de velocidade de rede
-- **1024 MB RAM:** 200 Mbps de velocidade de rede
-- **2048 MB RAM:** 400 Mbps de velocidade de rede
-- **4096 MB RAM:** 800 Mbps de velocidade de rede
-- **8192 MB RAM:** 1600 Mbps de velocidade de rede
-- **10240 MB RAM:** 2000 Mbps de velocidade de rede
+<Note>**Impact Data:** After implementing the 256 MB minimum limit, application stability increased drastically, reducing the crash rate due to OOM (Out of Memory) by **97.7%**.</Note>
 
-Para aplicações que requerem velocidades de rede superiores a 2000 Mbps, entre em contato com nossa equipe de suporte para discutir suas necessidades específicas.
+## CPU allocation
 
-## Limitações de Armazenamento
-As limitações de armazenamento são cruciais para garantir distribuição equitativa de recursos e proporcionar uma experiência de alta qualidade para todos os usuários.
-- **Todos os projetos:** Cada projeto recebe 10GB de armazenamento.
+Short answer: CPU is allocated based on configured RAM. Increasing RAM typically grants more vCPUs.
 
-## Limites de Serviço
-A VirtusCloud implementa limites de serviço para garantir utilização justa e eficiente de recursos para todos os usuários. Esses limites são categorizados como:
+### Rules
 
-### LACK_OF_RAM
-Se uma aplicação exceder o limite de RAM alocado conforme especificado em seu [arquivo de configuração virtuscloud.app](../getting-started/config-file), ela será marcada por violação de LACK_OF_RAM e encerrada para preservar sua segurança e a de todos os outros.
+#### Single vCPU plans
 
-### LACK_OF_CPU
-Se uma aplicação exceder e sobrecarregar seu limite de processamento alocado, ela será marcada por violação de LACK_OF_CPU e encerrada para preservar sua segurança e a de todos os outros. É importante lembrar que a VirtusCloud não permite a hospedagem de aplicações que minerem criptomoedas, por exemplo.
+Applications on 1 vCPU plans receive full capacity without throttling.
 
-A VirtusCloud é dedicada a proporcionar um ambiente seguro e equilibrado para todos os usuários, garantindo conformidade com suas políticas.
+#### Multicore plans (≥2 vCPU)
+
+* Performance floor: applications with ≥512 MB RAM receive at least 2 vCPUs.
+* Proportional scaling:
+  * Hobby (≤2 vCPU): +1 vCPU per 512 MB RAM
+  * Standard / Pro / Enterprise: +1 vCPU per 1 GB (1024 MB) RAM
+
+### Examples
+
+| Plan       | Plan capacity    | Configured RAM | vCPUs allocated |
+| ---------- | ---------------- | -------------: | --------------: |
+| Standard   | 4 GB / 4 vCPU    |           1 GB | 2 vCPUs (floor) |
+| Standard   | 4 GB / 4 vCPU    |           4 GB |   4 vCPUs (max) |
+| Enterprise | 128 GB / 16 vCPU |           2 GB |         2 vCPUs |
+| Enterprise | 128 GB / 16 vCPU |          16 GB |        16 vCPUs |
+
+Throttling and safety limits
+
+The system enforces the plan vCPU limit and applies leveling to keep distribution fair. Short-term elasticity may grant extra vCPUs during spikes but is not guaranteed.
+
+Prohibited CPU uses:
+
+* Cryptocurrency mining
+* Unrestricted, intensive ML workloads without authorization
+* Deliberate resource abuse
+
+Violations result in `LACK_OF_CPU` status and immediate suspension.
+
+## Network limits
+
+Bandwidth scales with RAM: **+50 Mbps per 256 MB RAM**.
+
+| RAM allocated | Bandwidth |
+| ------------: | --------: |
+|        256 MB |   50 Mbps |
+|        512 MB |  100 Mbps |
+|          1 GB |  200 Mbps |
+|          2 GB |  400 Mbps |
+|          4 GB |  800 Mbps |
+|          8 GB | 1600 Mbps |
+|         10 GB | 2000 Mbps |
+
+For requirements above 2000 Mbps contact support.
+
+## Storage limits
+
+All projects receive **10 GB NVMe** storage by default.
+
+Characteristics:
+
+* Enterprise-grade NVMe
+* Persistent across deploys and restarts
+* High IOPS and throughput
+
+## Limit exceeded statuses
+
+### LACK\_OF\_RAM
+
+When: application exceeds allocated RAM or kernel signals OOM.
+
+Action: process is terminated immediately to protect host stability.
+
+How to fix:
+
+1. Find memory leaks with profilers (Node.js: `--inspect`, Python: `memory_profiler`).
+2. Reduce in-memory caches or move caches to Redis.
+3. Increase allocated RAM in the control panel.
+
+### LACK\_OF\_CPU
+
+When: sustained CPU usage exceeds reasonable limits for the allocation.
+
+Action: process terminated with status `LACK_OF_CPU`.
+
+How to fix:
+
+1. Profile CPU hotspots (Node.js: `0x`, Python: `cProfile`).
+2. Optimize hot loops, DB queries and I/O-bound operations.
+3. Increase RAM to obtain more vCPUs (see CPU allocation table).
+4. Offload heavy work to asynchronous workers or batch jobs.
+
+Trade-off: increasing RAM to gain CPU raises costs. Measure whether code optimization is cheaper than scaling up.

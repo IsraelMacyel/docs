@@ -1,16 +1,16 @@
 ---
-title: "Resolvendo Problemas de Acesso ao Site ou API"
+title: "Problemas de Acesso ao Site ou API"
 sidebarTitle: "Problemas de Acesso ao Site"
 description: "Descubra como resolver problemas ao acessar seu site ou API."
 ---
 
-## Não Autorizado (Unauthorized)
+## Não autorizado
 
-- Há 2 situações que podem resultar nessa mensagem ao tentar acessar um site/API:
+Existem 2 situações que podem resultar nesta mensagem:
 
-1. A URL do site que você tentou acessar não está hospedada na VirtusCloud. Qualquer subdomínio de um site que não está hospedado na VirtusCloud e for acessado receberá a mensagem "Unauthorized". Se você adicionou o campo "SUBDOMAIN" após fazer o deploy da sua aplicação, esse campo não será lido e a URL não existirá, pois esse campo só é lido durante o deploy. Portanto, você precisa remover e refazer o deploy da sua aplicação com esse campo corretamente configurado.
+1. A URL do site que você tentou acessar não está hospedada na VirtusCloud. Se você adicionou o campo "SUBDOMAIN" após implantar sua aplicação, este campo não será lido, pois é processado apenas durante a implantação. Portanto, você precisa remover e reimplantar sua aplicação com este campo configurado corretamente.
 
-2. Se você hospedou seu site recentemente, aguarde 1 minuto. A VirtusCloud está finalizando as configurações do seu site. Após esse período, tente acessar novamente.
+2. Se você hospedou seu site recentemente, aguarde 1 minuto. A VirtusCloud está finalizando as configurações. Após este período, tente acessar novamente.
 
 <Frame>
   <img src="/images/articles/cloudflare/unauthorized-dns.png" style={{ borderRadius: '0.2rem' }} />
@@ -18,18 +18,18 @@ description: "Descubra como resolver problemas ao acessar seu site ou API."
 
 ## Timeout
 
-- Há 4 situações que podem resultar nessa mensagem ao tentar acessar um site/API:
+Existem 4 situações que podem resultar nesta mensagem:
 
-1. Seu site ou API pode ter erros impedindo-o de responder corretamente.
+1. Seu site ou API pode ter erros que impedem a resposta adequada.
 
-2. Se o site ou API estiver offline, você também receberá essa mensagem. É importante verificar os logs para identificar possíveis erros.
+2. Se o site ou API estiver offline, você também receberá esta mensagem. Verifique os logs para identificar possíveis erros.
 
-3. Na VirtusCloud, a porta padrão para sites e APIs é a porta `80` para tráfego HTTP. Se seu site ou API estiver usando uma porta diferente, você pode encontrar essa mensagem de erro.
+3. Na VirtusCloud, a porta padrão para sites e APIs é a porta `80` para tráfego HTTP. Se seu site ou API usar uma porta diferente, você pode encontrar esta mensagem de erro.
 
-4. Se você não configurar corretamente o host como `0.0.0.0` ao hospedar seu site, isso pode levar a erros de acesso.
+4. Se você não configurar o host como `0.0.0.0` ao hospedar seu site, isso pode levar a erros de acesso.
 
 <Frame>
   <img src="/images/articles/cloudflare/timeout.png" style={{ borderRadius: '0.2rem' }} />
 </Frame>
 
-Se continuar enfrentando problemas, não hesite em [contatar nossa equipe de suporte](/company/support).
+Se continuar com problemas, [entre em contato com nosso suporte](/company/support).

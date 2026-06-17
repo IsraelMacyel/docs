@@ -1,31 +1,29 @@
 ---
 title: "Purge Cache"
-description: "Purge Cache of the certain paths in the network. It has a rate limit of 1 request every 60 seconds."
-api: "POST https://api.virtuscloud.app/v2/apps/{app_id}/network/purge_cache"
-authMethod: "none"
 ---
 
-import Authorization from "/snippets/api/auth.mdx";
-import Status from "/snippets/api/status.mdx";
+# Purge Cache
 
-<Authorization />
+> Purge the global cache of the application on the Edge. Has a rate limit of 1 request every 60 seconds.
+
+<ParamField header="Authorization" type="string" placeholder="API Key" required>
+  The API key for your account. You can find this in your [account settings](https://virtuscloud.app/account/security).
+</ParamField>
 
 <ParamField path="app_id" type="string" placeholder="Application ID" required>
   The ID of the application. You can find this in the URL of your application's dashboard.
 </ParamField>
 
-<ParamField body="paths" type="array" placeholder={["https://yoursubdomain.virtusapp.cloud/", "https://yoursubdomain.virtusapp.cloud/style.css"]} required>
-  The paths you want to purge the cache.
-</ParamField>
-
 ### Response
 
-<Status />
+<ResponseField name="status" type="string">
+  Indicates whether the call was successful.. `success` if successful, `error` if not.
+</ResponseField>
 
 <ResponseExample>
-```json
-{
-    "status": "success"
-}
-```
+  ```json theme={null}
+  {
+      "status": "success"
+  }
+  ```
 </ResponseExample>

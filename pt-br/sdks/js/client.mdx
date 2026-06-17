@@ -1,56 +1,198 @@
 ---
 title: "Client"
-description: "The main object is the VirtusCloudAPI object, instantiated with an API key. This object signifies a connection to the VirtusCloud service and serves as an interface for interacting with different service aspects."
 ---
 
-```bash
-npm i @virtuscloud/api
-```
+# Client
 
-<Tabs> 
-    <Tab title="JavaScript">
-    ```javascript
-    const { VirtusCloudAPI } = require("@virtuscloud/api");
+> The VirtusCloudAPI class is the entry point to the SDK. It is instantiated with an API key and exposes every module — applications, databases, workspaces, user and platform service — through a single client.
 
-    const api = new VirtusCloudAPI("Your API Key");
+<Info>
+  This page documents **`@squarecloud/api` v4**. If you are upgrading from v3, read the [v3 → v4 migration guide](/en/sdks/js/migrating_to_v4) first.
+</Info>
+
+## Requirements
+
+* **Node.js 20.0.0** or newer
+* A valid API key — request one at the [Virtus Cloud Dashboard](https://virtuscloud.app/en/dashboard)
+
+## Instalação
+
+<Tabs>
+  <Tab title="npm">
+    ```bash theme={null}
+    npm install @squarecloud/api
     ```
-    </Tab>
-    <Tab title="TypeScript">
-    ```typescript
-    import { VirtusCloudAPI } from "@virtuscloud/api";
+  </Tab>
 
-    const api = new VirtusCloudAPI("Your API Key");
+  <Tab title="yarn">
+    ```bash theme={null}
+    yarn add @squarecloud/api
     ```
-    </Tab>
+  </Tab>
+
+  <Tab title="pnpm">
+    ```bash theme={null}
+    pnpm add @squarecloud/api
+    ```
+  </Tab>
 </Tabs>
 
-## Parameters
+## Instantiating the client
 
-### API Key
+<Tabs>
+  <Tab title="TypeScript">
+    ```typescript theme={null}
+    import { VirtusCloudAPI } from "@squarecloud/api";
 
-- Type: `string`
-- Required: Yes
-- Description: A valid API key must be provided as a string for authentication.
+    const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY!);
+    ```
+  </Tab>
 
-## Get Started
+  <Tab title="JavaScript (ESM)">
+    ```javascript theme={null}
+    import { VirtusCloudAPI } from "@squarecloud/api";
 
-Using the get started endpoint, you can obtain a user object representing the user associated with the API key, as well as a list of applications associated with the user.
+    const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY);
+    ```
+  </Tab>
 
-```javascript 
+  <Tab title="JavaScript (CommonJS)">
+    ```javascript theme={null}
+    const { VirtusCloudAPI } = require("@squarecloud/api");
+
+    const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY);
+    ```
+  </Tab>
+</Tabs>
+
+### Constructor
+
+| Parameter | Type     | Required | Description                                                               |
+| --------- | -------- | -------- | ------------------------------------------------------------------------- |
+| `apiKey`  | `string` | Yes      | Your Virtus Cloud API key. The client will throw if this is not a string. |
+
+## Modules
+
+The client exposes the entire v2 platform through dedicated modules. Each module is a property of the `VirtusCloudAPI` instance.
+
+| Property           | Module                                             | Documentation                                             |
+| ------------------ | -------------------------------------------------- | --------------------------------------------------------- |
+| `api.user`         | Authenticated user, plan, owned apps and databases | This page                                                 |
+| `api.applications` | List, fetch, upload and inspect applications       | [Managing applications](/en/sdks/js/managing_application) |
+| `api.databases`    | Create, fetch and manage databases                 | [Databases](/en/sdks/js/databases)                        |
+| `api.workspaces`   | Create, list and manage workspaces                 | [Workspaces](/en/sdks/js/workspaces)                      |
+| `api.service`      | Aggregate platform status                          | This page                                                 |
+| `api.cache`        | In-memory cache populated by SDK events            | This page                                                 |
+
+## Getting the authenticated user
+
+`api.user.get()` returns a [`User`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/structures/user.ts) instance containing the account details, current plan, owned applications and owned databases.
+
+```typescript theme={null}
 const user = await api.user.get();
 
-console.log(user.applications); // List of Application's
+console.log(user.id);          // "abcdef0123456789abcdef01"
+console.log(user.name);        // "John Doe"
+console.log(user.email);       // "john@example.com"
+console.log(user.locale);      // "en-US"
+console.log(user.plan.name);   // "free" | "standard" | ...
+console.log(user.createdAt);   // Date
+
+console.log(user.applications); // Collection<string, BaseApplication>
+console.log(user.databases);    // Collection<string, Database>
 ```
 
-## Application
+`user.applications` and `user.databases` are [`Collection`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/structures/collection.ts) instances (a `Map` subclass). Iterate them like any `Map`:
 
-Using the `Client`, you can obtain an object representing your application. This object is an instance of the `Application` class, allowing you to manage your application more conveniently without always needing to pass the ID.
-
-```javascript Obtaining an Application
-const app = user.applications.get("Application ID");
-console.log(app); // Output: application object
+```typescript theme={null}
+for (const [id, app] of user.applications) {
+    console.log(`${app.name} (${id}) — ${app.ram}MB ${app.language}`);
+}
 ```
 
-```javascript Obtaining All Applications
-console.log(user.applications); // user = api.user.get() [Promise]
+## Fetching a single application
+
+Use `api.applications.fetch(id)` to retrieve a fully populated `Application` (or `WebsiteApplication`, when the app has a website domain).
+
+```typescript theme={null}
+const app = await api.applications.fetch("abc123def456abc123def456");
+
+console.log(app.id, app.name, app.cluster, app.createdAt);
+
+if (app.isWebsite()) {
+    // narrowed to WebsiteApplication — `.network` is available
+    await app.network.purgeCache();
+}
+```
+
+The legacy `api.applications.get(id)` overload still exists, but it returns the lighter `BaseApplication` and is only kept for backwards compatibility. **Prefer `.fetch()` for v4.**
+
+## Listing snapshot history (account-wide)
+
+```typescript theme={null}
+const appSnapshots = await api.user.snapshots("applications");
+const dbSnapshots  = await api.user.snapshots("databases");
+```
+
+See [Snapshots](/en/sdks/js/snapshots) for details on snapshot payloads.
+
+## Platform status
+
+`api.service.status()` exposes the aggregated platform health (the same data shown on the public status page).
+
+```typescript theme={null}
+const status = await api.service.status();
+
+console.log(status.status);  // "ok" | "degraded" | "down"
+console.log(status.message); // human-readable summary
+```
+
+<Note>
+  Unlike most v2 endpoints, this route does **not** wrap its payload in the standard `{ status, response }` envelope.
+</Note>
+
+## Client cache
+
+The client maintains an in-memory cache that the SDK keeps in sync as you make calls:
+
+```typescript theme={null}
+api.cache.user;   // last fetched User
+// each application instance also exposes app.cache.status / .logs / .snapshots
+```
+
+The SDK emits typed events you can subscribe to:
+
+```typescript theme={null}
+api.on("userUpdate", (previous, current) => {
+    console.log("user changed:", current.name);
+});
+
+api.on("statusUpdate", (application, previous, current) => {
+    console.log(`${application.name} → ${current.status}`);
+});
+
+api.on("logsUpdate", (application, previous, current) => {
+    console.log(`new logs for ${application.name}`);
+});
+
+api.on("snapshotsUpdate", (application, previous, current) => {
+    console.log(`${current.length} snapshots for ${application.name}`);
+});
+```
+
+## Error handling
+
+Failed requests throw a `VirtusCloudAPIError`. The error exposes a stable `code` property you can switch on to discriminate failure modes.
+
+```typescript theme={null}
+import { VirtusCloudAPI, VirtusCloudAPIError } from "@squarecloud/api";
+
+try {
+    const app = await api.applications.fetch("invalid-id");
+} catch (err) {
+    if (err instanceof VirtusCloudAPIError) {
+        console.error(err.code);    // e.g. "APP_NOT_FOUND"
+        console.error(err.message);
+    }
+}
 ```

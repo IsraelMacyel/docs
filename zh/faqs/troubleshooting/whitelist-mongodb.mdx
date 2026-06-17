@@ -1,28 +1,26 @@
 ---
-title: "Configuring MongoDB Atlas Whitelist"
-sidebarTitle: "Whitelisting VirtusCloud in MongoDB"
-description: "Due to how VirtusCloud works in a way that has a dynamic IP, by an exclusive technology, it is impossible to provide you with an IP, since every restart in the application, you receive a unique IP."
+title: "配置 MongoDB Atlas 白名单"
+sidebarTitle: "MongoDB 白名单"
+description: "由于 VirtusCloud 使用动态 IP，无法提供固定 IP。"
 ---
 
-**VirtusCloud** stands out with its **dynamic IP allocation**, assigning a **unique address** with **each application restart**. Unlike static IPs, this dynamic approach enhances security by constantly changing the network footprint, **making it more resilient against potential threats**. 
+**VirtusCloud** 以其**动态 IP 分配**脱颖而出，每次**应用程序重启**时分配**唯一地址**。
 
-## When does it occur?
-When you are trying to connect your MongoDB Atlas database to your app hosted on VirtusCloud, you may come across the following error:
+## 何时发生？
+当您尝试将 MongoDB Atlas 数据库连接到 VirtusCloud 上托管的应用程序时：
 
 ```
 MongoNetworkError: connection 0 to shard-xxx-xxx.mongodb.net:27017 closed
 ```
 
-## Why does it occur?
-You will receive this error message if you have not included the MongoDB Atlas addresses, the IP where your app is hosted, on the whitelist.
+## 为什么发生？
+如果您没有将 MongoDB Atlas 地址包含在白名单中，将收到此错误消息。
 
-## How to fix
-To fix this error, you need to whitelist the IP address, according to the [mongodb documentation](https://www.mongodb.com/docs/atlas/security/ip-access-list/), you need to whitelist 0.0.0.0/0 IP address.
+## 如何修复
+根据 [MongoDB 文档](https://www.mongodb.com/docs/atlas/security/ip-access-list/)，您需要将 IP `0.0.0.0/0` 加入白名单。
 
 <Frame>
   <img src="/images/troubleshooting/mongodb-whitelist.png" style={{ borderRadius: '0.2rem' }} />
 </Frame>
 
-Congratulations! You have successfully whitelisted the IP address 0.0.0.0/0 for your MongoDB Atlas database. Now you can connect your database to your app hosted on VirtusCloud. 
-
-If you continue to experience any issues, please don't hesitate to [contact our support team](/company/support).
+如果您继续遇到问题，请[联系我们的支持团队](/company/support)。

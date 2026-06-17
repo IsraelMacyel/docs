@@ -1,20 +1,19 @@
 ---
 title: "Deployments"
-description: "This guide provides examples on how to integrate and manage
-application deployments using this SDK.
-You will learn how to create GitHub integrations, retrieve current
-integration details, and view the latest deployments using both the
-client and application objects."
 ---
+
+# Deployments
+
+> This guide provides examples on how to integrate and manage application deployments using this SDK. You will learn how to create GitHub integrations, retrieve current integration details, and view the latest deployments using both the client and application objects.
 
 ## Create Integration
 
 <Tabs>
-    <Tab title="Using Client">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Client">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client(api_key='API KEY')
+    client = square.Client(api_key='API KEY')
 
 
     async def example():
@@ -25,13 +24,13 @@ client and application objects."
             webhook_url
         )
     ```
-    </Tab>
+  </Tab>
 
-    <Tab title="Using Application">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Application">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client(api_key='API KEY')
+    client = square.Client(api_key='API KEY')
 
 
     async def example():
@@ -41,18 +40,17 @@ client and application objects."
             webhook_url
         )
     ```
-    </Tab>
+  </Tab>
 </Tabs>
-
 
 ## Obtaining Current Integration
 
 <Tabs>
-    <Tab title="Using Client">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Client">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client(api_key='API KEY')
+    client = square.Client(api_key='API KEY')
 
 
     async def example():
@@ -61,13 +59,13 @@ client and application objects."
         )
         print(webhook_url)
     ```
-    </Tab>
+  </Tab>
 
-    <Tab title="Using Application">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Application">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client(api_key='API KEY')
+    client = square.Client(api_key='API KEY')
 
 
     async def example():
@@ -77,31 +75,30 @@ client and application objects."
             webhook_url
         )
     ```
-    </Tab>
+  </Tab>
 </Tabs>
-
 
 ## Last Deploys
 
 <Tabs>
-    <Tab title="Using Client">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Client">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client(api_key='API KEY')
+    client = square.Client(api_key='API KEY')
 
 
     async def example():
         deploys = await client.last_deploys('application_id')
         print(deploys)  # [[DeployData(...), DeployData(...), DeployData(...)]]
     ```
-    </Tab>
+  </Tab>
 
-    <Tab title="Using Application">
-    ```python
-    import virtuscloud as virtus
+  <Tab title="Using Application">
+    ```python theme={null}
+    import squarecloud as square
 
-    client = virtus.Client(api_key='API KEY')
+    client = square.Client(api_key='API KEY')
 
 
     async def example():
@@ -109,5 +106,5 @@ client and application objects."
         deploys = await app.last_deploys()
         print(deploys)  # [[DeployData(...), DeployData(...), DeployData(...)]]
     ```
-    </Tab>
+  </Tab>
 </Tabs>

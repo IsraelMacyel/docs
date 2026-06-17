@@ -1,12 +1,12 @@
 ---
 title: "How to Host Preact Applications"
-description: "Learn how to deploy your Preact application on Virtus Cloud."
 ---
 
 # How to Host Preact Applications
 
 > Learn how to deploy your Preact application on Virtus Cloud.
 
+export const PortNote = ({lang}) => {
   if (lang == 'pt-br') {
     return <Note>
             <b>Qual porta devo usar para o meu servidor?</b><br />
@@ -21,6 +21,7 @@ description: "Learn how to deploy your Preact application on Virtus Cloud."
         </Note>;
 };
 
+export const RecommendedPlan = ({lang, plan, tier, cpu, appType}) => {
   const url = `https://virtuscloud.app/${lang}/pay?plan=${plan.toLowerCase()}&tier=${tier}`;
   if (lang == 'en') {
     return <Note>
@@ -42,19 +43,20 @@ description: "Learn how to deploy your Preact application on Virtus Cloud."
   }
 };
 
+export const appType_0 = "a Preact application"
 
-## Introduction
+## Introducción
 
 To develop and host {appType_0} on Virtus Cloud, it's essential to follow a structured sequence of configurations and prerequisites. This technical guide will cover the entire process, from initial setup to production deployment.
 
-### Prerequisites
+### Requisitos previos
 
-* **Virtus Cloud Account**: Register through the [signup page](https://virtuscloud.app/en/signup) using your email.
+* **Cuenta en Virtus Cloud**: Regístrate en la [página de registro](https://virtuscloud.app/es/signup) usando tu correo electrónico.
 * **Active Paid Plan**: Ensures dedicated resources and optimized performance for your application. Check our [available plans](https://virtuscloud.app/en/pricing) and choose the most suitable for your needs.
 
 <RecommendedPlan appType="Preact applications" plan="Standard" tier="4" cpu="4" lang="en" />
 
-## Creating project
+## Creando el proyecto
 
 Before starting, make sure you have **Node.js and npm** installed on your system.
 If you don't have them yet, download them from the official [Node.js](https://nodejs.org/) website.
@@ -108,7 +110,7 @@ export default function App() {
 }
 ```
 
-## Building project
+## Compilando el proyecto
 
 Before uploading, generate the production build:
 
@@ -118,7 +120,7 @@ npm run build
 
 Preact will output the optimized static files inside the `build/` directory.
 
-## Choosing a production server
+## Eligiendo un servidor de producción
 
 To serve your Preact in production you need a server. You can create your own or use existing ones.
 
@@ -174,26 +176,26 @@ In the `start:prod` script, `serve -s build -l 80` does the following:
 
 <Note>Adjust `dist` parameter to your project build folder. If it is in a folder inside `build` or `dist`, use it path instead.</Note>
 
-## Deploying
+## Despliegue
 
-After preparing your project files, you can now upload them to Virtus Cloud and host your project.
+Después de preparar los archivos del proyecto, ahora puedes subirlos a Virtus Cloud y alojar tu proyecto.
 To do so, create a ZIP file containing all your project files.
 
 <PortNote lang="en" />
 
-### Via dashboard
+### Via panel
 
 <Steps>
-  <Step title="Access the Upload Page">
-    Access the [upload page](https://virtuscloud.app/en/upload) and upload your project zip file.
+  <Step title="Acceder a la Página de Carga">
+    Accede a la [página de carga](https://virtuscloud.app/es/upload) and upload your project zip file.
   </Step>
 
-  <Step title="Configure Your Environment">
+  <Step title="Configurar tu Entorno">
     After uploading your zip, you will need to configure the name, main file or runtime environment and other settings for your project.\
     If you are uploading a web project, make sure to select "Web Publication" and set a subdomain to your project.
   </Step>
 
-  <Step title="Deploy Your Project">
+  <Step title="Desplegar tu Proyecto">
     Finally, click on the "Deploy" button to host your project on Virtus Cloud.\
     After deployment, you can monitor your project's status and logs from the dashboard.
 
@@ -212,11 +214,11 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
 </Card>
 
 <Steps>
-  <Step title="Install the CLI">
+  <Step title="Instalar la CLI">
     First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
     ```
-    npm install -g @virtuscloud/cli
+    npm install -g @squarecloud/cli
     ```
 
     If you already have it, we recommend updating it. To do this, run the following command in your terminal:
@@ -224,7 +226,7 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     <Tabs>
       <Tab title="Windows">
         ```bash theme={null}
-        virtuscloud update
+        squarecloud update
         ```
       </Tab>
 
@@ -236,43 +238,43 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     </Tabs>
   </Step>
 
-  <Step title="Authenticate">
-    Now, to authenticate and use other CLI commands, you will find your authorization key [here](https://virtuscloud.app/en/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
+  <Step title="Autenticar">
+    Ahora, para autenticarte y usar otros comandos de la CLI, encontrarás tu clave de autorización [aquí](https://virtuscloud.app/es/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
     ```bash theme={null}
-    virtuscloud auth login
+    squarecloud auth login
     ```
   </Step>
 
-  <Step title="Upload Your Project">
+  <Step title="Subir tu Proyecto">
     Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
 
     ```bash theme={null}
-    virtuscloud upload 
+    squarecloud upload 
     ```
 
     Or if you created the zip manually, you can use:
 
     ```bash theme={null}
-    virtuscloud upload --file <path/to/zip> 
+    squarecloud upload --file <path/to/zip> 
     ```
   </Step>
 </Steps>
 
-## Additional Resources
+## Recursos Adicionales
 
 For more information about Preact, visit the official documentation [here](https://preactjs.com/guide/v10)
 
-## Troubleshooting
+## Solución de Problemas
 
 <CardGroup cols={1}>
-  ### Custom Domain
+  ### Dominio Personalizado
 
   <Card horizontal>
-    To use a custom domain (e.g., `mysite.com`) instead of the default URL `mysite.squareweb.app`, you need the **Standard plan or higher**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
+    To use a custom domain (e.g., `mysite.com`) instead of the default URL `mysite.virtuscloud.app`, you need the **Standard plan or higher**. The subdomain is defined by the **SUBDOMAIN** field in the configuration file. See: [How to set up your custom domain](https://docs.virtuscloud.app/en/tutorials/platform/custom-domain).
   </Card>
 
-  ### Minimum RAM Requirements
+  ### Requisitos mínimos de RAM
 
   <Card horizontal>
     **Minimum: 512MB RAM** for simple websites/APIs. For sites with frameworks (Next.JS, React, Vue, Angular, etc.), we always recommend **at least 1GB RAM**. For larger applications, allocate more RAM to prevent the application from running out of memory and crashing.
@@ -281,7 +283,7 @@ For more information about Preact, visit the official documentation [here](https
   ### Could not find this site.
 
   <Card horizontal>
-    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Virtus to enable **first access**.
+    Check if the **subdomain/domain** matches what's configured in the **SUBDOMAIN** field or in the **custom domain settings**. If you just uploaded the site, wait up to **60 seconds** for Square to enable **first access**.
 
     <Frame>
       <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/unauthorized.webp" alt="Cloudflare site not found error" style={{ borderRadius: "0.2rem" }} />
@@ -291,7 +293,7 @@ For more information about Preact, visit the official documentation [here](https
   ### Site took too long to respond...
 
   <Card horizontal>
-    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Virtus's forced environment variables: **PORT** and **HOST** from the `.env` file.
+    Check if you correctly configured **port 80** and **host 0.0.0.0** in the application. We recommend using Square's forced environment variables: **PORT** and **HOST** from the `.env` file.
 
     <Frame>
       <img src="https://cdn.virtuscloud.app/docs/articles/cloudflare/en/timeout.webp" alt="Cloudflare request timeout error" style={{ borderRadius: "0.2rem" }} />
@@ -299,6 +301,6 @@ For more information about Preact, visit the official documentation [here](https
   </Card>
 </CardGroup>
 
-## Contact us
+## Contáctanos
 
-If you continue facing **technical difficulties**, our **specialized support team** is available to assist you. [**Contact us**](https://virtuscloud.app/en/support) and we'll be happy to help you resolve any issue.
+Si continúas enfrentando **dificultades técnicas**, nuestro **equipo de soporte especializado** está disponible para ayudarte. [**Contáctanos**](https://virtuscloud.app/es/support) and we'll be happy to help you resolve any issue.

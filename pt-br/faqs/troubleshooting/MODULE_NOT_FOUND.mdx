@@ -17,32 +17,28 @@ ModuleNotFoundError: No module named 'discord.py'
 
 ## Por que ocorre?
 
-Isso pode acontecer quando você tenta usar uma biblioteca que não está instalada por padrão no ambiente. Por exemplo, a biblioteca `discord.js` não é instalada por padrão no ambiente JavaScript.
+Isso pode acontecer quando você tenta usar uma biblioteca que não está instalada por padrão no ambiente.
 
-## Como resolver
+## Como corrigir
 
-Para corrigir isso, você precisa adicionar a biblioteca ausente aos arquivos de dependência do seu projeto. Esses arquivos listam as bibliotecas que serão instaladas no ambiente. No caso do Python, esse arquivo se chama `requirements.txt`, e para JavaScript, se chama `package.json`.
-
-Veja um exemplo do conteúdo desses arquivos após adicionar as bibliotecas ausentes:
+Adicione a biblioteca faltante aos arquivos de dependências do seu projeto.
 
 ```json package.json
 {
-  "name": "minha-app",
+  "name": "my-app",
   "version": "1.0.0",
   "dependencies": {
-    "discord.js": "14.14.1",
-    // outras dependências...
+    "discord.js": "14.14.1"
   }
 }
 ```
 
 ```txt requirements.txt
 discord.py
-# outras dependências...
 ```
 
-### Reinicie sua aplicação
+### Reiniciar sua Aplicação
 
-Após adicionar as bibliotecas necessárias aos arquivos de dependência do seu projeto, você deve reiniciar sua aplicação. Isso permite que o ambiente reconheça e instale as bibliotecas recém-adicionadas.
+Após adicionar as bibliotecas necessárias, reinicie sua aplicação.
 
-Se continuar enfrentando problemas, não hesite em [contatar nossa equipe de suporte](/company/support).
+Se continuar com problemas, [entre em contato com nosso suporte](/company/support).
