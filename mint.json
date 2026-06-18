@@ -592,7 +592,7 @@
     "linkedin": "https://linkedin.com/company/virtuscloud",
     "github": "https://github.com/virtuscloudofc"
   },
-  "backgroundImage": "/background.png",
+  "backgroundImage": "/images/background.png",
   "api": {
     "auth": {
       "method": "key",
@@ -714,5 +714,10 @@
       "destination": "/en/tutorials/how-to-create-your-lavalink-server"
     }
   ],
-  "theme": "maple"
+  "theme": "maple",
+  "logo": {
+    "light": "/favicon.png",
+    "dark": "/favicon.png",
+    "href": "https://virtuscloud.app"
+  }
 }
