@@ -15,7 +15,7 @@ Workspaces are a way to organize your applications and collaborate with team mem
 `client.create_workspace` returns a `Workspace` object.
 
 ```python theme={null}
-import squarecloud as square
+import virtuscloud as virtus
 
 client = square.Client(api_key='API_KEY')
 
@@ -35,7 +35,7 @@ async def example():
 `client.get_workspace` returns a `Workspace` object.
 
 ```python theme={null}
-import squarecloud as square
+import virtuscloud as virtus
 
 client = square.Client(api_key='API_KEY')
 
@@ -54,7 +54,7 @@ async def example():
 `client.all_workspaces` returns a list of `Workspace` objects.
 
 ```python theme={null}
-import squarecloud as square
+import virtuscloud as virtus
 
 client = square.Client(api_key='API_KEY')
 
@@ -73,7 +73,7 @@ async def example():
 `client.delete_workspace` returns a `Response` object.
 
 ```python theme={null}
-import squarecloud as square
+import virtuscloud as virtus
 
 client = square.Client(api_key='API_KEY')
 
@@ -87,7 +87,7 @@ async def example():
 If you are a member of a workspace but not the owner, you can leave the workspace using `client.leave_workspace`, which returns a `Response` object.
 
 ```python theme={null}
-import squarecloud as square
+import virtuscloud as virtus
 
 client = square.Client(api_key='API_KEY')
 

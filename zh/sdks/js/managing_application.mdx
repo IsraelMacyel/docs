@@ -9,7 +9,7 @@ title: "Managing applications"
 Every operation on this page starts by obtaining an `Application` instance:
 
 ```typescript theme={null}
-import { VirtusCloudAPI } from "@squarecloud/api";
+import { VirtusCloudAPI } from "@virtuscloud/api";
 
 const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY!);
 const app = await api.applications.fetch("abc123def456abc123def456");

@@ -103,7 +103,7 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
     ```
-    npm install -g @squarecloud/cli
+    npm install -g @virtuscloud/cli
     ```
 
     If you already have it, we recommend updating it. To do this, run the following command in your terminal:
@@ -111,7 +111,7 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     <Tabs>
       <Tab title="Windows">
         ```bash theme={null}
-        squarecloud update
+        virtuscloud update
         ```
       </Tab>
 
@@ -127,7 +127,7 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     Agora, para autenticar e usar outros comandos da CLI, encontre sua chave de autorização [aqui](https://virtuscloud.app/pt-br/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
     ```bash theme={null}
-    squarecloud auth login
+    virtuscloud auth login
     ```
   </Step>
 
@@ -135,13 +135,13 @@ To use this method, you need to create a config file named `virtuscloud.app` in 
     Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command:
 
     ```bash theme={null}
-    squarecloud upload 
+    virtuscloud upload 
     ```
 
     Or if you created the zip manually, you can use:
 
     ```bash theme={null}
-    squarecloud upload --file <path/to/zip> 
+    virtuscloud upload --file <path/to/zip> 
     ```
   </Step>
 </Steps>

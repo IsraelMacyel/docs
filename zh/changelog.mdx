@@ -478,7 +478,7 @@ title: "Changelog"
 
   By popular demand, we rebuilt the UI/UX for environment variable management to be more productive:
 
-  * **SQUARECLOUD\_APP\_ID:** Automatic injection of this ENV with the application ID.
+  * **VIRTUSCLOUD_APP_ID:** Automatic injection of this ENV with the application ID.
   * **Quick Actions:** Button to clear all ENVs and new validation on export.
   * **Advanced Interaction (Shift):** Holding `SHIFT` turns the menu button into a trash can for quick deletion.
   * **Direct Editing:** Click the input to edit the value immediately, no need to open menus.
@@ -491,7 +491,7 @@ title: "Changelog"
   * **Directory Handling:** You can now **rename and move directories** directly from the dashboard.
   * **Commit API (`?path=`):** Added support for allocating commits to specific subdirectories via API.
   * **Static Environments:** When deploying via runtime, the system automatically detects HTML/CSS projects, hides unnecessary commands, and makes publishing easier.
-  * **Postgres:** PostgreSQL databases now start with the `squarecloud` database created by default, avoiding connection errors for beginners.
+  * **Postgres:** PostgreSQL databases now start with the `virtuscloud` database created by default, avoiding connection errors for beginners.
 
   ### 🔒 Security, LGPD and Infrastructure
 
@@ -897,7 +897,7 @@ title: "Changelog"
 
   ### Log Management
 
-  * **Application Log Limitation:** The maximum number of logs per category (logs/crash) in `.squarecloud` files has been reduced from 10 to 5.
+  * **Application Log Limitation:** The maximum number of logs per category (logs/crash) in `.virtuscloud` files has been reduced from 10 to 5.
   * **Log Infrastructure Change:** We have migrated our log infrastructure from Logtail (BetterStack) to Loki (Grafana).
   * **Log Coverage and Retention:** We now log 100% of requests to our main infrastructure (API, Website, Blob, etc.), with a 7 times greater data retention.
 

@@ -7,7 +7,7 @@ title: "Client"
 > The VirtusCloudAPI class is the entry point to the SDK. It is instantiated with an API key and exposes every module — applications, databases, workspaces, user and platform service — through a single client.
 
 <Info>
-  This page documents **`@squarecloud/api` v4**. If you are upgrading from v3, read the [v3 → v4 migration guide](/en/sdks/js/migrating_to_v4) first.
+  This page documents **`@virtuscloud/api` v4**. If you are upgrading from v3, read the [v3 → v4 migration guide](/en/sdks/js/migrating_to_v4) first.
 </Info>
 
 ## Requirements
@@ -20,19 +20,19 @@ title: "Client"
 <Tabs>
   <Tab title="npm">
     ```bash theme={null}
-    npm install @squarecloud/api
+    npm install @virtuscloud/api
     ```
   </Tab>
 
   <Tab title="yarn">
     ```bash theme={null}
-    yarn add @squarecloud/api
+    yarn add @virtuscloud/api
     ```
   </Tab>
 
   <Tab title="pnpm">
     ```bash theme={null}
-    pnpm add @squarecloud/api
+    pnpm add @virtuscloud/api
     ```
   </Tab>
 </Tabs>
@@ -42,7 +42,7 @@ title: "Client"
 <Tabs>
   <Tab title="TypeScript">
     ```typescript theme={null}
-    import { VirtusCloudAPI } from "@squarecloud/api";
+    import { VirtusCloudAPI } from "@virtuscloud/api";
 
     const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY!);
     ```
@@ -50,7 +50,7 @@ title: "Client"
 
   <Tab title="JavaScript (ESM)">
     ```javascript theme={null}
-    import { VirtusCloudAPI } from "@squarecloud/api";
+    import { VirtusCloudAPI } from "@virtuscloud/api";
 
     const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY);
     ```
@@ -58,7 +58,7 @@ title: "Client"
 
   <Tab title="JavaScript (CommonJS)">
     ```javascript theme={null}
-    const { VirtusCloudAPI } = require("@squarecloud/api");
+    const { VirtusCloudAPI } = require("@virtuscloud/api");
 
     const api = new VirtusCloudAPI(process.env.SQUARE_API_KEY);
     ```
@@ -86,7 +86,7 @@ The client exposes the entire v2 platform through dedicated modules. Each module
 
 ## Getting the authenticated user
 
-`api.user.get()` returns a [`User`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/structures/user.ts) instance containing the account details, current plan, owned applications and owned databases.
+`api.user.get()` returns a [`User`](https://github.com/virtuscloudofc/sdk-api-js/blob/main/src/structures/user.ts) instance containing the account details, current plan, owned applications and owned databases.
 
 ```typescript theme={null}
 const user = await api.user.get();
@@ -102,7 +102,7 @@ console.log(user.applications); // Collection<string, BaseApplication>
 console.log(user.databases);    // Collection<string, Database>
 ```
 
-`user.applications` and `user.databases` are [`Collection`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/structures/collection.ts) instances (a `Map` subclass). Iterate them like any `Map`:
+`user.applications` and `user.databases` are [`Collection`](https://github.com/virtuscloudofc/sdk-api-js/blob/main/src/structures/collection.ts) instances (a `Map` subclass). Iterate them like any `Map`:
 
 ```typescript theme={null}
 for (const [id, app] of user.applications) {
@@ -185,7 +185,7 @@ api.on("snapshotsUpdate", (application, previous, current) => {
 Failed requests throw a `VirtusCloudAPIError`. The error exposes a stable `code` property you can switch on to discriminate failure modes.
 
 ```typescript theme={null}
-import { VirtusCloudAPI, VirtusCloudAPIError } from "@squarecloud/api";
+import { VirtusCloudAPI, VirtusCloudAPIError } from "@virtuscloud/api";
 
 try {
     const app = await api.applications.fetch("invalid-id");

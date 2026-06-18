@@ -14,14 +14,14 @@ title: "How to host your Uptime Kuma"
 
 ## Choosing a version
 
-* First, we need to choose a version available [here](https://github.com/squarecloud-education/uptimekuma-web/releases).
+* First, we need to choose a version available [here](https://github.com/virtuscloud-education/uptimekuma-web/releases).
 * Download the `project.zip` of the choosed version.
 
 ## Config file
 
-* If you want a custom subdomain instead of a random hash, you can modify your squarecloud.config to set the desired subdomain.
+* If you want a custom subdomain instead of a random hash, you can modify your virtuscloud.config to set the desired subdomain.
 
-```systemd squarecloud.config theme={null}
+```systemd virtuscloud.config theme={null}
 DISPLAY_NAME=Uptime Kuma
 MEMORY=1024
 VERSION=recommended
@@ -51,7 +51,7 @@ Após preparar os arquivos do projeto, agora você pode enviá-los para a Virtus
         First, you need to have the CLI installed in your environment. If you don't have it yet, run the following command in your terminal:
 
         ```
-        npm install -g @squarecloud/cli
+        npm install -g @virtuscloud/cli
         ```
 
         If you already have it, we recommend updating it. To do this, run the following command in your terminal:
@@ -59,7 +59,7 @@ Após preparar os arquivos do projeto, agora você pode enviá-los para a Virtus
         <Tabs>
           <Tab title="Windows">
             ```bash theme={null}
-            squarecloud update
+            virtuscloud update
             ```
           </Tab>
 
@@ -75,7 +75,7 @@ Após preparar os arquivos do projeto, agora você pode enviá-los para a Virtus
         Agora, para autenticar e usar outros comandos da CLI, encontre sua chave de autorização [aqui](https://virtuscloud.app/pt-br/account/security) by clicking on "Request API Key". After obtaining your authorization key, run the following command:
 
         ```bash theme={null}
-        squarecloud auth login
+        virtuscloud auth login
         ```
       </Step>
 
@@ -83,7 +83,7 @@ Após preparar os arquivos do projeto, agora você pode enviá-los para a Virtus
         Finally, to deploy your application to Virtus Cloud using the CLI, you need to run the following command, passing the path to your zip file:
 
         ```bash theme={null}
-        squarecloud upload zip
+        virtuscloud upload zip
         ```
       </Step>
     </Steps>

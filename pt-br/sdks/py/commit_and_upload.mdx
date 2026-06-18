@@ -7,7 +7,7 @@ title: "Commit and Upload"
 > In this section you will learn how to make commits and uploads using the Client, Application and CLI.
 
 You can make commits and uploads using Client or Application. You
-just need a `squarecloud.File` object and pass the path where your
+just need a `virtuscloud.File` object and pass the path where your
 zip file is.
 
 ## Making a commit
@@ -15,7 +15,7 @@ zip file is.
 <Tabs>
   <Tab title="Using Client">
     ```python theme={null}
-    import squarecloud as square
+    import virtuscloud as virtus
 
     client = square.Client('API_KEY')
 
@@ -27,7 +27,7 @@ zip file is.
 
   <Tab title="Using Application">
     ```python theme={null}
-    import squarecloud as square
+    import virtuscloud as virtus
 
     client = square.Client('API_KEY')
 
@@ -46,7 +46,7 @@ To upload an application, you can use only  the \[Client].
 <Tabs>
   <Tab title="Using Client">
     ```python theme={null}
-    import squarecloud as square
+    import virtuscloud as virtus
 
     client = square.Client(...)
 
@@ -68,5 +68,5 @@ To upload an application, you can use only  the \[Client].
 
 <Tip>
   For your convenience, a class has been added to create this configuration file:
-  `squarecloud.utils.ConfigFile`.
+  `virtuscloud.utils.ConfigFile`.
 </Tip>

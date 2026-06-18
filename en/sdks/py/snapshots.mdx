@@ -19,7 +19,7 @@ Snapshots are backups of your application or database at a specific point in tim
 <Tabs>
   <Tab title="Using Client">
     ```python theme={null}
-    import squarecloud as square
+    import virtuscloud as virtus
 
     client = square.Client(api_key='API_KEY')
 
@@ -33,7 +33,7 @@ Snapshots are backups of your application or database at a specific point in tim
 
   <Tab title="Using Application">
     ```python theme={null}
-    import squarecloud as square
+    import virtuscloud as virtus
 
     client = square.Client(api_key='API_KEY')
 
@@ -52,7 +52,7 @@ Snapshots are backups of your application or database at a specific point in tim
 The `Snapshot` object provides a method to download the snapshot as a zip file.
 
 ```python theme={null}
-import squarecloud as square
+import virtuscloud as virtus
 
 client = square.Client(api_key='API_KEY')
 
@@ -73,7 +73,7 @@ async def example():
 <Tabs>
   <Tab title="Using Client">
     ```python theme={null}
-    import squarecloud as square
+    import virtuscloud as virtus
 
     client = square.Client(api_key='API_KEY')
 
@@ -89,7 +89,7 @@ async def example():
 
   <Tab title="Using Application">
     ```python theme={null}
-    import squarecloud as square
+    import virtuscloud as virtus
 
     client = square.Client(api_key='API_KEY')
 
@@ -110,7 +110,7 @@ async def example():
 `client.restore_snapshot` returns a `Response` object. You can restore snapshots for both applications and databases.
 
 ```python theme={null}
-import squarecloud as square
+import virtuscloud as virtus
 
 client = square.Client(api_key='API_KEY')
 

@@ -20,7 +20,7 @@ To use Pydantic with this SDK, you need to install the SDK with the pydantic
 extra dependency, as it is not included by default:
 
 ```bash theme={null}
-pip install "squarecloud[pydantic]"
+pip install "virtuscloud[pydantic]"
 ```
 
 ## Features
@@ -30,8 +30,8 @@ into a Pydantic model, allowing for more robust data
 validation and manipulation.
 
 ```python theme={null}
-import squarecloud as square
-from squarecloud import Endpoint
+import virtuscloud as virtus
+from virtuscloud import Endpoint
 from pydantic import BaseModel
 
 class Animal(BaseModel):

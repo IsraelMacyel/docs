@@ -10,7 +10,7 @@ title: "Snapshots"
   Snapshots replace the v3 `backup` / `backups` API. `app.backup` and `app.backups` are still exported in v4 but they print a deprecation warning and proxy to `app.snapshots`. Update your code to use the new name.
 </Info>
 
-`app.snapshots` exposes the [`SnapshotsModule`](https://github.com/squarecloudofc/sdk-api-js/blob/main/src/modules/snapshots.ts).
+`app.snapshots` exposes the [`SnapshotsModule`](https://github.com/virtuscloudofc/sdk-api-js/blob/main/src/modules/snapshots.ts).
 
 ```typescript theme={null}
 const app = await api.applications.fetch("abc123def456abc123def456");
